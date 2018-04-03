@@ -1,0 +1,28 @@
+<table class="table  table-responsive" id="faxes_table" style="width: 100%">
+  <thead>
+  <tr>
+    <th>Fax Number</th>
+    <th>Fax Type</th>
+    <th>Note</th>
+    <th>Created start</th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% extend_demography.faxes.each do |fax| %>
+  <tr>
+    <td><%= link_to fax.fax_number, edit_extend_demographies_fax_path(extend_demography, fax) %>   </td>
+    <td><%= fax.fax_type %>   </td>
+    <td><%= fax.note %>   </td>
+    <td><%= format_date fax.created_at %>   </td>
+  </tr>
+  <% end %>
+
+  </tbody>
+</table>
+
+<script>
+  $(document).ready(function(){
+      initDataTable("faxes_table");
+  });
+</script>

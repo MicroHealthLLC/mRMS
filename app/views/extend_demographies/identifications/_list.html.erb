@@ -1,0 +1,33 @@
+<table class="table  table-responsive" id="identification_table"  style="width: 100%">
+  <thead>
+  <tr>
+    <th><%= t(:identification_type_id) %></th>
+    <th><%= t(:identification_number) %></th>
+    <th><%= t(:status) %></th>
+    <th><%= t(:date_expired) %></th>
+    <th><%= t(:issued_by_type) %></th>
+    <th><%= t(:date_issued) %></th>
+  </tr>
+  </thead>
+  <% identifications.each do |identification| %>
+  <tr>
+    <td><%= link_to identification.identification_type, edit_extend_demographies_identification_path(identification.extend_demography, identification) %></td>
+    <td><%= identification.identification_number %></td>
+    <td><%= identification.identification_status %></td>
+    <td><%= format_date identification.date_expired %></td>
+    <td><%= identification.issued_by_type %></td>
+    <td><%= format_date identification.date_issued %></td>
+  </tr>
+
+  <% end %>
+  <tbody>
+  </tbody>
+</table>
+
+
+<script>
+    $(document).ready(function(){
+        initDataTable("identification_table");
+    });
+</script>
+

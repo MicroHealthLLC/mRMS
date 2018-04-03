@@ -1,0 +1,14 @@
+<section id="widget-grid" class="show_identification">
+  <div class="row">
+    <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      <%= render partial: 'form',
+                 layout: 'shared/smart_widget_wrapper',
+                 locals: {
+                     identification: @identification,
+                     wid_id: 'identification',
+                     wid_title: 'New Identification',
+                     url: extend_demographies_identifications_path(@extend_demography)
+                 } %>
+    </article>
+  </div>
+</section>

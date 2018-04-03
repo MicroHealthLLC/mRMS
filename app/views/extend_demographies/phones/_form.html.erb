@@ -1,0 +1,27 @@
+<fieldset>
+  <legend>
+  </legend>
+  <%= form_for(@phone, url: url,  html: {  class: 'form-horizontal' }) do |f| %>
+      <% if @phone.errors.any? %>
+          <div id="error_explanation">
+            <h2><%= pluralize(@phone.errors.count, "error") %> prohibited this education from being saved:</h2>
+
+            <ul>
+              <% @phone.errors.full_messages.each do |message| %>
+                  <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
+      <% end %>
+
+      <%= render partial: 'extend_demographies/phone_fields', locals: {f: f} %>
+
+      <div class="form-group" >
+        <div class="col-md-11">
+          <%= link_to t('button_cancel'), @url_back, class: 'btn btn-warning pull-right' %>
+          <%= f.submit t('button_save'), class: 'btn btn-success pull-right' %>
+        </div>
+      </div>
+  <% end %>
+
+</fieldset>

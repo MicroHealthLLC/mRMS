@@ -1,0 +1,47 @@
+<%= form_for(@note_template, html: { class: 'form-horizontal',  :multipart => true }) do |f| %>
+    <% if @note_template.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@note_template.errors.count, "error") %> prohibited this template note from being saved:</h2>
+
+          <ul>
+            <% @note_template.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+<fieldset>
+  <legend></legend>
+
+  <div class="form-inputs">
+    <div class="form-group">
+      <%= f.label t('title'), class: 'col-md-2 control-label' %>
+      <div class="col-md-9">
+        <%= f.text_field :title, placeholder: 'Title', class: 'form-control' %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= f.label t(:organization) , class: 'col-md-2 control-label' %>
+      <div class="col-md-9">
+        <%= f.select :organization_id, options_for_select(Organization.pluck(:name, :id) , selected: f.object.organization_id), {include_blank: true} , {class: 'form-control'} %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :note , class: 'col-md-2 control-label' %>
+      <div class="col-md-9">
+        <%= f.text_area :note, class: 'form-control ck-editor' %>
+      </div>
+    </div>
+    <div class="form-group" >
+      <div class="col-md-11">
+        <%= link_to t('button_cancel'), note_templates_path, class: 'btn btn-warning pull-right' %>
+        <%= f.submit t('button_save'), class: 'btn btn-success pull-right' %>
+      </div>
+    </div>
+<% end %>
+  </div>
+</fieldset>
+

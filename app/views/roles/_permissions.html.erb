@@ -1,0 +1,18 @@
+<h3><%= t(:label_permissions) %></h3>
+<div class="col-xs-12" id="permissions">
+  <% perms_by_module = @role.setable_permissions.group_by {|p| p.project_module.to_s} %>
+  <% perms_by_module.keys.sort.each do |mod| %>
+      <br>
+      <fieldset><legend><%= mod.blank? ? '' : l_or_humanize(mod, :prefix => 'project_module_') %></legend>
+        <% perms_by_module[mod].each do |permission| %>
+            <label class="floating">
+              <%= check_box_tag 'permissions[]', permission.name, (@role.permissions.include? permission.name),
+                                :id => "permissions_#{permission.name}",
+                                :data => {:shows => ".#{permission.name}_shown"} %>
+              <%= l_or_humanize(permission.name, :prefix => 'permission_') %>
+            </label>
+        <% end %>
+      </fieldset>
+  <% end %>
+  <%= hidden_field_tag 'permissions[]', '' %>
+</div>

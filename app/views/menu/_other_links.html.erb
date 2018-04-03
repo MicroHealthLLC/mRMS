@@ -1,0 +1,147 @@
+<% modules = ['rordit', 'link_share',  'collaborate',
+              'wikis', 'forum', 'document_managers','kanban/projects',
+              'news', 'conference'
+]
+%>
+<% if can_view_submenu?(modules)  and User.current.can?(:view_collaborate) %>
+    <li>
+      <a href="#" id="ul_case"><i class="fa fa-lg fa-fw fa-square"></i> <span class="menu-item-parent">Collaborate</span></a>
+      <ul id="case_menu">
+        <% if module_enabled?('rordit/links') && can?(:view_rordit, :manage_roles, :manage_link_share)%>
+            <li class="<%= menu_active?('rordit/links') %>">
+              <a href="<%= '/rordit' %>" title="<%= 'Link Share' %>"><i class="fa fa-lg fa-fw fa-navicon"></i><span class="menu-item-parent"><%= 'Link Share' %></span></a>
+            </li>
+        <% end %>
+
+        <% if module_enabled?('lms/pages') %>
+            <li class="<%= menu_active?('lms/pages') %>">
+              <a href="<%= '/lms' %>" title="<%= 'LMS' %>"><i class="fa fa-lg fa-fw fa-circle"></i><span class="menu-item-parent"><%= 'LMS' %></span></a>
+            </li>
+        <% end %>
+
+        <% if module_enabled?('events') && can?(:view_events, :manage_roles, :manage_events)%>
+            <li class="<%= menu_active?('event_calendar/events') %>">
+              <a href="<%= '/event_calendar' %>" title="<%= 'Events' %>"><i class="fa fa-lg fa-fw fa-navicon"></i><span class="menu-item-parent"><%= 'Events' %></span></a>
+            </li>
+        <% end %>
+
+        <% if module_enabled?('kanban/projects') && can?(:view_kanban, :manage_kanban_projects, :manage_roles)%>
+            <li class="<%= menu_active?('kanban/projects') %>">
+              <a href="<%= '/kanban' %>" title="<%= 'Planner' %>"><i class="fa fa-lg fa-fw fa-navicon"></i><span class="menu-item-parent"><%= 'Planner' %></span></a>
+            </li>
+        <% end %>
+
+        <% if module_enabled?('wiki') && can?(:manage_wikis, :manage_roles) %>
+            <li class="<%= menu_active?('wiki') %>">
+              <a href="<%= '/wiki/all' %>" title="<%= t(:wiki) %>"><i class="fa fa-lg fa-fw fa-file-text"></i><span class="menu-item-parent"><%= t(:wiki) %></span></a>
+            </li>
+        <% end %>
+
+        <% if current_user == User.current  and module_enabled?('forum') and can?(:manage_roles, :view_forum) %>
+            <li class="<%= menu_active?('forum') %>">
+              <a href="<%= '/forum' %>" title="<%= t(:forum) %>"><i class="fa fa-lg fa-fw fa-forumbee"></i><span class="menu-item-parent"><%= t(:forum) %></span></a>
+            </li>
+        <% end %>
+
+        <% if module_enabled?('news') && can?(:manage_roles, :manage_news, :view_news) %>
+            <li class="<%= menu_active?('news') %>">
+              <a href="/news" title="<%= 'news' %>"><i class="fa fa-lg fa-fw fa-newspaper-o"></i><span class="menu-item-parent"><%= 'news' %></span></a>
+            </li>
+        <% end %>
+
+        <% if module_enabled?('document_managers') && can?(:manage_document_managers, :manage_roles) %>
+            <li class="<%= menu_active?('document_managers') %>">
+              <a href="/document_managers" title="<%= t 'document_managers' %>"><i class="fa fa-lg fa-fw fa-folder-open"></i><span class="menu-item-parent"><%= t 'document_managers' %></span></a>
+            </li>
+        <% end %>
+
+        <% if module_enabled?( 'new_conference') && can?(:manage_roles, :view_conference) %>
+            <li>
+              <a href="/conference/new_conference" <%= "target=_blank" if Setting['open_new_tab_url'] == 'true' %>><i class="fa fa-lg fa-fw fa-video-camera"></i><span class="menu-item-parent">New conference</span></a>
+            </li>
+        <% end %>
+      </ul>
+    </li>
+<% end %>
+<% modules = ['sticky', 'sticky_notes',
+              'personal_organizer', 'mind_map',
+              'todo_list']
+%>
+
+<% if can_view_submenu?(modules) and User.current.can?(:view_personal_organizer) %>
+    <li>
+      <a href="#" id="ul_profile"><i class="fa fa-lg fa-fw fa-square"></i> <span class="menu-item-parent">Personal Organizer</span></a>
+      <ul id="profile_menu">
+        <%= render partial: 'menu/links' %>
+        <% if module_enabled?('sticky') and can?(:manage_roles, :manage_sticky) %>
+            <li class="<%= menu_active?('sticky') %>">
+              <a href="<%= '/sticky' %>" title="<%= 'My checklists' %>"><i class="fa fa-lg fa-fw fa-navicon"></i><span class="menu-item-parent"><%= 'My checklists' %></span></a>
+            </li>
+        <% end %>
+
+        <% if module_enabled?('mind_map') and can?(:manage_roles, :manage_mind_map) %>
+            <li class="<%= menu_active?('mind_map') %>">
+              <a href="<%= '/mindmap' %>" title="<%= 'Mind map' %>"><i class="fa fa-lg fa-fw fa-navicon"></i><span class="menu-item-parent"><%= 'Mind map' %></span></a>
+            </li>
+        <% end %>
+
+        <% if module_enabled?('sticky_notes') && can?(:manage_sticky_notes, :manage_roles) %>
+            <li class="<%= menu_active?('sticky_notes/sticky_notes') %>">
+              <a href="<%= '/sticky_notes' %>" title="<%= t(:sticky) %>"><i class="fa fa-lg fa-fw fa-navicon"></i><span class="menu-item-parent"><%= t(:sticky) %></span></a>
+            </li>
+        <% end %>
+
+        <% if module_enabled?('todos') && can?(:manage_todo_list, :manage_roles) %>
+            <li class="<%= menu_active?('todo_list/todos') %>">
+              <a href="<%= '/todo_list' %>" title="<%= 'My To Do List' %>"><i class="fa fa-lg fa-fw fa-navicon"></i><span class="menu-item-parent"><%= 'My To Do List' %></span></a>
+            </li>
+        <% end %>
+        <% if module_enabled?('calculator') %>
+            <li class="<%= menu_active?('calculator/calculator') %>">
+              <a href="<%= '/calculator' %>" title="<%= 'Calculator' %>"><i class="fa fa-lg fa-fw fa-navicon"></i><span class="menu-item-parent"><%= 'Calculator' %></span></a>
+            </li>
+        <% end %>
+        <% if module_enabled?('measurements_converter') %>
+            <li class="<%= menu_active?('measurements_converter/converter') %>">
+              <a href="<%= '/measurements_converter' %>" title="<%= 'Measurements Converter' %>"><i class="fa fa-lg fa-fw fa-navicon"></i><span class="menu-item-parent"><%= 'Converter' %></span></a>
+            </li>
+        <% end %>
+        <li>
+          <a href="<%= '/rss' %>" title="<%= 'My RSS' %>"><i class="fa fa-lg fa-fw fa-navicon"></i><span class="menu-item-parent"><%= 'My RSS' %></span></a>
+        </li>
+        <li>
+          <a href="<%= '/svg_edit' %>" title="<%= 'My SVG' %>"><i class="fa fa-lg fa-fw fa-navicon"></i><span class="menu-item-parent"><%= 'My SVG' %></span></a>
+        </li>
+        <li>
+          <a href="<%= '/mhspreadsheet' %>" title="<%= 'My SpreadSheet' %>"><i class="fa fa-lg fa-fw fa-navicon"></i><span class="menu-item-parent"><%= 'My Speadsheet' %></span></a>
+        </li>
+        <li>
+          <a href="<%= '/texteditor' %>" title="<%= 'Text Editor' %>"><i class="fa fa-lg fa-fw fa-navicon"></i><span class="menu-item-parent"><%= 'Text Editor' %></span></a>
+        </li>
+      </ul>
+    </li>
+<% end %>
+<% if User.current.allowed_to?(:manage_roles) %>
+    <% if module_enabled? 'billings' %>
+        <li class="<%= menu_active?('billings') %>">
+          <a href="<%= "/billings" %>" title="Billing & Collections"><i class="fa fa-lg fa-fw fa-money"></i> <span class="menu-item-parent">Billing & Collections</span></a>
+        </li>
+    <% end %>
+<% else %>
+    <% if module_enabled?('all_files')  && can?(:manage_roles, :manage_documents) %>
+        <li class="<%= menu_active?('documents', 'all_files') %>">
+          <a href="/all_files" title="<%= t(:all_files) %>"><i class="fa fa-lg fa-fw fa-files-o"></i> <span class="menu-item-parent"><%= t(:all_files) %></span></a>
+        </li>
+    <% end %>
+    <% if module_enabled?('inventory/product_assigns')  && can?(:manage_roles, :view_product_assigns) %>
+        <li class="<%= menu_active?('inventory/product_assigns') %>">
+          <a href="/inventory/product_assigns" title="<%= 'Inventory' %>"><i class="fa fa-lg fa-fw fa-circle"></i> <span class="menu-item-parent"><%= 'Inventory' %></span></a>
+        </li>
+    <% end %>
+    <% if module_enabled?('client_journals')  && can?(:manage_roles, :view_client_journals, :manage_client_journals)%>
+        <li class="<%= menu_active?('client_journals') %>">
+          <a href="/client_journals" title="<%= t(:client_journals) %>"><i class="fa fa-lg fa-fw fa-address-book-o"></i> <span class="menu-item-parent"><%= t(:client_journals) %></span></a>
+        </li>
+    <%end %>
+<% end %>
+

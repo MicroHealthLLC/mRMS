@@ -1,0 +1,59 @@
+<div class="col-xs-12 btn-edition tabs-section">
+  <div class="btn-group">
+    <button type="button" class="btn btn-primary dropdown-toggle actions-tab" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">ACTIONS <span class="caret"></span></button>
+    <ul class="dropdown-menu dropdown-links" role="menu" style="min-width:210px;">
+      <% if @note.can?(:delete_notes, :manage_notes, :manage_roles) %>
+          <li>
+            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+            <%= link_to('Delete', note_path(@note), class: 'dropdown-item',
+                        :method => :delete,
+                        :data => {:confirm => t(:text_are_you_sure)})
+            %>
+          </li>
+          <div class='dropdown-item-dividier'></div>
+      <% end %>
+
+      <% if params[:action] == 'show' %>
+          <% if @note.can?(:edit_notes, :manage_notes, :manage_roles) %>
+              <li>
+                <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                <%= link_to 'Edit', edit_note_path(@note), class: 'dropdown-item' %>
+              </li>
+              <div class='dropdown-item-dividier'></div>
+          <% end %>
+      <% else %>
+          <% if @note.can?(:show_notes, :manage_notes, :manage_roles) %>
+              <li>
+                <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+                <%= link_to 'Show', note_path(@note), class: 'dropdown-item' %>
+              </li>
+              <div class='dropdown-item-dividier'></div>
+          <% end %>
+      <% end %>
+
+      <li>
+        <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
+        <%  if @note.object.is_a? Case %>
+            <%= link_to 'Cancel', (case_path(@note.object) + "#tabs-notes"), class: 'dropdown-item' %>
+        <% elsif @note.object.is_a? Appointment%>
+            <%= link_to 'Cancel', (appointment_path(@note.object) + "#tabs-note"), class: 'dropdown-item' %>
+        <% else %>
+            <%= link_to 'Cancel', @note.object, class: 'dropdown-item' %>
+        <% end %>
+
+      </li>
+      <div class='dropdown-item-dividier'></div>
+
+      <li>
+        <span class="glyphicon glyphicon-print" aria-hidden="true"></span>
+        <%= link_to 'Print', note_path(@note, format: 'pdf'), class: 'dropdown-item' %>
+      </li>
+      <div class='dropdown-item-dividier'></div>
+
+      <li>
+        <span class="glyphicon glyphicon-list" aria-hidden="true"></span>
+        <%= link_to 'History Changes', "/histories/#{@note.class}/#{@note.id}", class: 'dropdown-item' %>
+      </li>
+    </ul>
+  </div>
+</div>

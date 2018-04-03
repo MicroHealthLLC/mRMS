@@ -1,0 +1,21 @@
+<!-- Widget ID (each widget will need unique ID)-->
+
+<!-- PAGE RELATED PLUGIN(S)
+<script src="..."></script>-->
+<% if  params[:googleapi_loaded].nil? %>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBgNAFiZb48uAk4jb4U0gRSeuHQS9EuCyk&libraries=places&callback=initMap"
+            async defer></script>
+    <% params[:googleapi_loaded]=true %>
+<% end %>
+
+<script type="text/javascript">
+  function initMap() {
+
+    var input = document.getElementsByClassName('address')
+
+    for (i = 0; i < input.length; i++) {
+      autocomplete = new google.maps.places.Autocomplete(input[i], {});
+    }
+
+  }
+</script>

@@ -1,0 +1,13 @@
+<section id="widget-grid" class="show_identification">
+  <div class="row">
+    <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      <%= render partial: 'form',
+                 layout: 'shared/smart_widget_wrapper',
+                 locals: {
+                     wid_id: 'fax',
+                     wid_title: 'New Fax',
+                     url: extend_demographies_faxes_path(@extend_demography)
+                 } %>
+    </article>
+  </div>
+</section>

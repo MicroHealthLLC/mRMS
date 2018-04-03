@@ -1,0 +1,17 @@
+<%= link_to( t('new_related_client'), new_related_client_path, class: 'btn btn-primary pull-right btn-edition') if can?(:manage_related_clients, :create_related_clients, :manage_roles) %>
+<div class="row">
+  <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <% if can?(:manage_roles, :view_related_clients, :manage_related_clients) %>
+
+        <%= render partial: 'related_clients/list',
+                   layout: 'shared/smart_widget_wrapper',
+                   locals: {
+                       related_clients:  User.current.related_clients,
+                       wid_id: 'related_clients',
+                       wid_title: "Related Clients"
+                   } %>
+
+
+    <% end %>
+  </article>
+</div>

@@ -1,0 +1,33 @@
+<h2>Renew your password</h2>
+
+<%= form_for(resource, :as => resource_name, :url => [resource_name, :password_expired], :html => { :method => :put, class: 'form-horizontal' }) do |f| %>
+  <%= devise_error_messages! %>
+
+
+
+    <div class="form-group">
+      <label class="col-md-2 control-label">Current password</label>
+      <div class="col-md-9">
+        <%= f.password_field :current_password, autocomplete: "off", placeholder: 'Current password', class: 'form-control' %>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-md-2 control-label">New Password</label>
+      <div class="col-md-9">
+        <%= f.password_field :password, autocomplete: "off", placeholder: 'Password' , class: 'form-control' %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="col-md-2 control-label">New Password confirmation</label>
+      <div class="col-md-9">
+        <%= f.password_field :password_confirmation, autocomplete: "off", placeholder: 'Password confirmation' , class: 'form-control' %>
+      </div>
+    </div>
+
+    <div class="form-group" >
+      <div class="col-md-11">
+        <%= f.submit "Update", class: 'btn btn-success pull-right' %>
+      </div>
+    </div>
+<% end %>

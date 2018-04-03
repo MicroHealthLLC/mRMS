@@ -1,0 +1,21 @@
+<%= email_template do %>
+    <%= @template.header.to_s.html_safe %>
+    <p>
+      <%= @audit.user.try :name %>: at <%= format_date_time  @audit.created_at %>
+    <ul>
+      <% @audit.audited_changes.each do |key, value|
+        next unless value.is_a? Array
+      %>
+          <li><%= key.to_s.humanize %> : <em><%= @object.humanize_value @object, key, value[0] %></em>
+          </li>
+      <% end %>
+    </ul>
+    </p>
+    <hr/>
+    <style>
+      <%= @template.stylesheet.to_s %>
+    </style>
+
+    <%= @template.body.to_s.html_safe %>
+    <%= @template.footer.to_s.html_safe %>
+<% end  %>

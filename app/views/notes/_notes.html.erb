@@ -1,0 +1,15 @@
+<% can_show_case = defined?(show_case_column) ? show_case_column : true %>
+<section id="widget-grid" class="form_user_notes">
+  <div class="row">
+    <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      <%= render partial: 'notes/list',
+                 layout: 'shared/smart_widget_wrapper',
+                 locals: {
+                     show_case_column: can_show_case,
+                     notes: notes,
+                     wid_id: 'notes',
+                     wid_title: t('notes')
+                 } %>
+    </article>
+  </div>
+</section>

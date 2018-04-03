@@ -1,0 +1,14 @@
+<section id="widget-grid" class="form_task_user">
+<%= render partial: 'action_menu' %>
+  <div class="row">
+    <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      <%= render partial: 'form',
+                 layout: 'shared/smart_widget_wrapper',
+                 locals: {
+                         note: @note,
+                         wid_id: 'note_form',
+                         wid_title:  @note.is_a?(PostNote) ?  'Edit Comment' : 'Edit Note'
+                 } %>
+    </article>
+  </div>
+</section>

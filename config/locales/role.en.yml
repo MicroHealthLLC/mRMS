@@ -1,0 +1,19 @@
+en:
+  project_module_other_skills: Skills
+  permission_show_other_skills: Show skills
+  permission_view_other_skills: View skills
+  permission_create_other_skills: Create skills
+  permission_edit_other_skills:  Edit skills
+  permission_delete_other_skills:  Delete skills
+  permission_manage_other_skills:  Manage skills
+  
+  project_module_tasks: Actions
+  permission_view_tasks: View actions
+  permission_show_tasks: Show actions
+  permission_create_tasks: Create actions
+  permission_edit_tasks: Edit  actions
+  permission_delete_tasks:  Delete actions
+  permission_manage_tasks:  Manage actions
+  
+  project_module_employee: Clients
+  permission_manage_roles: Manage Roles

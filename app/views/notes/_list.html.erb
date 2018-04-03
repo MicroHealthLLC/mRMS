@@ -1,0 +1,66 @@
+<% show_case = @case.nil? %>
+<style>
+  .note_span{
+    cursor: pointer;
+    color: blue;
+  }
+  .all_notes
+  {
+    display: none;
+  }
+</style>
+<table class="display  projects-table table  table-striped  table-hover" cellspacing="0" width="100%" id="notes_table">
+  <thead>
+  <tr id="notes_input">
+
+    <% if defined?(use_belongs_to) %>
+        <th>Belongs to</th>
+    <% else %>
+        <th><%= t('label_user') %></th>
+    <% end %>
+    <% if show_case %>
+        <th><%= t('case') %></th>
+    <% end %>
+    <th><%= t('label_date') %></th>
+    <th><%= t('note') %></th>
+    <% if !show_case and @appointment %>
+        <th></th>
+    <% end %>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% notes.each do |note| %>
+      <tr>
+        <% if defined?(use_belongs_to) %>
+            <td><%= link_to( note.object.to_s, note.object) if note.object %></td>
+        <% else %>
+            <td><%= link_to_edit_if_can note.user, {ctrl: :notes, object: note }  %></td>
+        <% end %>
+        <% if show_case %>
+            <td><%= link_to_case note.object.try(:case) %></td>
+        <% end %>
+        <td><%= format_date note.updated_at %></td>
+        <td><%= display_note(note.note.to_s) %></td>
+        <% if !show_case and @appointment and can?(:manage_roles) %>
+            <td><%= link_to "<i class='fa fa-unlink fa-lg'></i>".html_safe, unlink_appointment_path(appointment_id: @appointment.id, type: 'Note', id: note.id ) %></td>
+        <% end %>
+      </tr>
+  <% end %>
+
+  </tbody>
+</table>
+
+<script>
+    $(document).ready(function(){
+        $('.link_label_less').on('click', function(){
+            $(this).parents('td').find('.all_notes').hide();
+            $(this).parents('td').find('.less_notes').show();
+        });
+        $('.link_label_more').on('click', function(){
+            $(this).parents('td').find('.less_notes').hide();
+            $(this).parents('td').find('.all_notes').show();
+        });
+        initDataTable('notes_table')
+    } );
+</script>

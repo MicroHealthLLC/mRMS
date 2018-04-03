@@ -1,0 +1,20 @@
+  <div class="col-xs-12 btn-edition tabs-section">
+    <div class="btn-group">
+      <button type="button" class="btn btn-primary dropdown-toggle actions-tab" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">ACTIONS <span class="caret"></span></button>
+      <ul class="dropdown-menu dropdown-links" role="menu">
+        <li>
+          <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+            <%= link_to('Delete', email_template_path(@email_template), class: 'dropdown-item',
+                        :method => :delete,
+                        :data => {:confirm => t(:text_are_you_sure)}) 
+            %>
+        </li>
+          <div class='dropdown-item-dividier'></div>
+
+          <li>
+            <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
+            <%= link_to 'Cancel', email_templates_path, class: 'dropdown-item' %>
+          </li>
+      </ul>
+    </div>
+  </div>

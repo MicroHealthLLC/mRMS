@@ -1,0 +1,28 @@
+<table class="table  table-responsive" id="phones_table" style="width: 100%">
+  <thead>
+  <tr>
+    <th>Phone Number</th>
+    <th>Phone Type</th>
+    <th>Note</th>
+    <th>Created start</th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% extend_demography.phones.each do |phone| %>
+  <tr>
+    <td><%= link_to phone.phone_number, edit_extend_demographies_phone_path(extend_demography, phone) %>   </td>
+    <td><%= phone.phone_type %>   </td>
+    <td><%= phone.note %>   </td>
+    <td><%= format_date phone.created_at %>   </td>
+  </tr>
+  <% end %>
+
+  </tbody>
+</table>
+
+<script>
+  $(document).ready(function(){
+      initDataTable("phones_table");
+  });
+</script>

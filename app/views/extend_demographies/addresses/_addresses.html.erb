@@ -1,0 +1,28 @@
+<table class="table  table-responsive" id="addresses_table" style="width: 100%">
+  <thead>
+  <tr>
+    <th>Address</th>
+    <th>Address Type</th>
+
+    <th>Created start</th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% extend_demography.addresses.each do |address| %>
+  <tr>
+    <td><%= link_to address.address, edit_extend_demographies_address_path(extend_demography, address) %>   </td>
+    <td><%= address.address_type %>   </td>
+
+    <td><%= format_date address.created_at %>   </td>
+  </tr>
+  <% end %>
+
+  </tbody>
+</table>
+
+<script>
+  $(document).ready(function(){
+      initDataTable("addresses_table");
+  });
+</script>

@@ -1,0 +1,28 @@
+<table class="table  table-responsive" id="social_media_table" style="width: 100%">
+  <thead>
+  <tr>
+    <th>Social Media</th>
+    <th>Social Media Type</th>
+    <th>Note</th>
+    <th>Created start</th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% extend_demography.social_media.each do |social_media| %>
+  <tr>
+    <td><%= link_to social_media.social_media_handle, edit_extend_demographies_social_medium_path(extend_demography, social_media) %>   </td>
+    <td><%= social_media.social_media_type %>   </td>
+    <td><%= social_media.note %>   </td>
+    <td><%= format_date social_media.created_at %>   </td>
+  </tr>
+  <% end %>
+
+  </tbody>
+</table>
+
+<script>
+  $(document).ready(function(){
+      initDataTable("social_media_table");
+  });
+</script>

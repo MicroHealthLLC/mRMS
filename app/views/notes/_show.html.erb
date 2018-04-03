@@ -1,0 +1,30 @@
+<div class="row">
+  <div class="col-xs-12" style="padding:15px 25px 15px 25px;">
+    <p>
+      <strong>User:</strong>
+      <%= @note.user %>
+    </p>
+
+    <p>
+      <strong>Created at:</strong>
+      <%= @note.created_at.to_date %>
+    </p>
+
+     <p>
+      <strong>Update at:</strong>
+      <%= format_date @note.updated_at %>
+    </p>
+
+    <% if @note.object.class != News %>
+        <p>
+          <strong>Belongs to:</strong>
+          <%= link_to @note.object.to_s, @note.object %>
+        </p>
+    <% end %>
+
+    <p>
+      <strong>Note:</strong>
+      <%= @note.note.html_safe %>
+    </p>
+  </div>  
+</div>

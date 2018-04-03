@@ -1,0 +1,40 @@
+<script>
+    function startExport(url, oParam) {
+        url2 = url + $.param(oParam);
+        window.open(url2,'_blank');
+    }
+    $(document).ready(function(){
+        var table = $('#<%= model_table %>').DataTable({
+            "ajax": "<%= ajax_url %>",
+            processing: true,
+            serverSide: true,
+            responsive: true,
+            display: [[0, 'asc']],
+            "oTableTools": {
+                "sSwfPath": "swf/copy_cvs_xls_pdf.swf",
+                "aButtons": [
+                    {
+                        "sExtends": "ajax",
+                        "sButtonText": "CSV",
+                        "sUrl": window.location.href,
+                        "fnClick": function (nButton, oConfig) {
+                            var oParams = this.s.dt.oApi._fnAjaxParameters(this.s.dt);
+                            url =  "<%= url %>?";
+                            startExport(url, oParams);
+                        }
+                    }
+                ]
+            },
+            "bDestroy": true,
+            "columns": <%= raw columns.to_json %>,
+            "sDom": "<'dt-toolbar'" +
+            "<'col-sm-5 col-xs-8'f>" + //search box
+            "<'col-sm-2 col-sm-offset-2 col-xs-2 'C>"+// drop down column hide
+            "<'col-sm-2 col-xs-2 'T>"+// buttons export
+            "<'col-sm-1 col-xs-2 'l>>"+// length
+            "t"+ // the table
+            "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
+            "iDisplayLength": 10
+        })
+    } );
+</script>

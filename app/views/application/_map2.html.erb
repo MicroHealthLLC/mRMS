@@ -1,0 +1,126 @@
+<!-- Widget ID (each widget will need unique ID)-->
+
+<div class="jarviswidget jarviswidget-color-white" id="wid-id-map" data-widget-editbutton="false" data-widget-deletebutton="false" data-widget-fullscreenbutton="false">
+  <!-- widget options:
+  usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+
+  data-widget-colorbutton="false"
+  data-widget-editbutton="false"
+  data-widget-togglebutton="false"
+  data-widget-deletebutton="false"
+  data-widget-fullscreenbutton="false"
+  data-widget-custombutton="false"
+  data-widget-collapsed="true"
+  data-widget-sortable="false"
+
+  -->
+  <header>
+    <span class="widget-icon"> <i class="fa fa-map-marker"></i> </span>
+    <h2>GMap</h2>
+  </header>
+
+  <!-- widget div-->
+  <div>
+
+    <!-- widget edit box -->
+    <div class="jarviswidget-editbox">
+      <!-- This area used as dropdown edit box -->
+
+    </div>
+    <!-- end widget edit box -->
+
+    <!-- widget content -->
+    <div class="widget-body no-padding">
+      <div id="map_canvas2" class="google_maps" data-gmap-lat="23.895883" data-gmap-lng="-80.650635" data-gmap-zoom="5" data-gmap-src="xml/gmap/pins.xml">
+        &nbsp;
+      </div>
+
+    </div>
+    <!-- end widget content -->
+
+  </div>
+  <!-- end widget div -->
+
+</div>
+
+
+<!-- PAGE RELATED PLUGIN(S)
+<script src="..."></script>-->
+
+<script type="text/javascript">
+  $(document).ready(function(){
+      initMap2()
+  })
+  function initMap2() {
+    var map = new google.maps.Map(document.getElementById('map_canvas2'), {
+      <% if location_lat_value and location_long_value %>
+      center: {lat: <%= location_lat_value %>, lng: <%= location_long_value %>},
+      <% else %>
+      center: {lat: 38.9071923, lng: -77.0368707},
+
+      <% end %>
+      zoom: 13
+    });
+    var input = document.getElementById('<%= location %>');
+    var input_lat = document.getElementById('<%= location_lat %>');
+    var input_long = document.getElementById('<%= location_long %>');
+
+    var autocomplete = new google.maps.places.Autocomplete(input);
+    autocomplete.bindTo('bounds', map);
+
+    var infowindow = new google.maps.InfoWindow();
+    var marker = new google.maps.Marker({
+      map: map,
+      anchorPoint: new google.maps.Point(0, -29)
+    });
+    <% if object.location_lat and object.location_long %>
+      latlong = new google.maps.LatLng(<%= location_lat_value%>, <%= location_long_value %>);
+      marker.setPosition(latlong);
+    <% end %>
+    autocomplete.addListener('place_changed', function() {
+      infowindow.close();
+      marker.setVisible(false);
+      var place = autocomplete.getPlace();
+      if (!place.geometry) {
+        // User entered the name of a Place that was not suggested and
+        // pressed the Enter key, or the Place Details request failed.
+        window.alert("No details available for input: '" + place.name + "'");
+        return;
+      }
+
+      // If the place has a geometry, then present it on a map.
+      if (place.geometry.viewport) {
+        map.fitBounds(place.geometry.viewport);
+      } else {
+        map.setCenter(place.geometry.location);
+        map.setZoom(17);  // Why 17? Because it looks good.
+      }
+      marker.setIcon(/** @type {google.maps.Icon} */({
+        url: place.icon,
+        size: new google.maps.Size(71, 71),
+        origin: new google.maps.Point(0, 0),
+        anchor: new google.maps.Point(17, 34),
+        scaledSize: new google.maps.Size(35, 35)
+      }));
+      marker.setPosition(place.geometry.location);
+      console.log(place.geometry.location.lat())
+      input_lat.value = place.geometry.location.lat()
+      console.log(place.geometry.location.lng())
+      input_long.value = place.geometry.location.lng()
+      marker.setVisible(true);
+
+      var address = '';
+      if (place.address_components) {
+        address = [
+          (place.address_components[0] && place.address_components[0].short_name || ''),
+          (place.address_components[1] && place.address_components[1].short_name || ''),
+          (place.address_components[2] && place.address_components[2].short_name || '')
+        ].join(' ');
+      }
+
+      infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + address);
+      infowindow.open(map, marker);
+    });
+
+  }
+</script>

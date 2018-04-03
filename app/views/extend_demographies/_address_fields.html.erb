@@ -1,0 +1,34 @@
+<div class="nested-fields row">
+  <div class="row">
+    <div class="col-xs-12 col-md-12">
+      <fieldset>
+
+        <div class="col-md-12">
+          <div class="form-group col-md-12">
+            <%= f.label :address_type , class: 'col-md-2 control-label' %>
+            <div class="col-md-8">
+              <%= f.select :address_type_id, options_for_select( AddressType.active.pluck(:name, :id), selected: f.object.address_type.try(:id) ), {}, {class: 'form-control'} %>
+            </div>
+          </div>
+
+          <div class="form-group col-md-12">
+            <%= f.label :address , class: 'col-md-2 control-label' %>
+            <div class="col-md-8">
+              <%= f.text_field :address , class: 'form-control address' %>
+              <%= f.hidden_field :location_lat , class: 'form-control address' %>
+              <%= f.hidden_field :location_long , class: 'form-control address' %>
+            </div>
+          </div>
+
+        </div>
+
+      </fieldset>
+    </div>
+
+      <%= render partial: 'map_address', locals: {
+          location: "#{f.object_name.gsub(/[\[\]]+/, '_').chop}_address",
+          object: f.object
+      } %>
+
+  </div>
+</div>

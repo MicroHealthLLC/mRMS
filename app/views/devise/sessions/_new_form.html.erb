@@ -1,0 +1,70 @@
+<div class="row">
+  <div class="col-xs-12">
+    <%= form_for resource, as: resource_name, url: session_path(resource_name), html: {id: 'login-form', class: "smart-form client-form" } do |f| %>
+
+        <section>
+          <label class="label"><%= t :login %></label>
+          <label class="input"> <i class="icon-append fa fa-user"></i>
+            <%= f.text_field :login, autofocus: true %>
+            <b class="tooltip tooltip-top-right"><i class="fa fa-user txt-color-teal"></i> Please enter username</b></label>
+        </section>
+
+        <section>
+          <label class="label">Password</label>
+          <label class="input"> <i class="icon-append fa fa-lock"></i>
+            <%= f.password_field :password, autocomplete: "off" %>
+            <b class="tooltip tooltip-top-right"><i class="fa fa-lock txt-color-teal"></i> Enter your password</b> </label>
+          <div class="note">
+            <a href="<%= new_password_path(resource_name) %>">Forgot password?</a>
+          </div>
+        </section>
+        <section>
+          <% if ENV['RECAPTCHA_PUBLIC_KEY'].present? %>
+              <%= recaptcha_tags :public_key => ENV['RECAPTCHA_PUBLIC_KEY'] %>
+          <% end %>
+        </section>
+
+        <% if devise_mapping.rememberable? -%>
+            <section>
+              <label class="checkbox">
+                <%= f.check_box :remember_me %>
+                <i></i>Stay signed in</label>
+            </section>
+        <% end -%>
+
+        <footer>
+          <button type="submit" class="btn btn-primary">
+            Sign in
+          </button>
+        </footer>
+    <% end %>
+  </div>
+  <div class="col-xs-12 ">
+    <% if can_connect_with?(:facebook) %>
+        <%= link_to '/users/auth/facebook', class: "btn btn-block btn-social btn-facebook" do %>
+            <span class="fa fa-facebook"></span> Sign in with Facebook
+        <% end %>
+    <% end %>
+    <% if can_connect_with?(:twitter) %>
+        <%= link_to '/users/auth/twitter', class: "btn btn-block btn-social btn-twitter" do %>
+            <span class="fa fa-twitter"></span> Sign in with Twitter
+        <% end %>
+    <% end %>
+    <% if can_connect_with?(:office365) %>
+        <%= link_to '/users/auth/office365', class: "btn btn-block btn-social btn-microsoft" do %>
+            <span class="fa fa-windows"></span> Sign in with Microsoft
+        <% end %>
+    <% end %>
+    <% if can_connect_with?(:google) %>
+        <%= link_to '/users/auth/google_oauth2', class: "btn btn-block btn-social btn-google" do %>
+            <span class="fa fa-google-plus"></span> Sign in with Google
+        <% end %>
+    <% end %>
+    <% if can_connect_with?(:github) %>
+        <%= link_to '/users/auth/github', class: "btn btn-block btn-social btn-github" do %>
+            <span class="fa fa-github"></span> Sign in with Github
+        <% end %>
+    <% end %>
+
+  </div>
+</div>

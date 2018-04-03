@@ -1,0 +1,17 @@
+<%= form_tag(set_theme_settings_path, html: { method: 'post',  class: 'form-horizontal' }) do |f| %>
+    <div class="form-group">
+      <%= label_tag "application_name", "Application name: ", class: 'col-md-2 control-label' %>
+      <div class="col-md-9">
+        <%= text_field_tag :application_name, Setting['application_name'], class: 'form-control' %>
+      </div>
+    </div>
+
+    <%= f.text_area  :home_page_content, class: 'ck-editor' %>
+
+
+    <div class="form-group margin-top-10" >
+      <div class="col-xs-12">
+        <%= f.submit t('button_save'), class: 'btn btn-success pull-right' %>
+      </div>
+    </div>
+<% end %>

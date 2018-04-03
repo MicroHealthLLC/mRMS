@@ -1,0 +1,24 @@
+<table  class="table table-responsive ">
+  <thead>
+  <tr>
+    <th>Title</th>
+    <th colspan="2"></th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% if @note_templates.present? %>
+      <% @note_templates.each do |note_template| %>
+          <tr>
+            <td><%= note_template.title %></td>
+            <td><%= edit_link edit_note_template_path(note_template) %></td>
+            <td><%= delete_link note_template, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          </tr>
+      <% end %>
+  <% else %>
+      <tr align="center">
+        <td colspan="3"><%= t('label_no_data') %></td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>

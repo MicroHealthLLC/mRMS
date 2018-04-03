@@ -1,0 +1,8 @@
+<%= email_template do %>
+    <style>
+      <%= @template.stylesheet.to_s %>
+    </style>
+    <%= @template.header.to_s.html_safe %>
+    <%= @template.body.to_s.html_safe %>
+    <%= @template.footer.to_s.html_safe %>
+<% end  %>

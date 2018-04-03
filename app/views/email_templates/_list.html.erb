@@ -1,0 +1,27 @@
+<table class="table  table-responsive" id="email_template_table">
+  <thead>
+  <tr>
+    <th>Model</th>
+    <th ></th>
+    <th ></th>
+ </tr>
+  </thead>
+
+  <tbody>
+  <% @email_templates.each do |email_template| %>
+      <tr>
+        <td><%= email_template.model %></td>
+        <td><%= edit_link edit_email_template_path(email_template) %></td>
+        <td><%= delete_link email_template, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<script>
+  $(document).ready(function(){
+    initDataTable('email_template_table')
+  } );
+</script>
+
+

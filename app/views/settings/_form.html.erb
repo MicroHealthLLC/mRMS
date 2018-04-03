@@ -1,0 +1,57 @@
+<div id="tabs" class="ui-tabs ui-widget ui-widget-content ui-corner-all">
+  <ul class="nav-tabs ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
+    <li class="ui-state-default ui-corner-top"> <a class="ui-tabs-anchor" id="link-tabs-general" href="#tabs-home" >Home page</a></li>
+    <li class="ui-state-default ui-corner-top"> <a class="ui-tabs-anchor" id="link-tabs-modules" href="#tabs-module">Module page</a></li>
+    <li class="ui-state-default ui-corner-top"> <a class="ui-tabs-anchor" id="link-tabs-modules" href="#tabs-theme">Themes</a></li>
+    <li class="ui-state-default ui-corner-top"> <a class="ui-tabs-anchor" id="link-tabs-modules" href="#tabs-authentification">Authentication</a></li>
+    <li class="ui-state-default ui-corner-top"> <a class="ui-tabs-anchor" id="link-tabs-modules" href="#tabs-notification">Notifications</a></li>
+    <li class="ui-state-default ui-corner-top"> <a class="ui-tabs-anchor" id="link-tabs-modules" href="#tabs-keys">Keys</a></li>
+  </ul>
+  <div id='tabs-home' style="display: block" class="nav-tabs-div ui-tabs-panel ui-widget-content ui-corner-bottom" >
+    <%= render partial: 'general_setting' %>
+  </div>
+
+  <div id='tabs-module' style="display: none" class="nav-tabs-div ui-tabs-panel ui-widget-content ui-corner-bottom" >
+    <div class="row">
+      <%= render partial: 'cms_module' %>
+    </div>
+  </div>
+  <div id='tabs-theme' style="display: none" class="nav-tabs-div ui-tabs-panel ui-widget-content ui-corner-bottom" >
+    <div class="row">
+      <div class="col-xs-12">
+        <%= render partial: 'cms_theme' %>
+      </div>
+    </div>
+  </div>
+  <div id='tabs-authentification' style="display: none" class="nav-tabs-div ui-tabs-panel ui-widget-content ui-corner-bottom" >
+    <div class="row">
+      <div class="col-xs-12">
+        <%= render partial: 'cms_authentification' %>
+      </div>
+    </div>
+  </div>
+  <div id='tabs-notification' style="display: none" class="nav-tabs-div ui-tabs-panel ui-widget-content ui-corner-bottom" >
+    <div class="row">
+      <div class="col-xs-12">
+        <%= render partial: 'cms_email' %>
+      </div>
+    </div>
+  </div>
+  <div id='tabs-keys' style="display: none" class="nav-tabs-div ui-tabs-panel ui-widget-content ui-corner-bottom" >
+    <div class="row">
+      <div class="col-xs-12">
+        <%= render partial: 'keys' %>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+</div>
+<script>
+  $( function() {
+    $tabs = $( "#tabs" ).tabs();
+  } );
+</script>

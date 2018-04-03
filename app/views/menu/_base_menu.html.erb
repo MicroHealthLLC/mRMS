@@ -1,0 +1,48 @@
+<aside id="left-panel">
+  <% if user_signed_in? %>
+      <!-- User info -->
+      <div class="login-info">
+				<span> <!-- User image size is adjusted inside CSS, it should stay as it -->
+
+					<a href="javascript:void(0);" id="show-shortcut">
+            <%= image_tag User.current.profile_image, class: 'online' %>
+            <span>
+							<%= User.current.name %>
+						</span>
+
+          </a>
+
+				</span>
+      </div>
+      <!-- end user info -->
+  <% end %>
+  <!-- NAVIGATION : This navigation is also responsive-->
+  <nav>
+    <% if user_signed_in? %>
+        <%= render  partial: 'menu/signed_in' %>
+    <% else %>
+        <%= render partial: 'menu/not_signed_in' %>
+    <% end %>
+  </nav>
+			<span class="minifyme" data-action="minifyMenu">
+				<i class="fa fa-arrow-circle-left hit"></i>
+			</span>
+
+</aside>
+
+<script>
+  $(function(){
+    $('.minifyme').on('click', function(e){
+      if($('body').attr('class').indexOf('minified') == -1 )
+      {
+        createCookie('minified', true, 7);
+      }
+      else {
+          eraseCookie('minified');
+      }
+    })
+      if(readCookie('minified')){
+        $('body').addClass('minified')
+      }
+  })
+</script>

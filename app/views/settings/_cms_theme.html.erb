@@ -1,0 +1,145 @@
+<%= form_tag(set_theme_settings_path, method: 'post',  class: 'form-horizontal' ) do |f| %>
+    <div id="tabs-theme">
+      <ul>
+        <li><a id="link-tabs-general" href="#tabs-admin" >Admin theme</a></li>
+        <li><a id="link-tabs-general" href="#tabs-client" >Client theme</a></li>
+
+      </ul>
+      <div id='tabs-admin' >
+        <legend class="no-padding margin-bottom-10">Layout Options</legend>
+        <section>
+          <label><input type="checkbox" name="header" id="smart-fixed-header" <%= @admin_theme_setting["header"].present? ? 'checked' : ''%> class="checkbox style-0"><span>Fixed Header</span></label>
+          <label><input type="checkbox" name="footer" id="smart-fixed-footer" <%= @admin_theme_setting["footer"].present? ? 'checked' : ''%> class="checkbox style-0"><span>Fixed Footer</span></label>
+          <label><input type="checkbox" name="container" id="smart-fixed-container" <%= @admin_theme_setting["container"].present? ? 'checked' : ''%> class="checkbox style-0"><span>Inside <b>.container</b></span></label>
+          <label><input type="checkbox" name="topmenu" id="smart-topmenu" <%= @admin_theme_setting["topmenu"].present? ? 'checked' : ''%> class="checkbox style-0"><span>Menu on <b>top</b></span></label>
+          <span id="smart-bgimages"></span>
+        </section>
+        <section>
+        </section>
+        <h6 class="margin-top-10 semi-bold margin-bottom-5">CMS Skins</h6>
+        <section id="smart-styles">
+          <span  data-target='#theme_style' data-style="smart-style-0" id="smart-style-0" data-skinlogo="img/logo.png" class="cms_styles btn btn-block btn-xs txt-color-white margin-right-5" style="background-color:#4E463F;"> <i class="fa fa-check fa-fw"></i>Smart Default</span>
+          <span   data-target='#theme_style' data-style="smart-style-1"  id="smart-style-1" data-skinlogo="img/logo-white.png" class=" cms_styles btn btn-block btn-xs txt-color-white" style="background:#3A4558;"><i class="fa fa-check fa-fw"></i>Dark Elegance</span>
+          <span   data-target='#theme_style' data-style="smart-style-2"  id="smart-style-2" data-skinlogo="img/logo-blue.png" class=" cms_styles btn btn-xs btn-block txt-color-darken margin-top-5" style="background:#fff;"><i class="fa fa-check fa-fw"></i>Ultra Light</span>
+          <span   data-target='#theme_style' data-style="smart-style-3"  id="smart-style-3" data-skinlogo="img/logo-pale.png" class="cms_styles btn btn-xs btn-block txt-color-white margin-top-5" style="background:#f78c40"><i class="fa fa-check fa-fw"></i>Google Skin</span>
+          <span   data-target='#theme_style' data-style="smart-style-4"  id="smart-style-4" data-skinlogo="img/logo-pale.png" class="cms_styles btn btn-xs btn-block txt-color-white margin-top-5" style="background: #bbc0cf; border: 1px solid #59779E; color: #17273D !important;"><i class="fa fa-check fa-fw"></i>PixelSmash</span>
+          <span   data-target='#theme_style' data-style="smart-style-5"  id="smart-style-5" data-skinlogo="img/logo-pale.png" class="cms_styles btn btn-xs btn-block txt-color-white margin-top-5" style="background: rgba(153, 179, 204, 0.2); border: 1px solid rgba(121, 161, 221, 0.8); color: #17273D !important;"><i class="fa fa-check fa-fw"></i>Glass</span>
+          <%= hidden_field_tag :theme_style, @admin_theme_setting["theme_style"] %>
+          <script>
+            $( function() {
+             $('#smart-styles').find('.cms_styles').not('#<%=@admin_theme_setting["theme_style"]%>').find('.fa').css('display', 'none')
+            } );
+          </script>
+          <div class="form-group margin-top-10" >
+            <div class="col-xs-12">
+              <%= submit_tag t('button_save'), class: 'btn btn-success pull-right' %>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <div id='tabs-client' >
+        <div class="row">
+          <h6 class="margin-top-10 semi-bold margin-bottom-5">CMS Skins</h6>
+          <section id="client-smart-styles">
+            <span   data-target='#client_theme_style' data-style="smart-style-0" id="client-smart-style-0" data-skinlogo="img/logo.png" class="cms_styles btn btn-block btn-xs txt-color-white margin-right-5" style="background-color:#4E463F;"><i class="fa fa-check fa-fw"></i>Smart Default</span>
+            <span   data-target='#client_theme_style' data-style="smart-style-1" id="client-smart-style-1" data-skinlogo="img/logo-white.png" class=" cms_styles btn btn-block btn-xs txt-color-white" style="background:#3A4558;"><i class="fa fa-check fa-fw"></i>Dark Elegance</span>
+            <span   data-target='#client_theme_style' data-style="smart-style-2" id="client-smart-style-2" data-skinlogo="img/logo-blue.png" class=" cms_styles btn btn-xs btn-block txt-color-darken margin-top-5" style="background:#fff;"><i class="fa fa-check fa-fw"></i>Ultra Light</span>
+            <span   data-target='#client_theme_style' data-style="smart-style-3" id="client-smart-style-3" data-skinlogo="img/logo-pale.png" class="cms_styles btn btn-xs btn-block txt-color-white margin-top-5" style="background:#f78c40"><i class="fa fa-check fa-fw"></i>Google Skin</span>
+            <span   data-target='#client_theme_style' data-style="smart-style-4" id="client-smart-style-4" data-skinlogo="img/logo-pale.png" class="cms_styles btn btn-xs btn-block txt-color-white margin-top-5" style="background: #bbc0cf; border: 1px solid #59779E; color: #17273D !important;"><i class="fa fa-check fa-fw"></i>PixelSmash</span>
+            <span   data-target='#client_theme_style' data-style="smart-style-5" id="client-smart-style-5" data-skinlogo="img/logo-pale.png" class="cms_styles btn btn-xs btn-block txt-color-white margin-top-5" style="background: rgba(153, 179, 204, 0.2); border: 1px solid rgba(121, 161, 221, 0.8); color: #17273D !important;"><i class="fa fa-check fa-fw"></i>Glass</span>
+            <%= hidden_field_tag :client_theme_style, @client_theme_setting["theme_style"] %>
+            <div class="form-group margin-top-10" >
+              <div class="col-xs-12">
+                <%= submit_tag t('button_save'), class: 'btn btn-success pull-right' %>
+              </div>
+            </div>
+          </section>
+          <script>
+            $( function() {
+              $('#client-smart-styles').find('.cms_styles').not('#client-<%=@client_theme_setting["theme_style"]%>').find('.fa').css('display', 'none')
+            } );
+          </script>
+        </div>
+      </div>
+    </div>
+    <script>
+      $( function() {
+        $tabs = $( "#tabs-theme" ).tabs();
+      } );
+    </script>
+
+
+<% end %>
+
+<script>
+  $(function(){
+
+    $('.cms_styles').on('click', function(){
+      id = $(this).data('style');
+      $(''+ $(this).data('target') ).val(id);
+      if($(this).data('target') == "#client_theme_style")
+      {
+        $('#client-smart-styles').find('.cms_styles').find('.fa').css('display', 'inline')
+        $('#client-smart-styles').find('.cms_styles').not('#'+$(this).attr('id')).find('.fa').css('display', 'none')
+      }else {
+        $('#smart-styles').find('.cms_styles').find('.fa').css('display', 'inline')
+        $('#smart-styles').find('.cms_styles').not('#'+$(this).attr('id')).find('.fa').css('display', 'none')
+      }
+      $('body').removeClass("smart-style-0");
+      $('body').removeClass("smart-style-1");
+      $('body').removeClass("smart-style-2");
+      $('body').removeClass("smart-style-3");
+      $('body').removeClass("smart-style-4");
+      $('body').removeClass("smart-style-5");
+      $('body').addClass(id);
+
+      $('html').removeClass("smart-style-0");
+      $('html').removeClass("smart-style-1");
+      $('html').removeClass("smart-style-2");
+      $('html').removeClass("smart-style-3");
+      $('html').removeClass("smart-style-4");
+      $('html').removeClass("smart-style-5");
+      $('html').addClass(id)
+    })
+    $('#smart-fixed-header').on('change', function(){
+      if($(this).prop('checked'))
+      {
+        $('body').addClass('fixed-header')
+
+      }
+      else {
+        $('body').removeClass('fixed-header')
+      }
+    })
+
+    $('#smart-fixed-footer').on('change', function(){
+      if($(this).prop('checked'))
+      {
+        $('body').addClass('fixed-page-footer')
+      }
+      else {
+        $('body').removeClass('fixed-page-footer')
+      }
+    })
+
+    $('#smart-fixed-container').on('change', function(){
+      if($(this).prop('checked'))
+      {
+        $('body').addClass('container')
+      }
+      else {
+        $('body').removeClass('container')
+      }
+    })
+    $('#smart-topmenu').on('change', function(){
+      if($(this).prop('checked'))
+      {
+        $('body').addClass('menu-on-top')
+      }
+      else {
+        $('body').removeClass('menu-on-top')
+      }
+    })
+  })
+</script>

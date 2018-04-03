@@ -1,0 +1,32 @@
+<div class="col-xs-12 btn-edition tabs-section">
+  <div class="btn-group">
+    <button type="button" class="btn btn-primary dropdown-toggle actions-tab" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">ACTIONS <span class="caret"></span></button>
+    <ul class="dropdown-menu dropdown-links" role="menu" style="min-width:210px;">
+      <li>
+        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+        <%= link_to('Delete',  extend_demographies_email_path(@extend_demography, @email), class: 'dropdown-item',
+                    :method => :delete,
+                    :data => {:confirm => t(:text_are_you_sure)})
+        %>
+      </li>
+      <div class='dropdown-item-dividier'></div>
+      <li>
+        <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
+        <%= link_to 'Cancel', url_back, class: 'dropdown-item' %>
+      </li>
+    </ul>
+  </div>
+</div>
+<section id="widget-grid" class="show_identification">
+  <div class="row">
+    <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      <%= render partial: 'form',
+                 layout: 'shared/smart_widget_wrapper',
+                 locals: {
+                     wid_id: 'email',
+                     wid_title: 'Edit Email',
+                     url: extend_demographies_email_path(@extend_demography, @email)
+                 } %>
+    </article>
+  </div>
+</section>

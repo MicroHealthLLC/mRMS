@@ -1,0 +1,14 @@
+<section id="widget-grid" class="note_template_section">
+  <%= render partial: 'action_menu' %>
+  <div class="row">
+    <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      <%= render partial: 'form',
+                 layout: 'shared/smart_widget_wrapper',
+                 locals: {
+                     note_template: @note_template,
+                     wid_id: 'info',
+                     wid_title: 'Edit Note Template'
+                 } %>
+    </article>
+  </div>
+</section>

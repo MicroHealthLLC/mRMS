@@ -1,0 +1,165 @@
+en:
+  enumerations_label: Enumerations
+  enumeration_address_type: Address
+  enumeration_affiliation_type: Affiliation
+  enumeration_affiliation_status: Affiliation Status
+  enumeration_clearence_type: Clearance
+  enumeration_clearence_status: Clearance Status
+  enumeration_pay_rate_type: Pay rate
+  enumeration_social_media_type: Social media
+  enumeration_certification_type: Certification
+  enumeration_certification_status: Certification Status
+  enumeration_case_status_type: Case status
+  enumeration_contact_type: Relationship
+  enumeration_contact_status: Contact status
+  enumeration_checklist_status_type: Checklist status
+  enumeration_checklist_type: Checklist Type
+  enumeration_country_type: Country
+  enumeration_client_journal_type: Client Journal Type
+  enumeration_citizenship_type: Citizenship
+  enumeration_issued_by_type : Issued by type
+  enumeration_department_type: Department
+  enumeration_document_type: Document
+  enumeration_deployment_operation: Deployment Operation
+  enumeration_education_type: Education
+  enumeration_education_status: Education Status
+  enumeration_form_type: Form Type
+  enumeration_risk_type: Risk Type
+  enumeration_priority_type: Priority
+  enumeration_task_type: Action Type
+  enumeration_task_status_type: Action Status
+  enumeration_employment_type: Employment
+  enumeration_email_type: Email
+  enumeration_ethnicity_type: Ethnicity
+  enumeration_fax_type: Fax
+  enumeration_gender_type: Gender
+  enumeration_survey_type: Survey
+  enumeration_identification_type: Identification
+  enumeration_identification_status: Identification Status
+  enumeration_location_type: Location
+  enumeration_language_type: Language
+  enumeration_language_status: Language Status
+  enumeration_proficiency_type: Proficiency
+  enumeration_phone_type: Phone
+  enumeration_organization_type: Organization
+  enumeration_skill_status: Skills Status
+  enumeration_religion_type: Religion type
+  enumeration_role_type: Role
+  enumeration_state_type: State
+  enumeration_new_label: New value
+  enumeration_case_type: Case type
+  enumeration_case_category_type: Case category type
+  enumeration_insurance_type: Insurance type
+  enumeration_insurance_status: Insurance Status
+  enumeration_need: Need
+  enumeration_need_status: Need status
+  enumeration_goal_status: Goal status
+  enumeration_plan_status: Plan status
+  enumeration_position_status: Position status
+  enumeration_position_type: Position type
+  enumeration_support_status: Support status
+  enumeration_appointment_status: Appointment status
+  enumeration_appointment_type: Appointment type
+  enumeration_case_support_type: Case support type
+  enumeration_assessment: Assessment
+  enumeration_disposition: Disposition
+  enumeration_procedure: Procedure
+  enumerations_enrollment_types: Enrollment Type
+  enumerations_enrollment_status: Enrollment Status
+  enumeration_contact_method: Contact Method
+  enumeration_consult_status: Consult Status
+  enumeration_case_source: Case Source
+  enumeration_marital_status: Marital Status
+  enumeration_daily_living_status: Daily Living Status
+  enumeration_daily_living_type: Daily Living Type
+  enumeration_admission_status: Admission Status
+  enumeration_admission_type: Admission Type
+  enumeration_health_care_facility_status: Health Care facility Status
+  enumeration_health_care_facility_type: Health Care facility Type
+  enumeration_housing_type: Housing Type
+  enumeration_housing_status: Housing Status
+  enumeration_cohabitation_type: Cohabitation Type
+  enumeration_transportation_accessibility: Transportation Accessibility
+  enumeration_transportation_type: Transportation Type
+  enumeration_transportation_status: Transportation Status
+  enumeration_transportation_mean: Transportation Mean
+  enumeration_financial_type: Financial Type
+  enumeration_financial_status: Financial Status
+  enumeration_financial_state: Financial State
+  enumeration_socioeconomic_status: Socioeconomic Status
+  enumeration_socioeconomic_state: Socioeconomic State
+  enumeration_legal_history_type: Legal History Type
+  enumeration_legal_history_status: Legal History Status
+
+  enumeration_surgery_type: Surgery Type
+  enumeration_surgery_status: Surgery Status
+  enumeration_problem_type: Problem Type
+  enumeration_problem_status: Problem Status
+  enumeration_allergy_status: Allergy Status
+
+  enumeration_medical_history_type: Medical History Type
+  enumeration_medical_history_status: Medical History Status
+  enumeration_family_type: Family History Type
+  enumeration_family_status: Family History Status
+  enumeration_immunization_status: Immnunization Status
+  enumeration_medication_status: Medication Status
+  enumeration_installation_name: Installation Name
+  enumeration_other_history_type: Other History Type
+  enumeration_other_history_status: Other History Status
+  enumeration_behavioral_risk_type: Behavioral Risk Type
+  enumeration_behavioral_risk_status: Behavioral Risk Status
+  enumeration_environment_type: Environment Risk Type
+  enumeration_environment_status: Environment Risk Status
+  enumeration_injury_type: Injury Type
+  enumeration_injury_status: Injury Status
+  enumeration_application_type: Application Type
+  enumeration_application_status: Application Status
+  enumeration_compensation_type: Compensation Type
+  enumeration_compensation_status: Compensation Status
+  enumeration_interview_type: Interview Type
+  enumeration_interview_status: Interview Status
+  enumeration_referral_status: Referral Status
+  enumeration_referral_type: Referral Type
+  enumeration_epsdt: EPSDT
+  enumeration_emergency: Emergency
+  enumeration_em_code: E&M CODE
+  enumeration_insurance_relationship: Insurance Relationship
+  enumeration_related_to: Disposition related to
+  enumeration_radiologic_result_status: Radiologic Result Status
+  enumeration_laboratory_result_status: Laboratory Result Status
+  enumeration_outside_lab: Outside Lab
+  enumeration_accept_assignment: Accept Assignment
+  enumeration_bill_status: Bill status
+  enumeration_bill_type: Bill type
+  enumeration_selection_status: Selection Status
+  enumeration_relationship: Relationship
+
+  enumeration_award_enum: Award
+  enumeration_award_type: Award Type
+  enumeration_component: Component
+  enumeration_discharge_type: Discharge Type
+  enumeration_incident_category: Incident Category
+  enumeration_incident_type: Incident Type
+  enumeration_line_of_duty_investigation: Line Of Duty Investigation (LOD)
+  enumeration_operation: Operation
+  enumeration_socioeconomic_type: Socioeconomic Type
+  enumeration_service_type: Service Type
+  enumeration_service_status: Service Status
+  enumeration_unit_enum: Unit
+  enumeration_unit_type: Unit Type
+  enumeration_resume_type: Resume Type
+  enumeration_resume_status: Resume Status
+  enumeration_verified_personnel_casualty_reporting_system: Verified Personnel Casualty Reporting System(s)
+  enumeration_rank: Rank
+  enumeration_measured_by: Measured by
+  enumeration_measurement_name: Measurement
+  enumeration_measurement_status: Measurement Status
+  enumeration_transport_status: Transport status
+  enumeration_transport_type: Transport Type
+  enumeration_transport_location: Transport Location
+  enumeration_goal_type: Goal Type
+  enumeration_plan_type: Plan Type
+  enumeration_association: Association
+  enumeration_application_stages: Application Stage
+  enumeration_app_state: Application State
+  enumeration_civility_title: Civility Title

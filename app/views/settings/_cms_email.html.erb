@@ -1,0 +1,64 @@
+<%  tabs = EmailNotification.where(nil).group_by{|a| a.name}.inject( Hash.new { |h, k| h[k] = Array.new }){ |hash, v|
+  c = v.first[0].to_s.capitalize
+  hash[c] << v
+  hash
+} %>
+
+<script>
+  $( function() {
+    $tabs_notifs = $( "#notification_tabs" ).tabs();
+  } );
+</script>
+<%= form_tag(set_notification_settings_path, method: 'post',  class: 'form-horizontal' ) do |f| %>
+    <section id="widget-grid" class="show_tab">
+      <div class="row">
+        <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <div id="notification_tabs">
+            <ul id="nav">
+              <% tabs.keys.sort.each do |tab| -%>
+                  <li><a id="link-tabs-modules" href="<%=  "#tabs-#{tab }" %>"><%= tab %></a></li>
+              <% end -%>
+            </ul>
+
+            <% tabs.each do |tab, values| -%>
+                <div id="<%= "tabs-#{tab}" %>">
+                  <% values.each do |v| %>
+                      <% notifications = Hash[*v] %>
+                      <% notifications.each do |name, notif| %>
+                          <div class="form-group">
+                            <h4><%= name %></h4>
+                            <div class="row">
+                              <% notif.each do |n| %>
+                                  <div class="col-xs-12 col-sm-6 col-ms-4 col-lg-3">
+                                    <%= check_box_tag 'notifications[]', n.id, n.enabled? %> <%= n.email_type %>
+                                  </div>
+                              <% end %>
+                            </div>
+                          </div>
+                      <% end %>
+                  <% end -%>
+                </div>
+            <% end -%>
+          </div>
+        </article>
+      </div>
+    </section>
+    <style>
+      .ui-widget-content a {
+        color: #214e75;
+      }
+      a.btn{
+        color: white
+      }
+    </style>
+
+
+    <div class="form-group margin-top-10" >
+      <div class="col-xs-12">
+        <%= submit_tag t('button_save'), class: 'btn btn-success pull-right' %>
+      </div>
+    </div>
+<% end %>
+
+
+

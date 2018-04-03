@@ -1,0 +1,28 @@
+<table class="table  table-responsive" id="emails_table" style="width: 100%">
+  <thead>
+  <tr>
+    <th>Email</th>
+    <th>Email Type</th>
+    <th>Note</th>
+    <th>Created start</th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% extend_demography.emails.each do |email| %>
+  <tr>
+    <td><%= link_to email.email_address, edit_extend_demographies_email_path(extend_demography, email) %>   </td>
+    <td><%= email.email_type %>   </td>
+    <td><%= email.note %>   </td>
+    <td><%= format_date email.created_at %>   </td>
+  </tr>
+  <% end %>
+
+  </tbody>
+</table>
+
+<script>
+  $(document).ready(function(){
+      initDataTable("emails_table");
+  });
+</script>

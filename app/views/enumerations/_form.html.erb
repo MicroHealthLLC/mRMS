@@ -1,0 +1,67 @@
+<%#= error_messages_for '@enumeration' %>
+<div class="row">
+  <div class="col-xs-12 col-md-8">
+
+    <fieldset>
+      <legend></legend>
+      <%=form_for :enumeration, object: @enumeration,
+                  :url => (@enumeration.new_record? ? enumerations_path : enumeration_path(@enumeration)),
+                  html: {method: (@enumeration.new_record? ? 'post' : 'put'), class: 'form-horizontal' } do |f| %>
+          <%= f.hidden_field :type  %>
+          <% if @enumeration.errors.any? %>
+              <div id="error_explanation">
+                <h2><%= pluralize(@enumeration.errors.count, "error") %> prohibited this enumeration from being saved:</h2>
+
+                <ul>
+                  <% @enumeration.errors.full_messages.each do |message| %>
+                      <li><%= message %></li>
+                  <% end %>
+                </ul>
+              </div>
+          <% end %>
+
+          <div class="form-group">
+            <%= f.label t(:label_name), class: 'col-md-2 control-label' %>
+            <div class="col-md-9">
+              <%= f.text_field :name , class: 'form-control' %>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <%= f.label t(:label_active), class: 'col-md-2 control-label' %>
+            <div class="col-md-9">
+              <%= f.check_box :active, class: 'form-control' %>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <%= f.label t(:label_flagged), class: 'col-md-2 control-label' %>
+            <div class="col-md-9">
+              <%= f.check_box :is_flagged, class: 'form-control' %>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <%= f.label t(:label_closed), class: 'col-md-2 control-label' %>
+            <div class="col-md-9">
+              <%= f.check_box :is_closed, class: 'form-control' %>
+            </div>
+          </div>
+
+
+          <div class="form-group">
+            <%= f.label t(:label_default), class: 'col-md-2 control-label' %>
+            <div class="col-md-9">
+              <%= f.check_box :is_default, class: 'form-control' %>
+            </div>
+          </div>
+          <div class="form-group" >
+            <div class="col-md-11">
+              <%= link_to t('button_cancel'), enumerations_path, class: 'btn btn-warning pull-right' %>
+              <%= f.submit t(:button_save), class: 'btn btn-success pull-right' %>
+            </div>
+          </div>
+      <% end %>
+    </fieldset>
+  </div>
+</div>

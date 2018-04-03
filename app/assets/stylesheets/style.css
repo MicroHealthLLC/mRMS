@@ -1,0 +1,87 @@
+div.flash {margin-top: 8px; margin-bottom: 5px;}
+
+div.flash.error, #errorExplanation {
+    /*background: url(../images/exclamation.png) 8px 50% no-repeat;*/
+    background-color: #ffe3e3;
+    border: 2px solid #dd0000;
+    color: #880000;
+}
+
+div.flash.notice {
+    /*background: url(../images/true.png) 8px 5px no-repeat;*/
+    background-color: #dfffdf;
+    border: 2px solid #9fcf9f;
+    color: #005f00;
+}
+
+div.flash.warning, .conflict {
+    /*background: url(../images/warning.png) 8px 5px no-repeat;*/
+    background-color: #FFEBC1;
+    border: 2px solid #FDBF3B;
+    color: #A6750C;
+    text-align: left;
+}
+
+label, legend, .jarviswidget header h2 strong, a{
+    text-transform: capitalize;
+}
+
+.center {
+    margin: auto;
+    width: 50%;
+    border: 3px solid green;
+    padding: 10px;
+}
+
+.center_global
+{
+    margin-top: 50vh; /* poussé de la moitié de hauteur de viewport */
+    transform: translateY(-50%); /* tiré de la moitié de sa propre hauteur */
+}
+
+.surveyrule {border: 1px solid #666666;}
+
+.btn {
+    margin-left: 10px;
+}
+
+.display_block{
+    display: block;
+}
+
+.chosen{
+    background-color: greenyellow;
+}
+
+.btn-edition
+{
+    margin-bottom: 10px;
+}
+fieldset{
+    padding-left: 10px;
+}
+.pagination li {
+    margin-left: 0 !important;
+    margin-right: 0  !important;
+    padding-left: 0  !important;
+    padding-right: 0  !important;
+}
+
+
+#pivot_btns .btn {
+  margin: 0 10px 10px 0;
+}
+#output table.pvtUi {
+  background-color: #f9f9f9;
+  border: 1px solid #808080;
+}
+#output table.pvtUi .pvtAxisContainer li span.pvtAttr {
+  background-color: #ffffff;
+}
+#output table.pvtUi tr td:first-child {
+  min-width:200px;
+}
+
+.clear-all {
+    color: white;
+}

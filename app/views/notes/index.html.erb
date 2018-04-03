@@ -1,0 +1,31 @@
+<section id="widget-grid" class="form_task_user">
+  <% if can?(:create_notes, :manage_roles, :manage_notes) %>
+      <div class="btn-group pull-right btn-edition">
+        <button class="btn btn-primary">
+          Add Action For
+        </button>
+        <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+          <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+          <% @cases_for_btn.each do |c| %>
+              <li>
+                <%= link_to c, new_note_path(owner_id: c.id, type: 'CaseNote') %>
+              </li>
+          <% end %>
+        </ul>
+      </div>
+  <% end %>
+  <div class="row">
+    <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      <%= render partial: 'list_ajax',
+                 layout: 'shared/smart_widget_wrapper',
+                 locals: {
+                     wid_id: 'notes',
+                     wid_title: 'Notes',
+                     use_belongs_to: true
+
+                 } %>
+    </article>
+  </div>
+</section>

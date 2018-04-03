@@ -1,0 +1,101 @@
+<header id="header">
+
+  <div id="logo-group">
+
+    <!-- PLACE YOUR LOGO HERE -->
+    <span id="logo1" style="margin: 10px;"> <%= link_to "#{image_tag( "logo.png", alt: '', size: '30x30' )} #{Setting['application_name']}".html_safe , root_path %> </span>
+    <!-- END LOGO PLACEHOLDER -->
+
+  </div>
+  <div id="midheader" class='col-xs-9 col-sm-8 col-md-8'>
+    <% if session[:employee_id] %>
+        <div class='col-xs-12 col-sm-8 margin-top-10' style='float: left; <%= Setting.theme_style(User.current.can?(:manage_role)) == 'smart-style-1' ? 'color:white; ' : '' %> font-weight: bold;'>
+          <%= cache User.current do %>
+              <%= render_employee_information.html_safe %>
+          <% end %>
+        </div>
+        <% if @link_type and @appointments_case.present? %>
+            <div class='col-xs-10 col-sm-6 col-md-4 margin-top-10' >
+              <div class='row'>
+                <%= form_tag(set_appointment_store_path, method: 'post', id: "set_appointment_store_form") do %>
+                    <%= hidden_field_tag :link_id, @link_id %>
+                    <%= hidden_field_tag :link_type, @link_type %>
+                    <div class='col-xs-11' >
+                      <!--<em style="font-size: 11px;">Related Appointment</em>-->
+                      <%= select_tag(:appointment_store_id,
+                                     options_for_select(@appointments_case.map{|a|[a.to_s, a.id]}.insert(0, ['NONE', 0]),
+                                                        selected: session[:appointment_store_id].to_i)) %>
+                    <script>
+                      $(document).ready(function(){
+                        $('#appointment_store_id').on('change', function(){
+                          $('#set_appointment_store_form').submit();
+                        })
+                      })
+                    </script>
+                    </div>
+                <% end %>
+              </div>
+            </div>
+        <% end %>
+    <% end %>
+  </div>
+  <!-- end projects dropdown -->
+
+  <!-- pulled right: nav area -->
+  <div class="pull-right">
+
+    <!-- collapse menu button -->
+    <div id="hide-menu" class="btn-header pull-right">
+      <span> <a href="javascript:void(0);" data-action="toggleMenu" title="Collapse Menu"><i class="fa fa-reorder"></i></a> </span>
+    </div>
+    <!-- end collapse menu -->
+
+    <!-- #MOBILE -->
+
+    <!-- logout button -->
+    <div id="logout" class="btn-header transparent pull-right">
+      <span>
+        <% if user_signed_in? %>
+            <%= link_to destroy_session_path(:user), title: 'Sign out', :method => :delete do %>
+                <i class="fa fa-sign-out"></i>
+            <% end %>
+        <% else %>
+            <%= link_to new_session_path(:user), title: "Sign In" do %>
+                <i class="fa fa-sign-in"></i>
+            <% end %>
+        <% end %>
+      </span>
+    </div>
+    <!-- end logout button -->
+
+    <!-- search mobile button (this is hidden till mobile view port) -->
+    <div id="search-mobile" class="btn-header transparent pull-right">
+      <span> <a href="javascript:void(0)" title="Search"><i class="fa fa-search"></i></a> </span>
+    </div>
+    <!-- end search mobile button -->
+
+
+    <!-- fullscreen button -->
+    <div id="fullscreen" class="btn-header transparent pull-right">
+      <span> <a href="javascript:void(0);" data-action="launchFullscreen" title="Full Screen"><i class="fa fa-arrows-alt"></i></a> </span>
+    </div>
+
+    <div id="logout" class="btn-header transparent pull-right">
+      <span>
+        <% if user_signed_in? and session[:employee_id]%>
+            <%= link_to "/persons/#{User.current.id}", title: "Log off from #{User.current.login}", :method => :delete do %>
+                    <i class="fa fa-times-circle"></i>
+            <% end %>
+        <% end %>
+      </span>
+    </div>
+    <!-- end fullscreen button -->
+
+    <!-- end voice command -->
+
+    <!-- end multiple lang -->
+
+  </div>
+  <!-- end pulled right: nav area -->
+
+</header>
