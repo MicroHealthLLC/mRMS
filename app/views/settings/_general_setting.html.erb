@@ -20,16 +20,6 @@
       </div>
     </div>
 
-    <div class="form-group">
-      <%= label_tag "conference_url", "Conference URL: ", class: 'col-md-2 control-label' %>
-      <div class="col-md-9">
-        <em>Add $room_number$ to generate unique room for every call(ex: http://www.appear.in/$room_number$ )</em>
-        <%= text_field_tag :conference_url, Setting['conference_url'], class: 'form-control' %>
-        <%= check_box_tag :open_new_tab_url, true,  Setting['open_new_tab_url']== 'true' %> Open Conference on new Tab
-        <%= check_box_tag :use_iframe, true,  Setting['use_iframe']== 'true' %> Use iframe
-      </div>
-    </div>
-
     <%= f.text_area  :home_page_content, class: 'ck-editor' %>
 
 

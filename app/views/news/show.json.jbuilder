@@ -1,0 +1,1 @@
+json.partial! "posts/posts", news: @news

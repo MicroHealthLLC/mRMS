@@ -1,5 +1,5 @@
 class Note < ApplicationRecord
-  audited except: [:created_by_id, :updated_by_id]
+  # audited except: [:created_by_id, :updated_by_id]
   belongs_to :user
   scope :not_private, -> {where(is_private: false)}
   default_scope -> {where(is_private: false).or(where(private_author_id: User.current_user.id)).includes(:user) }
@@ -69,14 +69,5 @@ class Note < ApplicationRecord
 
 end
 
-require_dependency 'task_note'
-require_dependency 'checklist_note'
+
 require_dependency 'post_note'
-require_dependency 'case_note'
-require_dependency 'survey_note'
-require_dependency 'appointment_note'
-require_dependency 'goal_note'
-require_dependency 'plan_note'
-require_dependency 'need_note'
-require_dependency 'document_note'
-require_dependency 'attempt_note'

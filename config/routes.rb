@@ -6,7 +6,7 @@ Rails.application.routes.draw do
 
   # Routes For Normal users
   resources :core_demographics, only: [:show]
-
+  resources :news
   resources :roles
   resources :settings, only: [:index, :create] do
     collection do
@@ -31,6 +31,12 @@ Rails.application.routes.draw do
   resources :email_templates, except: [:show] do
     collection do
       get 'load_available_variables'
+    end
+  end
+  resources :post_notes, except: [:index], controller: :notes
+  resources :notes do
+    collection do
+      get 'get_template_note'
     end
   end
   resources :note_templates

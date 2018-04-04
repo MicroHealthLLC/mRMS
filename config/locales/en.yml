@@ -1,34 +1,629 @@
-# Files in the config/locales directory are used for internationalization
-# and are automatically loaded by Rails. If you want to use locales other
-# than English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t 'hello'
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t('hello') %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# The following keys must be escaped otherwise they will not be retrieved by
-# the default I18n backend:
-#
-# true, false, on, off, yes, no
-#
-# Instead, surround them with single quotes.
-#
-# en:
-#   'true': 'foo'
-#
-# To learn more, please read the Rails Internationalization guide
-# available at http://guides.rubyonrails.org/i18n.html.
-
 en:
+  home: Home
+ #DEFAULT SETTING
+  label_no_data: No data to display
+  text_are_you_sure: Are you sure to delete this record?
+  notice_successful_create: Successful creation.
+  notice_successful_update: Successful update.
+  error_update: Error on update.
+  notice_successful_delete: Successful deletion.
+  attachment: Attachment
+  attachments: Attachments
+  label_x_comments: Comments (%{count})
+  label_added_time_by: "Added by %{author} %{age} ago"
+
+  text_enumeration_destroy_question: "%{count} objects are assigned to the value “%{name}”."
+  text_enumeration_category_reassign_to: 'Reassign them to this value:'
+  actionview_instancetag_blank_option:  Please select
+
+  core_demography: Core Demographics
+  extend_demography: Extended Demographics
+ # INSURANCE
+  insurance: Insurance
+  my_insurance: My Insurance
+  insurance_type: Insurance Type
+  insurance_status: Insurance Status
+  insurance_plural: Insurances
+  insurances: Insurances
+  new_insurance: New insurance
+  edit_insurance: Edit insurance
+
+ # Position
+  position: Position
+  positions: Positions
+  position_type: Position Type
+  position_status: Position Status
+  position_description: Position Description
+  estimated_monthly_amount: Estimated Monthly Amount ($)
+  estimated_monthly_cost: Estimated Monthly Cost ($)
+  estimated_amount: Estimated Amount ($)
+
+  # TeleConsult
+  teleconsult: Teleconsult
+  teleconsults: Teleconsults
+  teleconsult_type: Teleconsult Type
+  teleconsult_status: Teleconsult Status
+  new_teleconsult: New Teleconsult
+  edit_teleconsult: Edit Teleconsult
+
+  # Radiologic examination
+  radiologic: Radiologic Examination
+  radiologic_examination: Radiologic Examination
+  radiologics: Radiologic Examinations
+  radiologic_examinations: Radiologic Examinations
+  radiologic_examinations_short: Rad Exam
+  radiologic_result_status: Radiologic Result Status
+  new_radiologic_examination: New Radiologic Examination
+  edit_radiologic_examination: Edit Radiologic Examination
+
+  # Laboratory examination
+  laboratory_examination: Laboratory Examination
+  laboratory_examinations: Laboratory Examinations
+  laboratory_examinations_short: Lab Exam
+  laboratory: Laboratory Examination
+  laboratories: Laboratory Examinations
+  laboratory_result_status: Laboratory Result Status
+  new_laboratory_examination: New Laboratory Examination
+  edit_laboratory_examination: Edit Laboratory Examination
+
+  # Referral
+  referral: Referral
+  referrals: Referrals
+  referral_type: Referral Type
+  referral_status: Referral Status
+  new_referral: New Referral
+  edit_referral: Edit Referral
+
+  related_client: Related Client
+  related_clients: Related Clients
+  my_related_clients: My Related Clients
+  related_client_type: Related Client Type
+  related_client_status: Related Client Status
+  new_related_client: New Related Client
+  edit_related_client: Edit Related Client
+
+  referral_result: Referral Result
+  referral_results: Referral Results
+  new_referral_result: New Referral Result
+  edit_referral_result: Edit Referral Result
+
+  # Daily Living
+  daily_living: Daily Living
+  daily_livings: Daily Living
+  new_daily_living: New Daily Living
+  edit_daily_living: Edit Daily Living
+  daily_living_type: Daily Living Type
+  daily_living_status: Daily Living Status
+
+ # Education
+  education_type: Education
+  education: Education
+  educations: Education
+  new_education: New Education
+  education_status: Education Status
+  education_other_skill: Other Skill
+  skill_status:  Skill Status
+  skill_type:  Skill Type
+  education_date_received: Date Received
+  education_date_expired: Date Expired
+  education_clearence: Clearance
+  education_certification: Certification
+ # TASK
+
+# Identification
+  new_identification: New Identification
+
+ # EMPLOYEE
+  employees: Clients
+  new_employee: New Client
+  employment_type: Employment Type
+  label_employee: Client
+  change_employee_info: Change Information
+
+ # USER.
+  user_subscription: User subscription
+  login: Username
+  email: Email
+  new_user: New User
+  fax: Fax
+  phone: Phone Number
+  label_user: User
+  label_sort: Sort
+  label_active: Active
+  label_inactive: Inactive
+  profile:
+    profile: profile
+    my_profile: My Profile
+    name: Name
+    first_name: First Name
+    middle_name: Middle Name
+    last_name: Last Name
+    birthday: Birth Date
+    gender: Gender
+    religion: Religion
+    ethnicity: Ethnicity
+    marital_status: Marital Status
+    citizenship: Citizenship
+    password: Password
+    current_password: Current password
+    password_confirmation: Password confirmation
+
+ # DOCUMENTS
+  client_documents: Client Documents
+  my_client_documents: My Client Documents
+  documents: Documents
+  my_documents: My Documents
+  document: Document
+  document_type: Document Type
+  new_document: 'New Document'
+  edi_document: 'Editing Document'
+ # LANGUAGE
+
+ # CERTIFICATION
+
+ # CONTACT
+  emergency_contact: Emergency Contact
+  contact_type: Contact Type
+  contact_method: Contact Method
+  relationship: Relationship
+
+ # NOTES
+  note: Note
+  notes: Notes
+  new_note: New Note
+  label_note: Note
+  label_note_plural: Notes
+  add_note: "Add Note"
+  # Jsignature
+
+  jsignature: Signature
+  jsignatures: Signatures
+  new_jsignature: New Signature
+  label_jsignature: Signature
+  label_jsignature_plural: Signatures
+  add_jsignature: "Add Signature"
+ # INSURANCE
+
+ # APPOINTMENT
+  my_appointments: My Appointments
+  new_appointment: New Appointment
+  edit_appointment: Edit Appointment
+  appointments: Appointments
+  appointment_type: Appointment Type
+  appointment_status: Appointment Status
+
+ # Billings
+  my_billings: My billings
+  new_billing: New billing
+  edit_billing: Edit billing
+  billing: Billing
+  billings: Billings
+  bill_type: Bill Type
+  bill_status: Bill Status
+
+  #Client Journal
+  client: Client
+  client_journal: Client Journal
+  client_journals: Client Journals
+  client_journal_type: Client Journal Type
+
+  # NEEDS
+  need: Need
+  needs: Needs
+  my_needs: My Needs
+  new_need: New Need
+  edit_need: Edit Need
+  need_status: Need Status
+
+  # Case organization
+  case_organozation: Case Organization
+  new_case_organozation: New Case Organization
+  edit_case_organozation: Edit Case Organization
+  case_organozations: Case Organizations
+
+ # GOALS
+  goal: Goal
+  goals: Goals
+  my_goals: My Goals
+  new_goal: New goal
+  edit_goal: Edit goal
+  goal_status: Goal Status
+  goal_type: Goal Type
+
+# PLANS
+  plan: Plan
+  plans: Plans
+  my_plans: My Plans
+  new_plan: New plan
+  edit_plan: Edit plan
+  plan_status: Plan Status
+  plan_type: Plan Type
+
+ # CASES
+  case: Case
+  cases: Cases
+  subcases: SubCases
+  my_cases: My Cases
+  case_suport: Case Support
+  edit_case: 'Edit Case'
+  new_case: "New Case"
+  case_category: 'Case Category'
+  case_type: Case Type
+  case_relationship: Case Relationship
+  add_subcase: 'Add subCase'
+  all_files: All Files
+
+ # CASES Support
+  cases_support: Case Support
+  cases_supports: Case Supports
+  edit_cases_support: 'Edit Case Support'
+  new_cases_support: "New Case Support"
+  case_support_type: Case Support Type
+  support_status: Support Status
+
+
+ # TASK
+  task: Action
+  tasks: Actions
+  my_tasks: My actions
+  new_task: New action
+  edit_task: 'Edit action'
+  task_type: 'Action Type'
+  sub_tasks: 'Sub actions'
+  add_sub_task: "Add sub action"
+
+  # Enrollment
+  enrollment: Enrollment
+  enrollment_type: Enrollment Type
+  enrollment_status: Enrollment Status
+  enrollments: Enrollments
+  new_enrollment: New Enrollment
+  edit_enrollment: Edit Enrollment
+ # OTHER
+
+  languages: Languages
+  my_languages: My Languages
+  other_skill: Skill
+  other_skills: Skills
+  label_default: Default
+  label_active: Active
+  label_flagged: Flagged
+  label_closed: Closed
+  label_name: Name
+  label_address: Address
+  label_contact: Contact
+  label_on: On
+  label_off: Off
+  label_email_type: Email Type
+  label_fax_type: Fax Type
+  label_phone_type: Phone Type
   label_search: Search client
   label_search_suuport: Search support
+  proficiency: Proficiency
+  language_type: Language Type
+  language_status: Language Status
+  language: Language
+  answer: Answer
+  pay_rate: Pay rate
+
+  salary: Pay
+
+  #WIKI
+  new_wiki: New wiki
+ # AFFILIATION
+  new_affiliation: New Affiliation
+  affiliation_status: Affiliation Status
+  affiliations: Affiliations
+  my_affiliations: My Affiliations
+  affiliation_type: Affiliation type
+  #ORGANIZATION
+  new_organization: New Organization
+  organizations: Organizations
+  organization: Organization
+  organization_type: Organization Type
+  #CLEARANCE
+  clearances: Clearances
+  clearance_status: Clearance Status
+  certifications: Certifications
+  certification_status: Certification Status
+
+  departments: Departments
+
+  # News
+  news : news
+  new_news: New news
+  edit_news: Edit news
+  #CHECKLIST
+  checklist: Checklist
+  checklists: Checklists
+  checklist_template: Checklist Templates
+  checklist_type: Checklist Type
+  checklist_status: Checklist Status
+  number_of_checklist: Number of checklist
+  new_checklist: 'New checklist'
+
+  contacts: Contacts
+  my_contacts: My Contacts
+  description: Description
+  priority: Priority
+  priority_type: Priority Type
+  question: Question
+  survey: Survey
+  survey_type: Survey Type
+  attempts: Attempts
+  surveys: Surveys
+  new_survey: 'New survey'
+  title: Title
+  last_updated: Last updated
+  status: Status
+  assigned_to: Assigned To
+  type: Type
+  category: Category
+  date_due: Date Due
+  date_end: Date End
+  date_ended: Date Ended
+  date_start: Date Start
+  date_started: Date Started
+  date_completed: Date Completed
+  date_identified: Date Identified
+  summary: Summary
+  private: Private
+  label_date: Date
+  label_time: Time
+  forum: Forum
+  wiki: Wiki
+  sticky: My Sticky Notes
+  role: Role
+  label_permissions: Permissions
+  label_more: "More"
+  label_less: "Less"
+  special_requirement: Special Requirement
+
+  watchers: Watchers
+  watcher: Watcher
+  manage_watcher: Manage Watcher
+
+  chat_room: ChatRoom
+  new_conference: New conference
+
+  categories: Categories
+  groups: Groups
+  document_managers: Documents
+
+  # FOR HISTORY
+
+  # Admission
+  admission: Admission
+  admissions: Admissions
+  new_admission: New Admission
+  edit_admission: Edit Admission
+  admission_type: Admission Type
+  admission_status: Admission Status
+
+  # health_care_facilities
+  health_care_facilities: Health Care Facilties
+  health_care_facility: Health Care Facilty
+  health_care_facility_type: Health Care Facilty Type
+  health_care_facility_status: Health Care Facilty Status
+  new_health_care_facility: New Health Care Facilty
+  edit_health_care_facility: Edit Health Care Facilty
+
+  # Housing
+  housing: Housing
+  housings: Housing
+  new_housing: New Housing
+  edit_housing: Edit Housing
+  housing_type: Housing Type
+  housing_status: Housing Status
+  cohabitation_type: Cohabitation Type
+  primary_address: Primary Address
+
+  legal: Legal
+  new_legal: New Legal
+  edit_legal: Edit Legal
+  legals: Legal
+  legal_history_type: Legal History Type
+  legal_history_status: Legal History Status
+
+  allergy: Allergy
+  new_allergy: New Allergy
+  edit_allergy: Edit Allergy
+  allergies: Allergies
+  allergy_status: Allergy Status
+
+  injury: Injury
+  new_injury: New Injury
+  edit_injury: Edit Injury
+  injuries: Injuries
+  injury_status: Injury Status
+  injury_type: Injury Type
+
+  job_application: Job Application
+  new_job_application: New Job Application
+  edit_job_application: Edit Job Application
+  job_applications: Job Applications
+  application_status: Job Application Status
+  application_type: Job Application Type
+  interview_status: Interview Status
+  selection_status: Selection Status
+  interview_type: Job Interview Type
+
+  job_app: Job Application
+  new_job_app: New Job Application
+  edit_job_app: Edit Job Application
+  job_apps: Job Applications
+
+  job: Job Application
+  new_job: New Job Application
+  edit_job: Edit Job Application
+  jobs: Job Applications
+
+  worker_compensation: Worker Comp
+  new_worker_compensation: New Worker Comp
+  edit_worker_compensation: Edit Worker Comp
+  worker_compensations: Workers Comp
+  compensation_status: Worker Comp Status
+  compensation_type: Worker Comp Type
+
+  service_history: Service History
+  service_histories: Service History
+  new_service_history: New Service History
+  edit_service_history: Edit Service History
+  military_history: Military History
+  military_histories: Military History
+  new_military_history: New Military History
+  edit_military_history: Edit Military History
+  service_type: Service Type
+  service_status: Service Status
+  rank: Rank
+  component: Component
+  discharge_type: Discharge Type
+
+  transportation: Transportation
+  new_transportation: New Transportation
+  edit_transportation: Edit Transportation
+  transportations: Transportation
+  transportation_type: Transportation Type
+  transportation_status: Transportation Status
+  transportation_mean: Transportation Mean
+  transportation_accessibility: Transportation Accessibility
+
+  transport: transport
+  new_transport: New transport
+  edit_transport: Edit transport
+  transports: transports
+  transport_type: transport Type
+  transport_status: transport Status
+  transport_location: transport Location
+
+  financial: Financial
+  new_financial: New Financial
+  edit_financial: Edit Financial
+  financials: Financials
+  financial_type: Financial Type
+  financial_status: Financial Status
+  financial_state: Financial State
+
+  resume: Resume
+  new_resume: New Resume
+  edit_resume: Edit Resume
+  resumes: Resumes
+  resume_type: Resume Type
+  resume_status: Resume Status
+
+  surgical: Surgery
+  new_surgical: New Surgery
+  edit_surgical: Edit Surgery
+  surgicals: Surgery & Procedures
+  surgery_type: Surgery Type
+  surgery_status: Surgery Status
+
+  medical: Medical History
+  new_medical: New Medical History
+  edit_medical: Edit Medical History
+  medicals: Medical history
+  medical_history_type: Medical History Type
+  medical_history_status: Medical History Status
+
+  medication: Medication
+  medication_description: Medication Description
+  new_medication: New Medication
+  edit_medication: Edit Medication
+  medications: Medications
+  medication_type: Medication Type
+  medication_status: Medication Status
+
+  other_history: Other History
+  new_other_history: New Other History
+  edit_other_history: Edit Other History
+  other_histories: Other History
+  other_history_type: Other History Type
+  other_history_status: Other History Status
+
+  family_history: Family History
+  new_family_history: New Family History
+  edit_family_history: Edit Family History
+  family_histories: Family History
+  family_type: Family History Type
+  family_status: Family History Status
+
+  socioeconomic: Socioeconomic History
+  new_socioeconomic: New Socioeconomic History
+  edit_socioeconomic: Edit Socioeconomic History
+  socioeconomics: Socioeconomic history
+  socioeconomic_history_type: Socioeconomic History Type
+  socioeconomic_history_status: Socioeconomic History Status
+  socioeconomic_type: Socioeconomic History Type
+  socioeconomic_status: Socioeconomic History Status
+
+  behavioral_risk: Behavioral Risk
+  new_behavioral_risk: New Behavioral Risk
+  edit_behavioral_risk: Edit Behavioral Risk
+  behavioral_risks: Behavioral Risks
+  behavioral_risk_type: Behavioral Risk Type
+  behavioral_risk_status: Behavioral Risk Status
+
+  environment_risk: Environment Risk
+  new_environment_risk: New Environment Risk
+  edit_environment_risk: Edit Environment Risk
+  environment_risks: Environment Risks
+  environment_risk_type: Environment Risk Type
+  environment_risk_status: Environment Risk Status
+
+  problem_list: Problem List
+  new_problem_list: New Problem List
+  edit_problem_list: Edit Problem List
+  problem_lists: Problem Lists
+  problem_type: Problem Type
+  problem_status: Problem Status
+  icdcm_code: ICD-10-CM Code
+  cause_icdcm_code: Cause ICD-10-CM Code
+  hcpc: HCPCS
+
+  unit: Unit
+  units: Units
+  new_unit: New Unit
+  edit_unit: Edit Unit
+  unit_type: Unit Type
+  unit_enum: Unit
+  unit_status: Unit Status
+
+  award: Award
+  awards: Awards
+  new_award: New Award
+  edit_award: Edit Award
+  award_type: Award Type
+  award_enum: Award
+  award_status: Award Status
+
+  immunization: Immunization
+  immunizations: Immunizations
+  new_immunization: New Immunization
+  edit_immunization: Edit Immunization
+  immunization_type: Immunization Type
+  immunization_enum: Immunization
+  immunization_status: Immunization Status
+
+  deployment_history: Deployment History
+  deployment_histories: Deployment Histories
+  new_deployment_history: New Deployment History
+  edit_deployment_history: Edit Deployment History
+  deployment_history_type: Deployment History Type
+  deployment_history_status: Deployment History Status
+
+  incident_history: Incident History
+  incident_histories: Incident Histories
+  new_incident_history: New Incident History
+  edit_incident_history: Edit Incident History
+  incident_history_type: Incident History Type
+  incident_history_status: Incident History Status
+
+  mtf_hospital: Mtf/Hospital
+  mtf_hospitals: Mtf/Hospitals
+  new_mtf_hospital: New Mtf/Hospital
+  edit_mtf_hospital: Edit Mtf/Hospital
+  mtf_hospital_type: Mtf/Hospital Type
+  mtf_hospital_status: Mtf/Hospital Status
+
+  incident_type: "Incident Type"
+  incident_category: "Incident Category"
