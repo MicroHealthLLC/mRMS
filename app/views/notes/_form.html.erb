@@ -18,7 +18,7 @@
         <%= label_tag :note_template_label, 'note template', class: 'col-md-2 control-label' %>
         <div class="col-md-9">
           <%= select_tag :note_template,
-                         options_for_select(NoteTemplate.from_organization({owner_id: params[:owner_id], type: params[:type]}).pluck(:title, :id).insert(0, [ ''])), {class: 'control-label' } %>
+                         options_for_select(NoteTemplate.pluck(:title, :id).insert(0, [ ''])), {class: 'control-label' } %>
         </div>
       </div>
 
