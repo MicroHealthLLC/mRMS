@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :channels
+  resources :reports
   get 'welcome/index'
   root to: 'welcome#index'
 

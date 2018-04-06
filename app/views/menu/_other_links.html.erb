@@ -1,3 +1,17 @@
+
+<% if  can?(:manage_roles, :manage_channels, :create_channels) %>
+    <li class="<%= menu_active?('channels', 'new') %>">
+      <a href="/channels/new" title="<%= 'new Channel' %>"><i class="fa fa-lg fa-fw fa-plus-circle"></i><span class="menu-item-parent"><%= 'Create Channel' %></span></a>
+    </li>
+<% end %>
+<% if can?(:manage_roles, :manage_channels, :view_channels) %>
+    <% Channel.is_public.each do |channel| %>
+        <li class="<%= menu_active?('channels', 'show') %>">
+          <a href="/channels/<%= channel.id %>" title="<%=  channel.name %>"><i class="fa fa-lg fa-fw fa-newspaper-o"></i><span class="menu-item-parent"><%= channel.name %></span></a>
+        </li>
+    <% end %>
+
+<% end %>
 <% if module_enabled?('news') && can?(:manage_roles, :manage_news, :view_news) %>
     <li class="<%= menu_active?('news') %>">
       <a href="/news" title="<%= 'news' %>"><i class="fa fa-lg fa-fw fa-newspaper-o"></i><span class="menu-item-parent"><%= 'news' %></span></a>

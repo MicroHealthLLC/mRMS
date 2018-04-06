@@ -5,7 +5,9 @@ RedCarpet::AccessControl.map do |map|
         :employees => [:index],
         :identifications => [:index, :show, :new, :create, :edit, :update, :destroy],
         :document => [:all_files, :index, :new, :show, :create, :edit, :update, :destroy],
-        :news => [:index, :show, :new, :create, :edit, :update, :destroy]
+        :news => [:index, :show, :new, :create, :edit, :update, :destroy],
+        :channels => [:index, :show, :new, :create, :edit, :update, :destroy],
+        :reports => [:index, :show, :new, :create, :edit, :update, :destroy]
     },  :read => true
   end
 end

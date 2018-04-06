@@ -1,0 +1,41 @@
+<%= form_for(channel, html: { method: :post, class: 'form-horizontal' }) do |form| %>
+    <fieldset>
+      <legend></legend>
+      <% if channel.errors.any? %>
+          <div id="error_explanation">
+            <h2><%= pluralize(channel.errors.count, "error") %> prohibited this channel from being saved:</h2>
+
+            <ul>
+              <% channel.errors.full_messages.each do |message| %>
+                  <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
+      <% end %>
+
+
+      <div class="form-group">
+        <%= form.label 'Title', class: 'col-md-2 control-label' %>
+        <div class="col-md-8">
+          <%= form.hidden_field :user_id %>
+          <%= form.text_field :name, placeholder: 'Title', class: 'form-control' %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <%= form.label 'Public', class: 'col-md-2 control-label' %>
+        <div class="col-md-8">
+          <%= form.check_box :is_public  %>
+        </div>
+      </div>
+
+
+      <div class="form-group" >
+        <div class="col-md-11">
+          <%= link_to t('button_cancel'), :back, class: 'btn btn-warning pull-right' %>
+          <%= form.submit t(:button_create), class: 'btn btn-success pull-right' %>
+        </div>
+      </div>
+    </fieldset>
+
+<% end %>
