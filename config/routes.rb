@@ -17,6 +17,7 @@ Rails.application.routes.draw do
       post 'set_key_providers'
     end
   end
+  get 'profile_record',  to: 'user_profiles#profile_record'
   resources :employees, path: :persons, except: [:edit] do
     member do
       get 'log_in'
@@ -28,6 +29,7 @@ Rails.application.routes.draw do
       post 'upload'
     end
   end
+
   resources :email_templates, except: [:show] do
     collection do
       get 'load_available_variables'

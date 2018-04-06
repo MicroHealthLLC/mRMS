@@ -73,7 +73,7 @@ class User < ApplicationRecord
   end
 
   def organization
-    job_detail.try(:organization)
+    # job_detail.try(:organization)
   end
 
   def self.get_user(auth)
@@ -288,14 +288,14 @@ class User < ApplicationRecord
 
   def self.safe_attributes_with_password
     [:login, :state, :email, :time_zone,
-     :password, :password_confirmation, job_detail_attributes: [JobDetail.safe_attributes],
+     :password, :password_confirmation,
      core_demographic_attributes: [CoreDemographic.safe_attributes]]
   end
 
   def self.admin_safe_attributes
     [:login, :state, :email, :role_id, :time_zone,
      :password, :password_confirmation,
-     :admin, job_detail_attributes: [JobDetail.safe_attributes],
+     :admin,
      core_demographic_attributes: [CoreDemographic.safe_attributes]]
   end
 

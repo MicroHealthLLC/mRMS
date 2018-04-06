@@ -2,7 +2,7 @@ class EmployeesController < ProtectForgeryApplication
   before_action  :authenticate_user!
   before_action  :set_employee, :only => [:show, :destroy, :log_in, :update]
   before_action  :authorize
-  include UserProfilesHelper
+  # include UserProfilesHelper
   include ApplicationHelper
 
   def index
@@ -18,27 +18,20 @@ class EmployeesController < ProtectForgeryApplication
 
   def show
     redirect_to '/profile_record'
-    add_breadcrumb 'Client Profile', '/profile_record'
-    @languages = Language.for_status(params[:status_type]) if module_enabled?( 'languages')  && can?(:manage_roles, :view_languages, :manage_languages)
-    @contacts = Contact.for_status(params[:status_type]) if module_enabled?( 'contacts')  && can?(:manage_roles, :view_contacts, :manage_contacts)
-    @affiliations = Affiliation.for_status(params[:status_type]) if module_enabled?( 'affiliations')  && can?(:manage_roles, :view_affiliations, :manage_affiliations)
-    @user_insurances = UserInsurance.for_status(params[:status_type]) if module_enabled?( 'insurances')  && can?(:manage_roles, :view_insurances, :manage_insurances)
-    @documents = Document.for_profile.for_status(params[:status_type]) if module_enabled?( 'documents')  && can?(:manage_roles, :view_documents, :manage_documents)
-    @jsignatures = User.current.jsignatures if module_enabled?( 'jsignatures')
   end
 
   def new
     r = Role.where(role_type_id: RoleType.default.try(:id)).first
     @user = User.new(state: true, role_id: r.try(:id))
     @user.core_demographic = CoreDemographic.new
-    @user.job_detail = JobDetail.new
+    # @user.job_detail = JobDetail.new
   end
 
   def create
     @user = User.new(params.require(:user).permit(employee_params))
     if params[:anonyme_client]
-       @user.anonyme_user = true
-       @user.email = random_email(params)
+      @user.anonyme_user = true
+      @user.email = random_email(params)
     end
 
     if @user.save

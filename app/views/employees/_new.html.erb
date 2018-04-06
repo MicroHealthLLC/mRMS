@@ -1,0 +1,234 @@
+<%= form_for(user, url: employees_path, html: { method: :post, class: 'form-horizontal', id: 'smart-form-register' }) do |f| %>
+
+    <fieldset>
+      <legend><%#= t('change_employee_info') %></legend>
+      <% if user.errors.any? %>
+          <div id="error_explanation">
+            <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+            <ul>
+              <% user.errors.full_messages.each do |message| %>
+                  <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
+      <% end %>
+
+      <%= f.fields_for :core_demographic do |form| %>
+          <div class="form-group">
+            <%= form.label t('title'), class: 'col-md-2 control-label' %>
+            <div class="col-md-8">
+              <%= form.text_field :title, placeholder: 'Title', class: 'form-control' %>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <%= form.label t('profile.first_name'), class: 'col-md-2 control-label' %>
+            <div class="col-md-8">
+              <%= form.text_field :first_name, placeholder: 'First name', class: 'form-control' %>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <%= form.label t('profile.middle_name'), class: 'col-md-2 control-label' %>
+            <div class="col-md-8">
+              <%= form.text_field :middle_name, placeholder: 'Middle name', class: 'form-control' %>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <%= form.label t('profile.last_name'), class: 'col-md-2 control-label' %>
+            <div class="col-md-8">
+              <%= form.text_field :last_name, placeholder: 'Last name', class: 'form-control' %>
+            </div>
+          </div>
+
+
+          <div class="form-group">
+            <label class="col-md-2 control-label">Time Zone</label>
+            <div class="col-md-8">
+              <%= f.time_zone_select :time_zone, ActiveSupport::TimeZone.us_zones, {},{class: 'form-control'} %>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-md-2 control-label"><%= t('profile.birthday') %></label>
+            <div class="col-md-8">
+              <%= form.text_field :birth_date, class: 'form-control birthday', data: {dateformat: "yy-mm-dd"}, placeholder: "yyyy-mm-dd" %>
+              <script>
+                $(function(){
+                  $('.birthday').datepicker({
+                    dateFormat: 'yy-mm-dd',
+                    "prevText":'<i class="fa fa-chevron-left"></i>',
+                    "nextText":'<i class="fa fa-chevron-right"></i>',
+                    changeMonth: true,
+                    changeYear: true,
+                    yearRange: "-100:+0"
+                  });
+                })
+              </script>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-md-2 control-label"><%= t('label_note') %></label>
+            <div class="col-md-8">
+              <%= form.text_area :note, class: 'form-control' %>
+            </div>
+          </div>
+
+
+
+          <div class="form-group">
+            <label class="col-md-2 control-label"><%= t('profile.marital_status') %></label>
+            <div class="col-md-8">
+              <%= form.select :marital_status_id, options_for_select(MaritalStatus.active.pluck(:name, :id), selected: form.object.marital_status.try(:id)) , {},{class: 'form-control'} %>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-md-2 control-label"><%= t('profile.citizenship') %></label>
+            <div class="col-md-8">
+              <%= form.select :citizenship_type_id, options_for_select(CitizenshipType.active.pluck(:name, :id), selected: form.object.citizenship_type.try(:id)) , {},{class: 'form-control'} %>
+            </div>
+          </div>
+
+      <% end %>
+
+      <div class="form-group">
+        <label class="col-md-2 control-label">Login</label>
+        <div class="col-md-9">
+          <%= f.text_field :login, placeholder: 'Login' , class: 'form-control' %>
+        </div>
+      </div>
+
+
+      <div class="form-group">
+        <label class="col-md-2 control-label">No Email</label>
+        <div class="col-md-9">
+          <%= check_box_tag :anonyme_client, true, f.object.anonyme_user? %>
+        </div>
+      </div>
+
+      <div class="form-group email_div">
+        <label class="col-md-2 control-label"><%= t(:email) %></label>
+        <div class="col-md-9">
+          <%= f.email_field :email, placeholder: 'Email' , class: 'form-control' %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="col-md-2 control-label">automatic password generation</label>
+        <div class="col-md-9">
+          <%= check_box_tag :auto_password, true, '1' %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="col-md-2 control-label"><%= t('profile.password') %></label>
+        <div class="col-md-9">
+          <%= f.password_field :password, autocomplete: "off", placeholder: 'Password' , class: 'form-control' %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="col-md-2 control-label"><%= t('profile.password_confirmation') %></label>
+        <div class="col-md-9">
+          <%= f.password_field :password_confirmation, autocomplete: "off", placeholder: 'Password confirmation' , class: 'form-control' %>
+        </div>
+      </div>
+
+
+      <% if User.current.admin? %>
+          <div class="form-group">
+            <label class="col-md-2 control-label">Administrator</label>
+            <div class="col-md-9">
+              <%= f.check_box :admin %>
+            </div>
+          </div>
+      <% end %>
+
+      <div class="form-group">
+        <label class="col-md-2 control-label"><%= t('role') %></label>
+        <div class="col-md-9">
+          <%= f.select :role_id, options_for_select(Role.active.map{|r| [r.role_type, r.id]}, selected: f.object.role.try(:id)), {}, {class: 'form-control'} %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="col-md-2 control-label">Status</label>
+        <div class="col-md-9">
+          <%= f.select :state, options_for_select(User::STATUS, selected: Setting['user_default_state']), {}, {class: 'form-control'} %>
+        </div>
+      </div>
+
+
+      <div class="form-group" >
+        <div class="col-md-11">
+         <%= link_to t('button_cancel'), :back, class: 'btn btn-warning pull-right' %>
+         <%= f.submit t(:button_create), class: 'btn btn-success pull-right' %>
+        </div>
+      </div>
+    </fieldset>
+<% end %>
+<script>
+  // Validation
+  $(function() {
+    runAllForms();
+    // Validation
+    $("#smart-form-register").validate({
+
+      // Rules for form validation
+      rules : {
+        "user[login]" : {
+          required : true
+        },
+        "user[email]" : {
+          required : true
+        },
+        "user[core_demographic_attributes][first_name]": {
+          required : true
+        },
+        "user[core_demographic_attributes][last_name]": {
+          required : true
+        },
+        "user[core_demographic_attributes][birth_date]": {
+          required : true
+        }
+      },
+      // Do not change code below
+      errorPlacement : function(error, element) {
+        error.insertAfter(element.parent());
+      }
+    });
+
+    $('#auto_password').on('change', function(){
+      generate_random_password()
+    })
+
+    $('#anonyme_client').on('change', function(){
+      client_anonyme()
+    })
+    generate_random_password()
+  });
+
+  function generate_random_password(){
+    str ='';
+    if($('#auto_password').prop('checked'))
+    {
+      str = 'A'+ Math.random().toString(36)
+    }
+    $('#user_password').val(str);
+    $('#user_password_confirmation').val(str);
+  }
+
+  function client_anonyme(){
+    str ='';
+    if($('#anonyme_client').prop('checked'))
+    {
+      $('.email_div').hide();
+    }
+    else {
+      $('.email_div').show();
+    }
+  }
+</script>
