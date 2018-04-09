@@ -1,19 +1,14 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Name:</strong>
-  <%= @channel.name %>
-</p>
-
-<p>
-  <strong>Is public:</strong>
-  <%= @channel.is_public %>
-</p>
-
-<p>
-  <strong>User:</strong>
-  <%= @channel.user_id %>
-</p>
-
-<%= link_to 'Edit', edit_channel_path(@channel) %> |
-<%= link_to 'Back', channels_path %>
+<%= render partial: 'action_menu' %>
+<section id="widget-grid" class="channel">
+  <div class="row">
+    <article class="col-xs-12">
+      <%= render partial: 'show',
+                 layout: 'shared/smart_widget_wrapper',
+                 locals: {
+                     wid_id: 'channel',
+                     wid_title: 'Channel',
+                     channel: @channel
+                 } %>
+    </article>
+  </div>
+</section>

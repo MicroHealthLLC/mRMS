@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180404130514) do
+ActiveRecord::Schema.define(version: 20180407163846) do
 
   create_table "addresses", id: :bigint, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.integer  "address_type_id"
@@ -40,6 +40,26 @@ ActiveRecord::Schema.define(version: 20180404130514) do
     t.integer  "updated_by_id"
     t.integer  "created_by_id"
     t.index ["user_id"], name: "index_attachments_on_user_id", using: :btree
+  end
+
+  create_table "channel_users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+    t.integer  "channel_id"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["channel_id"], name: "index_channel_users_on_channel_id", using: :btree
+    t.index ["user_id"], name: "index_channel_users_on_user_id", using: :btree
+  end
+
+  create_table "channels", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+    t.string   "name"
+    t.boolean  "is_public",   default: false
+    t.integer  "user_id"
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.boolean  "is_personal", default: false
+    t.integer  "parent_id",   default: 0
+    t.index ["user_id"], name: "index_channels_on_user_id", using: :btree
   end
 
   create_table "core_demographics", id: :bigint, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
@@ -204,6 +224,20 @@ ActiveRecord::Schema.define(version: 20180404130514) do
     t.datetime "updated_at",                         null: false
   end
 
+  create_table "reports", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+    t.string   "name"
+    t.integer  "category_id"
+    t.integer  "category_type_id"
+    t.integer  "user_id"
+    t.string   "document"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.integer  "channel_id"
+    t.index ["category_id"], name: "index_reports_on_category_id", using: :btree
+    t.index ["category_type_id"], name: "index_reports_on_category_type_id", using: :btree
+    t.index ["user_id"], name: "index_reports_on_user_id", using: :btree
+  end
+
   create_table "roles", id: :bigint, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.boolean  "state"
     t.text     "note",          limit: 65535
@@ -222,6 +256,15 @@ ActiveRecord::Schema.define(version: 20180404130514) do
     t.datetime "updated_at",                      null: false
     t.string   "setting_type"
     t.text     "value",             limit: 65535
+  end
+
+  create_table "shared_reports", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+    t.integer  "user_id"
+    t.integer  "report_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["report_id"], name: "index_shared_reports_on_report_id", using: :btree
+    t.index ["user_id"], name: "index_shared_reports_on_user_id", using: :btree
   end
 
   create_table "social_media", id: :bigint, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|

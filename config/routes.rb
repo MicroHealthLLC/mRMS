@@ -1,6 +1,13 @@
 Rails.application.routes.draw do
-  resources :channels
-  resources :reports
+  resources :channels do
+    resources :reports do
+      member do
+        match :upload_document, via: [:get, :post]
+        match :share_report, via: [:get, :post]
+      end
+    end
+  end
+
   get 'welcome/index'
   root to: 'welcome#index'
 

@@ -29,6 +29,10 @@ class User < ApplicationRecord
   accepts_nested_attributes_for :user_attachments, reject_if: :all_blank, allow_destroy: true
 
 
+  has_many :channels
+  has_many :shared_reports
+  has_many :reports, through: :shared_reports
+
   STATUS = [['Active', true],['Inactive', false]]
 
   default_scope  -> {includes(:core_demographic).references(:core_demographic)}

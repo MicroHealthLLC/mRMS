@@ -1,29 +1,58 @@
-<p id="notice"><%= notice %></p>
+<%= render partial: 'action_menu' %>
+<div class="row">
+  <div class="col-md-12">
+    <p>
+      <strong>Name:</strong>
+      <%= @report.name %>
+    </p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @report.name %>
-</p>
+    <p>
+      <strong>Channel:</strong>
+      <%= @report.channel %>
+    </p>
 
-<p>
-  <strong>Category:</strong>
-  <%= @report.category_id %>
-</p>
 
-<p>
-  <strong>Category type:</strong>
-  <%= @report.category_type_id %>
-</p>
+    <%  if @report.document_url %>
+        <p>
+          <strong>Document:</strong>
+          <%=link_to @report.read_attribute(:document), @report.document_url%>
+        </p>
 
-<p>
-  <strong>User:</strong>
-  <%= @report.user_id %>
-</p>
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div id="output">
 
-<p>
-  <strong>Document:</strong>
-  <%= @report.document %>
-</p>
+            </div>
+          </div>
+        </div>
 
-<%= link_to 'Edit', edit_report_path(@report) %> |
-<%= link_to 'Back', reports_path %>
+        <%= javascript_include_tag 'smart_admin/c3_renderers.min' %>
+        <%= javascript_include_tag 'smart_admin/d3_renderers.min' %>
+        <%= javascript_include_tag 'smart_admin/pivot' %>
+            <script>
+                $(document).ready(function(){
+                    $("#output").pivotUI(
+                        [
+                            <% tab = render_pivot_information
+                            tab[1].each do |hash| %>
+                            {
+                                <% hash.each do |k, v| %>
+                                '<%= k %>': '<%= v %>',
+                                <% end %>
+                            },
+                            <% end %>
+                        ],
+                        {
+                            rows: ["<%= tab[0][0] %>"],
+                            cols:  ["<%= tab[0][1] %>"]
+                        }
+                    );
+                });
+            </script>
+
+
+    <% end %>
+  </div>
+</div>
+
+

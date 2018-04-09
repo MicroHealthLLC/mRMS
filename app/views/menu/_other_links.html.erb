@@ -7,11 +7,29 @@
 <% if can?(:manage_roles, :manage_channels, :view_channels) %>
     <% Channel.is_public.each do |channel| %>
         <li class="<%= menu_active?('channels', 'show') %>">
-          <a href="/channels/<%= channel.id %>" title="<%=  channel.name %>"><i class="fa fa-lg fa-fw fa-newspaper-o"></i><span class="menu-item-parent"><%= channel.name %></span></a>
+          <a href="/channels/<%= channel.id %>" title="<%=  channel.name %>"><i class="fa fa-lg fa-fw fa-square"></i><span class="menu-item-parent"><%= channel.name %></span></a>
         </li>
     <% end %>
-
+    <% Channel.for_user.each do |channel| %>
+        <li class="<%= menu_active?('channels', 'show') %>">
+          <a href="/channels/<%= channel.id %>" title="<%=  channel.name %>"><i class="fa fa-lg fa-fw fa-square-o"></i><span class="menu-item-parent"><%= channel.name %></span></a>
+        </li>
+    <% end %>
 <% end %>
+<li>
+  <a href="#"><i class="fa fa-lg fa-fw fa-flash"></i> <span class="menu-item-parent"> Personal</span></a>
+  <ul>
+    <% channel = Channel.market_place %>
+    <li class="<%= menu_active?('channels', 'show') %>">
+      <a href="/channels/<%= channel.id %>" title="<%=  channel.name %>"><i class="fa fa-lg fa-fw fa-square-o"></i><span class="menu-item-parent"><%= channel.name %></span></a>
+    </li>
+    <% channel = Channel.segmented_market %>
+    <li class="<%= menu_active?('channels', 'show') %>">
+      <a href="/channels/<%= channel.id %>" title="<%=  channel.name %>"><i class="fa fa-lg fa-fw fa-square-o"></i><span class="menu-item-parent"><%= channel.name %></span></a>
+    </li>
+  </ul>
+</li>
+
 <% if module_enabled?('news') && can?(:manage_roles, :manage_news, :view_news) %>
     <li class="<%= menu_active?('news') %>">
       <a href="/news" title="<%= 'news' %>"><i class="fa fa-lg fa-fw fa-newspaper-o"></i><span class="menu-item-parent"><%= 'news' %></span></a>
