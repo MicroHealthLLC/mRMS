@@ -313,7 +313,7 @@ class User < ApplicationRecord
   def account_active?; state?; end
 
   def to_s
-    name
+    name.strip.presence || login
   end
 
   def permissions

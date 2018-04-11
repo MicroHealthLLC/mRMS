@@ -13,7 +13,7 @@
           <div class='dropdown-item-dividier'></div>
       <% end %>
 
-      <% if @channel.can?(:edit_channel, :manage_channel, :manage_roles) %>
+      <% if @channel.user_id == User.current.id %>
           <li>
             <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
             <%= link_to 'Edit', edit_channel_path(@channel), class: 'dropdown-item' %>
@@ -21,10 +21,10 @@
           <div class='dropdown-item-dividier'></div>
       <% end %>
 
-      <% if @channel.can?(:edit_channel, :manage_channel, :manage_roles) %>
+      <% if @channel.user_id == User.current.id && !@channel.is_public? && !@channel.is_personal? %>
           <li>
             <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-            <%= link_to 'Manage Users', edit_channel_path(@channel), class: 'dropdown-item' %>
+            <%= link_to 'Manage Users', manage_users_channel_path(@channel), class: 'dropdown-item' %>
           </li>
           <div class='dropdown-item-dividier'></div>
       <% end %>

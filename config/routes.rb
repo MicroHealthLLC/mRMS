@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
   resources :channels do
+    member do
+      match :manage_users, via: [:get, :post]
+    end
     resources :reports do
       member do
         match :upload_document, via: [:get, :post]
