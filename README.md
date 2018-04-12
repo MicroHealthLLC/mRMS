@@ -18,7 +18,7 @@ go to config directory and edit database.yml to connect to mysql
 
 and you should create an admin user 
 
-`rake db:seeds`
+`rake db:seed`
 
 Running the server
 
