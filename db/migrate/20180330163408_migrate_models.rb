@@ -1,4 +1,4 @@
-class MigrateModels < ActiveRecord::Migration[5.1]
+class MigrateModels < ActiveRecord::Migration[5.0]
   def change
     create_table "enumerations", force: :cascade do |t|
       t.string  "name",          limit: 100, default: "",    null: false

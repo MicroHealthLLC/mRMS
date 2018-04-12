@@ -1,4 +1,4 @@
-class CreateEnabledModules < ActiveRecord::Migration[5.1]
+class CreateEnabledModules < ActiveRecord::Migration[5.0]
   def change
     create_table :enabled_modules do |t|
       t.string   "name"

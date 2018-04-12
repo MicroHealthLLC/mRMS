@@ -1,4 +1,4 @@
-class AddCoreDemographic < ActiveRecord::Migration[5.1]
+class AddCoreDemographic < ActiveRecord::Migration[5.0]
   def change
     create_table "core_demographics" do |t|
       t.integer  "user_id"

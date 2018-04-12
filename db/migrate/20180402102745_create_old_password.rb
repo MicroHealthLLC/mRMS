@@ -1,4 +1,4 @@
-class CreateOldPassword < ActiveRecord::Migration[5.1]
+class CreateOldPassword < ActiveRecord::Migration[5.0]
   def change
     create_table :old_passwords do |t|
       t.string   "encrypted_password",       null: false

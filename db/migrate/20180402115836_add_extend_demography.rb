@@ -1,4 +1,4 @@
-class AddExtendDemography < ActiveRecord::Migration[5.1]
+class AddExtendDemography < ActiveRecord::Migration[5.0]
   def change
     create_table "extend_demographies" do |t|
       t.integer  "user_id"

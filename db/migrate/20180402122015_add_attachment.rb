@@ -1,4 +1,4 @@
-class AddAttachment < ActiveRecord::Migration[5.1]
+class AddAttachment < ActiveRecord::Migration[5.0]
   def change
     create_table "attachments" do |t|
       t.string   "type"
