@@ -3,9 +3,14 @@ MicroHealth Reports Made Simple
 
 # Installation:
 
-This project use Ruby 2.3+ and rails 5.0
+This project use Ruby 2.3+ and rails 5.0 and Mysql 
 
-`undle install`
+
+`Bundle install`
+
+create mysql database simple_report
+
+'rails generate simple_form:install'
 
 `rake db:migrate`
 
