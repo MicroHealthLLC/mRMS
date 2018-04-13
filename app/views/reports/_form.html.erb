@@ -24,7 +24,7 @@
       <div class="form-group">
         <%= f.label t('title'), class: 'col-md-2 control-label' %>
         <div class="col-md-9">
-          <%= f.select :channel_id , options_for_select(Channel.where(user_id: User.current.id).pluck(:name, :id), selected:  @channel.id) , class: 'form-control' %>
+          <%= f.select :channel_id , options_for_select(Channel.where(user_id: User.current.id, id: @channel.id).pluck(:name, :id), selected:  @channel.id) , class: 'form-control' %>
         </div>
       </div>
 

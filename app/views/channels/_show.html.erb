@@ -9,7 +9,7 @@
   <tbody>
   <% @reports.each do |report| %>
       <tr>
-        <td><%= report.name %></td>
+        <td><%= link_to report.name, channel_report(@channel, report ) %></td>
         <td><%= format_date_time report.created_at %></td>
         <td><%= format_date_time report.updated_at %></td>
       </tr>
