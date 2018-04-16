@@ -29,7 +29,7 @@
       <% if @channel.is_personal? and @report.can?(:edit_channel, :manage_channel, :manage_roles) %>
           <li>
             <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-            <%= link_to 'Share report', share_report_channel_report_path(@channel, @report), class: 'dropdown-item' %>
+            <%= link_to 'Share report', '#', class: 'dropdown-item', onclick: 'show_upload_file();' %>
           </li>
           <div class='dropdown-item-dividier'></div>
       <% end %>
@@ -43,3 +43,9 @@
     </ul>
   </div>
 </div>
+
+<script>
+  function show_upload_file(){
+      $('#')
+  }
+</script>
