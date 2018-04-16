@@ -236,11 +236,6 @@ class User < ApplicationRecord
     @actions_allowed ||= permissions.inject([]) { |actions, permission| actions += RedCarpet::AccessControl.allowed_actions(permission) }.flatten.to_set
   end
 
-
-  def job
-    job_detail || JobDetail.new(user_id: self.id)
-  end
-
   def name
     cd = core_demographic
     return login if cd.nil?
