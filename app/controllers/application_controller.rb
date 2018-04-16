@@ -23,21 +23,21 @@ class ApplicationController < ActionController::Base
     if user_signed_in?
       User.current_user = current_user
 
-      if session[:employee_id]
-        User.current = User.find session[:employee_id]
-        @user = User.current
-      elsif params[:user_id]
-        @user = User.find params[:user_id]
+      # if session[:employee_id]
+      #   User.current = User.find session[:employee_id]
+      #   @user = User.current
+      # elsif params[:user_id]
+      #   @user = User.find params[:user_id]
+      #   User.current = current_user
+      # elsif params[:employee_id]
+      #   User.current = User.find params[:employee_id]
+      #   @user = User.current
+      #   session[:employee_id] = User.current.id
+      # else
         User.current = current_user
-      elsif params[:employee_id]
-        User.current = User.find params[:employee_id]
-        @user = User.current
-        session[:employee_id] = User.current.id
-      else
-        User.current = current_user
-        @user = User.current
-      end
-      current_user.last_seen_at =  Time.now
+      #   @user = User.current
+      # end
+      # current_user.last_seen_at =  Time.now
       current_user.save(validate: false)
     end
   rescue ActiveRecord::RecordNotFound
