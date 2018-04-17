@@ -43,10 +43,17 @@
           </div>
         </div>
 
-        <%= javascript_include_tag 'smart_admin/c3_renderers.min' %>
-        <%= javascript_include_tag 'smart_admin/d3_renderers.min' %>
+        <%= stylesheet_link_tag 'c3.min' %>
+        <%= stylesheet_link_tag 'pivot.min' %>
         <%= javascript_include_tag 'smart_admin/pivot' %>
+        <%= javascript_include_tag 'smart_admin/d3.min' %>
+        <%= javascript_include_tag 'smart_admin/jquery.ui.touch-punch.min' %>
+        <%= javascript_include_tag 'smart_admin/c3.min' %>
+        <%= javascript_include_tag 'smart_admin/c3_renderers.min' %>
+
         <script>
+
+
             $(document).ready(function(){
                 $("#output").pivotUI(
                     [
@@ -61,7 +68,14 @@
                     ],
                     {
                         rows: [],
-                        cols: []
+                        cols: [],
+                        vals: ["tip", "total_bill"],
+                        aggregatorName: "Sum over Sum",
+                        rendererName: "Bar Chart",
+                        renderers: $.extend(
+                            $.pivotUtilities.renderers,
+                            $.pivotUtilities.c3_renderers
+                        )
                     }
                 );
             });
