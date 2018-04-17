@@ -90,6 +90,7 @@ gem 'jSignature'
 gem 'simple_form'
 gem 'sidekiq'
 gem 'cocoon'
+gem 'rollbar'
 
 # breadcrumbs
 gem "breadcrumbs_on_rails"
