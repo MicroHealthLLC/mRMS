@@ -25,5 +25,6 @@ and you should create an admin user
 Running the server
 
 `rails s`
+or run it in the background rails s -e production > /dev/null &
 
 
