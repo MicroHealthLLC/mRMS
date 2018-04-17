@@ -53,7 +53,7 @@ Rails.application.routes.draw do
       get 'get_template_note'
     end
   end
-  resources :note_templates
+
   resources :users, only: [:index, :show, :destroy] do
     collection do
       match 'recently_connected', via: [:post, :get]

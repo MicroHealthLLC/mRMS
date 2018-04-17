@@ -14,11 +14,6 @@ class NotesController < ProtectForgeryApplication
     end
   end
 
-  def get_template_note
-    @note_id = params[:note_id]
-    @note_template = NoteTemplate.find(params[:note_template_id]) rescue nil
-  end
-
   # TODO make on each breadcrumn it own value
   def new
     @note = Note.new(type: params[:type], owner_id: params[:owner_id], user_id: User.current_user.id)
