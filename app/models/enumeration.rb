@@ -130,3 +130,4 @@ end
 # require_dependency 'enumerations/*.rb'
 require_dependency 'religion_type'
 require_dependency 'role_type'
+require_dependency 'organization_enum'

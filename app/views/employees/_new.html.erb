@@ -16,13 +16,6 @@
 
       <%= f.fields_for :core_demographic do |form| %>
           <div class="form-group">
-            <%= form.label t('title'), class: 'col-md-2 control-label' %>
-            <div class="col-md-8">
-              <%= form.text_field :title, placeholder: 'Title', class: 'form-control' %>
-            </div>
-          </div>
-
-          <div class="form-group">
             <%= form.label t('profile.first_name'), class: 'col-md-2 control-label' %>
             <div class="col-md-8">
               <%= form.text_field :first_name, placeholder: 'First name', class: 'form-control' %>
@@ -50,24 +43,7 @@
               <%= f.time_zone_select :time_zone, ActiveSupport::TimeZone.us_zones, {},{class: 'form-control'} %>
             </div>
           </div>
-          <div class="form-group">
-            <label class="col-md-2 control-label"><%= t('profile.birthday') %></label>
-            <div class="col-md-8">
-              <%= form.text_field :birth_date, class: 'form-control birthday', data: {dateformat: "yy-mm-dd"}, placeholder: "yyyy-mm-dd" %>
-              <script>
-                $(function(){
-                  $('.birthday').datepicker({
-                    dateFormat: 'yy-mm-dd',
-                    "prevText":'<i class="fa fa-chevron-left"></i>',
-                    "nextText":'<i class="fa fa-chevron-right"></i>',
-                    changeMonth: true,
-                    changeYear: true,
-                    yearRange: "-100:+0"
-                  });
-                })
-              </script>
-            </div>
-          </div>
+
 
           <div class="form-group">
             <label class="col-md-2 control-label"><%= t('label_note') %></label>
@@ -76,21 +52,13 @@
             </div>
           </div>
 
-
-
           <div class="form-group">
-            <label class="col-md-2 control-label"><%= t('profile.marital_status') %></label>
+            <label class="col-md-2 control-label"><%= t('organization') %></label>
             <div class="col-md-8">
-              <%= form.select :marital_status_id, options_for_select(MaritalStatus.active.pluck(:name, :id), selected: form.object.marital_status.try(:id)) , {},{class: 'form-control'} %>
+              <%= form.select :organization_id, options_for_select(OrganizationEnum.active.pluck(:name, :id), selected: form.object.organization.try(:id)) , {},{class: 'form-control'} %>
             </div>
           </div>
 
-          <div class="form-group">
-            <label class="col-md-2 control-label"><%= t('profile.citizenship') %></label>
-            <div class="col-md-8">
-              <%= form.select :citizenship_type_id, options_for_select(CitizenshipType.active.pluck(:name, :id), selected: form.object.citizenship_type.try(:id)) , {},{class: 'form-control'} %>
-            </div>
-          </div>
 
       <% end %>
 

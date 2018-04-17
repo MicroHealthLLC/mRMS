@@ -1,0 +1,26 @@
+<table class="table table-responsive table-striped enumerations" id="<%= klass::OptionName %>_table" >
+  <thead>
+  <tr>
+    <th><%= t :label_name %></th>
+    <th><%= t :label_default %></th>
+    <th><%= t :label_active %></th>
+    <th></th>
+  </tr>
+  </thead>
+  <% enumerations.each do |enumeration| %>
+      <tr>
+        <td class="name"><%= link_to enumeration, edit_enumeration_path(enumeration) %></td>
+        <td class="tick"><%= enumeration.is_default? %></td>
+        <td class="tick"><%= enumeration.active? %></td>
+        <td class="buttons">
+          <%= reorder_handle(enumeration, :url => enumeration_path(enumeration), :param => 'enumeration') %>
+          <%= delete_link enumeration_path(enumeration) %>
+        </td>
+      </tr>
+  <% end %>
+</table>
+<script>
+    $(document).ready(function(){
+        initDataTable("<%= klass::OptionName %>_table")
+    })
+</script>

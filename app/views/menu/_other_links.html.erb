@@ -1,6 +1,3 @@
-<li class="<%= menu_active?('devise/registrations') %>">
-  <a href="/users/edit" title="<%= 'My profile' %>"><i class="fa fa-lg fa-fw fa-user"></i><span class="menu-item-parent"><%= 'My Profile' %></span></a>
-</li>
 
 <% if  can?(:manage_roles, :manage_channels, :create_channels) %>
     <li class="<%= menu_active?('channels', 'new') %>">
