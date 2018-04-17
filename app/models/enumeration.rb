@@ -128,6 +128,10 @@ class Enumeration < ActiveRecord::Base
   end
 end
 # require_dependency 'enumerations/*.rb'
-require_dependency 'religion_type'
+require_dependency 'address_type'
+require_dependency 'email_type'
+require_dependency 'fax_type'
+require_dependency 'identification_type'
+require_dependency 'identification_status'
 require_dependency 'role_type'
 require_dependency 'organization_enum'

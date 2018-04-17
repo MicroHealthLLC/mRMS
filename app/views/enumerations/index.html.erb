@@ -40,8 +40,8 @@
                                locals: {
                                    klass: klass,
                                    enumerations: enumerations,
-                                   wid_id: 'news',
-                                   wid_title: 'New news'
+                                   wid_id: klass::OptionName,
+                                   wid_title: t( klass::OptionName)
                                } %>
                 <% end %>
               </div>
