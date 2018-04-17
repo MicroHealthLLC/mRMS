@@ -26,10 +26,8 @@ module ApplicationHelper
   def edit_user_page_tab
     tabs = [
         {:name => 'core_demographic', :partial => 'devise/registrations/shared/core_demographic', :label => :core_demography},
-        {:name => 'extend_demographic', :partial => 'devise/registrations/shared/extend_demography', :label => :extend_demography}
 
     ]
-    tabs << {:name => 'identification', :partial => 'devise/registrations/shared/identification_form', :label => 'Identifications'}
 
     tabs << {:name => 'password', :partial => 'devise/registrations/shared/password', :label => :password}
 
