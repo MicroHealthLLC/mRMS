@@ -33,7 +33,7 @@ class UsersController < ProtectForgeryApplication
 
   def image_upload
     @user.avatar = params[:images]
-    @user.save
+    @user.save(validate: false)
     render 'uploader/image_upload'
   end
 
