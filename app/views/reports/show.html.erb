@@ -11,6 +11,23 @@
       <%= @report.channel %>
     </p>
 
+    <p>
+      <strong>Created by:</strong>
+      <%= @report.created_by %> at <%= format_date_time @report.created_at %>
+    </p>
+
+
+    <p>
+      <strong>Updated by:</strong>
+      <%= @report.updated_by %> at <%= format_date_time @report.updated_at %>
+    </p>
+
+
+    <p>
+      <strong>Description:</strong>
+      <%= @report.description.to_s.html_safe %>
+    </p>
+
 
     <%  if @report.document_url %>
         <p>
@@ -29,26 +46,26 @@
         <%= javascript_include_tag 'smart_admin/c3_renderers.min' %>
         <%= javascript_include_tag 'smart_admin/d3_renderers.min' %>
         <%= javascript_include_tag 'smart_admin/pivot' %>
-            <script>
-                $(document).ready(function(){
-                    $("#output").pivotUI(
-                        [
-                            <% tab = render_pivot_information
-                            tab[1].each do |hash| %>
-                            {
-                                <% hash.each do |k, v| %>
-                                '<%= k %>': '<%= v %>',
-                                <% end %>
-                            },
-                            <% end %>
-                        ],
+        <script>
+            $(document).ready(function(){
+                $("#output").pivotUI(
+                    [
+                        <% tab = render_pivot_information
+                        tab[1].each do |hash| %>
                         {
-                            rows: [],
-                            cols: []
-                        }
-                    );
-                });
-            </script>
+                            <% hash.each do |k, v| %>
+                            '<%= k %>': '<%= v %>',
+                            <% end %>
+                        },
+                        <% end %>
+                    ],
+                    {
+                        rows: [],
+                        cols: []
+                    }
+                );
+            });
+        </script>
 
 
     <% end %>

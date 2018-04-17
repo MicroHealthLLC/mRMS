@@ -3,7 +3,9 @@
   <tr>
     <th>Name</th>
     <th>Date created</th>
-    <th>Date las updated</th>
+    <th>Created By</th>
+    <th>Date last updated</th>
+    <th>Updated By</th>
   </tr>
   </thead>
   <tbody>
@@ -11,7 +13,9 @@
       <tr>
         <td><%= link_to report.name, channel_report_path(@channel, report ) %></td>
         <td><%= format_date_time report.created_at %></td>
+        <td><%= report.created_by %></td>
         <td><%= format_date_time report.updated_at %></td>
+        <td><%= report.updated_by %></td>
       </tr>
   <% end %>
   </tbody>

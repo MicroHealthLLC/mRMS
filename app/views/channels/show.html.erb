@@ -1,4 +1,23 @@
 <%= render partial: 'action_menu' %>
+<p>
+  <strong>Channel :</strong>
+  <%= @channel.name %>
+</p>
+
+<p>
+  <strong>Description :</strong>
+  <%= @channel.description.to_s.html_safe %>
+</p>
+
+<p>
+  <strong>Created by :</strong>
+  <%= @channel.user %> at <%= format_date_time @channel.created_at %>
+</p>
+<p>
+  <strong>Last update :</strong>
+  <%= @channel.updated_by %> at <%= format_date_time @channel.updated_at %>
+</p>
+
 <section id="widget-grid" class="channel">
   <div class="row">
     <article class="col-xs-12">
@@ -6,7 +25,7 @@
                  layout: 'shared/smart_widget_wrapper',
                  locals: {
                      wid_id: 'channel',
-                     wid_title: 'Rports',
+                     wid_title: 'Reports',
                      channel: @channel
                  } %>
     </article>
