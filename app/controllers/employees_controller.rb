@@ -36,7 +36,7 @@ class EmployeesController < ProtectForgeryApplication
 
     if @user.save
       UserMailer.welcome_email(@user, params[:user][:password]).deliver_later unless @user.anonyme_user?
-      redirect_to log_in_employee_path(@user)
+      redirect_to users_path
     else
       render 'new'
     end
@@ -48,12 +48,6 @@ class EmployeesController < ProtectForgeryApplication
     else
       flash[:error] =  @employee.errors.full_messages.join('<br/>')
     end
-    redirect_to employee_path(@employee)
-  end
-
-  def log_in
-    session[:employee_id] = @employee.id
-    # flash[:notice]= "Logged In from #{@employee.login}"
     redirect_to employee_path(@employee)
   end
 
