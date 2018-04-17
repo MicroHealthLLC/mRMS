@@ -2,7 +2,7 @@
   <div class="btn-group">
     <button type="button" class="btn btn-primary dropdown-toggle actions-tab" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">ACTIONS <span class="caret"></span></button>
     <ul class="dropdown-menu dropdown-links" role="menu" style="min-width:200px;">
-      <% if @channel.can?(:delete_channel, :manage_channel, :manage_roles) %>
+      <% if @channel.can?(:delete_channel, :manage_channel, :manage_roles) and @channel.user_id == User.current.id %>
           <li>
             <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
             <%= link_to('Delete', channel_path(@channel), class: 'dropdown-item',

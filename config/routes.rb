@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :channels do
+  resources :channels, except: [:index] do
     member do
       match :manage_users, via: [:get, :post]
     end

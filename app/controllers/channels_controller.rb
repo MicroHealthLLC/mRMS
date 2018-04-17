@@ -2,11 +2,6 @@ class ChannelsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_channel, only: [:manage_users, :show, :edit, :update, :destroy]
 
-  # GET /channels
-  # GET /channels.json
-  def index
-    @channels = Channel.all
-  end
 
   # GET /channels/1
   # GET /channels/1.json
@@ -71,7 +66,7 @@ class ChannelsController < ApplicationController
   def destroy
     @channel.destroy
     respond_to do |format|
-      format.html { redirect_to channels_url, notice: 'Channel was successfully destroyed.' }
+      format.html { redirect_to root_path, notice: 'Channel was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
