@@ -88,6 +88,7 @@ gem 'pry-rails'
 gem 'rails-pry'
 gem 'jSignature'
 gem 'simple_form'
+gem 'sidekiq'
 gem 'cocoon'
 
 # breadcrumbs

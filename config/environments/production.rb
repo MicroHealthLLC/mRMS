@@ -9,23 +9,19 @@ Rails.application.configure do
   # and those relying on copy on write to perform better.
   # Rake tasks automatically ignore this option for performance.
   config.eager_load = true
+  config.enable_dependency_loading = true
 
   # Full error reports are disabled and caching is turned on.
   config.consider_all_requests_local       = false
   config.action_controller.perform_caching = true
 
-  # Attempt to read encrypted secrets from `config/secrets.yml.enc`.
-  # Requires an encryption key in `ENV["RAILS_MASTER_KEY"]` or
-  # `config/secrets.yml.key`.
-  config.read_encrypted_secrets = true
-
   # Disable serving static files from the `/public` folder by default since
   # Apache or NGINX already handles this.
-  config.public_file_server.enabled = ENV['RAILS_SERVE_STATIC_FILES'].present?
+  config.public_file_server.enabled = true
 
   # Compress JavaScripts and CSS.
   config.assets.js_compressor = :uglifier
-  # config.assets.css_compressor = :sass
+  config.assets.css_compressor = :sass
 
   # Do not fallback to assets pipeline if a precompiled asset is missed.
   config.assets.compile = false
@@ -44,6 +40,12 @@ Rails.application.configure do
   # config.action_cable.url = 'wss://example.com/cable'
   # config.action_cable.allowed_request_origins = [ 'http://example.com', /http:\/\/example.*/ ]
 
+  config.action_cable.disable_request_forgery_protection = true
+  # config.action_cable.allowed_request_origins = [ 'localhost:3000',
+  #                                                 'umed.microhealthllc.com',
+  #                                                 /https:\/\/umed.microhealthllc.com/,
+  #                                                 /http:\/\/localhost:*/ ]
+
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
   # config.force_ssl = true
 
@@ -59,7 +61,7 @@ Rails.application.configure do
 
   # Use a real queuing backend for Active Job (and separate queues per environment)
   # config.active_job.queue_adapter     = :resque
-  # config.active_job.queue_name_prefix = "simple_report_#{Rails.env}"
+  # config.active_job.queue_name_prefix = "mHRM_#{Rails.env}"
   config.action_mailer.perform_caching = false
 
   # Ignore bad email addresses and do not raise email delivery errors.
@@ -76,6 +78,14 @@ Rails.application.configure do
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
 
+
+  if File.exist?("#{Rails.root}/config/emails.yml")
+    emails = YAML::load(File.open("#{Rails.root}/config/emails.yml"))
+    config.action_mailer.delivery_method = emails['email_delivery']['delivery_method']
+    config.action_mailer.smtp_settings = emails['email_delivery']['smtp_settings'].symbolize_keys
+    config.action_mailer.default_url_options = emails['action_mailer_config'].symbolize_keys
+  end
+
   # Use a different logger for distributed setups.
   # require 'syslog/logger'
   # config.logger = ActiveSupport::TaggedLogging.new(Syslog::Logger.new 'app-name')
@@ -83,8 +93,15 @@ Rails.application.configure do
   if ENV["RAILS_LOG_TO_STDOUT"].present?
     logger           = ActiveSupport::Logger.new(STDOUT)
     logger.formatter = config.log_formatter
-    config.logger    = ActiveSupport::TaggedLogging.new(logger)
+    config.logger = ActiveSupport::TaggedLogging.new(logger)
   end
+
+  # Exception Notifier Gem
+  Rails.application.config.middleware.use ExceptionNotification::Rack,
+                                          :email => {
+                                              :exception_recipients => %w{bilel.kedidi@gmail.com e67b35dd.microhealthllc.com@amer.teams.ms}
+                                          }
+
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
