@@ -21,13 +21,7 @@
           <div class='dropdown-item-dividier'></div>
         <% end %>
 
-        <% if can?(:add_notes, :manage_roles) %>
-          <li>
-            <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
-            <%= link_to 'Add Comment', new_note_path(type: 'PostNote', owner_id: @news.id), class: 'dropdown-item', style: 'padding-right: 0;' %>
-          </li>
-          <div class='dropdown-item-dividier'></div>
-        <% end %>
+
 
           <li>
             <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
