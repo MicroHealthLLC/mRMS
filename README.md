@@ -7,6 +7,7 @@ This project use Ruby 2.3+ and rails 5.0 and Mysql
 
 Install ImageMagick
 
+Install Redis
 
 `Bundle install`
 
