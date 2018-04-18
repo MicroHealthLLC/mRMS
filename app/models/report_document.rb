@@ -27,7 +27,7 @@ class ReportDocument < ApplicationRecord
   def read_content
     begin
       content = render_pivot_information(file)
-      update_column(:original_content, content.to_json)
+      self.original_content = content.to_json
     rescue StandardError => e
       self.errors.add(:file, "Could not read the doc, error #{e.message}")
     end
