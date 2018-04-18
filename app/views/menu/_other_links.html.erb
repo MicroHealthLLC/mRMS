@@ -20,14 +20,18 @@
 <li>
   <a href="#"><i class="fa fa-lg fa-fw fa-flash"></i> <span class="menu-item-parent"> Personal</span></a>
   <ul>
-    <% channel = Channel.market_place %>
-    <li class="<%= menu_active?('channels', 'show') %>">
-      <a href="/channels/<%= channel.id %>" title="<%=  channel.name %>"><i class="fa fa-lg fa-fw fa-square-o"></i><span class="menu-item-parent"><%= channel.name %></span></a>
-    </li>
-    <% channel = Channel.segmented_market %>
-    <li class="<%= menu_active?('channels', 'show') %>">
-      <a href="/channels/<%= channel.id %>" title="<%=  channel.name %>"><i class="fa fa-lg fa-fw fa-square-o"></i><span class="menu-item-parent"><%= channel.name %></span></a>
-    </li>
+    <% channel = Channel.unscoped.market_place %>
+    <% if channel.is_active? %>
+        <li class="<%= menu_active?('channels', 'show') %>">
+          <a href="/channels/<%= channel.id %>" title="<%=  channel.name %>"><i class="fa fa-lg fa-fw fa-square-o"></i><span class="menu-item-parent"><%= channel.name %></span></a>
+        </li>
+    <% end  %>
+    <% channel = Channel.unscoped.segmented_market %>
+    <% if channel.is_active? %>
+        <li class="<%= menu_active?('channels', 'show') %>">
+          <a href="/channels/<%= channel.id %>" title="<%=  channel.name %>"><i class="fa fa-lg fa-fw fa-square-o"></i><span class="menu-item-parent"><%= channel.name %></span></a>
+        </li>
+    <% end  %>
   </ul>
 </li>
 

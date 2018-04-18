@@ -1,4 +1,5 @@
 class Channel < ApplicationRecord
+  default_scope {where(is_active: true)}
   has_many :channel_users
   has_many :reports
   belongs_to :user

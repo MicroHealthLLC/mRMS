@@ -64,7 +64,8 @@ class ChannelsController < ApplicationController
   # DELETE /channels/1
   # DELETE /channels/1.json
   def destroy
-    @channel.destroy
+    @channel.is_active = false
+    @channel.save
     respond_to do |format|
       format.html { redirect_to root_path, notice: 'Channel was successfully destroyed.' }
       format.json { head :no_content }
@@ -72,15 +73,15 @@ class ChannelsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_channel
-      @channel = Channel.find(params[:id])
-    rescue ActiveRecord::RecordNotFound
-      render_404
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_channel
+    @channel = Channel.find(params[:id])
+  rescue ActiveRecord::RecordNotFound
+    render_404
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def channel_params
-      params.require(:channel).permit(Channel.safe_attributes)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def channel_params
+    params.require(:channel).permit(Channel.safe_attributes)
+  end
 end
