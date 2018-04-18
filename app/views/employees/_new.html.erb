@@ -70,13 +70,6 @@
       </div>
 
 
-      <div class="form-group">
-        <label class="col-md-2 control-label">No Email</label>
-        <div class="col-md-9">
-          <%= check_box_tag :anonyme_client, true, f.object.anonyme_user? %>
-        </div>
-      </div>
-
       <div class="form-group email_div">
         <label class="col-md-2 control-label"><%= t(:email) %></label>
         <div class="col-md-9">
@@ -172,10 +165,6 @@
     $('#auto_password').on('change', function(){
       generate_random_password()
     })
-
-    $('#anonyme_client').on('change', function(){
-      client_anonyme()
-    })
     generate_random_password()
   });
 
@@ -187,16 +176,5 @@
     }
     $('#user_password').val(str);
     $('#user_password_confirmation').val(str);
-  }
-
-  function client_anonyme(){
-    str ='';
-    if($('#anonyme_client').prop('checked'))
-    {
-      $('.email_div').hide();
-    }
-    else {
-      $('.email_div').show();
-    }
   }
 </script>

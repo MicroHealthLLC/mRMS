@@ -7,8 +7,6 @@ class EmployeeDatatable < Abstract
       CoreDemographic.first_name
       CoreDemographic.middle_name
       CoreDemographic.last_name
-      CoreDemographic.gender
-      CoreDemographic.birth_date
       User.state
       Organization.name
     }
@@ -21,8 +19,6 @@ class EmployeeDatatable < Abstract
       CoreDemographic.first_name
       CoreDemographic.middle_name
       CoreDemographic.last_name
-      CoreDemographic.gender
-      CoreDemographic.birth_date
       User.state
       Organization.name
     }
@@ -38,10 +34,8 @@ class EmployeeDatatable < Abstract
           user.middle_name ,
 
           user.last_name,
-          user.gender.to_s,
           user.email ,
 
-          @view.format_date(user.birthday) ,
           user.organization.to_s,
           user.state
 

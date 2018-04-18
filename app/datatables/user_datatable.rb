@@ -9,7 +9,7 @@ class UserDatatable < Abstract
       CoreDemographic.first_name
       CoreDemographic.middle_name
       CoreDemographic.last_name
-      CoreDemographic.birth_date
+
       Role.name
       User.state
     }
@@ -24,7 +24,7 @@ class UserDatatable < Abstract
       CoreDemographic.first_name
       CoreDemographic.middle_name
       CoreDemographic.last_name
-      CoreDemographic.birth_date
+
       Role.name
       User.state
     }
@@ -42,7 +42,6 @@ class UserDatatable < Abstract
           user.first_name,
           user.last_name,
 
-          @view.format_date(user.birthday),
           user.role.to_s,
           user.state,
 
