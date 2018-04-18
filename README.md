@@ -7,6 +7,7 @@ This project use Ruby 2.3+ and rails 5.0 and Mysql
 
 Install ImageMagick
 
+Install Redis
 
 `Bundle install`
 
@@ -24,7 +25,10 @@ and you should create an admin user
 
 Running the server
 
-`rails s`
-or run it in the background rails s -e production > /dev/null &
+start your app rails s -e production -b localhost -d 
+or 
+rails s -e production > /dev/null &
+
+start sidekiq bundle exec sidekiq -d -L log/sidekiq.log -C config/sidekiq.yml -e production
 
 
