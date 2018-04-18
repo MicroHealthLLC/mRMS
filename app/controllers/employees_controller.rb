@@ -30,7 +30,7 @@ class EmployeesController < ProtectForgeryApplication
   def create
     @user = User.new(params.require(:user).permit(employee_params))
     if @user.save
-      UserMailer.welcome_email(@user, params[:user][:password]).deliver_later
+      # UserMailer.welcome_email(@user, params[:user][:password]).deliver_later
       redirect_to users_path
     else
       render 'new'
