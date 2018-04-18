@@ -1,6 +1,6 @@
 module ReportsHelper
-  def render_pivot_information
-    @file = SpreadsheetEnumerationUpload.new(@report.document)
+  def render_pivot_information(document)
+    @file = SpreadsheetEnumerationUpload.new(document)
     roo_csv  = @file.open_file
     sheet = roo_csv.sheet(0)
     header = sheet.first

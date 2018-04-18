@@ -70,6 +70,8 @@ gem "omniauth-google-oauth2"
 gem 'therubyracer', platforms: :ruby
 gem 'execjs'
 gem 'carrierwave'
+gem 'file_validators'
+
 gem 'will_paginate'
 gem 'will_paginate-bootstrap'
 gem 'jquery-datatables-rails'

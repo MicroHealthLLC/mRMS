@@ -2,10 +2,12 @@ class Report < ApplicationRecord
   belongs_to :channel
   belongs_to :created_by, class_name: 'User', optional: true
   belongs_to :updated_by, class_name: 'User', optional: true
+
+  has_many :report_documents
   has_many :shared_reports
   has_many :users, through: :shared_reports
 
-  mount_uploader :document, ReportUploader
+  # mount_uploader :document, ReportUploader
 
   before_create do
     self.created_by_id = User.current.id
@@ -21,8 +23,16 @@ class Report < ApplicationRecord
     end
   end
 
+  def document
+    report_documents.first_or_initialize
+  end
+
+  def document_url
+    document.file_url
+  end
+
   def self.safe_attributes
-    [:name, :category_id, :channel_id, :category_type_id, :user_id, :document, :description ]
+    [:name, :category_id, :channel_id, :category_type_id, :user_id, :description ]
   end
 
 

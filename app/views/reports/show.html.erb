@@ -32,7 +32,7 @@
     <%  if @report.document_url %>
         <p>
           <strong>Document:</strong>
-          <%=link_to @report.read_attribute(:document), @report.document_url%>
+          <%=link_to @report.read_attribute(:document), @report.document_url %>
         </p>
 
         <div class="row">
@@ -52,23 +52,22 @@
         <%= javascript_include_tag 'smart_admin/c3_renderers.min' %>
 
         <script>
-
-
             $(document).ready(function(){
                 $("#output").pivotUI(
                     [
-                        <% tab = render_pivot_information
-                        tab[1].each do |hash| %>
+                        <% header, tab = @report.document.content
+                        tab.each do |hash| %>
                         {
-                            <% hash.each do |k, v| %>
+                            <% hash.each_with_index do |(k, v), idx| %>
+                          
                             '<%= k %>': '<%= v %>',
                             <% end %>
                         },
                         <% end %>
                     ],
                     {
-                        rows: [],
-                        cols: [],
+                        rows: ['<%= header[1] %>'],
+                        cols: ['<%= header[0] %>'],
                         aggregatorName: "Count",
                         rendererName: "Table",
                         renderers: $.extend(

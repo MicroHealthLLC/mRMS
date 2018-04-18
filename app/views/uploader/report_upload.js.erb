@@ -1,0 +1,5 @@
+<% if @report_document.errors.any? %>
+  alert('<%= @report_document.errors.full_messages.join(', ') %>');
+<% else %>
+  location.reload();
+<% end %>

@@ -25,9 +25,10 @@ class ReportsController < ApplicationController
 
   def upload_document
     if request.post?
-      @report.document = params[:report][:document]
-      @report.save
-      redirect_to channel_report_path(@channel, @report)
+      @report_document = @report.document
+      @report_document.file = params[:report][:document]
+      @report_document.save
+      render 'uploader/report_upload'
     end
   end
 
