@@ -5,10 +5,11 @@ class Channel < ApplicationRecord
   belongs_to :user
 
   has_many :users, through: :channel_users
-  scope :personal, -> { where(is_personal: true)}
-  scope :not_personal, -> { where(is_personal: false)}
-  scope :is_public, -> { not_personal.where(is_public: true)}
-  scope :for_user, -> { includes(:channel_users).not_personal.where(channel_users: {user_id: User.current.id}).where(is_public: false)}
+  scope :personal, -> { where(option: 3)}
+  scope :not_personal, -> { where.not(option: 3)}
+  scope :is_public, -> { where(option: 2)}
+  scope :for_shared_users, -> { where(option: 1)}
+  scope :for_user, -> { includes(:channel_users).for_shared_users.where(channel_users: {user_id: User.current.id}).where(is_public: false)}
 
   accepts_nested_attributes_for :channel_users, reject_if: :all_blank, allow_destroy: true
 
@@ -38,7 +39,7 @@ class Channel < ApplicationRecord
 
 
   def self.safe_attributes
-    [:user_id, :name, :is_public, :description]
+    [:user_id, :name, :is_public, :description, :is_personal]
   end
 
   def visible_reports
