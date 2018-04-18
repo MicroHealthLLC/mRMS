@@ -4,7 +4,6 @@
   <header>
     <h3><%= avatar(@news.user) %>
       <%= link_to h(@news.title), news_path(@news) %>
-      <%= "(#{t(:label_x_comments, :count => @news.post_notes.count)})" if @news.post_notes.count > 0 %>
     </h3>
     <p class="author"><%= authoring @news.created_at, @news.user %></p>
   </header>

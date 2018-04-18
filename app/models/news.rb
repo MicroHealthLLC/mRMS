@@ -1,13 +1,13 @@
 class News < ApplicationRecord
   # audited except: [:created_by_id, :updated_by_id]
   belongs_to :user
-  has_many :post_notes, foreign_key: :owner_id, dependent: :destroy
 
   has_many :post_attachments, foreign_key: :owner_id, dependent: :destroy
   accepts_nested_attributes_for :post_attachments, reject_if: :all_blank, allow_destroy: true
 
   validates_presence_of :user_id, :title, :summary, :description
-
+  validates_length_of :title, maximum: 250
+  validates_length_of :summary, maximum: 250
   def visible?
     true
   end
