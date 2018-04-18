@@ -51,9 +51,8 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="myModalLabel">Upload Files</h4>
       </div>
-      <div id="files" class="files col-xs-12" >
-
-      </div>
+      <div id="files" class="files col-xs-12" ></div>
+      <div id="errors" style="color: red;" class="files col-xs-12" ></div>
       <%= form_for(@report, url: upload_document_channel_report_path(@channel, @report), method: :post, html: { class: 'form-horizontal' , method: :post,  :multipart => true, :id => "fileupload" }) do |f| %>
           <div class="modal-body">
             <fieldset>
