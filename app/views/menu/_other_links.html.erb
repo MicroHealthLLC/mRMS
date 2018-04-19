@@ -8,21 +8,21 @@
 <% if can?(:manage_roles, :manage_channels, :view_channels) %>
     <% Channel.is_public.each do |channel| %>
         <li class="<%= channel_active?(channel)  %>">
-          <a href="/channels/<%= channel.id %>" title="<%=  channel.name %>"><i class="fa fa-lg fa-fw fa-square"></i><span class="menu-item-parent"><%= channel.name %></span></a>
+          <a href="/channels/<%= channel.id %>" title="<%=  channel.name %>"><i class="fa fa-lg fa-fw <%= channel.icon || 'fa-square' %>"></i><span class="menu-item-parent"><%= channel.name %></span></a>
         </li>
     <% end %>
     <% Channel.for_user.each do |channel| %>
         <li class="<%= channel_active?(channel)   %>">
-          <a href="/channels/<%= channel.id %>" title="<%=  channel.name %>"><i class="fa fa-lg fa-fw fa-square-o"></i><span class="menu-item-parent"><%= channel.name %></span></a>
+          <a href="/channels/<%= channel.id %>" title="<%=  channel.name %>"><i class="fa fa-lg fa-fw <%= channel.icon || 'fa-square' %>"></i><span class="menu-item-parent"><%= channel.name %></span></a>
         </li>
     <% end %>
 <% end %>
 <li>
-  <a href="#"><i class="fa fa-lg fa-fw fa-flash"></i> <span class="menu-item-parent"> Personal</span></a>
+  <a href="#"><i class="fa fa-lg fa-fw"></i> <span class="menu-item-parent"> Personal</span></a>
   <ul>
    <% Channel.where(user_id: User.current.id).personal.each do |channel| %>
         <li class="<%= channel_active?(channel)  %>">
-          <a href="/channels/<%= channel.id %>" title="<%=  channel.name %>"><i class="fa fa-lg fa-fw fa-"></i><span class="menu-item-parent"><%= channel.name %></span></a>
+          <a href="/channels/<%= channel.id %>" title="<%=  channel.name %>"><i class="fa fa-lg fa-fw <%= channel.icon || 'fa-square' %>"></i><span class="menu-item-parent"><%= channel.name %></span></a>
         </li>
     <% end  %>
   </ul>

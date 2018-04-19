@@ -15,6 +15,7 @@ class SettingsController < ProtectForgeryApplication
     @setting.save
 
     Setting['application_name'] = params['application_name']
+    Setting['news_limit'] = params['news_limit']
     Setting['email_from'] = params['email_from']
     Setting['format_date'] = params['format_date']
     redirect_to settings_path

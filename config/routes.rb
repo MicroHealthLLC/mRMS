@@ -5,6 +5,8 @@ Rails.application.routes.draw do
     end
     resources :reports do
       member do
+        match :save_pivottable, via: [:post]
+        match :delete_pivottable, via: [:delete]
         match :upload_document, via: [:get, :post]
         match :share_report, via: [:get, :post]
       end

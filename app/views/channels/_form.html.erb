@@ -23,6 +23,26 @@
       </div>
 
       <div class="form-group">
+        <div class="col-md-2 control-label">
+          <i class="" id="icon_result"></i>
+          <%= form.label 'Icon', class: '' %>
+        </div>
+
+        <div class="col-md-8">
+          <%= form.select :icon, options_for_select(Channel::ICONS, selected: form.object.icon), class: 'form-control'%>
+
+          <script>
+            $(function(){
+                $('#channel_icon').on('change', function(){
+                    $("#icon_result").removeAttr("class");
+                    $("#icon_result").attr("class", "fa "+$(this).val() );
+                })
+            })
+          </script>
+        </div>
+      </div>
+
+      <div class="form-group">
         <%= form.label 'Options', class: 'col-md-2 control-label' %>
         <div class="col-md-8">
           <%= form.radio_button :option, 2 %> Public

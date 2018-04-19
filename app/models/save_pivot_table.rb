@@ -1,0 +1,2 @@
+class SavePivotTable < ApplicationRecord
+end

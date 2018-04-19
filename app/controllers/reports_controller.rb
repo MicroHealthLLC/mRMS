@@ -1,7 +1,7 @@
 class ReportsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_channel
-  before_action :set_report, only: [:share_report, :upload_document, :show, :edit, :update, :destroy]
+  before_action :set_report, only: [:save_pivottable, :delete_pivottable, :share_report, :upload_document, :show, :edit, :update, :destroy]
 
   # GET /reports
   # GET /reports.json
@@ -49,7 +49,6 @@ class ReportsController < ApplicationController
   # POST /reports.json
   def create
     @report = Report.new(report_params)
-
     respond_to do |format|
       if @report.save
         format.html { redirect_to channel_report_path(@channel, @report), notice: 'Report was successfully created.' }
@@ -73,6 +72,19 @@ class ReportsController < ApplicationController
         format.json { render json: @report.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  def save_pivottable
+    p = SavePivotTable.new(params[:save_pivot_table].permit!)
+    p.save
+    redirect_to channel_report_path(@channel, @report, query_id: p.id)
+
+  end
+
+  def delete_pivottable
+    p = SavePivotTable.find(params[:query_id])
+    p.save
+    redirect_to  channel_report_path(@channel, @report)
   end
 
   # DELETE /reports/1

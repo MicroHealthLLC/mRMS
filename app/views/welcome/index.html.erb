@@ -7,7 +7,7 @@
       </div>
       <% if can?(:manage_roles, :view_news , :manage_news) %>
           <div class="col-xs-12 hidden-xs col-sm-1 col-md-3">
-            <% News.includes(:user).order("id DESC").first(5).each do |news| %>
+            <% News.includes(:user).order("id DESC").first(Setting['news_limit']).each do |news| %>
                 <%= render partial: 'news/news', locals: {news: news} %>
             <% end %>
           </div>

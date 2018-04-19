@@ -35,16 +35,103 @@
           <%=link_to @report.document.read_attribute(:file), @report.document_url %>
         </p>
 
-        <div class="row" style="overflow-x: scroll; transform: rotateX(180deg);">
-          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="transform: rotateX(180deg);">
-            <div id="output">
+        <span id="savepivottable" style="display: none;">
+          <%= link_to  '#', class: 'btn btn-info', data: {toggle:"modal", target:"#mySaveModal" } do %>
+              <span class="glyphicon glyphicon-download" aria-hidden="true">Save Pivot Changes</span>
+          <% end %>
+        </span>
+        <%= link_to  '#', class: 'btn btn-info', data: {toggle:"modal", target:"#myChangeModal" } do %>
+            <span class="glyphicon glyphicon-download" aria-hidden="true">Change Pivot Changes</span>
+        <% end %>
 
+
+        <div class="modal fade" id="myChangeModal" tabindex="-1" role="dialog" aria-labelledby="mySaveModal">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Save Pivot Table changes</h4>
+              </div>
+              <div id="files" class="files col-xs-12" ></div>
+              <div id="errors" style="color: red;" class="files col-xs-12" ></div>
+              <div class="modal-body">
+                <fieldset>
+                  <div class="form-group">
+                    <% SavePivotTable.where(user_id: User.current.id, report_id: @report.id).each do |p| %>
+                        <%= link_to p.name, channel_report_path(@channel, @report, query_id: p.id), style: 'color: black' %>
+                        <%= link_to '<i class="fa fa-trash"></i>'.html_safe, delete_pivottable_channel_report_path(@channel, @report, query_id: p.id),
+                                    :method => :delete,
+                                    :data => {:confirm => t(:text_are_you_sure)}%>
+                        <br/>
+                    <% end %>
+
+                  </div>
+                </fieldset>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+              </div>
             </div>
+
+          </div>
+        </div>
+        <div class="modal fade" id="mySaveModal" tabindex="-1" role="dialog" aria-labelledby="mySaveModal">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Save Pivot Table changes</h4>
+              </div>
+              <div id="files" class="files col-xs-12" ></div>
+              <div id="errors" style="color: red;" class="files col-xs-12" ></div>
+              <%= form_for(SavePivotTable.new(user_id: User.current.id, report_id: @report.id), url: save_pivottable_channel_report_path(@channel, @report), method: :post, html: { class: 'form-horizontal' , method: :post}) do |f| %>
+                  <div class="modal-body">
+                    <fieldset>
+                      <div class="form-group">
+                        <%= f.label 'Name', class: 'col-md-2 control-label' %>
+                        <div class="col-md-9">
+                          <%= f.text_field :name , class: 'form-control' %>
+                          <%= f.hidden_field :user_id  %>
+                          <%= f.hidden_field :report_id  %>
+                          <span style="display: none;">
+                              <%= f.text_field :content  %>
+                          </span>
+
+                        </div>
+                      </div>
+                    </fieldset>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <%= f.submit 'Save', class: 'btn btn-primary' %>
+                  </div>
+                  </div>
+
+              <% end %>
+              </div>
+        </div>
+
+        <div class="row" >
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" >
+            <div class="diagramWrapper">
+              <div id="output" class="pane"></div>
+            </div>
+            <span class="changesOutput" ></span>
           </div>
         </div>
 
+
+        <%= stylesheet_link_tag 'pivot_style' %>
         <%= stylesheet_link_tag 'c3.min' %>
+        <%= stylesheet_link_tag 'subtotal.min' %>
+        <%= stylesheet_link_tag 'handsontable.full.min' %>
         <%= stylesheet_link_tag 'pivot.min' %>
+
+        <%= javascript_include_tag 'smart_admin/highstock' %>
+        <%= javascript_include_tag 'smart_admin/highcharts-more' %>
+        <%= javascript_include_tag 'smart_admin/treemap' %>
+
         <%= javascript_include_tag 'smart_admin/pivot' %>
         <%= javascript_include_tag 'smart_admin/d3.min' %>
         <%= javascript_include_tag 'smart_admin/jquery.ui.touch-punch.min' %>
@@ -52,46 +139,82 @@
         <%= javascript_include_tag 'smart_admin/c3_renderers.min' %>
         <!-- subtotal.js libs from ../dist -->
         <%= javascript_include_tag 'smart_admin/subtotal.min' %>
-        <%= stylesheet_link_tag 'subtotal.min' %>
 
+        <%= javascript_include_tag 'smart_admin/handsontable.full.min' %>
+
+        <%= javascript_include_tag 'smart_admin/novix.pivot.renderer' %>
+
+        <%= javascript_include_tag 'smart_admin/hightchart_renderers' %>
+
+
+        <script>
+            <% header, tab = @report.document.content %>
+            var  json =  [
+
+                <% tab.each do |hash| %>
+                {
+                    <% hash.each_with_index do |(k, v), idx| %>
+
+                    '<%= k %>': '<%= v %>',
+                    <% end %>
+                },
+                <% end %>
+            ];
+
+        </script>
         <script>
             $(document).ready(function(){
                 var dataClass = $.pivotUtilities.SubtotalPivotData;
-                var renderers = $.extend(
+                var renderers = $.extend({},
                     $.pivotUtilities.renderers,
                     $.pivotUtilities.c3_renderers,
-                    $.pivotUtilities.subtotal_renderers
+                    $.pivotUtilities.subtotal_renderers,
+                    $.pivotUtilities.novix_renderers,
+                    $.pivotUtilities.highchart_renderers
                 );
-                <% header, tab = @report.document.content %>
-                json =  [
-
-                    <% tab.each do |hash| %>
-                    {
-                        <% hash.each_with_index do |(k, v), idx| %>
-
-                        '<%= k %>': '<%= v %>',
-                        <% end %>
-                    },
-                    <% end %>
-                ]
-                $("#output").pivotUI(json, {
+                default_query = {
                     dataClass: dataClass,
+                    renderers: renderers,
                     rows: [],
                     cols: [],
-                    renderers: renderers,
-                    aggregatorName: "Count",
                     rendererName: "Table",
-
                     rendererOptions: {
+                        onEditValues: function (changes) {
+                            $(".changesOutput").html(JSON.stringify(changes));
+                        },
+                        onDrawTable: function (htTable) {
+                            $(".changesOutput").empty();
+                        },
                         rowSubtotalDisplay: {
                             hideOnExpand: true
                         },
                         colSubtotalDisplay: {
                             hideOnExpand: true
                         }
-                    }
-                });
+                    },
+                    onRefresh: saveState
+                }
+                <% if params[:query_id] and query = SavePivotTable.find_by_id(params[:query_id]) %>
+                $("#output").pivotUI(json,  Object.assign(default_query, <%=  JSON.parse(query.content).to_json.html_safe %>) );
+                <% else %>
+                $("#output").pivotUI(json, default_query);
 
+
+
+                <% end %>
+                function saveState(config) {
+
+                    var config_copy = JSON.parse(JSON.stringify(config));
+                    //delete some values which are functions
+                    delete config_copy["aggregators"];
+                    delete config_copy["renderers"];
+                    //delete some bulky default values
+                    delete config_copy["rendererOptions"];
+                    delete config_copy["localeStrings"];
+                    $('#savepivottable').show();
+                    $('#save_pivot_table_content').val(JSON.stringify(config_copy, undefined, 2));
+                }
+                // This function stores PivotTable config to LocalStorage.
             });
         </script>
 
