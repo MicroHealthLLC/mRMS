@@ -32,7 +32,7 @@
     <%  if @report.document_url %>
         <p>
           <strong>Document:</strong>
-          <%=link_to @report.read_attribute(:document), @report.document_url %>
+          <%=link_to @report.document.read_attribute(:file), @report.document_url %>
         </p>
 
         <div class="row">
@@ -50,35 +50,50 @@
         <%= javascript_include_tag 'smart_admin/jquery.ui.touch-punch.min' %>
         <%= javascript_include_tag 'smart_admin/c3.min' %>
         <%= javascript_include_tag 'smart_admin/c3_renderers.min' %>
+        <!-- subtotal.js libs from ../dist -->
+        <%= javascript_include_tag 'smart_admin/subtotal.min' %>
+        <%= stylesheet_link_tag 'subtotal.min' %>
 
         <script>
             $(document).ready(function(){
-                $("#output").pivotUI(
-                    [
-                        <% header, tab = @report.document.content
-                        tab.each do |hash| %>
-                        {
-                            <% hash.each_with_index do |(k, v), idx| %>
-                          
-                            '<%= k %>': '<%= v %>',
-                            <% end %>
-                        },
-                        <% end %>
-                    ],
-                    {
-                        rows: [],
-                        cols: [],
-                        aggregatorName: "Count",
-                        rendererName: "Table",
-                        renderers: $.extend(
-                            $.pivotUtilities.renderers,
-                            $.pivotUtilities.c3_renderers
-                        )
-                    }
+                var dataClass = $.pivotUtilities.SubtotalPivotData;
+                var renderers = $.extend(
+                    $.pivotUtilities.renderers,
+                    $.pivotUtilities.c3_renderers,
+                    $.pivotUtilities.subtotal_renderers
                 );
+                <% header, tab = @report.document.content %>
+                json =  [
+
+                    <% tab.each do |hash| %>
+                    {
+                        <% hash.each_with_index do |(k, v), idx| %>
+
+                        '<%= k %>': '<%= v %>',
+                        <% end %>
+                    },
+                    <% end %>
+                ]
+                $("#output").pivotUI(json, {
+                    dataClass: dataClass,
+                    rows: [],
+                    cols: [],
+                    renderers: renderers,
+                    aggregatorName: "Count",
+                    rendererName: "Table",
+
+                    rendererOptions: {
+                        rowSubtotalDisplay: {
+                            hideOnExpand: true
+                        },
+                        colSubtotalDisplay: {
+                            hideOnExpand: true
+                        }
+                    }
+                });
+
             });
         </script>
-
 
     <% end %>
   </div>

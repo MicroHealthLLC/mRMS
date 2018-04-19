@@ -8,7 +8,7 @@ Rails.application.config.assets.version = '1.0'
 # Add Yarn node_modules folder to the asset load path.
 Rails.application.config.assets.paths << Rails.root.join('node_modules')
 #CSS
-Rails.application.config.assets.precompile += %w(jquery.tagsinput.css pivot.min.css c3.min.css  lightbox2.css)
+Rails.application.config.assets.precompile += %w(jquery.tagsinput.css pivot.min.css c3.min.css  lightbox2.css subtotal.min.css)
 #JS
 Rails.application.config.assets.precompile += %w(smart_admin/* chat.js signature.js  lightbox2.js jquery.tagsinput.js form_builder/form-builder.min.js form_builder/form-render.min.js)
 
