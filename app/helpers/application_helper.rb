@@ -189,6 +189,14 @@ module ApplicationHelper
 
   end
 
+  def channel_active?(channel)
+    if @channel.try(:id) == channel.id
+      'active'
+    else
+      ''
+    end
+  end
+
   # For devise
 
   def resource_name
