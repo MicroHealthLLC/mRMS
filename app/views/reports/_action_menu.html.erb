@@ -5,14 +5,20 @@
       <%  if @report.document_url %>
       <span id="savepivottable" style="display: none;">
           <%= link_to  '#', class: 'btn btn-info', data: {toggle:"modal", target:"#mySaveModal" } do %>
-              <span class="glyphicon glyphicon-download" aria-hidden="true">Save Pivot</span>
+              <span class="glyphicon glyphicon-arrow-down" aria-hidden="true">Save Report</span>
           <% end %>
         </span>
           <%= link_to  '#', class: 'btn btn-info', data: {toggle:"modal", target:"#myChangeModal" } do %>
-              <span class="glyphicon glyphicon-download" aria-hidden="true">Load Pivot</span>
+              <span class="glyphicon glyphicon-arrow-up" aria-hidden="true">Load Pivot</span>
           <% end %>
       <% end %>
-
+      <% if @report.can?(:edit_channel, :manage_channel, :manage_roles) %>
+          <span>
+            <%= link_to  edit_channel_report_path(@channel, @report), class: 'btn btn-success' do %>
+                <span class="glyphicon glyphicon-edit" aria-hidden="true">Edit </span>
+            <% end %>
+          </span>
+      <% end %>
       <% if @report.can?(:delete_channel, :manage_channel, :manage_roles) %>
           <span>
             <%= link_to( channel_report_path(@channel, @report), class: 'btn btn-danger',
@@ -24,12 +30,8 @@
 
       <% end %>
 
+
       <% if @report.can?(:edit_channel, :manage_channel, :manage_roles) %>
-          <span>
-            <%= link_to  edit_channel_report_path(@channel, @report), class: 'btn btn-success' do %>
-                <span class="glyphicon glyphicon-edit" aria-hidden="true">Edit </span>
-            <% end %>
-          </span>
 
           <span>
 
