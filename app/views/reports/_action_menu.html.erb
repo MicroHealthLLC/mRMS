@@ -9,7 +9,7 @@
           <% end %>
         </span>
           <%= link_to  '#', class: 'btn btn-info', data: {toggle:"modal", target:"#myChangeModal" } do %>
-              <span class="glyphicon glyphicon-arrow-up" aria-hidden="true">Load Pivot</span>
+              <span class="glyphicon glyphicon-arrow-up" aria-hidden="true">Load Report</span>
           <% end %>
       <% end %>
       <% if @report.can?(:edit_channel, :manage_channel, :manage_roles) %>
@@ -36,7 +36,7 @@
           <span>
 
             <%= link_to  '#', class: 'btn btn-info', data: {toggle:"modal", target:"#myModal" } do %>
-                <span class="glyphicon glyphicon-upload" aria-hidden="true">Upload document</span>
+                <span class="glyphicon glyphicon-upload" aria-hidden="true">Upload Data</span>
 
             <% end %>
           </span>
