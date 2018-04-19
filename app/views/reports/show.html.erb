@@ -35,15 +35,6 @@
           <%=link_to @report.document.read_attribute(:file), @report.document_url %>
         </p>
 
-        <span id="savepivottable" style="display: none;">
-          <%= link_to  '#', class: 'btn btn-info', data: {toggle:"modal", target:"#mySaveModal" } do %>
-              <span class="glyphicon glyphicon-download" aria-hidden="true">Save Pivot Changes</span>
-          <% end %>
-        </span>
-        <%= link_to  '#', class: 'btn btn-info', data: {toggle:"modal", target:"#myChangeModal" } do %>
-            <span class="glyphicon glyphicon-download" aria-hidden="true">Change Pivot Changes</span>
-        <% end %>
-
 
         <div class="modal fade" id="myChangeModal" tabindex="-1" role="dialog" aria-labelledby="mySaveModal">
           <div class="modal-dialog" role="document">
@@ -57,11 +48,11 @@
               <div class="modal-body">
                 <fieldset>
                   <div class="form-group">
-                    <% SavePivotTable.where(user_id: User.current.id, report_id: @report.id).each do |p| %>
+                    <% SavePivotTable.where(report_id: @report.id).each do |p| %>
                         <%= link_to p.name, channel_report_path(@channel, @report, query_id: p.id), style: 'color: black' %>
-                        <%= link_to '<i class="fa fa-trash"></i>'.html_safe, delete_pivottable_channel_report_path(@channel, @report, query_id: p.id),
+                        <%= link_to( '<i class="fa fa-trash"></i>'.html_safe, delete_pivottable_channel_report_path(@channel, @report, query_id: p.id),
                                     :method => :delete,
-                                    :data => {:confirm => t(:text_are_you_sure)}%>
+                                    :data => {:confirm => t(:text_are_you_sure)}) if p.user_id == User.current.id %>
                         <br/>
                     <% end %>
 

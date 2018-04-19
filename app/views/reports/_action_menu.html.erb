@@ -50,6 +50,16 @@
 
       </span>
 
+      <span id="savepivottable" style="display: none;">
+          <%= link_to  '#', class: 'btn btn-info', data: {toggle:"modal", target:"#mySaveModal" } do %>
+              <span class="glyphicon glyphicon-download" aria-hidden="true">Save Pivot</span>
+          <% end %>
+        </span>
+      <%= link_to  '#', class: 'btn btn-info', data: {toggle:"modal", target:"#myChangeModal" } do %>
+          <span class="glyphicon glyphicon-download" aria-hidden="true">Load Pivot</span>
+      <% end %>
+
+
       <%= render partial: 'uploader/report_upload' %>
     </div>
   </div>
