@@ -18,7 +18,7 @@
     <% end %>
 <% end %>
 <li>
-  <a href="#"><i class="fa fa-lg fa-fw"></i> <span class="menu-item-parent"> Personal</span></a>
+  <a href="#"><i class="fa fa-lg fa-fw fa-circle"></i> <span class="menu-item-parent"> Personal</span></a>
   <ul>
    <% Channel.where(user_id: User.current.id).personal.each do |channel| %>
         <li class="<%= channel_active?(channel)  %>">
