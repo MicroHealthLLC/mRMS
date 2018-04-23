@@ -5,7 +5,7 @@ class Devise::RegistrationsController < DeviseController
   prepend_before_action :check_captcha, only: [:create] if ENV['RECAPTCHA_PUBLIC_KEY'].present? # Change this to be any actions you want to protect.
   # GET /resource/sign_up
 
-  include ApplicationHelper
+   include ::ApplicationHelper
   def new
     if @enabled_modules.include?('user_subscription')
       build_resource({})
