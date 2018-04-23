@@ -1,34 +1,19 @@
 <div class="module-title">
   <h2 class='module-title-text'>USERS</h2>
 </div>
-  
+
 <section id="widget-grid" class="users_list">
-  <div class="col-xs-12 btn-edition tabs-section">
-    <div class="btn-group">
-      <button type="button" class="btn btn-primary dropdown-toggle actions-tab" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">ACTIONS <span class="caret"></span></button>
-      <ul class="dropdown-menu dropdown-links" role="menu" style="min-width:190px;">
-        <li>
-          <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
-          <%= link_to t(:new_user), new_employee_path, class: 'dropdown-item' %>
-        </li>
-        <div class='dropdown-item-dividier'></div>
-        <li>
-          <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-          <%= link_to 'Active users', active_users_path, class: 'dropdown-item' %>
-        </li>
-        <div class='dropdown-item-dividier'></div>
-        <li>
-          <span class="glyphicon glyphicon-tag" aria-hidden="true"></span>
-          <%= link_to 'Audit users', audit_users_path, class: 'dropdown-item' %>
-        </li>
-        <div class='dropdown-item-dividier'></div>
-        <li>
-          <span class="glyphicon glyphicon-print" aria-hidden="true"></span>
-          <%= link_to 'Print', params.permit(:from, :to, :status_type).merge(format: 'pdf'), class: 'dropdown-item' %>
-        </li>
-      </ul>
+  <div class="row" style="margin-bottom: 10px">
+    <div class="col-md-12 ">
+      <div class="pull-right">
+        <%= show_button(new_employee_path, t(:new_user), 'plus-sign', 'primary') %>
+        <%= show_button(active_users_path, ' Active users', 'star', 'info') %>
+        <%= show_button(audit_users_path, ' Audit users', 'tag', 'default') %>
+        <%= show_button( params.permit(:from, :to, :status_type).merge(format: 'pdf'), ' Print', 'print', 'primary') %>
+      </div>
     </div>
   </div>
+
   <div class="row">
     <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
       <%= render partial: 'list',

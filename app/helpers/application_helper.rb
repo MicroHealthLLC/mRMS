@@ -138,6 +138,28 @@ module ApplicationHelper
     output
   end
 
+  def edit_button(url)
+    show_button('Edit', url, 'edit', 'success')
+  end
+
+  def show_button(url, text, icon, btn_style, data_options = {})
+    link_to  url, class: "btn btn-#{btn_style}", data: data_options do
+      "<span class='glyphicon glyphicon-#{icon}' aria-hidden='true'>#{text} </span>".html_safe
+    end
+  end
+
+  def delete_button(url)
+    link_to( url, class: 'btn btn-danger',
+             :method => :delete,
+             :data => {:confirm => t(:text_are_you_sure)}) do
+      '<span class="glyphicon glyphicon-remove" aria-hidden="true">Delete</span>'.html_safe
+    end
+  end
+
+  def cancel_button(url)
+    show_button('Cancel', url, 'arrow-left', 'warning')
+  end
+
   # Renders flash messages
   def render_flash_messages
     s = ''

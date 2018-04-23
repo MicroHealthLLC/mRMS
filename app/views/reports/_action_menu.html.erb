@@ -3,68 +3,33 @@
     <div class="pull-right">
 
       <%  if @report.document_url %>
-      <span id="savepivottable" style="display: none;">
-          <%= link_to  '#', class: 'btn btn-info', data: {toggle:"modal", target:"#mySaveModal" } do %>
-              <span class="glyphicon glyphicon-arrow-down" aria-hidden="true">Save Report</span>
-          <% end %>
-        </span>
-          <%= link_to  '#', class: 'btn btn-info', data: {toggle:"modal", target:"#myChangeModal" } do %>
-              <span class="glyphicon glyphicon-arrow-up" aria-hidden="true">Load Report</span>
-          <% end %>
+          <%= show_button('#', ' Save Report', 'arrow-down', 'info', {toggle:"modal", target:"#mySaveModal" }) %>
+          <%= show_button('#', ' Load Report', 'arrow-up', 'info', {toggle:"modal", target:"#myChangeModal" }) %>
       <% end %>
       <% if @report.can?(:edit_channel, :manage_channel, :manage_roles) %>
           <span>
-            <%= link_to  edit_channel_report_path(@channel, @report), class: 'btn btn-success' do %>
-                <span class="glyphicon glyphicon-edit" aria-hidden="true">Edit </span>
-            <% end %>
+            <%= edit_button edit_channel_report_path(@channel, @report) %>
           </span>
       <% end %>
 
       <% if @report.can?(:delete_channel, :manage_channel, :manage_roles) %>
           <span>
-            <%= link_to( channel_report_path(@channel, @report), class: 'btn btn-danger',
-                         :method => :delete,
-                         :data => {:confirm => t(:text_are_you_sure)}) do %>
-                <span class="glyphicon glyphicon-remove" aria-hidden="true">Delete</span>
-            <%  end  %>
+            <%= delete_button channel_report_path(@channel, @report) %>
           </span>
-
       <% end %>
 
-
       <% if @report.can?(:edit_channel, :manage_channel, :manage_roles) %>
-
           <span>
-
-            <%= link_to  '#', class: 'btn btn-info', data: {toggle:"modal", target:"#myModal" } do %>
-                <span class="glyphicon glyphicon-upload" aria-hidden="true">Upload Data</span>
-
-            <% end %>
+            <%= show_button('#', ' Upload Data', 'upload', 'info', {toggle:"modal", target:"#myModal" }) %>
           </span>
-
       <% end %>
 
       <% if @channel.is_personal? and @report.can?(:edit_channel, :manage_channel, :manage_roles) %>
           <span>
-
-            <%= link_to share_report_channel_report_path(@channel, @report), class: 'btn btn-primary' do  %>
-                <span class="glyphicon glyphicon-plus" aria-hidden="true">Share report</span>
-            <% end %>
+            <%= show_button(share_report_channel_report_path(@channel, @report), ' Share report', 'plus', 'primary') %>
           </span>
-
       <% end %>
-
-
-      <span>
-
-        <%= link_to channel_path(@channel), class: 'btn btn-warning' do  %>
-            <span class="glyphicon glyphicon-arrow-left" aria-hidden="true">Cancel</span>
-        <% end %>
-
-      </span>
-
-
-
+      <%= cancel_button channel_path(@channel) %>
       <%= render partial: 'uploader/report_upload' %>
     </div>
   </div>
