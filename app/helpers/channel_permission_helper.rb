@@ -1,0 +1,2 @@
+module ChannelPermissionHelper
+end

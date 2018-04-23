@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  get 'channel_permission/index'
+
+  get 'channel_permission/new'
+
+  get 'channel_permission/destroy'
+
   resources :channels, except: [:index] do
     member do
       match :manage_users, via: [:get, :post]
