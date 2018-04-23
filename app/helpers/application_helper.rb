@@ -139,7 +139,7 @@ module ApplicationHelper
   end
 
   def edit_button(url)
-    show_button('Edit', url, 'edit', 'success')
+    show_button(url, 'Edit', 'edit', 'success')
   end
 
   def show_button(url, text, icon, btn_style, data_options = {})
@@ -157,7 +157,7 @@ module ApplicationHelper
   end
 
   def cancel_button(url)
-    show_button('Cancel', url, 'arrow-left', 'warning')
+    show_button(url, 'Cancel' , 'arrow-left', 'warning')
   end
 
   # Renders flash messages
