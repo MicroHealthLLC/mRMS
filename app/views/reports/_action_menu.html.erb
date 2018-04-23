@@ -6,6 +6,13 @@
           <%= show_button('#', ' Save Report', 'arrow-down', 'info', {toggle:"modal", target:"#mySaveModal" }) %>
           <%= show_button('#', ' Load Report', 'arrow-up', 'info', {toggle:"modal", target:"#myChangeModal" }) %>
       <% end %>
+
+      <% if @report.can?(:edit_channel, :manage_channel, :manage_roles) %>
+          <span>
+            <%= show_button('#', ' Upload Data', 'upload', 'info', {toggle:"modal", target:"#myModal" }) %>
+          </span>
+      <% end %>
+
       <% if @report.can?(:edit_channel, :manage_channel, :manage_roles) %>
           <span>
             <%= edit_button edit_channel_report_path(@channel, @report) %>
@@ -18,11 +25,6 @@
           </span>
       <% end %>
 
-      <% if @report.can?(:edit_channel, :manage_channel, :manage_roles) %>
-          <span>
-            <%= show_button('#', ' Upload Data', 'upload', 'info', {toggle:"modal", target:"#myModal" }) %>
-          </span>
-      <% end %>
 
       <% if @channel.is_personal? and @report.can?(:edit_channel, :manage_channel, :manage_roles) %>
           <span>
