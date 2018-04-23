@@ -10,10 +10,11 @@ class ReportDocument < ApplicationRecord
   mount_uploader :file, ReportUploader
 
   validates_presence_of :file, :report_id
-  validates :file,
-            :file_size => {
-                :less_than_or_equal_to => 5.megabytes.to_i
-            }
+  # validates :file,
+  #           :file_size => {
+  #               :less_than_or_equal_to => Setting[:spreadsheet_limit].to_i.megabytes.to_i
+  #           }
+  validate :check_file_size
   validate :read_content
 
   def self.safe_attributes
@@ -22,6 +23,14 @@ class ReportDocument < ApplicationRecord
 
   def content
     changed_content ? JSON.parse(changed_content.to_s) : JSON.parse(original_content) rescue  [[], []]
+  end
+
+  def check_file_size
+    if file
+      if file.size > Setting[:spreadsheet_limit].to_i.megabytes.to_i
+        self.errors.add(:file, "file size exceeded #{Setting[:spreadsheet_limit]}MB")
+      end
+    end
   end
 
   def read_content

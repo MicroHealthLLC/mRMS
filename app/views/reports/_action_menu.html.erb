@@ -19,6 +19,7 @@
             <% end %>
           </span>
       <% end %>
+
       <% if @report.can?(:delete_channel, :manage_channel, :manage_roles) %>
           <span>
             <%= link_to( channel_report_path(@channel, @report), class: 'btn btn-danger',
