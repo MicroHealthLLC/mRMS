@@ -4,6 +4,8 @@ class Channel < ApplicationRecord
   has_many :reports
   belongs_to :user
 
+  PUBLIC = 1
+  PERSONAL = 3
   has_many :users, through: :channel_users
   scope :personal, -> { where(option: 3)}
   scope :not_personal, -> { where.not(option: 3)}
@@ -75,15 +77,23 @@ class Channel < ApplicationRecord
 
 
   def self.safe_attributes
-    [:user_id, :name, :is_public, :description, :is_personal, :icon]
+    [:user_id, :name, :is_public, :description, :is_personal, :icon, :option]
   end
 
   def visible_reports
-    if is_personal?
+    if option == PERSONAL
       User.current.reports
     else
       reports
     end
+  end
+
+  def is_personal?
+    option == PERSONAL
+  end
+
+  def is_public?
+    option == PUBLIC
   end
 
   def to_s
