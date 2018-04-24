@@ -1,6 +1,11 @@
 <div class="row">
   <div class="col-md-12 ">
     <div class="pull-right">
+      <% if @channel.is_personal? and @report.can?(:edit_channel, :manage_channel, :manage_roles) %>
+          <span>
+            <%= show_button(share_report_channel_report_path(@channel, @report), ' Share report', 'plus', 'primary') %>
+          </span>
+      <% end %>
 
       <%  if @report.document_url %>
           <%= show_button('#', ' Save Report', 'arrow-down', 'info', {toggle:"modal", target:"#mySaveModal" }) %>
@@ -24,14 +29,10 @@
             <%= delete_button channel_report_path(@channel, @report) %>
           </span>
       <% end %>
-
-
-      <% if @channel.is_personal? and @report.can?(:edit_channel, :manage_channel, :manage_roles) %>
-          <span>
-            <%= show_button(share_report_channel_report_path(@channel, @report), ' Share report', 'plus', 'primary') %>
-          </span>
-      <% end %>
       <%= cancel_button channel_path(@channel) %>
+
+
+
       <%= render partial: 'uploader/report_upload' %>
     </div>
   </div>
