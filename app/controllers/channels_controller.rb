@@ -3,7 +3,6 @@ class ChannelsController < ApplicationController
   # before_action :set_channel, only: [:manage_users, :show, :edit, :update, :destroy]
   before_action :set_channel, only: [ :show, :edit, :update, :destroy]
 
-
   # GET /channels/1
   # GET /channels/1.json
   def show
@@ -17,6 +16,7 @@ class ChannelsController < ApplicationController
 
   # GET /channels/1/edit
   def edit
+    render_403 unless @channel.is_creator? or @channel.my_permission.can_edit?
   end
 
   # POST /channels
@@ -65,11 +65,15 @@ class ChannelsController < ApplicationController
   # DELETE /channels/1
   # DELETE /channels/1.json
   def destroy
-    @channel.is_active = false
-    @channel.save
-    respond_to do |format|
-      format.html { redirect_to root_path, notice: 'Channel was successfully destroyed.' }
-      format.json { head :no_content }
+    if @channel.is_creator? or User.current.can?(:manage_roles)
+      @channel.is_active = false
+      @channel.save
+      respond_to do |format|
+        format.html { redirect_to root_path, notice: 'Channel was successfully destroyed.' }
+        format.json { head :no_content }
+      end
+    else
+      render_403
     end
   end
 

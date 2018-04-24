@@ -16,14 +16,17 @@ class ReportsController < ApplicationController
 
   # GET /reports/new
   def new
+    render_403 unless @channel.is_creator? or @channel.my_permission.can_add_report?
     @report = Report.new(user_id: User.current.id, channel_id: @channel.id)
   end
 
   # GET /reports/1/edit
   def edit
+    render_403 unless @channel.is_creator? or @channel.my_permission.can_add_report?
   end
 
   def upload_document
+    render_403 unless @channel.is_creator? or @channel.my_permission.can_add_report?
     if request.post?
       @report_document = @report.document
       @report_document.file = params[:report][:document]
