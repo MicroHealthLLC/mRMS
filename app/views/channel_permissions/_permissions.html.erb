@@ -1,0 +1,31 @@
+
+<table class="table table-responsive table-hover" id="permissions_table">
+  <thead>
+  <tr>
+    <th>User</th>
+    <th> Can Edit Channel </th>
+    <th> Can Add/Edit Report </th>
+    <th> Can Delete Report </th>
+    <th> Can Add/Change permission </th>
+    <th> Delete </th>
+  </tr>
+  </thead>
+  <tbody>
+  <% permissions.each do |permission| %>
+      <tr>
+        <td><%=  permission.user.to_s %></td>
+        <td><i class="fa fa-<%=  permission.can_edit? ? 'check' : 'times' %>"></i></td>
+        <td><i class="fa fa-<%=  permission.can_add_report? ? 'check' : 'times' %>"></i></td>
+        <td><i class="fa fa-<%=  permission.can_delete_report? ? 'check' : 'times' %>"></i></td>
+        <td><i class="fa fa-<%=  permission.can_add_users? ? 'check' : 'times' %>"></i></td>
+        <td><%= delete_link(channel_channel_permission_url(@channel, permission)) %></td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<script>
+    $(document).ready(function(){
+        initDataTable('permissions_table')
+    })
+</script>

@@ -8,7 +8,6 @@ class CreateChannelPermissions < ActiveRecord::Migration[5.0]
 
       t.boolean :can_add_report, default: false
       t.boolean :can_delete_report, default: false
-      t.boolean :can_remove_report, default: false
       t.boolean :can_add_users, default: false
 
       t.timestamps

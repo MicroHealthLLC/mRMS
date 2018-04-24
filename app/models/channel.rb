@@ -1,23 +1,26 @@
 class Channel < ApplicationRecord
   default_scope {where(is_active: true)}
-  has_many :channel_users
+
   has_many :reports
+  has_many :channel_permissions
+  has_many :channel_orders
   belongs_to :user
 
   GROUPS = 1
   PUBLIC = 2
   PERSONAL = 3
 
-  has_many :users, through: :channel_users
+  has_many :users, through: :channel_permissions
   scope :personal, -> { where(option: PERSONAL)}
-  scope :my_personal_channel, -> { personal.where(user_id: User.current.id) }
+  scope :for_current_user, -> { where(user_id: User.current.id) }
+  scope :my_personal_channel, -> { personal.for_current_user }
   scope :not_personal, -> { where(option: [PUBLIC, GROUPS])}
   scope :is_public, -> { where(option: PUBLIC)}
   scope :for_shared_users, -> { where(option: GROUPS)}
-  scope :for_user, -> { includes(:channel_users).for_shared_users.where(channel_users: {user_id: User.current.id}).where(is_public: false)}
+  scope :for_user, -> { for_shared_users.includes(:channel_permissions).where(channel_permissions: {user_id: User.current.id}) + for_shared_users.for_current_user}
   scope :visible, -> { is_public + for_user + my_personal_channel }
 
-  accepts_nested_attributes_for :channel_users, reject_if: :all_blank, allow_destroy: true
+  # accepts_nested_attributes_for :channel_users, reject_if: :all_blank, allow_destroy: true
 
 
   belongs_to :created_by, class_name: 'User', optional: true
@@ -26,6 +29,13 @@ class Channel < ApplicationRecord
   validates_presence_of :name
   validates_uniqueness_of :name, scope: [:user_id]
 
+  def is_creator?
+    user_id == User.current.id
+  end
+
+  def my_permission
+    @permission ||= channel_permissions.where(user_id: User.current.id).first_or_initialize
+  end
 
   before_create do
     self.created_by_id = User.current.id

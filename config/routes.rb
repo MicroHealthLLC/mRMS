@@ -6,9 +6,10 @@ Rails.application.routes.draw do
   get 'channel_permission/destroy'
 
   resources :channels, except: [:index] do
-    member do
-      match :manage_users, via: [:get, :post]
-    end
+    # member do
+    #   match :manage_users, via: [:get, :post]
+    # end
+    resources :channel_permissions
     resources :reports do
       member do
         match :save_pivottable, via: [:post]

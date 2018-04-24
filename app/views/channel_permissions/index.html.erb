@@ -1,0 +1,69 @@
+<div class="row">
+  <div class="col-md-12 ">
+    <div class="pull-right">
+      <%= show_button('#', ' Add Permission', 'plus', 'primary', {toggle:"modal", target:"#AddPermissionModal" })  %>
+
+      <%= cancel_button channel_path(@channel) %>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="AddPermissionModal" tabindex="-1" role="dialog" aria-labelledby="AddPermissionModal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Add Permission</h4>
+      </div>
+      <div id="files" class="files col-xs-12" ></div>
+      <div id="errors" style="color: red;" class="files col-xs-12" ></div>
+      <%= form_for([@channel, @permission], method: :post, remote: true, html: { class: 'form-horizontal ', method: :post}) do |f| %>
+          <div class="modal-body">
+            <fieldset>
+              <div class="form-group">
+                <%= f.label 'User', class: 'col-md-2 control-label' %>
+                <div class="col-md-9">
+                  <%= f.select :user_id , options_for_select(User.where.not(id: [@channel.user_id] + @channel.channel_permissions.pluck(:id)).map{|u| [u.name, u.id]}),{class: 'form-control'} %>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <%= f.label 'Permission', class: 'col-md-2 control-label' %>
+                <div class="col-md-9">
+                  <%= f.check_box :can_edit %> Can Edit Channel <br/>
+                  <%= f.check_box :can_add_report %> Can Add/Edit Report <br/>
+                  <%= f.check_box :can_delete_report %> Can Delete Report <br/>
+                  <%= f.check_box :can_add_users %> Can Add/Change permission <br/>
+                </div>
+              </div>
+            </fieldset>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <%= f.submit 'Save', class: 'btn btn-primary' %>
+          </div>
+          </div>
+
+      <% end %>
+      </div>
+</div>
+
+<h2>
+  <%= @channel.name %>
+</h2>
+
+
+<section id="widget-grid" class="channel">
+  <div class="row">
+    <article class="col-xs-12">
+      <%= render partial: 'permissions',
+                 layout: 'shared/smart_widget_wrapper',
+                 locals: {
+                     wid_id: 'channel',
+                     wid_title: 'Permissions',
+                     channel: @channel,
+                     permissions: @permissions
+                 } %>
+    </article>
+  </div>
+</section>

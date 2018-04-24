@@ -1,6 +1,7 @@
 class ChannelsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_channel, only: [:manage_users, :show, :edit, :update, :destroy]
+  # before_action :set_channel, only: [:manage_users, :show, :edit, :update, :destroy]
+  before_action :set_channel, only: [ :show, :edit, :update, :destroy]
 
 
   # GET /channels/1
@@ -34,18 +35,18 @@ class ChannelsController < ApplicationController
     end
   end
 
-  def manage_users
-    @shared_channels = @channel.channel_users.pluck(:user_id)
-    @users = User.where.not(id: User.current.id)
-    if request.post?
-      @channel.channel_users.where(user_id: (@shared_channels.map(&:to_s) - params[:users]) ).where.not(user_id: User.current.id).delete_all
-      (params[:users] - @shared_channels.map(&:to_s)).each do |user_id|
-        @channel.channel_users.create(user_id: user_id)
-      end
-      flash[:notice] = "User(s) added successfully"
-      redirect_to channel_path(@channel)
-    end
-  end
+  # def manage_users
+  #   @shared_channels = @channel.channel_users.pluck(:user_id)
+  #   @users = User.where.not(id: User.current.id)
+  #   if request.post?
+  #     @channel.channel_users.where(user_id: (@shared_channels.map(&:to_s) - params[:users]) ).where.not(user_id: User.current.id).delete_all
+  #     (params[:users] - @shared_channels.map(&:to_s)).each do |user_id|
+  #       @channel.channel_users.create(user_id: user_id)
+  #     end
+  #     flash[:notice] = "User(s) added successfully"
+  #     redirect_to channel_path(@channel)
+  #   end
+  # end
 
   # PATCH/PUT /channels/1
   # PATCH/PUT /channels/1.json

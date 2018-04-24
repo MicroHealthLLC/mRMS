@@ -51,8 +51,8 @@
                     <% SavePivotTable.where(report_id: @report.id).each do |p| %>
                         <%= link_to p.name, channel_report_path(@channel, @report, query_id: p.id), style: 'color: black' %>
                         <%= link_to( '<i class="fa fa-trash"></i>'.html_safe, delete_pivottable_channel_report_path(@channel, @report, query_id: p.id),
-                                    :method => :delete,
-                                    :data => {:confirm => t(:text_are_you_sure)}) if p.user_id == User.current.id %>
+                                     :method => :delete,
+                                     :data => {:confirm => t(:text_are_you_sure)}) if p.user_id == User.current.id %>
                         <br/>
                     <% end %>
 
@@ -91,7 +91,7 @@
                           <%= f.hidden_field :user_id  %>
                           <%= f.hidden_field :report_id  %>
                           <span style="display: none;">
-                              <%= f.text_field :content  %>
+                            <%= f.text_field :content  %>
                           </span>
 
                         </div>
@@ -105,7 +105,7 @@
                   </div>
 
               <% end %>
-              </div>
+          </div>
         </div>
 
         <div class="row" >
