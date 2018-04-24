@@ -138,7 +138,7 @@
 
         <%= javascript_include_tag 'smart_admin/handsontable.full.min' %>
 
-        <%= javascript_include_tag 'smart_admin/novix.pivot.renderer' %>
+
 
         <%= javascript_include_tag 'smart_admin/hightchart_renderers' %>
 
@@ -165,7 +165,6 @@
                     $.pivotUtilities.renderers,
                     $.pivotUtilities.c3_renderers,
                     $.pivotUtilities.subtotal_renderers,
-                    $.pivotUtilities.novix_renderers,
                     $.pivotUtilities.highchart_renderers
                 );
                 default_query = {
@@ -175,12 +174,6 @@
                     cols: [],
                     rendererName: "Table",
                     rendererOptions: {
-                        onEditValues: function (changes) {
-                            $(".changesOutput").html(JSON.stringify(changes));
-                        },
-                        onDrawTable: function (htTable) {
-                            $(".changesOutput").empty();
-                        },
                         rowSubtotalDisplay: {
                             hideOnExpand: true
                         },

@@ -4,14 +4,18 @@ class Channel < ApplicationRecord
   has_many :reports
   belongs_to :user
 
-  PUBLIC = 1
+  GROUPS = 1
+  PUBLIC = 2
   PERSONAL = 3
+
   has_many :users, through: :channel_users
-  scope :personal, -> { where(option: 3)}
-  scope :not_personal, -> { where.not(option: 3)}
-  scope :is_public, -> { where(option: 2)}
-  scope :for_shared_users, -> { where(option: 1)}
+  scope :personal, -> { where(option: PERSONAL)}
+  scope :my_personal_channel, -> { personal.where(user_id: User.current.id) }
+  scope :not_personal, -> { where(option: [PUBLIC, GROUPS])}
+  scope :is_public, -> { where(option: PUBLIC)}
+  scope :for_shared_users, -> { where(option: GROUPS)}
   scope :for_user, -> { includes(:channel_users).for_shared_users.where(channel_users: {user_id: User.current.id}).where(is_public: false)}
+  scope :visible, -> { is_public + for_user + my_personal_channel }
 
   accepts_nested_attributes_for :channel_users, reject_if: :all_blank, allow_destroy: true
 
@@ -20,7 +24,8 @@ class Channel < ApplicationRecord
   belongs_to :updated_by, class_name: 'User', optional: true
 
   validates_presence_of :name
-  validates_uniqueness_of :name, scope: :option
+  validates_uniqueness_of :name, scope: [:user_id]
+
 
   before_create do
     self.created_by_id = User.current.id

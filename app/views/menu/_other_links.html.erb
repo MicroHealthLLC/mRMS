@@ -20,7 +20,7 @@
 <li>
   <a href="#"><i class="fa fa-lg fa-fw fa-circle"></i> <span class="menu-item-parent"> Personal</span></a>
   <ul>
-   <% Channel.where(user_id: User.current.id).personal.each do |channel| %>
+   <% Channel.my_personal_channel.each do |channel| %>
         <li class="<%= channel_active?(channel)  %>">
           <a href="/channels/<%= channel.id %>" title="<%=  channel.name %>"><i class="fa fa-lg fa-fw <%= channel.icon || 'fa-square' %>"></i><span class="menu-item-parent"><%= channel.name %></span></a>
         </li>

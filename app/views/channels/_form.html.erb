@@ -45,9 +45,9 @@
       <div class="form-group">
         <%= form.label 'Options', class: 'col-md-2 control-label' %>
         <div class="col-md-8">
-          <%= form.radio_button :option, 2 %> Public
-          <%= form.radio_button :option, 1 %> Not public
-          <%= form.radio_button :option, 3 %> Personal
+          <%= form.radio_button :option, Channel::PUBLIC %> Public
+          <%= form.radio_button :option, Channel::GROUPS %> GROUPS
+          <%= form.radio_button :option, Channel::PERSONAL %> Personal
         </div>
       </div>
 

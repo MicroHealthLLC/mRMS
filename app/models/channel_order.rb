@@ -1,0 +1,2 @@
+class ChannelOrder < ApplicationRecord
+end
