@@ -4,22 +4,11 @@
   hash
 } %>
 
-<script>
-  $( function() {
-    $tabs_notifs = $( "#notification_tabs" ).tabs();
-  } );
-</script>
 <%= form_tag(set_notification_settings_path, method: 'post',  class: 'form-horizontal' ) do |f| %>
     <section id="widget-grid" class="show_tab">
       <div class="row">
         <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
           <div id="notification_tabs">
-            <ul id="nav">
-              <% tabs.keys.sort.each do |tab| -%>
-                  <li><a id="link-tabs-modules" href="<%=  "#tabs-#{tab }" %>"><%= tab %></a></li>
-              <% end -%>
-            </ul>
-
             <% tabs.each do |tab, values| -%>
                 <div id="<%= "tabs-#{tab}" %>">
                   <% values.each do |v| %>

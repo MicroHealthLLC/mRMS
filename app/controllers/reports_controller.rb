@@ -82,8 +82,13 @@ class ReportsController < ApplicationController
   end
 
   def delete_pivottable
-    p = SavePivotTable.find(params[:query_id])
-    p.destroy
+    if params[:delete_all]
+      @report.save_pivot_tables.delete_all
+    else
+      p = SavePivotTable.find(params[:query_id])
+      p.destroy
+    end
+
     redirect_to  channel_report_path(@channel, @report)
   end
 

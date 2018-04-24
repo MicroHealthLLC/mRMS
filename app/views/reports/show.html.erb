@@ -56,6 +56,11 @@
                         <br/>
                     <% end %>
 
+                    <hr>
+                    <%= link_to( '<i class="fa fa-trash">Delete all</i>'.html_safe, delete_pivottable_channel_report_path(@channel, @report, delete_all: true),
+                                 :method => :delete,
+                                 :data => {:confirm => t(:text_are_you_sure)}) if User.current.can?(:manage_roles) %>
+
                   </div>
                 </fieldset>
               </div>
