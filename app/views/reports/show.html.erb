@@ -140,8 +140,6 @@
 
 
 
-        <%= javascript_include_tag 'smart_admin/hightchart_renderers' %>
-
 
         <script>
             <% header, tab = @report.document.content %>
@@ -164,8 +162,7 @@
                 var renderers = $.extend({},
                     $.pivotUtilities.renderers,
                     $.pivotUtilities.c3_renderers,
-                    $.pivotUtilities.subtotal_renderers,
-                    $.pivotUtilities.highchart_renderers
+                    $.pivotUtilities.subtotal_renderers
                 );
                 default_query = {
                     dataClass: dataClass,
