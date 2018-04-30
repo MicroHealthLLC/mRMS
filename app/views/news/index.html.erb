@@ -1,23 +1,19 @@
 <div class="module-title">
   <h2 class='module-title-text'>NEWS</h2>
 </div>
- 
+
+
 <section id="widget-grid" class="news_section">
-  <div class="row">
-    <div class="col-xs-12 btn-edition">
-      <div class="btn-group">
-        <button type="button" class="btn btn-primary dropdown-toggle actions-tab" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">ACTIONS <span class="caret"></span></button>
-        <ul class="dropdown-menu dropdown-links" role="menu" style="min-width:170px;">
+  <div class="row" style="margin-bottom: 10px">
+    <div class="col-md-12 ">
+      <div class="pull-right">
         <% if can?(:create_news, :manage_roles, :manage_news) %>
-          <li>
-            <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
-            <%= link_to 'New News', new_news_path, class: 'dropdown-item' %>
-          </li>
+        <%= show_button(new_news_path, 'New News', 'plus', 'primary') %>
         <% end %>
-        </ul>
       </div>
     </div>
   </div>
+
   <div class="row">
     <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
       <% @news.each do |news| %>

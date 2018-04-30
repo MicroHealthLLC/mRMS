@@ -144,7 +144,7 @@ module ApplicationHelper
 
   def show_button(url, text, icon, btn_style, data_options = {})
     link_to  url, class: "btn btn-#{btn_style}", data: data_options do
-      "<span class='glyphicon glyphicon-#{icon}' aria-hidden='true'>#{text} </span>".html_safe
+      "<i class='fa fa-#{icon}' aria-hidden='true'> #{text} </i>".html_safe
     end
   end
 
@@ -152,7 +152,7 @@ module ApplicationHelper
     link_to( url, class: 'btn btn-danger',
              :method => :delete,
              :data => {:confirm => t(:text_are_you_sure)}) do
-      '<span class="glyphicon glyphicon-remove" aria-hidden="true">Delete</span>'.html_safe
+      '<i class="fa fa-trash" aria-hidden="true"> Delete</i>'.html_safe
     end
   end
 

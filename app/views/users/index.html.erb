@@ -6,7 +6,7 @@
   <div class="row" style="margin-bottom: 10px">
     <div class="col-md-12 ">
       <div class="pull-right">
-        <%= show_button(new_employee_path, t(:new_user), 'plus-sign', 'primary') %>
+        <%= show_button(new_employee_path, t(:new_user), 'plus', 'primary') %>
         <%= show_button(active_users_path, ' Active users', 'star', 'info') %>
         <%= show_button(audit_users_path, ' Audit users', 'tag', 'default') %>
         <%= show_button( params.permit(:from, :to, :status_type).merge(format: 'pdf'), ' Print', 'print', 'primary') %>

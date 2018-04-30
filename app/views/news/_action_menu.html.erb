@@ -1,38 +1,16 @@
-  <div class="col-xs-12 btn-edition tabs-section">
-    <div class="btn-group">
-      <button type="button" class="btn btn-primary dropdown-toggle actions-tab" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">ACTIONS <span class="caret"></span></button>
-      <ul class="dropdown-menu dropdown-links" role="menu" style="min-width:200px;">
-        <% if @news.can?(:delete_news, :manage_news, :manage_roles) %>
-          <li>
-            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-              <%= link_to('Delete', news_path(@news), class: 'dropdown-item',
-                          :method => :delete,
-                          :data => {:confirm => t(:text_are_you_sure)}) 
-              %>
-          </li>
-          <div class='dropdown-item-dividier'></div>
-        <% end %>
-
-        <% if @news.can?(:edit_news, :manage_news, :manage_roles) %>
-          <li>
-            <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
-            <%= link_to 'Edit', edit_news_path(@news), class: 'dropdown-item' %>
-          </li>
-          <div class='dropdown-item-dividier'></div>
-        <% end %>
+<div class="row" style="margin-bottom: 10px">
+  <div class="col-md-12 ">
+    <div class="pull-right">
+      <% if @news.can?(:delete_news, :manage_news, :manage_roles) %>
+          <%= delete_button(news_path(@news)) %>
+      <% end %>
+      <% if @news.can?(:edit_news, :manage_news, :manage_roles) %>
+          <%= edit_button(edit_news_path(@news)) %>
+      <% end %>
+      <%= show_button(users_path, 'Cancel', 'reply', 'primary') %>
+      <%#= show_button( params.permit(:from, :to, :status_type).merge(format: 'pdf'), ' Print', 'print', 'primary') %>
 
 
-
-          <li>
-            <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
-            <%= link_to 'Cancel', news_index_path, class: 'dropdown-item' %>
-          </li>
-          <div class='dropdown-item-dividier'></div>
-
-          <li>
-            <span class="glyphicon glyphicon-print" aria-hidden="true"></span>
-            <%= link_to 'Print', news_path(@news, format: 'pdf'), class: 'dropdown-item' %>
-          </li>
-      </ul>
     </div>
   </div>
+</div>
