@@ -18,13 +18,13 @@
           </span>
       <% end %>
 
-      <% if @channel.is_creator? or (@channel.my_permission.my_permission.can_add_report? and @report.can?(:manage_roles) ) %>
+      <% if @channel.is_creator? or (@channel.my_permission.can_add_report? and @report.can?(:manage_roles) ) %>
           <span>
             <%= edit_button edit_channel_report_path(@channel, @report) %>
           </span>
       <% end %>
 
-      <% if  @channel.is_creator? or (@channel.my_permission.my_permission.can_delete_report? and @report.can?(:manage_roles) ) %>
+      <% if  @channel.is_creator? or (@channel.my_permission.can_delete_report? and @report.can?(:manage_roles) ) %>
           <span>
             <%= delete_button channel_report_path(@channel, @report) %>
           </span>

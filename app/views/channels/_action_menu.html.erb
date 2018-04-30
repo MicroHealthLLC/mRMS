@@ -1,15 +1,15 @@
 <div class="row">
   <div class="col-md-12 ">
     <div class="pull-right">
-      <% if !@channel.is_public? && !@channel.is_personal? && (@channel.is_creator? or @channel.my_permission.my_permission.can_add_users?) %>
+      <% if !@channel.is_public? && !@channel.is_personal? && (@channel.is_creator? or @channel.my_permission.can_add_users?) %>
           <%= show_button(channel_channel_permissions_path(@channel), ' Permissions', 'cog', 'warning')  %>
       <% end %>
 
-      <% if @channel.is_creator? or (@channel.my_permission.my_permission.can_add_report? or @channel.can?(:edit_channel, :manage_channel, :manage_roles) ) %>
+      <% if @channel.is_creator? or (@channel.my_permission.can_add_report? or @channel.can?(:edit_channel, :manage_channel, :manage_roles) ) %>
           <%= show_button(new_channel_report_url(@channel), ' Add Report', 'play-circle', 'info')  %>
       <% end %>
 
-      <% if @channel.is_creator? or @channel.my_permission.my_permission.can_edit? %>
+      <% if @channel.is_creator? or @channel.my_permission.can_edit? %>
           <%= edit_button edit_channel_path(@channel) %>
       <% end %>
 
