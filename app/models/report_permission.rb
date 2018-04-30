@@ -1,0 +1,2 @@
+class ReportPermission < ApplicationRecord
+end

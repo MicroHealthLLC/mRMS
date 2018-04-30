@@ -96,8 +96,10 @@ class Channel < ApplicationRecord
   end
 
   def visible_reports
-    if option == PERSONAL
-      User.current.reports
+    if is_personal?
+      User.current.reports.where(channel_id: self.id)
+    elsif is_public?
+      reports
     else
       reports
     end

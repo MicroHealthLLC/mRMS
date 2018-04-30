@@ -20,7 +20,7 @@ class Report < ApplicationRecord
 
   after_create do
     if channel.is_personal?
-      SharedReport.create(user_id: self.user_id, report_id: self.id)
+      SharedReport.create(user_id: User.current.id, report_id: self.id, channel_id: self.channel.id)
     end
   end
 
