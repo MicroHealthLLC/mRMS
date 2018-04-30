@@ -26,13 +26,16 @@ class ReportsController < ApplicationController
   end
 
   def upload_document
-    render_403 unless @channel.is_creator? or @channel.my_permission.can_add_report?
-    if request.post?
-      @report_document = @report.document
-      @report_document.file = params[:report][:document]
-      @report_document.save
-      render 'uploader/report_upload'
-    end
+   if @channel.is_creator? or @channel.my_permission.can_add_report?
+     if request.post?
+       @report_document = @report.document
+       @report_document.file = params[:report][:document]
+       @report_document.save
+       render 'uploader/report_upload'
+     end
+   else
+     render_403
+   end
   end
 
   def share_report

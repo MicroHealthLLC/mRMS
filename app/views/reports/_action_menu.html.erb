@@ -12,10 +12,12 @@
           <%= show_button('#', ' Load Report', 'arrow-up', 'info', {toggle:"modal", target:"#myChangeModal" }) %>
       <% end %>
 
-      <% if @report.can?(:edit_channel, :manage_channel, :manage_roles) %>
-          <span>
-            <%= show_button('#', ' Upload Data', 'upload', 'info', {toggle:"modal", target:"#myModal" }) %>
-          </span>
+      <% if  @report.can?(:edit_channel, :manage_channel, :manage_roles) %>
+          <% if @channel.is_creator? or @channel.my_permission.can_add_report?%>
+              <span>
+                <%= show_button('#', ' Upload Data', 'upload', 'info', {toggle:"modal", target:"#myModal" }) %>
+              </span>
+          <% end %>
       <% end %>
 
       <% if @channel.is_creator? or (@channel.my_permission.can_add_report? and @report.can?(:manage_roles) ) %>
