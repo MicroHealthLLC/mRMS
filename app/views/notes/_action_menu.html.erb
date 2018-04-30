@@ -33,27 +33,12 @@
 
       <li>
         <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
-        <%  if @note.object.is_a? Case %>
-            <%= link_to 'Cancel', (case_path(@note.object) + "#tabs-notes"), class: 'dropdown-item' %>
-        <% elsif @note.object.is_a? Appointment%>
-            <%= link_to 'Cancel', (appointment_path(@note.object) + "#tabs-note"), class: 'dropdown-item' %>
-        <% else %>
             <%= link_to 'Cancel', @note.object, class: 'dropdown-item' %>
-        <% end %>
 
       </li>
-      <div class='dropdown-item-dividier'></div>
 
-      <li>
-        <span class="glyphicon glyphicon-print" aria-hidden="true"></span>
-        <%= link_to 'Print', note_path(@note, format: 'pdf'), class: 'dropdown-item' %>
-      </li>
-      <div class='dropdown-item-dividier'></div>
 
-      <li>
-        <span class="glyphicon glyphicon-list" aria-hidden="true"></span>
-        <%= link_to 'History Changes', "/histories/#{@note.class}/#{@note.id}", class: 'dropdown-item' %>
-      </li>
+
     </ul>
   </div>
 </div>
