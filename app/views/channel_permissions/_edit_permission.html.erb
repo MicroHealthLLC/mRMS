@@ -1,0 +1,33 @@
+
+<div class="modal fade" id="<%= "AddPermission#{idx}Modal" %>" tabindex="-1" role="dialog" aria-labelledby="<%= "AddPermission#{idx}Modal" %> ">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Edit Permission for <%= permission.user %></h4>
+      </div>
+      <div id="files" class="files col-xs-12" ></div>
+      <div id="errors" style="color: red;" class="files col-xs-12" ></div>
+      <%= form_for([@channel, permission],  remote: true, html: { class: 'form-horizontal ', method: :patch}) do |f| %>
+          <div class="modal-body">
+            <fieldset>
+              <div class="form-group">
+                <%= f.label 'Permission', class: 'col-md-2 control-label' %>
+                <div class="col-md-9">
+                  <%= f.check_box :can_edit %> Can Edit Channel <br/>
+                  <%= f.check_box :can_add_report %> Can Add/Edit Report <br/>
+                  <%= f.check_box :can_delete_report %> Can Delete Report <br/>
+                  <%= f.check_box :can_add_users %> Can Add/Change permission <br/>
+                </div>
+              </div>
+            </fieldset>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <%= f.submit 'Save', class: 'btn btn-primary' %>
+          </div>
+          </div>
+
+      <% end %>
+      </div>
+</div>

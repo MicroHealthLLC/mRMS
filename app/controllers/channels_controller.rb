@@ -2,6 +2,7 @@ class ChannelsController < ApplicationController
   before_action :authenticate_user!
   # before_action :set_channel, only: [:manage_users, :show, :edit, :update, :destroy]
   before_action :set_channel, only: [ :show, :edit, :update, :destroy]
+  before_action :authorize
 
   # GET /channels/1
   # GET /channels/1.json
@@ -88,5 +89,13 @@ class ChannelsController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def channel_params
     params.require(:channel).permit(Channel.safe_attributes)
+  end
+
+  def authorize
+    if @channel
+      @channel.is_creator? or (@channel.my_permission.can_add_report? or @channel.can?(:edit_channel, :manage_channel, :manage_roles) )
+    else
+      true
+    end
   end
 end

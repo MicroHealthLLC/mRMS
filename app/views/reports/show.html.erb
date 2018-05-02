@@ -32,7 +32,7 @@
     <%  if @report.document_url %>
         <p>
           <strong>Document:</strong>
-          <%=link_to @report.document.read_attribute(:file), @report.document_url %>
+          <%=link_to @report.document.read_attribute(:file), @report.document_url, class: 'fa fa-fw fa-download' %>
         </p>
 
 

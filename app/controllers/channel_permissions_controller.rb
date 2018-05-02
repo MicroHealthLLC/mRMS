@@ -18,6 +18,16 @@ class ChannelPermissionsController < ApplicationController
     end
   end
 
+  def update
+    @permission = ChannelPermission.find(params[:id])
+    if @permission.update(params[:channel_permission].permit!)
+      flash[:notice] = "Success"
+      render js: 'location.reload();'
+    else
+      render js: "alert('#{@permission.errors.full_messages.join('<br/>').html_safe}')"
+    end
+  end
+
   def destroy
     @permission.destroy
     redirect_to :back

@@ -9,7 +9,7 @@ Rails.application.routes.draw do
     # member do
     #   match :manage_users, via: [:get, :post]
     # end
-    resources :channel_permissions
+    resources :channel_permissions, except: [:new, :edit]
     resources :reports do
       member do
         match :save_pivottable, via: [:post]

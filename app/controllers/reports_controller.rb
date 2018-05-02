@@ -6,6 +6,7 @@ class ReportsController < ApplicationController
   # GET /reports
   # GET /reports.json
   def index
+
     @reports = @channel.visible_reports
   end
 
@@ -26,16 +27,12 @@ class ReportsController < ApplicationController
   end
 
   def upload_document
-   if @channel.is_creator? or @channel.my_permission.can_add_report?
-     if request.post?
-       @report_document = @report.document
-       @report_document.file = params[:report][:document]
-       @report_document.save
-       render 'uploader/report_upload'
-     end
-   else
-     render_403
-   end
+    if request.post?
+      @report_document = @report.document
+      @report_document.file = params[:report][:document]
+      @report_document.save
+      render 'uploader/report_upload'
+    end
   end
 
   def share_report
@@ -126,5 +123,17 @@ class ReportsController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def report_params
     params.require(:report).permit(Report.safe_attributes)
+  end
+
+  def authorize
+    case params[:action]
+      when 'index' , 'edit', 'update',
+          'new', 'upload_document',
+          'create', 'save_pivottable',
+          'delete_pivottable' then @channel.is_creator? or (@channel.my_permission.can_add_report?)
+      when 'destroy' then @channel.is_creator? or (@channel.my_permission.can_delete_report? )
+      else
+        @channel.is_creator? or @channel.my_permission.can_add_users?
+    end
   end
 end

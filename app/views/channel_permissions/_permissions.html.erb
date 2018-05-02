@@ -7,18 +7,26 @@
     <th> Can Add/Edit Report </th>
     <th> Can Delete Report </th>
     <th> Can Add/Change permission </th>
+    <th> Edit </th>
     <th> Delete </th>
   </tr>
   </thead>
   <tbody>
-  <% permissions.each do |permission| %>
+  <% permissions.each_with_index do |permission, idx| %>
       <tr>
         <td><%=  permission.user.to_s %></td>
         <td><i class="fa fa-<%=  permission.can_edit? ? 'check' : 'times' %>"></i></td>
         <td><i class="fa fa-<%=  permission.can_add_report? ? 'check' : 'times' %>"></i></td>
         <td><i class="fa fa-<%=  permission.can_delete_report? ? 'check' : 'times' %>"></i></td>
         <td><i class="fa fa-<%=  permission.can_add_users? ? 'check' : 'times' %>"></i></td>
+        <td>
+          <%= link_to  '#', data: {toggle:"modal", target:"#AddPermission#{idx}Modal" } do
+            "<i class='fa fa-edit' aria-hidden='true'>  </i>".html_safe
+          end%>
+          <%= render partial: 'edit_permission', locals: {permission: permission, idx: idx} %>
+        </td>
         <td><%= delete_link(channel_channel_permission_url(@channel, permission)) %></td>
+
       </tr>
   <% end %>
   </tbody>

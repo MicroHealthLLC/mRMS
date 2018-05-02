@@ -7,9 +7,9 @@ class ReportDocument < ApplicationRecord
     self.user_id = User.current.id
   end
 
-  after_save do
-    report.save_pivot_tables.delete_all
-  end
+  # after_save do
+  #   report.save_pivot_tables.delete_all
+  # end
 
   mount_uploader :file, ReportUploader
 
