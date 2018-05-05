@@ -59,7 +59,7 @@ class ApplicationController < ActionController::Base
   end
 
   def require_login
-    redirect_to new_session_path(:user)
+    redirect_to new_session_path(:user) unless User.current.persisted?
   end
 
   def render_403(options={})

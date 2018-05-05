@@ -30,10 +30,12 @@
               <div class="form-group">
                 <%= f.label 'Permission', class: 'col-md-2 control-label' %>
                 <div class="col-md-9">
+                  <%= f.check_box :can_view %> Can View Channel <br/>
                   <%= f.check_box :can_edit %> Can Edit Channel <br/>
                   <%= f.check_box :can_add_report %> Can Add/Edit Report <br/>
                   <%= f.check_box :can_delete_report %> Can Delete Report <br/>
                   <%= f.check_box :can_add_users %> Can Add/Change permission <br/>
+                  <%= f.check_box :can_download %> Can Download File <br/>
                 </div>
               </div>
             </fieldset>

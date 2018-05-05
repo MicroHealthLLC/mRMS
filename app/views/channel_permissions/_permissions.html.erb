@@ -3,10 +3,12 @@
   <thead>
   <tr>
     <th>User</th>
+    <th> Can View Channel</th>
     <th> Can Edit Channel </th>
     <th> Can Add/Edit Report </th>
     <th> Can Delete Report </th>
     <th> Can Add/Change permission </th>
+    <th> Can Download File </th>
     <th> Edit </th>
     <th> Delete </th>
   </tr>
@@ -15,10 +17,12 @@
   <% permissions.each_with_index do |permission, idx| %>
       <tr>
         <td><%=  permission.user.to_s %></td>
+        <td><i class="fa fa-<%=  permission.can_view? ? 'check' : 'times' %>"></i></td>
         <td><i class="fa fa-<%=  permission.can_edit? ? 'check' : 'times' %>"></i></td>
         <td><i class="fa fa-<%=  permission.can_add_report? ? 'check' : 'times' %>"></i></td>
         <td><i class="fa fa-<%=  permission.can_delete_report? ? 'check' : 'times' %>"></i></td>
         <td><i class="fa fa-<%=  permission.can_add_users? ? 'check' : 'times' %>"></i></td>
+        <td><i class="fa fa-<%=  permission.can_downlod? ? 'check' : 'times' %>"></i></td>
         <td>
           <%= link_to  '#', data: {toggle:"modal", target:"#AddPermission#{idx}Modal" } do
             "<i class='fa fa-edit' aria-hidden='true'>  </i>".html_safe

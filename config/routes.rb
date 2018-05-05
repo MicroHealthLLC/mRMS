@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  # get 'redocuments/download'
+  #
+  get "/uploads/:report_id/:basename.:extension", :controller => "redocuments", :action => "download"
+  # match "/uploads/:id/:basename.:extension", :controller => "addfiles", :action => "download", via: :get
+
   get 'channel_permission/index'
 
   get 'channel_permission/new'

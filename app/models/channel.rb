@@ -17,7 +17,10 @@ class Channel < ApplicationRecord
   scope :not_personal, -> { where(option: [PUBLIC, GROUPS])}
   scope :is_public, -> { where(option: PUBLIC)}
   scope :for_shared_users, -> { where(option: GROUPS)}
-  scope :for_user, -> { for_shared_users.includes(:channel_permissions).where(channel_permissions: {user_id: User.current.id}) + for_shared_users.for_current_user}
+  scope :for_user, -> { for_shared_users.
+      includes(:channel_permissions).
+      where(channel_permissions: {user_id: User.current.id, can_view: true}) + for_shared_users.for_current_user
+  }
   scope :visible, -> { is_public + for_user + my_personal_channel }
 
   # accepts_nested_attributes_for :channel_users, reject_if: :all_blank, allow_destroy: true
