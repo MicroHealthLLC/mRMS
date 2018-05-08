@@ -18,7 +18,7 @@ class ReportDocument < ApplicationRecord
   #           :file_size => {
   #               :less_than_or_equal_to => Setting[:spreadsheet_limit].to_i.megabytes.to_i
   #           }
-  validate :check_file_size
+ # validate :check_file_size
   validate :read_content
 
   def self.safe_attributes
@@ -29,13 +29,13 @@ class ReportDocument < ApplicationRecord
     changed_content ? JSON.parse(changed_content.to_s) : JSON.parse(original_content) rescue  [[], []]
   end
 
-  def check_file_size
-    if file
-      if file.size > Setting[:spreadsheet_limit].to_i.megabytes.to_i
-        self.errors.add(:file, "file size exceeded #{Setting[:spreadsheet_limit]}MB")
-      end
-    end
-  end
+ # def check_file_size
+ #   if file
+ #     if file.size > Setting[:spreadsheet_limit].to_i.megabytes.to_i
+ #       self.errors.add(:file, "file size exceeded #{Setting[:spreadsheet_limit]}MB")
+ #     end
+ #   end
+ # end
 
   def read_content
     begin
