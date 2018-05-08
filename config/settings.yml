@@ -33,7 +33,7 @@ email_header:
 news_limit:
   default: 5
 spreadsheet_limit:
-  default: 5
+  default: 50
 email_footer:
   default: |-
     You have received this notification because you have either subscribed to it, or are involved in it.
