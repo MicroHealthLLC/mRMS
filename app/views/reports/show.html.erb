@@ -31,11 +31,15 @@
 
     <%  if @report.document_url %>
         <% if @channel.is_creator? or @channel.my_permission.can_download? %>
-            <p>
-              <strong>Document:</strong>
-              <%= link_to @report.document.read_attribute(:file), "/uploads/#{@report.id}/#{File.basename(@report.document.file_url)}",  class: 'fa fa-fw fa-download', style: 'white-space: nowrap;' %>
+            <% if File.exists?("#{Rails.root}/public#{@report.document_url}") %>
+                <p>
+                  <strong>Document:</strong>
+                  <%= link_to @report.document.read_attribute(:file), "/uploads/#{@report.id}/#{File.basename(@report.document.file_url)}",  class: 'fa fa-fw fa-download', style: 'white-space: nowrap;' %>
 
-            </p>
+                </p>
+            <% else %>
+              <span style="color: red;"> File do not exist on server, please re-upload it again</span>
+            <% end %>
         <% end %>
 
 

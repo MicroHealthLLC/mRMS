@@ -31,7 +31,11 @@
           </span>
       <% end %>
       <%= cancel_button channel_path(@channel) %>
-
+      <% if params[:query_id] %>
+              <span>
+                <%= show_button(channel_report_path(@channel, @report), ' Clear', 'times', 'default') %>
+              </span>
+      <% end %>
 
 
       <%= render partial: 'uploader/report_upload' %>
