@@ -115,7 +115,9 @@
             add: function(e, data){
                 var uploadErrors = [];
 
+
                 if(data.originalFiles[0]['size'].length && data.originalFiles[0]['size'] > <%= Setting['spreadsheet_limit'].to_i.megabytes %>) {
+
                     uploadErrors.push('Filesize is too big');
                 }
                 if(uploadErrors.length > 0) {

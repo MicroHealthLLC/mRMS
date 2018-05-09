@@ -16,7 +16,7 @@ class SettingsController < ProtectForgeryApplication
 
     Setting['application_name'] = params['application_name']
     Setting['news_limit'] = params['news_limit']
-    Setting['spreadsheet_limit'] = params['spreadsheet_limit'] if params[:spreadsheet_limit].to_i < 30
+    Setting['spreadsheet_limit'] = params['spreadsheet_limit'] if params[:spreadsheet_limit].to_i < 50
     Setting['email_from'] = params['email_from']
     Setting['format_date'] = params['format_date']
     redirect_to settings_path
