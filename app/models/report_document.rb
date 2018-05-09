@@ -19,7 +19,7 @@ class ReportDocument < ApplicationRecord
   #               :less_than_or_equal_to => Setting[:spreadsheet_limit].to_i.megabytes.to_i
   #           }
  # validate :check_file_size
-  validate :read_content
+ #  validate :read_content
 
   def self.safe_attributes
     [:id, :file, :original_content, :changed_content, :report_id, :_destroy]
