@@ -28,6 +28,16 @@ class SpreadsheetEnumerationUpload
     end
   end
 
+  def force_read_csv(file_url)
+    quote_chars = %w(" | ~ ^ & *)
+    begin
+      @report = CSV.read(file_url, headers: :first_row, quote_char: quote_chars.shift)
+     [[], @report.map(&:to_h), nil]
+    rescue CSV::MalformedCSVError => error
+      quote_chars.empty? ? [[],[], error.message] : retry
+    end
+  end
+
   def upload_enumeration(e)
     roo_csv  = open_file
     sheet = roo_csv.sheet(0)

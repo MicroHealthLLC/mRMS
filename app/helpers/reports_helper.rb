@@ -13,6 +13,8 @@ module ReportsHelper
       end
       tab << json
     end
-    [header, tab]
+    [header, tab, nil]
+  rescue CSV::MalformedCSVError => error
+    @file.force_read_csv(document.path)
   end
 end

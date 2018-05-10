@@ -2,7 +2,7 @@
 <div class="row">
   <div class="col-md-12">
     <p>
-      <strong>Name:</strong>
+      <strong>Data Set:</strong>
       <%= @report.name %>
     </p>
 
@@ -170,19 +170,22 @@
 
         <% cache("#{@report.id}-#{@report.document.updated_at}") do %>
             <script>
-                <% header, tab = render_pivot_information(@report.document.file) %>
+                <% header, tab, error= render_pivot_information(@report.document.file)
+                 if error  %>
+                  alert('<%=  error %> ');
+               <%  else   %>
                 var  json =  [
 
                     <% tab.each do |hash| %>
                     {
                         <% hash.each_with_index do |(k, v), idx| %>
 
-                        '<%= k %>': '<%= v %>',
+                        '<%= k.to_s.gsub('"', '') %>': '<%= v.to_s.gsub('"', '') %>',
                         <% end %>
                     },
                     <% end %>
                 ];
-
+                <% end %>
             </script>
 
         <% end %>

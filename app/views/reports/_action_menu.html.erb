@@ -8,8 +8,8 @@
       <% end %>
 
       <%  if @report.document_url %>
-          <%= show_button('#', ' Save Report', 'arrow-down', 'info', {toggle:"modal", target:"#mySaveModal" }) %>
-          <%= show_button('#', ' Load Report', 'arrow-up', 'info', {toggle:"modal", target:"#myChangeModal" }) %>
+          <%= show_button('#', ' New Report', 'arrow-down', 'info', {toggle:"modal", target:"#mySaveModal" }) %>
+          <%= show_button('#', ' Refresh Report', 'arrow-up', 'info', {toggle:"modal", target:"#myChangeModal" }) %>
       <% end %>
 
       <% if @channel.is_creator? or @channel.my_permission.can_add_report? %>

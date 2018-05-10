@@ -6,7 +6,7 @@
       <% end %>
 
       <% if @channel.is_creator? or (@channel.my_permission.can_add_report? or @channel.can?(:edit_channel, :manage_channel, :manage_roles) ) %>
-          <%= show_button(new_channel_report_url(@channel), ' Add Report', 'play-circle', 'info')  %>
+          <%= show_button(new_channel_report_url(@channel), ' Add Data set', 'play-circle', 'info')  %>
       <% end %>
 
       <% if @channel.is_creator? or @channel.my_permission.can_edit? %>
