@@ -114,20 +114,7 @@
               <% end %>
               </div>
         </div>
-        <div class="loader report_show"><style>
-          .loader {
-          border: 16px solid #f3f3f3; /* Light grey */
-          border-top: 16px solid #3498db; /* Blue */
-          border-radius: 50%;
-          width: 120px;
-          height: 120px;
-          animation: spin 2s linear infinite;
-        }
 
-        @keyframes spin {
-          0% { transform: rotate(0deg); }
-          100% { transform: rotate(360deg); }
-        }</style></div>
         <div class="row" style="margin-top: 20px">
           <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" >
             <div class="diagramWrapper">
@@ -181,10 +168,77 @@
           #output     { margin-top: -15px; }
         </style>
 
+        <% cache("#{@report.id}-#{@report.document.updated_at}") do %>
+            <script>
+                <% header, tab = render_pivot_information(@report.document.file) %>
+                var  json =  [
+
+                    <% tab.each do |hash| %>
+                    {
+                        <% hash.each_with_index do |(k, v), idx| %>
+
+                        '<%= k %>': '<%= v %>',
+                        <% end %>
+                    },
+                    <% end %>
+                ];
+
+            </script>
+
+        <% end %>
+
         <script>
-          $(document).ready(function(){
-              $.getScript('<%= channel_report_path(@channel, @report, format: :js, query_id: params[:query_id]) %>')
-          })
+            var renderers;
+            $(document).ready(function(){
+                var dataClass = $.pivotUtilities.SubtotalPivotData;
+                var renderers = $.extend({},
+                    $.pivotUtilities.renderers,
+                    $.pivotUtilities.c3_renderers,
+                    $.pivotUtilities.subtotal_renderers
+                );
+                default_query = {
+
+                    dataClass: dataClass,
+                    renderers: renderers,
+                    unusedAttrsVertical: false,
+                    rows: [],
+                    cols: [],
+                    rendererName: "Table",
+                    rendererOptions: {
+                        c3: {
+                            size: { width: window.innerWidth / 1.4 * 0.8 }
+                        },
+                        rowSubtotalDisplay: {
+                            hideOnExpand: true
+                        },
+                        colSubtotalDisplay: {
+                            hideOnExpand: true
+                        }
+                    },
+                    onRefresh: saveState
+                }
+                <% if params[:query_id] and query = SavePivotTable.find_by_id(params[:query_id]) %>
+                $("#output").pivotUI(json,  Object.assign(default_query, <%=  JSON.parse(query.content).to_json.html_safe %>) );
+                <% else %>
+                $("#output").pivotUI(json, default_query);
+
+
+
+                <% end %>
+                function saveState(config) {
+
+                    var config_copy = JSON.parse(JSON.stringify(config));
+                    //delete some values which are functions
+                    delete config_copy["aggregators"];
+                    delete config_copy["renderers"];
+                    //delete some bulky default values
+                    delete config_copy["rendererOptions"];
+                    delete config_copy["localeStrings"];
+                    $('#savepivottable').show();
+                    $('#save_pivot_table_content').val(JSON.stringify(config_copy, undefined, 2));
+                }
+                // This function stores PivotTable config to LocalStorage.
+            });
         </script>
     <% end %>
   </div>
