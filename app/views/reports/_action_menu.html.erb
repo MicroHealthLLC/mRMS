@@ -8,8 +8,12 @@
       <% end %>
 
       <%  if @report.document_url %>
-          <%= show_button('#', ' New Report', 'arrow-down', 'info', {toggle:"modal", target:"#mySaveModal" }) %>
-          <%= show_button('#', ' Refresh Report', 'arrow-up', 'info', {toggle:"modal", target:"#myChangeModal" }) %>
+          <% if params[:new_query] or params[:query_id] %>
+              <%= show_button('#', ' Save Report', 'arrow-down', 'info', {toggle:"modal", target:"#mySaveModal" }) %>
+          <% else %>
+              <%= show_button(channel_report_path(@channel, @report, new_query: true), 'New Report', 'arrow-down', 'info') %>
+
+          <% end %>
       <% end %>
 
       <% if @channel.is_creator? or @channel.my_permission.can_add_report? %>
