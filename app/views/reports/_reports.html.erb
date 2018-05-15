@@ -8,14 +8,17 @@
 
   <tbody>
   <% SavePivotTable.where(report_id: @report.id).each do |p| %>
-      <td><%= link_to p.name, channel_report_path(@channel, @report, query_id: p.id), style: 'color: black' %>
-      </td>
-      <td><%= link_to( '<i class="fa fa-trash"></i>'.html_safe, delete_pivottable_channel_report_path(@channel, @report, query_id: p.id),
-                       :method => :delete,
-                       :data => {:confirm => t(:text_are_you_sure)}) if p.user_id == User.current.id %>
+  <tr>
+    <td><%= link_to p.name, channel_report_path(@channel, @report, query_id: p.id), style: 'color: black' %>
+    </td>
+    <td><%= link_to( '<i class="fa fa-trash"></i>'.html_safe, delete_pivottable_channel_report_path(@channel, @report, query_id: p.id),
+                     :method => :delete,
+                     :data => {:confirm => t(:text_are_you_sure)}) if p.user_id == User.current.id %>
 
 
-      </td>
+    </td>
+  </tr>
+
   <% end %>
 
   </tbody>
