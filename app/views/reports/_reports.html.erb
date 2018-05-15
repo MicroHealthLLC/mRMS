@@ -1,8 +1,10 @@
 <table class="table table-responsive" id="reports_table">
   <thead>
   <tr>
-    <th></th>
-    <th></th>
+    <th>Name</th>
+    <th>Created by</th>
+    <th>Created at</th>
+    <th>Action</th>
   </tr>
   </thead>
 
@@ -11,6 +13,8 @@
   <tr>
     <td><%= link_to p.name, channel_report_path(@channel, @report, query_id: p.id), style: 'color: black' %>
     </td>
+    <td><%= p.user %></td>
+    <td><%= format_date p.created_at %></td>
     <td><%= link_to( '<i class="fa fa-trash"></i>'.html_safe, delete_pivottable_channel_report_path(@channel, @report, query_id: p.id),
                      :method => :delete,
                      :data => {:confirm => t(:text_are_you_sure)}) if p.user_id == User.current.id %>
