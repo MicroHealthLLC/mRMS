@@ -10,8 +10,10 @@
       <%  if @report.document_url %>
           <% if params[:new_query] %>
               <%= show_button('#', ' Save Report', 'arrow-down', 'info', {toggle:"modal", target:"#mySaveModal" }) %>
+              <%= cancel_button channel_report_path(@channel, @report) %>
           <% elsif params[:query_id] %>
               <%= show_button('#', ' Rename Report', 'arrow-down', 'info', {toggle:"modal", target:"#myRenameModal" }) %>
+              <%= cancel_button channel_report_path(@channel, @report) %>
           <% else %>
               <%= show_button(channel_report_path(@channel, @report, new_query: true), 'New Report', 'arrow-down', 'info') %>
               <% if @channel.is_creator? or @channel.my_permission.can_add_report? %>
@@ -22,23 +24,24 @@
 
 
               <% if @channel.is_creator? or (@channel.my_permission.can_add_report? ) %>
-          <span>
-            <%= edit_button edit_channel_report_path(@channel, @report) %>
-          </span>
+                  <span>
+                    <%= edit_button edit_channel_report_path(@channel, @report) %>
+                  </span>
               <% end %>
 
               <% if  @channel.is_creator? or (@channel.my_permission.can_delete_report? or @report.can?(:manage_roles) ) %>
-          <span>
-            <%= delete_button channel_report_path(@channel, @report) %>
-          </span>
+                  <span>
+                    <%= delete_button channel_report_path(@channel, @report) %>
+                  </span>
               <% end %>
+              <%= cancel_button channel_path(@channel) %>
           <% end %>
       <% end %>
 
 
 
 
-      <%= cancel_button channel_path(@channel) %>
+
 
       <%= render partial: 'uploader/report_upload' %>
     </div>
