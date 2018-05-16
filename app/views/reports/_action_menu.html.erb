@@ -14,14 +14,15 @@
               <%= show_button('#', ' Rename Report', 'arrow-down', 'info', {toggle:"modal", target:"#myRenameModal" }) %>
           <% else %>
               <%= show_button(channel_report_path(@channel, @report, new_query: true), 'New Report', 'arrow-down', 'info') %>
-          <% end %>
-      <% end %>
-
-      <% if @channel.is_creator? or @channel.my_permission.can_add_report? %>
+              <% if @channel.is_creator? or @channel.my_permission.can_add_report? %>
               <span>
                 <%= show_button('#', ' Upload Data', 'upload', 'info', {toggle:"modal", target:"#myModal" }) %>
               </span>
+              <% end %>
+          <% end %>
       <% end %>
+
+
 
 
       <% if @channel.is_creator? or (@channel.my_permission.can_add_report? ) %>
