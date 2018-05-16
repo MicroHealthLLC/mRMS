@@ -30,11 +30,6 @@
     </p>
 
 
-    <p>
-      <strong>Description:</strong>
-      <%= @report.description.to_s.html_safe %>
-    </p>
-
 
     <%  if @report.document_url %>
         <% if @channel.is_creator? or @channel.my_permission.can_download? %>
