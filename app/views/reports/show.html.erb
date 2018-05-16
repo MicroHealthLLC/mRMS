@@ -5,6 +5,13 @@
       <strong>Data Set:</strong>
       <%= @report.name %>
     </p>
+    <% if @p = SavePivotTable.find_by_id(params[:query_id]) %>
+        <p>
+          <strong>Report Name:</strong>
+          <%= @p.name %>
+        </p>
+
+    <% end %>
 
     <p>
       <strong>Channel:</strong>
@@ -43,41 +50,41 @@
         <% end %>
 
         <% unless params[:query_id]  %>
-        <div class="modal fade" id="mySaveModal" tabindex="-1" role="dialog" aria-labelledby="mySaveModal">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Save Pivot Table changes</h4>
-              </div>
-              <div id="files" class="files col-xs-12" ></div>
-              <div id="errors" style="color: red;" class="files col-xs-12" ></div>
-              <%= form_for(SavePivotTable.new(user_id: User.current.id, report_id: @report.id), url: save_pivottable_channel_report_path(@channel, @report), method: :post, html: { class: 'form-horizontal' , method: :post}) do |f| %>
-                  <div class="modal-body">
-                    <fieldset>
-                      <div class="form-group">
-                        <%= f.label 'Name', class: 'col-md-2 control-label' %>
-                        <div class="col-md-9">
-                          <%= f.text_field :name , class: 'form-control' %>
-                          <%= f.hidden_field :user_id  %>
-                          <%= f.hidden_field :report_id  %>
-                          <span style="display: none;">
+            <div class="modal fade" id="mySaveModal" tabindex="-1" role="dialog" aria-labelledby="mySaveModal">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Save Pivot Table changes</h4>
+                  </div>
+                  <div id="files" class="files col-xs-12" ></div>
+                  <div id="errors" style="color: red;" class="files col-xs-12" ></div>
+                  <%= form_for(SavePivotTable.new(user_id: User.current.id, report_id: @report.id), url: save_pivottable_channel_report_path(@channel, @report), method: :post, html: { class: 'form-horizontal' , method: :post}) do |f| %>
+                      <div class="modal-body">
+                        <fieldset>
+                          <div class="form-group">
+                            <%= f.label 'Name', class: 'col-md-2 control-label' %>
+                            <div class="col-md-9">
+                              <%= f.text_field :name , class: 'form-control' %>
+                              <%= f.hidden_field :user_id  %>
+                              <%= f.hidden_field :report_id  %>
+                              <span style="display: none;">
                             <%= f.text_field :content  %>
                           </span>
 
-                        </div>
+                            </div>
+                          </div>
+                        </fieldset>
                       </div>
-                    </fieldset>
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <%= f.submit 'Save', class: 'btn btn-primary' %>
-                  </div>
-                  </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <%= f.submit 'Save', class: 'btn btn-primary' %>
+                      </div>
+                      </div>
 
-              <% end %>
-              </div>
-        </div>
+                  <% end %>
+                  </div>
+            </div>
         <% else  %>
             <div class="modal fade" id="myRenameModal" tabindex="-1" role="dialog" aria-labelledby="myRenameModal">
               <div class="modal-dialog" role="document">
@@ -88,7 +95,7 @@
                   </div>
                   <div id="files" class="files col-xs-12" ></div>
                   <div id="errors" style="color: red;" class="files col-xs-12" ></div>
-                  <%= form_for(SavePivotTable.find_by_id(params[:query_id]), url: save_pivottable_channel_report_path(@channel, @report, query_id: params[:query_id]), method: :post, html: { class: 'form-horizontal' , method: :post}) do |f| %>
+                  <%= form_for(@p, url: save_pivottable_channel_report_path(@channel, @report, query_id: params[:query_id]), method: :post, html: { class: 'form-horizontal' , method: :post}) do |f| %>
                       <div class="modal-body">
                         <fieldset>
                           <div class="form-group">
