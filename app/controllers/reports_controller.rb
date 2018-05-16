@@ -79,7 +79,8 @@ class ReportsController < ApplicationController
   end
 
   def save_pivottable
-    p = SavePivotTable.new(params[:save_pivot_table].permit!)
+    p = SavePivotTable.where(id: params[:query_id]).first_or_initialize
+    p.attributes = params[:save_pivot_table].permit!
     p.save
     redirect_to channel_report_path(@channel, @report, query_id: p.id)
 

@@ -11,7 +11,7 @@
   <tbody>
   <% SavePivotTable.where(report_id: @report.id).each do |p| %>
   <tr>
-    <td><%= link_to p.name, channel_report_path(@channel, @report, query_id: p.id), style: 'color: black' %>
+    <td><%= link_to p.name, channel_report_path(@channel, @report, query_id: p.id) %>
     </td>
     <td><%= p.user %></td>
     <td><%= format_date p.created_at %></td>

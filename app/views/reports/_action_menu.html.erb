@@ -8,11 +8,12 @@
       <% end %>
 
       <%  if @report.document_url %>
-          <% if params[:new_query] or params[:query_id] %>
+          <% if params[:new_query] %>
               <%= show_button('#', ' Save Report', 'arrow-down', 'info', {toggle:"modal", target:"#mySaveModal" }) %>
+          <% elsif params[:query_id] %>
+              <%= show_button('#', ' Rename Report', 'arrow-down', 'info', {toggle:"modal", target:"#myRenameModal" }) %>
           <% else %>
               <%= show_button(channel_report_path(@channel, @report, new_query: true), 'New Report', 'arrow-down', 'info') %>
-
           <% end %>
       <% end %>
 
@@ -35,12 +36,6 @@
           </span>
       <% end %>
       <%= cancel_button channel_path(@channel) %>
-      <% if params[:query_id] %>
-              <span>
-                <%= show_button(channel_report_path(@channel, @report), ' Clear', 'times', 'default') %>
-              </span>
-      <% end %>
-
 
       <%= render partial: 'uploader/report_upload' %>
     </div>
