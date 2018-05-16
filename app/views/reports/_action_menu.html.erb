@@ -19,23 +19,25 @@
                 <%= show_button('#', ' Upload Data', 'upload', 'info', {toggle:"modal", target:"#myModal" }) %>
               </span>
               <% end %>
+
+
+              <% if @channel.is_creator? or (@channel.my_permission.can_add_report? ) %>
+          <span>
+            <%= edit_button edit_channel_report_path(@channel, @report) %>
+          </span>
+              <% end %>
+
+              <% if  @channel.is_creator? or (@channel.my_permission.can_delete_report? or @report.can?(:manage_roles) ) %>
+          <span>
+            <%= delete_button channel_report_path(@channel, @report) %>
+          </span>
+              <% end %>
           <% end %>
       <% end %>
 
 
 
 
-      <% if @channel.is_creator? or (@channel.my_permission.can_add_report? ) %>
-          <span>
-            <%= edit_button edit_channel_report_path(@channel, @report) %>
-          </span>
-      <% end %>
-
-      <% if  @channel.is_creator? or (@channel.my_permission.can_delete_report? or @report.can?(:manage_roles) ) %>
-          <span>
-            <%= delete_button channel_report_path(@channel, @report) %>
-          </span>
-      <% end %>
       <%= cancel_button channel_path(@channel) %>
 
       <%= render partial: 'uploader/report_upload' %>
