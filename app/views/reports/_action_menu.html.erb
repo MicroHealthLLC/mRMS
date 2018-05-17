@@ -12,7 +12,7 @@
               <%= show_button('#', ' Save Report', 'arrow-down', 'info', {toggle:"modal", target:"#mySaveModal" }) %>
               <%= cancel_button channel_report_path(@channel, @report) %>
           <% elsif params[:query_id] %>
-              <%= show_button('#', ' Rename Report', 'arrow-down', 'info', {toggle:"modal", target:"#myRenameModal" }) %>
+              <%= show_button('#', ' Update Report', 'arrow-down', 'info', {toggle:"modal", target:"#myRenameModal" }) %>
               <%= cancel_button channel_report_path(@channel, @report) %>
           <% else %>
               <%= show_button(channel_report_path(@channel, @report, new_query: true), 'New Report', 'arrow-down', 'info') %>
