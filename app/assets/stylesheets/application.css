@@ -32,6 +32,7 @@
 
   <!-- Scoped Style -->
   *= require layouts.scss
+  *= require responsive.dataTables.min
 
   <!-- Application-wide Style -->
   *= require global.scss

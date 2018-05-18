@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-md-12 ">
-    <div class="pull-right">
+    <div class="pull-right" style="margin-bottom: 10px">
       <% if @channel.is_personal? and @channel.is_creator?  %>
           <span>
             <%= show_button(share_report_channel_report_path(@channel, @report), ' Share report', 'plus', 'primary') %>

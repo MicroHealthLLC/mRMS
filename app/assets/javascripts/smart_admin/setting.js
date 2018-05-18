@@ -42,6 +42,7 @@ function createCookie(name,value,days) {
 function initDataTable(table_id)
 {
     $('#'+table_id).DataTable({
+        responsive: true,
         display: [[0, 'desc']],
         "bDestroy": true,
         "sDom": "<'dt-toolbar'" +

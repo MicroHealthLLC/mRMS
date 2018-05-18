@@ -1,0 +1,44 @@
+<div class="col-xs-12 col-sm-6">
+  <p>
+    <strong>Data Set:</strong>
+    <%= @report.name %>
+  </p>
+  <% if @p = SavePivotTable.find_by_id(params[:query_id]) %>
+      <p>
+        <strong>Report Name:</strong>
+        <%= @p.name %>
+      </p>
+
+  <% end %>
+
+  <p>
+    <strong>Channel:</strong>
+    <%= @report.channel %>
+  </p>
+
+
+</div>
+<div class="col-xs-12 col-sm-6">
+  <p>
+    <strong>Created by:</strong>
+    <%= @report.created_by %> at <%= format_date_time @report.created_at %>
+  </p>
+
+
+  <p>
+    <strong>Updated by:</strong>
+    <%= @report.updated_by %> at <%= format_date_time @report.updated_at %>
+  </p>
+
+  <% if @report.document_url && (@channel.is_creator? or @channel.my_permission.can_download?) %>
+      <% if File.exists?("#{Rails.root}/public#{@report.document_url}") %>
+          <p>
+            <strong>Document:</strong>
+            <%= link_to @report.document.read_attribute(:file), "/uploads/#{@report.id}/#{File.basename(@report.document.file_url)}",  class: 'fa fa-fw fa-download', style: 'white-space: nowrap;' %>
+
+          </p>
+      <% else %>
+          <span style="color: red;"> File do not exist on server, please re-upload it again</span>
+      <% end %>
+  <% end %>
+</div>

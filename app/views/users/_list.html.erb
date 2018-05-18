@@ -1,4 +1,4 @@
-<table class="table  table-responsive" id="users_table">
+<table style="width: 100%" class="table  table-responsive display responsive nowrap" id="users_table">
   <thead>
   <tr id="users_input">
     <th>#</th>
@@ -43,6 +43,7 @@
 <script>
   $(document).ready(function(){
     var table = $('#users_table').DataTable({
+        responsive: true,
       "ajax": "<%= users_path(format: :json) %>",
       processing: true,
       serverSide: true,
