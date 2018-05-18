@@ -157,7 +157,7 @@ module ApplicationHelper
   end
 
   def cancel_button(url)
-    show_button(url, 'Cancel' , 'arrow-left', 'warning')
+    show_button(url, 'Back' , 'arrow-left', 'warning')
   end
 
   # Renders flash messages

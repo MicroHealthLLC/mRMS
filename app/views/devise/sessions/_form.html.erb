@@ -51,7 +51,7 @@
           </div>
         </section>
         <section>
-          <% if ENV['RECAPTCHA_PUBLIC_KEY'].present? %>
+          <% if ENV[' RECAPTCHA_PUBLIC_KEY'].present? %>
               <%= recaptcha_tags :public_key => ENV['RECAPTCHA_PUBLIC_KEY'] %>
           <% end %>
         </section>
