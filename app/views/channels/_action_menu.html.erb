@@ -5,7 +5,7 @@
           <%= show_button(channel_channel_permissions_path(@channel), ' Permissions', 'cog', 'warning')  %>
       <% end %>
 
-      <% if @channel.is_creator? or (@channel.my_permission.can_add_report? or @channel.can?(:edit_channel, :manage_channel, :manage_roles) ) %>
+      <% if @channel.is_creator? or (@channel.my_permission.can_add_report?) %>
           <%= show_button(new_channel_report_url(@channel), ' Add Data set', 'play-circle', 'info')  %>
       <% end %>
 
@@ -13,7 +13,7 @@
           <%= edit_button edit_channel_path(@channel) %>
       <% end %>
 
-      <% if @channel.is_creator? or @channel.can?(:delete_channel, :manage_channel, :manage_roles) %>
+      <% if @channel.is_creator?  %>
           <%= delete_button channel_path(@channel) %>
       <% end %>
 

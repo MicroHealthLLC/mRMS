@@ -32,7 +32,7 @@
 
   <% if @report.document_url && (@channel.is_creator? or @channel.my_permission.can_download?) %>
       <% if File.exists?("#{Rails.root}/public#{@report.document_url}") %>
-          <p>
+          <p class="noprint">
             <strong>Document:</strong>
             <%= link_to '', "/uploads/#{@report.id}/#{File.basename(@report.document.file_url)}",  class: 'fa fa-fw fa-download', style: 'white-space: nowrap;', target: '_blank' %>
             <%= link_to '', "https://docs.google.com/viewer?url=https://mrms.microhealthllc.com#{@report.document.file_url}",  class: 'fa fa-fw fa-eye', style: 'white-space: nowrap;' , target: '_blank' %>

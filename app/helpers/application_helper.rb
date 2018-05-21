@@ -143,7 +143,7 @@ module ApplicationHelper
   end
 
   def show_button(url, text, icon, btn_style, data_options = {})
-    link_to  url, class: "btn btn-#{btn_style}", data: data_options do
+    link_to  url, class: "noprint btn btn-#{btn_style}", data: data_options do
       "<i class='fa fa-#{icon}' aria-hidden='true'> #{text} </i>".html_safe
     end
   end

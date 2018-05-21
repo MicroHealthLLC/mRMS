@@ -85,3 +85,7 @@ fieldset{
 .clear-all {
     color: white;
 }
+@media print
+{
+    .noprint {display:none;}
+}

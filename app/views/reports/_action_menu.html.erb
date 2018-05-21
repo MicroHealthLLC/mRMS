@@ -1,4 +1,4 @@
-<div class="row">
+<div class="noprint row">
   <div class="col-md-12 ">
     <div class="pull-right" style="margin-bottom: 10px">
       <% if @channel.is_personal? and @channel.is_creator?  %>
@@ -13,6 +13,7 @@
           <%= cancel_button channel_report_path(@channel, @report) %>
       <% elsif params[:query_id] &&   @report.document_url %>
           <%= show_button('#', ' Update Report', 'arrow-down', 'info', {toggle:"modal", target:"#myRenameModal" }) %>
+          <%= link_to "<i class='fa fa-print' aria-hidden='true'> Print </i>".html_safe,  '#', class: "noprint btn btn-primary", onclick: 'window.print(); ' %>
           <%= cancel_button channel_report_path(@channel, @report) %>
       <% else %>
           <%= show_button(channel_report_path(@channel, @report, new_query: true), 'New Report', 'arrow-down', 'info' ) if  @report.document_url %>
@@ -29,7 +30,7 @@
                   </span>
           <% end %>
 
-          <% if  @channel.is_creator? or (@channel.my_permission.can_delete_report? or @report.can?(:manage_roles) ) %>
+          <% if  @channel.is_creator? or (@channel.my_permission.can_delete_report? ) %>
                   <span>
                     <%= delete_button channel_report_path(@channel, @report) %>
                   </span>

@@ -2,10 +2,10 @@
 
   <% if user_signed_in? %>
       <div class="col-xs-12 hidden-xs col-sm-1 col-md-1">  </div>
-      <div class="col-xs-12 col-sm-10 col-md-8">
+      <div class="col-xs-12 col-sm-10 col-md-8" style="overflow: hidden;">
         <%= @setting.home_page_content.html_safe if @setting.home_page_content %>
       </div>
-      <% if can?(:manage_roles, :view_news , :manage_news) %>
+      <% if User.current.persisted? %>
           <div class="col-xs-12 hidden-xs col-sm-1 col-md-3">
             <% News.includes(:user).order("id DESC").first(Setting['news_limit']).each do |news| %>
                 <%= render partial: 'news/news', locals: {news: news} %>
