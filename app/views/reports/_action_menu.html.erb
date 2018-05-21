@@ -7,41 +7,35 @@
           </span>
       <% end %>
 
-      <%  if @report.document_url %>
-          <% if params[:new_query] %>
-              <%= show_button('#', ' Save Report', 'arrow-down', 'info', {toggle:"modal", target:"#mySaveModal" }) %>
-              <%= cancel_button channel_report_path(@channel, @report) %>
-          <% elsif params[:query_id] %>
-              <%= show_button('#', ' Update Report', 'arrow-down', 'info', {toggle:"modal", target:"#myRenameModal" }) %>
-              <%= cancel_button channel_report_path(@channel, @report) %>
-          <% else %>
-              <%= show_button(channel_report_path(@channel, @report, new_query: true), 'New Report', 'arrow-down', 'info') %>
-              <% if @channel.is_creator? or @channel.my_permission.can_add_report? %>
+
+      <% if params[:new_query] &&  @report.document_url %>
+          <%= show_button('#', ' Save Report', 'arrow-down', 'info', {toggle:"modal", target:"#mySaveModal" }) %>
+          <%= cancel_button channel_report_path(@channel, @report) %>
+      <% elsif params[:query_id] &&   @report.document_url %>
+          <%= show_button('#', ' Update Report', 'arrow-down', 'info', {toggle:"modal", target:"#myRenameModal" }) %>
+          <%= cancel_button channel_report_path(@channel, @report) %>
+      <% else %>
+          <%= show_button(channel_report_path(@channel, @report, new_query: true), 'New Report', 'arrow-down', 'info' ) if  @report.document_url %>
+
+          <% if @channel.is_creator? or @channel.my_permission.can_add_report? %>
               <span>
                 <%= show_button('#', ' Upload Data', 'upload', 'info', {toggle:"modal", target:"#myModal" }) %>
               </span>
-              <% end %>
+          <% end %>
 
-
-              <% if @channel.is_creator? or (@channel.my_permission.can_add_report? ) %>
+          <% if @channel.is_creator? or (@channel.my_permission.can_add_report? ) %>
                   <span>
                     <%= edit_button edit_channel_report_path(@channel, @report) %>
                   </span>
-              <% end %>
+          <% end %>
 
-              <% if  @channel.is_creator? or (@channel.my_permission.can_delete_report? or @report.can?(:manage_roles) ) %>
+          <% if  @channel.is_creator? or (@channel.my_permission.can_delete_report? or @report.can?(:manage_roles) ) %>
                   <span>
                     <%= delete_button channel_report_path(@channel, @report) %>
                   </span>
-              <% end %>
-              <%= cancel_button channel_path(@channel) %>
           <% end %>
+          <%= cancel_button channel_path(@channel) %>
       <% end %>
-
-
-
-
-
 
       <%= render partial: 'uploader/report_upload' %>
     </div>

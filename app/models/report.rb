@@ -29,7 +29,7 @@ class Report < ApplicationRecord
   end
 
   def document_url
-    document.file_url
+    @document_url ||= document.file_url
   end
 
   def self.safe_attributes

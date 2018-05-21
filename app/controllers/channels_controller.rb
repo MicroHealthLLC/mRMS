@@ -36,19 +36,6 @@ class ChannelsController < ApplicationController
     end
   end
 
-  # def manage_users
-  #   @shared_channels = @channel.channel_users.pluck(:user_id)
-  #   @users = User.where.not(id: User.current.id)
-  #   if request.post?
-  #     @channel.channel_users.where(user_id: (@shared_channels.map(&:to_s) - params[:users]) ).where.not(user_id: User.current.id).delete_all
-  #     (params[:users] - @shared_channels.map(&:to_s)).each do |user_id|
-  #       @channel.channel_users.create(user_id: user_id)
-  #     end
-  #     flash[:notice] = "User(s) added successfully"
-  #     redirect_to channel_path(@channel)
-  #   end
-  # end
-
   # PATCH/PUT /channels/1
   # PATCH/PUT /channels/1.json
   def update
@@ -92,10 +79,12 @@ class ChannelsController < ApplicationController
   end
 
   def authorize
-    if @channel
-      @channel.is_creator? or (@channel.my_permission.can_add_report? or @channel.can?(:edit_channel, :manage_channel, :manage_roles) )
-    else
-      true
-    end
+    access =  if @channel
+                @channel.is_creator? or (@channel.my_permission.can_view? or @channel.my_permission.can_add_report? )
+              else
+                true
+              end
+
+    render_403 unless access
   end
 end

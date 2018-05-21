@@ -2,11 +2,10 @@ class ReportsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_channel
   before_action :set_report, only: [:save_pivottable, :delete_pivottable, :share_report, :upload_document, :show, :edit, :update, :destroy]
-
+  before_action :authorize
   # GET /reports
   # GET /reports.json
   def index
-
     @reports = @channel.visible_reports
   end
 
@@ -17,13 +16,11 @@ class ReportsController < ApplicationController
 
   # GET /reports/new
   def new
-    render_403 unless @channel.is_creator? or @channel.my_permission.can_add_report?
     @report = Report.new(user_id: User.current.id, channel_id: @channel.id)
   end
 
   # GET /reports/1/edit
   def edit
-    render_403 unless @channel.is_creator? or @channel.my_permission.can_add_report?
   end
 
   def upload_document
@@ -39,8 +36,8 @@ class ReportsController < ApplicationController
     @shared_reports = @report.shared_reports.pluck(:user_id)
     @users = User.where.not(id: User.current.id)
     if request.post?
-      @report.shared_reports.where(user_id: (@shared_reports.map(&:to_s) - params[:users]) ).where.not(user_id: User.current.id).delete_all
-      (params[:users] - @shared_reports.map(&:to_s)).each do |user_id|
+      @report.shared_reports.where(user_id: (@shared_reports.map(&:to_s) - Array.wrap(params[:users]) ) ).where.not(user_id: User.current.id).delete_all
+      (Array.wrap(params[:users]) - @shared_reports.map(&:to_s)).each do |user_id|
         @report.shared_reports.create(user_id: user_id)
       end
       flash[:notice] = "User(s) added successfully"
@@ -127,14 +124,17 @@ class ReportsController < ApplicationController
   end
 
   def authorize
-    case params[:action]
-      when 'index' , 'edit', 'update',
-          'new', 'upload_document',
-          'create', 'save_pivottable',
-          'delete_pivottable' then @channel.is_creator? or (@channel.my_permission.can_add_report?)
-      when 'destroy' then @channel.is_creator? or (@channel.my_permission.can_delete_report? )
-      else
-        @channel.is_creator? or @channel.my_permission.can_add_users?
-    end
+    can_access = case params[:action]
+                   when 'index' then  false
+                   when 'edit', 'update',
+                       'new', 'upload_document',
+                       'create', 'save_pivottable',
+                       'delete_pivottable' then  @channel.my_permission.can_add_report?
+                   when 'destroy' then  @channel.my_permission.can_delete_report?
+                   else
+                     @channel.my_permission.can_add_users?
+                 end
+
+    render_403 unless can_access or @channel.is_creator? or @channel.my_permission.can_view?
   end
 end
