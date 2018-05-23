@@ -11,13 +11,11 @@ class SavePivotTable < ApplicationRecord
 
 
   after_create do
-    ReportWorker.perform_in(1.second,  self.id)
+    ReportWorker.perform_in(1.second,  self.id, 1)
   end
 
   after_update do
-    report.active_users.each do |user|
-      NotificationMailer.report_updated(user, self).deliver_later
-    end
+    ReportWorker.perform_in(1.second,  self.id, 2)
   end
 
 end
