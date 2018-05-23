@@ -1,6 +1,6 @@
 class SavePivotTable < ApplicationRecord
 
-  audited except: [:created_at, :updated_at]
+  audited except: [:created_at, :updated_at, :content]
 
   validates_presence_of  :name, :report_id
   validates_uniqueness_of  :name, scope: [:report_id]
@@ -11,9 +11,7 @@ class SavePivotTable < ApplicationRecord
 
 
   after_create do
-    report.active_users.each do |user|
-      NotificationMailer.report_created(user, self).deliver_later
-    end
+    ReportWorker.perform_in(1.second,  self.id)
   end
 
   after_update do

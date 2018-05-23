@@ -29,15 +29,11 @@ class Report < ApplicationRecord
   end
 
   after_create do
-    active_users.each do |user|
-      NotificationMailer.data_set_created(user, self).deliver_later
-    end
+    DataSetWorker.perform_in(1.second,  self.id, 1)
   end
 
   after_update do
-    active_users.each do |user|
-      NotificationMailer.data_set_updated(user, self).deliver_later
-    end
+    DataSetWorker.perform_in(1.second,  self.id, 2)
   end
 
   def active_users
