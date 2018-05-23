@@ -5,9 +5,10 @@
 
 <ul>
   <% changes.each do |attr, array| %>
-     <li>
-       <%= attr %>: changed from `<%= array.first %>` to `<%= array.last %>`
-     </li>
+      <% next unless array.is_a? Array %>
+      <li>
+        <%= attr %>: changed from `<%= array.first %>` to `<%= array.last %>`
+      </li>
   <% end %>
 
 </ul>
