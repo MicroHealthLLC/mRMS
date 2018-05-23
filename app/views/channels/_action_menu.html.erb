@@ -5,7 +5,7 @@
           <%= show_button(channel_channel_permissions_path(@channel), ' Permissions', 'cog', 'warning')  %>
       <% end %>
 
-      <% if @channel.is_creator? or (@channel.my_permission.can_add_report?) %>
+      <% if @channel.is_public? or @channel.is_creator? or (@channel.my_permission.can_add_report?) %>
           <%= show_button(new_channel_report_url(@channel), ' Add Data set', 'play-circle', 'info')  %>
       <% end %>
 

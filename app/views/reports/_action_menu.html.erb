@@ -1,41 +1,40 @@
 <div class="noprint row">
   <div class="col-md-12 ">
     <div class="pull-right" style="margin-bottom: 10px">
-      <% if @channel.is_personal? and @channel.is_creator?  %>
+      <% if @report.channel.is_personal? and @report.channel.is_creator?  %>
           <span>
-            <%= show_button(share_report_channel_report_path(@channel, @report), ' Share report', 'plus', 'primary') %>
+            <%= show_button(share_report_channel_report_path(@report.channel, @report), ' Share report', 'plus', 'primary') %>
           </span>
       <% end %>
 
-
       <% if params[:new_query] &&  @report.document_url %>
-          <%= show_button('#', ' Save Report', 'arrow-down', 'info', {toggle:"modal", target:"#mySaveModal" }) %>
+          <%= show_button('#', ' Save Report', 'arrow-down', 'info', {toggle:"modal", target:"#mySaveModal" }) if @report.channel.is_creator?  and  @report.document_url %>
           <%= cancel_button channel_report_path(@channel, @report) %>
       <% elsif params[:query_id] &&   @report.document_url %>
-          <%= show_button('#', ' Update Report', 'arrow-down', 'info', {toggle:"modal", target:"#myRenameModal" }) %>
+          <%= show_button('#', ' Update Report', 'arrow-down', 'info', {toggle:"modal", target:"#myRenameModal" }) if @report.channel.is_creator?  and  @report.document_url %>
           <%= link_to "<i class='fa fa-print' aria-hidden='true'> Print </i>".html_safe,  '#', class: "noprint btn btn-primary", onclick: 'window.print(); ' %>
           <%= cancel_button channel_report_path(@channel, @report) %>
       <% else %>
-          <%= show_button(channel_report_path(@channel, @report, new_query: true), 'New Report', 'arrow-down', 'info' ) if  @report.document_url %>
+          <%= show_button(channel_report_path(@channel, @report, new_query: true), 'New Report', 'arrow-down', 'info' ) if @report.channel.is_creator?  and  @report.document_url %>
 
-          <% if @channel.is_creator? or @channel.my_permission.can_add_report? %>
+          <% if @report.channel.is_public? or @report.channel.is_creator? or @report.channel.my_permission.can_add_report? %>
               <span>
                 <%= show_button('#', ' Upload Data', 'upload', 'info', {toggle:"modal", target:"#myModal" }) %>
               </span>
           <% end %>
 
-          <% if @channel.is_creator? or (@channel.my_permission.can_add_report? ) %>
+          <% if @report.channel.is_public? or @report.channel.is_creator? or (@report.channel.my_permission.can_add_report? ) %>
                   <span>
-                    <%= edit_button edit_channel_report_path(@channel, @report) %>
+                    <%= edit_button edit_channel_report_path(@report.channel, @report) %>
                   </span>
           <% end %>
 
-          <% if  @channel.is_creator? or (@channel.my_permission.can_delete_report? ) %>
+          <% if @report.channel.is_public? or @report.channel.is_creator? or (@report.channel.my_permission.can_delete_report? ) %>
                   <span>
-                    <%= delete_button channel_report_path(@channel, @report) %>
+                    <%= delete_button channel_report_path(@report.channel, @report) %>
                   </span>
           <% end %>
-          <%= cancel_button channel_path(@channel) %>
+          <%= cancel_button channel_path(@report.channel) %>
       <% end %>
 
       <%= render partial: 'uploader/report_upload' %>

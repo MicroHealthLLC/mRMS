@@ -7,7 +7,7 @@ class ChannelsController < ApplicationController
   # GET /channels/1
   # GET /channels/1.json
   def show
-    @reports = @channel.visible_reports
+    @reports = @channel.shared_report? ? User.current.reports : @channel.visible_reports
   end
 
   # GET /channels/new
@@ -80,7 +80,7 @@ class ChannelsController < ApplicationController
 
   def authorize
     access =  if @channel
-                @channel.is_creator? or (@channel.my_permission.can_view? or @channel.my_permission.can_add_report? )
+                @channel.is_public? or @channel.is_creator? or (@channel.my_permission.can_view? or @channel.my_permission.can_add_report? )
               else
                 true
               end

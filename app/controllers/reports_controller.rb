@@ -127,9 +127,9 @@ class ReportsController < ApplicationController
     can_access = case params[:action]
                    when 'index' then  false
                    when 'edit', 'update',
-                       'new', 'upload_document',
+                       'new', 'upload_document', 'show',
                        'create', 'save_pivottable',
-                       'delete_pivottable' then  @channel.my_permission.can_add_report?
+                       'delete_pivottable' then  @channel.is_public? or @channel.my_permission.can_add_report?
                    when 'destroy' then  @channel.my_permission.can_delete_report?
                    else
                      @channel.my_permission.can_add_users?

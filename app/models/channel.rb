@@ -56,6 +56,14 @@ class Channel < ApplicationRecord
     personal.where(user_id: User.current.id, name: 'Market Analyses' ).first_or_create
   end
 
+   def self.shared_report
+    personal.where(user_id: User.current.id, name: 'Shared Report', option: PERSONAL ).first_or_create
+   end
+
+  def shared_report?
+    name == 'Shared Report'
+  end
+
   def self.segmented_market
     personal.where(user_id: User.current.id, name: 'Segmented Market' ).first_or_create
   end
