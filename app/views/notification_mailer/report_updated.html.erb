@@ -1,0 +1,13 @@
+<% audit = @report.audits.last %>
+<% user = audit.user %>
+<% changes = audit.audited_changes %>
+<h1>A report in Data set `<%= @data_set.name %>` was updated by `<%= user %>` </h1>
+
+<ul>
+  <% changes.each do |attr, array| %>
+      <li>
+        <%= attr %>: changed from `<%= array.first %>` to `<%= array.last %>`
+      </li>
+  <% end %>
+</ul>
+

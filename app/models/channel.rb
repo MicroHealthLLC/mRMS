@@ -1,6 +1,8 @@
 class Channel < ApplicationRecord
   default_scope {where(is_active: true)}
 
+  audited except: [:created_at, :updated_at]
+
   has_many :reports
   has_many :channel_permissions
   has_many :channel_orders
@@ -17,6 +19,7 @@ class Channel < ApplicationRecord
   scope :not_personal, -> { where(option: [PUBLIC, GROUPS])}
   scope :is_public, -> { where(option: PUBLIC)}
   scope :for_shared_users, -> { where(option: GROUPS)}
+
   scope :for_user, -> { for_shared_users.
       includes(:channel_permissions).
       where(channel_permissions: {user_id: User.current.id, can_view: true}) + for_shared_users.for_current_user
@@ -36,6 +39,16 @@ class Channel < ApplicationRecord
     user_id == User.current.id
   end
 
+  def active_users
+    case option
+      when PUBLIC then User.all
+      when GROUPS then User.where(id: channel_permissions.where(can_view: true).pluck(:user_id) )
+      when PERSONAL then [user]
+      else
+        []
+    end
+  end
+
   def my_permission
     @permission ||= channel_permissions.where(user_id: User.current.id).first_or_initialize
   end
@@ -50,6 +63,14 @@ class Channel < ApplicationRecord
 
   after_create do
     ChannelUser.create(user_id: self.user_id, channel_id: self.id)
+
+    # TODO after create send notification
+  end
+
+  after_update do
+    active_users.each do |user|
+      NotificationMailer.channel_updated(user, self).deliver_later
+    end
   end
 
   def self.market_place

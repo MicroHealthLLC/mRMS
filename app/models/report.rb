@@ -1,4 +1,7 @@
 class Report < ApplicationRecord
+
+  audited except: [:created_at, :updated_at]
+
   belongs_to :channel
   belongs_to :created_by, class_name: 'User', optional: true
   belongs_to :updated_by, class_name: 'User', optional: true
@@ -7,6 +10,7 @@ class Report < ApplicationRecord
   has_many :report_documents
   has_many :shared_reports
   has_many :users, through: :shared_reports
+
 
   # mount_uploader :document, ReportUploader
 
@@ -21,6 +25,26 @@ class Report < ApplicationRecord
   after_create do
     if channel.is_personal?
       SharedReport.create(user_id: User.current.id, report_id: self.id, channel_id: self.channel.id)
+    end
+  end
+
+  after_create do
+    active_users.each do |user|
+      NotificationMailer.data_set_created(user, self).deliver_later
+    end
+  end
+
+  after_update do
+    active_users.each do |user|
+      NotificationMailer.data_set_updated(user, self).deliver_later
+    end
+  end
+
+  def active_users
+    if channel.is_personal?
+      shared_reports.map(&:user) + channel.active_users
+    else
+      channel.active_users
     end
   end
 

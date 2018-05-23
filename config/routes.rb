@@ -104,7 +104,6 @@ Rails.application.routes.draw do
 
   require 'sidekiq/web'
   authenticate :user, lambda { |u| u.admin? } do
-    resources :exception_notifier, only: [:index, :show]
     mount Sidekiq::Web => '/sidekiq'
   end
 
