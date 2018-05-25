@@ -1,14 +1,20 @@
 <% audit = @report.audits.last %>
-<% user = audit.user %>
-<% changes = audit.audited_changes %>
-<h1>A report in Data set `<%= @data_set.name %>` was updated by `<%= user %>` </h1>
+<% if audit %>
+    <% user = audit.user %>
+    <% changes = audit.audited_changes %>
+    <h1>A report in Data set `<%= @data_set.name %>` was updated by `<%= user %>` </h1>
 
-<ul>
-  <% changes.each do |attr, array| %>
-      <% next unless array.is_a? Array %>
-      <li>
-        <%= attr %>: changed from `<%= array.first %>` to `<%= array.last %>`
-      </li>
-  <% end %>
-</ul>
-
+    <ul>
+      <% changes.each do |attr, array| %>
+          <% next unless array.is_a? Array %>
+          <li>
+            <%= attr %>: changed from `<%= array.first %>` to `<%= array.last %>`
+          </li>
+      <% end %>
+    </ul>
+<% else %>
+    <h1>A report in Data set `<%= @data_set.name %>` was updated  </h1>
+    <ul>
+      name: <%= @report.name %>
+    </ul>
+<% end %>
