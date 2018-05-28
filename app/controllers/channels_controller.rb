@@ -1,8 +1,24 @@
 class ChannelsController < ApplicationController
   before_action :authenticate_user!
   # before_action :set_channel, only: [:manage_users, :show, :edit, :update, :destroy]
-  before_action :set_channel, only: [ :show, :edit, :update, :destroy]
+  before_action :set_channel, only: [:show, :edit, :update, :destroy]
   before_action :authorize
+
+
+  def index
+
+  end
+
+  def reorder_handle
+    channel_position = User.current.channel_orders.where(channel_id: params[:channel_id]).first
+    channel_position.position = params[:channel][:position]
+    channel_position.save
+    respond_to do |format|
+      format.html {
+      }
+      format.js { render :nothing => true }
+    end
+  end
 
   # GET /channels/1
   # GET /channels/1.json

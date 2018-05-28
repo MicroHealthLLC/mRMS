@@ -1,36 +1,85 @@
 
-<% if  can?(:manage_roles, :manage_channels, :create_channels) %>
-    <li class="<%= menu_active?('channels', 'new') %>">
-      <a href="/channels/new" title="<%= 'new Channel' %>"><i class="fa fa-lg fa-fw fa-plus-circle"></i><span class="menu-item-parent"><%= 'Create Channel' %></span></a>
-    </li>
-<% end %>
-
-<% if can?(:manage_roles, :manage_channels, :view_channels) %>
-    <% Channel.is_public.each do |channel| %>
-        <li class="<%= channel_active?(channel)  %>">
-          <a href="/channels/<%= channel.id %>" title="<%=  channel.name %>"><i class="fa fa-lg fa-fw <%= channel.icon || 'fa-square' %>"></i><span class="menu-item-parent"><%= channel.name %></span></a>
-        </li>
-    <% end %>
-    <% Channel.for_user.each do |channel| %>
-        <li class="<%= channel_active?(channel)   %>">
-          <a href="/channels/<%= channel.id %>" title="<%=  channel.name %>"><i class="fa fa-lg fa-fw <%= channel.icon || 'fa-square' %>"></i><span class="menu-item-parent"><%= channel.name %></span></a>
-        </li>
-    <% end %>
-<% end %>
-<li>
-  <a href="#"><i class="fa fa-lg fa-fw fa-circle"></i> <span class="menu-item-parent"> Personal</span></a>
-  <ul>
-    <% Channel.shared_report %>
-   <% Channel.my_personal_channel.each do |channel| %>
-        <li class="<%= channel_active?(channel)  %>">
-          <a href="/channels/<%= channel.id %>" title="<%=  channel.name %>"><i class="fa fa-lg fa-fw <%= channel.icon || 'fa-square' %>"></i><span class="menu-item-parent"><%= channel.name %></span></a>
-        </li>
-    <% end  %>
-  </ul>
+<li class="<%= menu_active?('channels', 'new') %>">
+  <a href="/channels/new" title="<%= 'new Channel' %>"><i class="fa fa-lg fa-fw fa-plus-circle"></i><span class="menu-item-parent"><%= 'Create Channel' %></span></a>
 </li>
+  <%   scope  = []
+         scope<< Channel.is_public
+         scope<< Channel.for_user
+
+         scope.flatten.compact.each do |channel|
+           co = User.current.channel_orders.where(channel_id: channel.id).first
+           if co.nil?
+             ChannelOrder.create(channel_id: channel.id, user_id: User.current.id)
+           end
+         end
+         co= User.current.channel_orders.where(channel_id: -1).first
+         if co.nil?
+           ChannelOrder.create(channel_id: -1, user_id: User.current.id)
+         end
+         @channels = User.current.channel_orders.map(&:channel)
+
+    %>
+
+    <% @channels.each do |channel| %>
+        <% if channel %>
+            <li data-reorder-url="<%= reorder_handle_channels_path(channel_id: channel ? channel.id : '-1') %>" data-reorder-param="<%= 'channel' %>" class=" sort-handle <%= channel_active?(channel)  %>">
+              <a href="/channels/<%= channel.id %>" title="<%=  channel.name %>"><i class="fa fa-lg fa-fw <%= channel.icon || 'fa-square' %>"></i><span class="menu-item-parent"><%= channel.name %></span></a>
+            </li>
+
+
+        <% else %>
+            <li data-reorder-url="<%= reorder_handle_channels_path(channel_id: '-1') %>" data-reorder-param="<%= 'channel' %>" class=" sort-handle" >
+              <a href="#"><i class="fa fa-lg fa-fw fa-circle"></i> <span class="menu-item-parent"> Personal</span></a>
+              <ul>
+                <% Channel.shared_report %>
+                <% Channel.my_personal_channel.each do |channel| %>
+                    <li class="<%= channel_active?(channel)  %>">
+                      <a href="/channels/<%= channel.id %>" title="<%=  channel.name %>"><i class="fa fa-lg fa-fw <%= channel.icon || 'fa-square' %>"></i><span class="menu-item-parent"><%= channel.name %></span></a>
+                    </li>
+                <% end  %>
+              </ul>
+            </li>
+        <% end %>
+    <% end %>
+
 
 <% if module_enabled?('news') && can?(:manage_roles, :manage_news, :view_news) %>
     <li class="<%= menu_active?('news') %>">
       <a href="/news" title="<%= 'news' %>"><i class="fa fa-lg fa-fw fa-newspaper-o"></i><span class="menu-item-parent"><%= 'news' %></span></a>
     </li>
 <% end %>
+
+
+<script>
+    $(document).ready(function(){
+        $( "#sortable" ).sortable({
+            items: "li.sort-handle",
+            placeholder: "ui-state-highlight",
+            update: function(event, ui) {
+                var sortable = $(this);
+                var handle = $(ui.item[0])
+                var url = handle.data("reorder-url");
+                var param = handle.data("reorder-param");
+                var data = {};
+                data[param] = {position: ui.item.index() + 1 - 2};
+                $.ajax({
+                    url: url,
+                    type: 'put',
+                    dataType: 'script',
+                    data: data,
+                    success: function(data){
+                        console.log(data)
+                    },
+                    error: function(jqXHR, textStatus, errorThrown){
+                        alert(jqXHR.status);
+                        sortable.sortable("cancel");
+                    },
+                    complete: function(jqXHR, textStatus, errorThrown){
+                        handle.removeClass("ajax-loading");
+                    }
+                });
+            }
+        });
+        $( "#sortable" ).disableSelection();
+    })
+</script>

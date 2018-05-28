@@ -31,7 +31,7 @@ module ActAsPosition
   end
 
   def reset_positions_in_list
-    position_scope.reorder(:position, :id).pluck(:id).each_with_index do |record_id, p|
+    self.class.reorder(:position, :id).pluck(:id).each_with_index do |record_id, p|
       self.class.where(:id => record_id).update_all(:position => p+1)
     end
   end

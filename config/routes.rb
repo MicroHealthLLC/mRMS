@@ -11,9 +11,9 @@ Rails.application.routes.draw do
   get 'channel_permission/destroy'
 
   resources :channels, except: [:index] do
-    # member do
-    #   match :manage_users, via: [:get, :post]
-    # end
+    collection do
+      match :reorder_handle, via: [:put]
+    end
     resources :channel_permissions, except: [:new, :edit]
     resources :reports do
       member do

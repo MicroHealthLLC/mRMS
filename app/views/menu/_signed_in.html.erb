@@ -1,10 +1,17 @@
-<ul>
+<ul id="sortable">
+
   <li class="<%= menu_active?('home') %>">
     <a href="<%= "/" %>" title="Home"><i class="fa fa-lg fa-fw fa-home"></i> <span class="menu-item-parent">Home</span></a>
   </li>
 
   <%= render partial: 'menu/other_links' %>
 
+  <script>
+      $( function() {
+          $( "#sortable" ).sortable();
+          $( "#sortable" ).disableSelection();
+      } );
+  </script>
   <% if User.current.admin? %>
       <%= render partial: 'menu/admin' %>
   <% end %>

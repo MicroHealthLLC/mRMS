@@ -30,6 +30,7 @@ class User < ApplicationRecord
 
 
   has_many :channels
+  has_many :channel_orders
   has_many :shared_reports
   has_many :reports, through: :shared_reports
 
