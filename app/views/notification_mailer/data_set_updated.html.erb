@@ -1,4 +1,4 @@
-<% audit = @report.audits.last %>
+<% audit = @data_set.audits.last %>
 <% user = audit.user %>
 <% changes = audit.audited_changes %>
 <h1>A data set in channel `<%= @channel.name %>` was updated by `<%= user %>` </h1>
