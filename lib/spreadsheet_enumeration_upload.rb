@@ -16,13 +16,18 @@ class SpreadsheetEnumerationUpload
 
   def open_file
     original_filename = file.try(:original_filename) || file.url
-    case File.extname(original_filename)
+    @extname = File.extname(original_filename)
+    case @extname
       when ".csv" then
         Roo::CSV.new(file.path, csv_options: {encoding: 'ISO-8859-1'})
       when ".xls" then
         Roo::Excel.new(file.path)
       when ".xlsx" then
         Roo::Excelx.new(file.path)
+      when '.json' then
+        File.read(file.path)
+      when '.xml' then
+        File.read(file.path)
       else
         @invalid_file_parse = "Unknown file type: #{original_filename}"
     end
