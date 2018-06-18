@@ -12,8 +12,8 @@
           <%= cancel_button channel_report_path(@channel, @report) %>
       <% elsif params[:query_id] &&   @report.document_url %>
           <%= show_button('#', ' Update Report', 'arrow-down', 'info', {toggle:"modal", target:"#myRenameModal" }) if @report.channel.is_creator?  and  @report.document_url %>
-          <input type="button" onclick="$('#output').find('table').attr('id', 'testTable'); tableToExcel('testTable', 'W3C Example Table')" value="Export to Excel" class="btn btn-primary">
-          <%= link_to "<i class='fa fa-print' aria-hidden='true'> Print </i>".html_safe,  '#', class: "noprint btn btn-primary", onclick: 'window.print(); ' %>
+          <input type="button" onclick="$('#output').find('.pvtRendererArea').attr('id', 'testTable'); tableToExcel('testTable', 'Pivot table exprt')" value="Export to Excel" class="btn btn-primary">
+          <%#= link_to "<i class='fa fa-print' aria-hidden='true'> Print </i>".html_safe,  '#', class: "noprint btn btn-primary", onclick: 'window.print(); ' %>
           <%= cancel_button channel_report_path(@channel, @report) %>
       <% else %>
           <%= show_button(channel_report_path(@channel, @report, new_query: true), 'New Report', 'arrow-down', 'info' ) if @report.channel.is_creator?  and  @report.document_url %>
