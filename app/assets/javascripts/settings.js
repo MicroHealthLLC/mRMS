@@ -114,6 +114,7 @@ var named_function = function(){
 
     $( "select").css('width', '100%')
     $( "select").css('padding', '0')
+    $.fn.modal.Constructor.prototype.enforceFocus = function () {};
     $( "select" ).select2({
         theme: "bootstrap"
     });

@@ -23,7 +23,7 @@
               <div class="form-group">
                 <%= f.label 'User', class: 'col-md-2 control-label' %>
                 <div class="col-md-9">
-                  <%= f.select :user_id , options_for_select(User.where.not(id: [@channel.user_id] + @channel.channel_permissions.pluck(:id)).map{|u| [u.name, u.id]}),{class: 'form-control'} %>
+                  <%= f.select :user_id , options_for_select(User.where.not(id: [@channel.user_id] + @channel.channel_permissions.pluck(:user_id)).map{|u| [u.name, u.id]}),{class: 'form-control'} %>
                 </div>
               </div>
 
