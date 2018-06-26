@@ -53,15 +53,16 @@
     #clear-all  { float: right; cursor: pointer; margin-top: -15px; }
     #output     { margin-top: -15px; }
   </style>
-
-     <script>
+  <% cache("#{@report.id}--#{@report.document.updated_at}") do %>
+      <script>
           <% header, tab, error= render_pivot_information(@report.document.file)
            if error  %>
           alert('<%=  error %> ');
           <%  else   %>
-            var json = <%= tab.to_json.to_s.gsub('/', '\/').html_safe %>
+          var json = <%= tab.to_json.to_s.gsub('/', '\/').html_safe %>
           <% end %>
       </script>
+  <% end %>
 
   <script type="text/javascript">
       var tableToExcel = (function() {
