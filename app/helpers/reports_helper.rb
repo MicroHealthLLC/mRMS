@@ -16,7 +16,7 @@ module ReportsHelper
         next if index.zero?
         json = {}
         header.each_with_index  do |title, i|
-          json[title] = row[i]
+          json[title] = row[i].to_s.gsub(',', '')
         end
         tab << json
       end
