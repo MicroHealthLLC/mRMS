@@ -30,7 +30,7 @@
                   </span>
           <% end %>
 
-          <% if @report.channel.is_public? or @report.channel.is_creator? or (@report.channel.my_permission.can_delete_report? ) %>
+          <% if @report.channel.is_creator? or @report.channel.is_public? or @report.channel.my_permission.can_delete_report?  %>
                   <span>
                     <%= delete_button channel_report_path(@report.channel, @report) %>
                   </span>

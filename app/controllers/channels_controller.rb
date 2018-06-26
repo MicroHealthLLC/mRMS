@@ -69,8 +69,9 @@ class ChannelsController < ApplicationController
   # DELETE /channels/1
   # DELETE /channels/1.json
   def destroy
-    if @channel.is_creator? or User.current.can?(:manage_roles)
+    if @channel.is_creator?
       @channel.is_active = false
+      ChannelOrder.where(channel_id: @channel.id).delete_all
       @channel.save
       respond_to do |format|
         format.html { redirect_to root_path, notice: 'Channel was successfully destroyed.' }
@@ -84,7 +85,7 @@ class ChannelsController < ApplicationController
   private
   # Use callbacks to share common setup or constraints between actions.
   def set_channel
-    @channel = Channel.find(params[:id])
+    @channel = Channel.unscoped.find(params[:id])
   rescue ActiveRecord::RecordNotFound
     render_404
   end

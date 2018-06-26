@@ -4,8 +4,8 @@ class Channel < ApplicationRecord
   audited except: [:created_at, :updated_at]
 
   has_many :reports
-  has_many :channel_permissions
-  has_many :channel_orders
+  has_many :channel_permissions, dependent: :destroy
+  has_many :channel_orders, dependent: :destroy
   belongs_to :user
 
   GROUPS = 1
@@ -33,7 +33,8 @@ class Channel < ApplicationRecord
   belongs_to :updated_by, class_name: 'User', optional: true
 
   validates_presence_of :name
-  validates_uniqueness_of :name, scope: [:user_id]
+  validates_uniqueness_of :name, scope: [:user_id, :is_active, :option]
+
 
   def is_creator?
     user_id == User.current.id
@@ -143,6 +144,10 @@ class Channel < ApplicationRecord
 
   def is_public?
     option == PUBLIC
+  end
+
+  def is_group?
+    option == GROUPS
   end
 
   def to_s

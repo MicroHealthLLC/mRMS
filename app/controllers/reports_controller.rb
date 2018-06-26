@@ -129,12 +129,13 @@ class ReportsController < ApplicationController
                    when 'edit', 'update',
                        'new', 'upload_document', 'show',
                        'create', 'save_pivottable',
-                       'delete_pivottable' then  @channel.is_public? or @channel.my_permission.can_add_report?
-                   when 'destroy' then  @channel.my_permission.can_delete_report?
+                       'delete_pivottable' then  @channel.is_public? or @channel.my_permission.can_add_report? or @channel.my_permission.can_view?
+                   when 'destroy'
+                     @report.channel.my_permission.can_delete_report? or @report.channel.is_public?
                    else
                      @channel.my_permission.can_add_users?
                  end
 
-    render_403 unless can_access or @channel.is_creator? or @channel.my_permission.can_view?
+    render_403 unless (can_access or @report.channel.is_creator? )
   end
 end
