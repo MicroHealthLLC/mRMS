@@ -1,4 +1,4 @@
-<% audit = @report.audits.last %>
+<% audit = @report.try(:audits).try(:last) %>
 <% if audit %>
     <% user = audit.user %>
     <% changes = audit.audited_changes %>

@@ -1,10 +1,12 @@
-<% audit = @report.audits.last %>
-<% user = audit.user %>
-<h1>A report in Data set `<%= @data_set.name %>` was created by `<%= user %>` </h1>
+<% audit = @report.try(:audits).try(:last) %>
+<% if audit %>
+    <% user = audit.user %>
+    <h1>A report in Data set `<%= @data_set.name %>` was created by `<%= user %>` </h1>
 
-<ul>
-  <li>
-    Name: `<%= @data_set.name %>`
-  </li>
-</ul>
+    <ul>
+      <li>
+        Name: `<%= @data_set.name %>`
+      </li>
+    </ul>
+<% end %>
 

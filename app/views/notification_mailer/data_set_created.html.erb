@@ -1,14 +1,15 @@
-<% audit = @data_set.audits.last %>
-<% user = audit.user %>
-<% changes = audit.audited_changes %>
-<h1>A data set in channel `<%= @channel.name %>` was created by <%= user %> </h1>
+<% audit = @data_set.try(:audits).try(:last) %>
+<% if audit %>
+    <% user = audit.user %>
+    <h1>A data set in channel `<%= @channel.name %>` was created by <%= user %> </h1>
 
-<ul>
-  <li>
-    Name: `<%= @data_set.name %>`
-  </li>
-  <li>
-    Description: <%= @data_set.description.to_s.html_safe %>
-  </li>
-</ul>
+    <ul>
+      <li>
+        Name: `<%= @data_set.name %>`
+      </li>
+      <li>
+        Description: <%= @data_set.description.to_s.html_safe %>
+      </li>
+    </ul>
+<% end %>
 

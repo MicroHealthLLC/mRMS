@@ -1,4 +1,4 @@
-<% audit = @data_set.audits.last %>
+<% audit = @data_set.try(:audits).try(:last) %>
 <% if audit %>
     <% user = audit.user %>
     <% changes = audit.audited_changes %>
