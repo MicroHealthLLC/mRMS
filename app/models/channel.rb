@@ -32,7 +32,7 @@ class Channel < ApplicationRecord
   belongs_to :created_by, class_name: 'User', optional: true
   belongs_to :updated_by, class_name: 'User', optional: true
 
-  validates_presence_of :name
+  validates_presence_of :name, :option
   validates_uniqueness_of :name, scope: [:user_id, :is_active, :option]
 
 

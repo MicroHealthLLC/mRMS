@@ -136,6 +136,6 @@ class ReportsController < ApplicationController
                      @channel.my_permission.can_add_users?
                  end
 
-    render_403 unless (can_access or @report.channel.is_creator? )
+    render_403 unless (can_access or (@report && @report.channel.is_creator?) or (@report.nil? and  @channel.is_creator?) )
   end
 end
