@@ -3,7 +3,7 @@ class Channel < ApplicationRecord
 
   audited except: [:created_at, :updated_at]
 
-  has_many :reports
+  has_many :reports, dependent: :destroy
   has_many :channel_permissions, dependent: :destroy
   has_many :channel_orders, dependent: :destroy
   belongs_to :user
