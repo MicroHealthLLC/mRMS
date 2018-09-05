@@ -6,6 +6,7 @@
     <th> Can View Channel</th>
     <th> Can Edit Channel </th>
     <th> Can Add/Edit Report </th>
+    <th> Can View Report </th>
     <th> Can Delete Report </th>
     <th> Can Add/Change permission </th>
     <th> Can Download File </th>
@@ -20,6 +21,7 @@
         <td><i class="fa fa-<%=  permission.can_view? ? 'check' : 'times' %>"></i></td>
         <td><i class="fa fa-<%=  permission.can_edit? ? 'check' : 'times' %>"></i></td>
         <td><i class="fa fa-<%=  permission.can_add_report? ? 'check' : 'times' %>"></i></td>
+        <td><i class="fa fa-<%=  permission.can_view_report ? 'check' : 'times' %>"></i></td>
         <td><i class="fa fa-<%=  permission.can_delete_report? ? 'check' : 'times' %>"></i></td>
         <td><i class="fa fa-<%=  permission.can_add_users? ? 'check' : 'times' %>"></i></td>
         <td><i class="fa fa-<%=  permission.can_download? ? 'check' : 'times' %>"></i></td>

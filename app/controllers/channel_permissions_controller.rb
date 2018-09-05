@@ -2,6 +2,7 @@ class ChannelPermissionsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_channel
   before_action :set_permission, only: :destroy
+  before_action :authorize
 
   def index
     @permissions = @channel.channel_permissions
@@ -45,4 +46,15 @@ class ChannelPermissionsController < ApplicationController
   rescue ActiveRecord::RecordNotFound
     render_404
   end
+
+  def authorize
+    access =  if @channel
+                @channel.is_public? or @channel.is_creator? or (@channel.my_permission.can_view? and @channel.my_permission.can_add_users? )
+              else
+                false
+              end
+
+    render_403 unless access
+  end
+
 end

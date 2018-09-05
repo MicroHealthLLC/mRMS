@@ -98,9 +98,9 @@ class ChannelsController < ApplicationController
 
   def authorize
     access =  if @channel
-                @channel.is_public? or @channel.is_creator? or (@channel.my_permission.can_view? or @channel.my_permission.can_add_report? )
+                @channel.is_public? or @channel.is_creator? or @channel.my_permission.can_view? or (@channel.my_permission.can_view? and @channel.my_permission.can_add_report? )
               else
-                true
+                false
               end
 
     render_403 unless access
