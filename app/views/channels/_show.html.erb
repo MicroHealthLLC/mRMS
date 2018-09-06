@@ -11,7 +11,7 @@
   <tbody>
   <% @reports.each do |report| %>
       <tr>
-        <td><%= @channel.my_permission.can_view_report? ? link_to( report.name, channel_report_path(@channel, report )) : report.name %></td>
+        <td><%= ( @channel.is_public? or @channel.is_creator? or @channel.my_permission.can_view_report?) ? link_to( report.name, channel_report_path(@channel, report )) : report.name %></td>
         <td><%= format_date_time report.created_at %></td>
         <td><%= report.created_by %></td>
         <td><%= format_date_time report.updated_at %></td>

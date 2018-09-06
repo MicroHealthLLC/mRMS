@@ -31,6 +31,25 @@ class SpreadsheetEnumerationUpload
       else
         @invalid_file_parse = "Unknown file type: #{original_filename}"
     end
+  rescue Ole::Storage::FormatError
+    open_with_different_format(@extname, file, original_filename)
+  end
+
+  def open_with_different_format(extname, file, original_filename)
+    case extname
+      when ".xlsx" then
+        `cp #{file.path} #{file.path[0..-1]}`
+        Roo::Excel.new("#{file.path[0..-1]}")
+      when ".xls" then
+        `cp #{file.path} #{file.path}x`
+        Roo::Excelx.new("#{file.path}x")
+      else
+        @invalid_file_parse = "Unknown file type: #{original_filename}"
+    end
+  rescue Ole::Storage::FormatError
+    @invalid_file_parse = "Cannot open File: #{original_filename} (check extension)"
+  rescue StandardError
+    @invalid_file_parse = "Cannot open File: #{original_filename} (check extension)"
   end
 
   def force_read_csv(file_url)
