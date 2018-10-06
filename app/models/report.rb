@@ -26,6 +26,8 @@ class Report < ApplicationRecord
     if channel.is_personal?
       SharedReport.create(user_id: User.current.id, report_id: self.id, channel_id: self.channel.id)
     end
+    # make sure that no document is linked
+    report_documents.destroy_all
   end
 
   after_create do

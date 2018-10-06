@@ -37,6 +37,12 @@ class ReportDocument < ApplicationRecord
  #   end
  # end
 
+  before_destroy do
+    if file.present?
+      self.remove_file!
+    end
+  end
+
   def read_content
     begin
       content = render_pivot_information(file)
