@@ -81,6 +81,9 @@ fieldset{
 #output table.pvtUi tr td:first-child {
   min-width:200px;
 }
+#output table.pvtUi .pvtRendererArea {
+ overflow:auto;
+}
 
 .clear-all {
     color: white;
