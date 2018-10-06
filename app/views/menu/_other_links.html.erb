@@ -40,7 +40,7 @@
         </li>
 
 
-    <% elsif channel = Channel.find_by_id(channel_id) %>
+    <% elsif channel = Channel.not_personal.find_by_id(channel_id) %>
         <li data-reorder-url="<%= reorder_handle_channels_path(channel_id: channel ? channel.id : '-1') %>" data-reorder-param="<%= 'channel' %>" class=" sort-handle <%= channel_active?(channel)  %>">
           <a href="/channels/<%= channel.id %>" title="<%=  channel.name %>"><i class="fa fa-lg fa-fw <%= channel.icon || 'fa-square' %>"></i><span class="menu-item-parent"><%= channel.name %> </span>
             <i class="fa fa-sort pull-right" style="font-size: 13px !important;margin-top: 5px;">

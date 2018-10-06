@@ -46,9 +46,9 @@ class SpreadsheetEnumerationUpload
       else
         @invalid_file_parse = "Unknown file type: #{original_filename}"
     end
-  rescue Ole::Storage::FormatError
+  rescue Ole::Storage::FormatError=> e
     @invalid_file_parse = "Cannot open File: #{original_filename} (check extension)"
-  rescue StandardError
+  rescue StandardError=> e
     @invalid_file_parse = "Cannot open File: #{original_filename} (check extension)"
   end
 
@@ -86,7 +86,7 @@ class SpreadsheetEnumerationUpload
         retry if can_retry
       end
       @invalid_file_parse = e.message == "invalid byte sequence in UTF-8" ? I18n.t("back_end.wrong_file") :  e.message
-      Rollbar.critical("IMPORT DOC: #{e.message}, current_saas_company: #{@current_saas_company.id}, current_saas_office: #{@current_saas_office.id}, file: #{file} ")
+      Rollbar.critical("IMPORT DOC: #{e.message}, file: #{file} ")
       return @invalid_file_parse
     end
   end

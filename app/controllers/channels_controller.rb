@@ -6,7 +6,6 @@ class ChannelsController < ApplicationController
 
 
   def index
-
   end
 
   def reorder_handle
@@ -100,7 +99,7 @@ class ChannelsController < ApplicationController
     access =  if @channel
                 @channel.is_public? or @channel.is_creator? or @channel.my_permission.can_view? or (@channel.my_permission.can_view? and @channel.my_permission.can_add_report? )
               else
-                false
+                true
               end
 
     render_403 unless access

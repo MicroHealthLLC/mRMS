@@ -43,8 +43,6 @@ class User < ApplicationRecord
     super
   end
 
-
-
   before_create do
     self.ldap_authenticatable= '' if self.ldap_authenticatable.to_s.blank?
   end
@@ -166,15 +164,6 @@ class User < ApplicationRecord
     end
   end
 
-  def has_unread_message(receiver)
-    chat_room = ChatRoom.where(user_id: self.id).where(receiver_id: receiver.id).or(ChatRoom.where(user_id: receiver.id).where(receiver_id: self.id)).first
-    unless chat_room.message_seen?
-      if chat_room.messages.last.user_id != self.id
-        chat_room.messages.last.body
-      end
-    end
-  end
-
   def self.current=(user)
     RequestStore.store[:current_user] = user
   end
@@ -189,10 +178,6 @@ class User < ApplicationRecord
 
   def self.current_user
     RequestStore.store[:user] ||= User.new
-  end
-
-  def checklist_template_answers(template_id)
-    checklist_answers.where(checklist_template_id: template_id)
   end
 
   def extend_informations
@@ -374,27 +359,6 @@ class User < ApplicationRecord
 
   def pivot_table
     {}
-  end
-
-  def all_phone_number
-    phones = []
-    if user_extend_demography
-       user_extend_demography.phones.each do |p|
-         phones<< ["#{username} < #{p.phone_number} >", "#{p.phone_number}"]
-      end
-    end
-    if contacts.present?
-      contacts.each do |contact|
-        next if contact.phone.blank? or contact.phone.phone_number.blank?
-        phones<< ["#{contact.name} < #{contact.phone.phone_number} >", "#{contact.phone.phone_number}"]
-      end
-    end
-    phones
-  end
-
-  def all_organizations
-    case_organizations = Organization.where id: CaseOrganization.where(case_id: cases.pluck(:id)).pluck(:organization_id)
-    [case_organizations + organizations].flatten.uniq
   end
 
   def self.recently_active
