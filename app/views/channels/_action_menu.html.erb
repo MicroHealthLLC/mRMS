@@ -1,20 +1,22 @@
 <div class="row">
   <div class="col-md-12 ">
     <div class="pull-right">
-      <% if !@channel.is_public? && !@channel.is_personal? && (@channel.is_creator? or @channel.my_permission.can_add_users?) %>
-          <%= show_button(channel_channel_permissions_path(@channel), ' Permissions', 'cog', 'warning')  %>
-      <% end %>
+      <% unless @channel.shared_report? %>
+        <% if !@channel.is_public? && !@channel.is_personal? && (@channel.is_creator? or @channel.my_permission.can_add_users?) %>
+            <%= show_button(channel_channel_permissions_path(@channel), ' Permissions', 'cog', 'warning')  %>
+        <% end %>
 
-      <% if @channel.is_public? or @channel.is_creator? or (@channel.my_permission.can_add_report?) %>
-          <%= show_button(new_channel_report_url(@channel), ' Add Data set', 'play-circle', 'info')  %>
-      <% end %>
+        <% if @channel.is_public? or @channel.is_creator? or (@channel.my_permission.can_add_report?) %>
+            <%= show_button(new_channel_report_url(@channel), ' Add Data set', 'play-circle', 'info')  %>
+        <% end %>
 
-      <% if @channel.is_creator? or @channel.my_permission.can_edit? %>
-          <%= edit_button edit_channel_path(@channel) %>
-      <% end %>
+        <% if @channel.is_creator? or @channel.my_permission.can_edit? %>
+            <%= edit_button edit_channel_path(@channel) %>
+        <% end %>
 
-      <% if @channel.is_creator?  %>
-          <%= delete_button channel_path(@channel) %>
+        <% if @channel.is_creator?  %>
+            <%= delete_button channel_path(@channel), 'channel' %>
+          <% end %>
       <% end %>
 
       <%= cancel_button :back %>

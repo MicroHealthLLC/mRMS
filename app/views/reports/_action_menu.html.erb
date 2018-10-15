@@ -38,10 +38,10 @@
 
           <% if @report.channel.is_creator? or @report.channel.is_public? or @report.channel.my_permission.can_delete_report?  %>
                   <span>
-                    <%= delete_button channel_report_path(@report.channel, @report) %>
+                    <%= delete_button channel_report_path(@report.channel, @report), 'Data set' %>
                   </span>
           <% end %>
-          <%= cancel_button channel_path(@report.channel) %>
+          <%= cancel_button channel_path(@channel) %>
       <% end %>
 
       <%= render partial: 'uploader/report_upload' %>

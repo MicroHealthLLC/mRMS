@@ -42,7 +42,7 @@ class ReportsController < ApplicationController
       (Array.wrap(params[:users]) - @shared_reports.map(&:to_s)).each do |user_id|
         @report.shared_reports.create(user_id: user_id)
       end
-      flash[:notice] = "User(s) added successfully"
+      flash[:notice] = "Share Report updated successfully"
       redirect_to channel_report_path(@channel, @report)
     end
   end
@@ -54,7 +54,7 @@ class ReportsController < ApplicationController
     @report.user_id = User.current.id
     respond_to do |format|
       if @report.save
-        format.html { redirect_to channel_report_path(@channel, @report), notice: 'Report was successfully created.' }
+        format.html { redirect_to channel_report_path(@channel, @report), notice: 'Data set was successfully created.' }
         format.json { render :show, status: :created, location: @report }
       else
         format.html { render :new }
@@ -68,7 +68,7 @@ class ReportsController < ApplicationController
   def update
     respond_to do |format|
       if @report.update(report_params)
-        format.html { redirect_to channel_report_path(@channel, @report), notice: 'Report was successfully updated.' }
+        format.html { redirect_to channel_report_path(@channel, @report), notice: 'Data set was successfully updated.' }
         format.json { render :show, status: :ok, location: @report }
       else
         format.html { render :edit }
@@ -101,7 +101,7 @@ class ReportsController < ApplicationController
   def destroy
     @report.destroy
     respond_to do |format|
-      format.html { redirect_to channel_path(@channel), notice: 'Report was successfully destroyed.' }
+      format.html { redirect_to channel_path(@channel), notice: 'Data set was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

@@ -148,10 +148,10 @@ module ApplicationHelper
     end
   end
 
-  def delete_button(url)
+  def delete_button(url, object_title = 'record')
     link_to( url, class: 'btn btn-danger',
              :method => :delete,
-             :data => {:confirm => t(:text_are_you_sure)}) do
+             :data => {:confirm => "Are you sure to delete this #{object_title}?"}) do
       '<i class="fa fa-trash" aria-hidden="true"> Delete</i>'.html_safe
     end
   end
