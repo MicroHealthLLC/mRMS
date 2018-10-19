@@ -17,7 +17,7 @@
     <td><%= format_date p.created_at %></td>
     <td><%= link_to( '<i class="fa fa-trash"></i>'.html_safe, delete_pivottable_channel_report_path(@channel, @report, query_id: p.id),
                      :method => :delete,
-                     :data => {:confirm => t(:text_are_you_sure)}) if p.user_id == User.current.id %>
+                     :data => {:confirm => "Are you sure to delete this report?"}) if p.user_id == User.current.id %>
 
 
     </td>
