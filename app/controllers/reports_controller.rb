@@ -81,8 +81,13 @@ class ReportsController < ApplicationController
     p = SavePivotTable.where(id: params[:query_id]).first_or_initialize
     p.attributes = params[:save_pivot_table].permit!
     p.save
-    redirect_to channel_report_path(@channel, @report, query_id: p.id)
+    if params[:query_id]
+      flash[:notice] = 'Report was successfully updated'
+    else
+      flash[:notice] = 'Report was successfully created'
+    end
 
+    redirect_to channel_report_path(@channel, @report, query_id: p.id)
   end
 
   def delete_pivottable
@@ -92,7 +97,7 @@ class ReportsController < ApplicationController
       p = SavePivotTable.find(params[:query_id])
       p.destroy
     end
-
+    flash[:notice] = 'Report was successfully destroyed'
     redirect_to  channel_report_path(@channel, @report)
   end
 
