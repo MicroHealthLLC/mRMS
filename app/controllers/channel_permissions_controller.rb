@@ -31,8 +31,7 @@ class ChannelPermissionsController < ApplicationController
 
   def destroy
     @permission.destroy
-    flash[:notice] = "Success"
-    render js: 'location.reload();'
+    redirect_to :back
   end
 
   private
