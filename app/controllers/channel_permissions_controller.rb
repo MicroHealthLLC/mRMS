@@ -31,7 +31,7 @@ class ChannelPermissionsController < ApplicationController
 
   def destroy
     if @permission.destroy
-       flash[:notice] = "Success"
+      flash[:notice] = "Success"
       render js: 'location.reload();'
     else
       render js: "alert('#{@permission.errors.full_messages.join('<br/>').html_safe}')"
