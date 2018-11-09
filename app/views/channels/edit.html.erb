@@ -11,3 +11,17 @@
     </article>
   </div>
 </section>
+
+
+<script>
+  $(document).ready(function () {
+      if ($(#channel_option_3).prop("checked") == false) {
+          $(#channel_option_3).prop("disabled", true);
+          if ($(#channel_option_1).prop("checked") == true) {
+             $(#channel_option_2).prop("disabled", true);
+          } else {
+             $(#channel_option_1).prop("disabled", true);
+          }
+      }
+  })
+</script>
