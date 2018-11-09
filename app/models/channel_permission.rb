@@ -7,11 +7,11 @@ class ChannelPermission < ApplicationRecord
 
   after_save do
     unless self.can_view?
-      user.channel_orders.where(channel_id: channel_id).delete_all
+      user.channel_orders.where(channel_id: channel_id).delete_all if user
     end
   end
 
   before_destroy do
-    user.channel_orders.where(channel_id: channel_id).delete_all
+    user.channel_orders.where(channel_id: channel_id).delete_all if user
   end
 end
