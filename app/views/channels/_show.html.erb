@@ -6,7 +6,9 @@
     <th>Created By</th>
     <th>Date last updated</th>
     <th>Updated By</th>
+  <% if @channel.is_personal? %>
     <th>Shared</th>
+  <% end %>
   </tr>
   </thead>
   <tbody>
@@ -17,7 +19,9 @@
         <td><%= report.created_by %></td>
         <td><%= format_date_time report.updated_at %></td>
         <td><%= report.updated_by %></td>
+      <% if @channel.is_personal? %>
         <td><%= report.shared_reports.present? %></td>
+      <% end %>
       </tr>
   <% end %>
   </tbody>
