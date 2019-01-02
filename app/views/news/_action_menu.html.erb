@@ -1,10 +1,10 @@
 <div class="row" style="margin-bottom: 10px">
   <div class="col-md-12 ">
     <div class="pull-right">
-      <% if @news.can?(:delete_news, :manage_news, :manage_roles) %>
+      <% if @news.user_id == User.current.id or  @news.can?(:manage_roles) %>
           <%= delete_button(news_path(@news)) %>
       <% end %>
-      <% if @news.can?(:edit_news, :manage_news, :manage_roles) %>
+      <% if @news.user_id == User.current.id or  @news.can?(:manage_roles) %>
           <%= edit_button(edit_news_path(@news)) %>
       <% end %>
       <%= show_button(news_index_path, 'Back', 'reply', 'warning') %>

@@ -84,11 +84,11 @@ class NewsController < ProtectForgeryApplication
   end
 
   def authorize_edit
-    raise Unauthorized unless @news.can?(:edit_news, :manage_news, :manage_roles)
+    raise Unauthorized unless @news.user_id == User.current.id or  @news.can?(:manage_roles)
   end
 
   def authorize_delete
-    raise Unauthorized unless @news.can?(:delete_news, :manage_news, :manage_roles)
+    raise Unauthorized unless @news.user_id == User.current.id or  @news.can?(:manage_roles)
   end
 
 end
