@@ -30,7 +30,7 @@
     <%= @report.updated_by %> at <%= format_date_time @report.updated_at %>
   </p>
 
-  <% if @report.document_url && (@channel.is_creator? or @channel.my_permission.can_download?) %>
+  <% if @report.document_url && (@report.channel.is_public? or @channel.is_creator? or @channel.my_permission.can_download?) %>
       <% if File.exists?("#{Rails.root}/public#{@report.document_url}") %>
           <p class="noprint">
             <strong>Document:</strong>
