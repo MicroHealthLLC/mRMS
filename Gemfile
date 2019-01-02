@@ -41,7 +41,7 @@ group :development, :test do
   gem 'capybara', '~> 2.13'
   gem 'selenium-webdriver'
 end
-
+gem 'letter_opener'
 group :development do
   gem 'awesome_print', require: 'ap'
   gem 'better_errors'
@@ -87,6 +87,9 @@ gem "request_store"
 gem "binding_of_caller"
 gem 'rails-pry'
 gem 'pry-rails'
+gem 'prawn-rails'
+gem 'prawn-table'
+gem 'prawn'
 gem 'rails-pry'
 gem 'jSignature'
 gem 'simple_form'

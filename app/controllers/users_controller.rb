@@ -48,6 +48,7 @@ class UsersController < ProtectForgeryApplication
   # authorized by admin
   def index
     respond_to do |format|
+      format.pdf{}
       format.html{}
       format.json{
         options = Hash.new
