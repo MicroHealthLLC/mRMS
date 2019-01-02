@@ -63,7 +63,7 @@ class UsersController < ProtectForgeryApplication
       user.last_seen_at = 1.year.ago
       user.save
     end
-    @users = User.recently_active.
+    @users = User.where(state: true).
         includes(:core_demographic).
         references(:core_demographic)
   rescue ActiveRecord::RecordNotFound
