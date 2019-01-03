@@ -25,11 +25,11 @@
       <span>
         <% if user_signed_in? %>
             <%= link_to destroy_session_path(:user), title: 'Sign out', :method => :delete do %>
-                <i class="fa fa-sign-out"></i>
+                <i class="fas fa-sign-out-alt"></i>
             <% end %>
         <% else %>
             <%= link_to new_session_path(:user), title: "Sign In" do %>
-                <i class="fa fa-sign-in"></i>
+                <i class="fas fa-sign-in-alt"></i>
             <% end %>
         <% end %>
       </span>

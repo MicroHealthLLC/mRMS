@@ -157,7 +157,13 @@ module ApplicationHelper
   end
 
   def cancel_button(url)
-    show_button(url, 'Back' , 'arrow-left', 'warning')
+    if url == :back
+      if request.env["HTTP_REFERER"].present? and request.env["HTTP_REFERER"] != request.env["REQUEST_URI"]
+        show_button(url, 'Back' , 'arrow-left', 'warning')
+      else
+        show_button(root_path, 'Back' , 'arrow-left', 'warning')
+      end
+    end
   end
 
   # Renders flash messages
