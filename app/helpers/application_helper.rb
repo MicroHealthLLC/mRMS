@@ -87,7 +87,7 @@ module ApplicationHelper
         :data => {:confirm => t(:text_are_you_sure)}
     }.merge(options)
 
-    link_to "<i class='fa fa-lg fa-trash-o'></i>".html_safe, url, options
+    link_to "<i class='far fa-lg fa-trash-alt'></i>".html_safe, url, options
   end
 
   def restore_user_link(user, options={})
@@ -152,7 +152,7 @@ module ApplicationHelper
     link_to( url, class: 'btn btn-danger',
              :method => :delete,
              :data => {:confirm => "Are you sure to delete this #{object_title}?"}) do
-      '<i class="fa fa-trash" aria-hidden="true"> Delete</i>'.html_safe
+      '<i class="far fa-trash-alt" aria-hidden="true"> Delete</i>'.html_safe
     end
   end
 

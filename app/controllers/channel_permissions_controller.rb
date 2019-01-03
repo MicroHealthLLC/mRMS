@@ -31,6 +31,7 @@ class ChannelPermissionsController < ApplicationController
 
   def destroy
     @permission.destroy
+    flash[:notice] = "Success"
     redirect_to :back
   end
 
