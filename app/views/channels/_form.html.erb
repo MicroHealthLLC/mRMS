@@ -45,20 +45,20 @@
       <div class="form-group">
         <%= form.label 'Options', class: 'col-md-2 control-label' %>
         <div class="col-md-8">
-        <% if channel.is_groups? %>
-          <%= form.radio_button :option, Channel::PUBLIC :disabled => true %> Public
+        <% if channel.is_group? %>
+          <%= form.radio_button :option, Channel::PUBLIC, :disabled => true %> Public
         <% else %>
-          <%= form.radio_button :option, Channel::PUBLIC :disabled => false %> Public
+          <%= form.radio_button :option, Channel::PUBLIC, :disabled => false %> Public
         <% end %>
         <% if channel.is_public? %>
-          <%= form.radio_button :option, Channel::GROUPS :disabled => true %> GROUPS
+          <%= form.radio_button :option, Channel::GROUPS, :disabled => true %> GROUPS
         <% else %>
-          <%= form.radio_button :option, Channel::GROUPS :disabled => false %> GROUPS
+          <%= form.radio_button :option, Channel::GROUPS, :disabled => false %> GROUPS
         <% end %>
-        <% if channel.is_groups == true or channel.is_public == true %>
-          <%= form.radio_button :option, Channel::PERSONAL :disabled => true %> Personal
+        <% if channel.is_group? == true or channel.is_public == true %>
+          <%= form.radio_button :option, Channel::PERSONAL, :disabled => true %> Personal
         <% else %>
-          <%= form.radio_button :option, Channel::PERSONAL :disabled => false %> Personal
+          <%= form.radio_button :option, Channel::PERSONAL, :disabled => false %> Personal
         <% end %>
         </div>
       </div>
