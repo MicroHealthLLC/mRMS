@@ -55,7 +55,7 @@
         <% else %>
           <%= form.radio_button :option, Channel::GROUPS, :disabled => false %> GROUPS
         <% end %>
-        <% if channel.is_group? == true or channel.is_public == true %>
+        <% if channel.is_group? or channel.is_public? %>
           <%= form.radio_button :option, Channel::PERSONAL, :disabled => true %> Personal
         <% else %>
           <%= form.radio_button :option, Channel::PERSONAL, :disabled => false %> Personal
