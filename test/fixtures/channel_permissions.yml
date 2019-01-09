@@ -7,7 +7,6 @@ one:
   can_add_report: false
   can_edit: false
   can_delete_report: false
-  can_remove_report: false
   can_add_users: false
 
 two:
@@ -17,5 +16,4 @@ two:
   can_add_report: false
   can_edit: false
   can_delete_report: false
-  can_remove_report: false
   can_add_users: false
