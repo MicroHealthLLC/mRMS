@@ -163,6 +163,8 @@ module ApplicationHelper
       else
         show_button(root_path, 'Back' , 'arrow-left', 'warning')
       end
+    else
+      show_button(url, 'Back' , 'arrow-left', 'warning')
     end
   end
 

@@ -35,6 +35,13 @@ class Channel < ApplicationRecord
   validates_presence_of :name, :option
   validates_uniqueness_of :name, scope: [:user_id, :is_active, :option]
 
+  before_update do
+    if valid?
+      if option_changed? and option_was == PERSONAL
+        SharedReport.where.not(user_id: user_id).where(report_id: reports.pluck(:id)).delete_all
+      end
+    end
+  end
 
   def is_creator?
     user_id == User.current.id

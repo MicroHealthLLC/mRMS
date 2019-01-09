@@ -114,8 +114,8 @@ en:
   new_identification: New Identification
 
  # EMPLOYEE
-  employees: Clients
-  new_employee: New Client
+  employees: Users
+  new_employee: New User
   employment_type: Employment Type
   label_employee: Client
   change_employee_info: Change Information

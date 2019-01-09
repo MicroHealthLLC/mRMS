@@ -10,7 +10,7 @@ class UserDatatable < Abstract
       CoreDemographic.middle_name
       CoreDemographic.last_name
 
-      Role.name
+
       User.state
     }
   end
@@ -25,7 +25,7 @@ class UserDatatable < Abstract
       CoreDemographic.middle_name
       CoreDemographic.last_name
 
-      Role.name
+
       User.state
     }
   end
@@ -42,7 +42,6 @@ class UserDatatable < Abstract
           user.first_name,
           user.last_name,
 
-          user.role.to_s,
           user.state,
 
           user.deleted? ?   @view.restore_user_link(user, 'data-turbolinks'=> false) :  @view.delete_link(user, 'data-turbolinks'=> false),
