@@ -6,13 +6,12 @@ require 'database_cleaner'
 
 class ActiveSupport::TestCase
   # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
-  
+  include Devise::Test::IntegrationHelpers
+
   fixtures :all
   ActiveRecord::Migration.check_pending!
   DatabaseCleaner.strategy = :truncation
   DatabaseCleaner.logger = Rails.logger
-  setup { DatabaseCleaner.start }
-  teardown { DatabaseCleaner.clean }
 
   # Add more helper methods to be used by all tests here...
 end

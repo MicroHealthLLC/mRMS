@@ -4,8 +4,10 @@ one:
   name: MyString
   is_public: false
   user_id: 1
+  option: <%= Channel::GROUPS %>
 
 two:
   name: MyString
   is_public: false
   user_id: 1
+  option: <%= Channel::GROUPS %>
