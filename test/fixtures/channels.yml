@@ -12,4 +12,10 @@ two:
   name: MyString
   is_public: false
   user_id: 1
-  option: <%= Channel::GROUPS %>  
+  option: <%= Channel::GROUPS %>
+personal:
+  id: 3
+  name: MyString
+  is_personal: true
+  user_id: 1
+  option: <%= Channel::PERSONAL %>

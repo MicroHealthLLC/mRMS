@@ -7,6 +7,8 @@ require 'database_cleaner'
 class ActiveSupport::TestCase
   # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
   include Devise::Test::IntegrationHelpers
+  include ActionDispatch::TestProcess
+
 
   fixtures :all
   ActiveRecord::Migration.check_pending!
