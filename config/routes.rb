@@ -9,7 +9,7 @@ Rails.application.routes.draw do
       match :reorder_handle, via: [:put]
     end
     resources :channel_permissions, except: [:new, :edit]
-    resources :reports do
+    resources :reports, except: [:index] do
       member do
         match :save_pivottable, via: [:post]
         match :delete_pivottable, via: [:delete]

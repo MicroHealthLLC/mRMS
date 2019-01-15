@@ -3,12 +3,6 @@ class ReportsController < ApplicationController
   before_action :set_channel
   before_action :set_report, only: [:save_pivottable, :delete_pivottable, :share_report, :upload_document, :show, :edit, :update, :destroy]
   before_action :authorize, except: [:index, :show]
-  # GET /reports
-  # GET /reports.json
-  def index
-    render_403 unless  @channel.is_public? or @channel.is_creator? or @channel.my_permission.can_view?
-    @reports = @channel.visible_reports
-  end
 
   # GET /reports/1
   # GET /reports/1.json

@@ -3,46 +3,43 @@ require 'test_helper'
 class ReportsControllerTest < ActionDispatch::IntegrationTest
   setup do
     @report = reports(:one)
-  end
-
-  test "should get index" do
-    get reports_url
-    assert_response :success
+    @channel = channels(:one)
+    @admin = users(:admin)
+    sign_in @admin 
   end
 
   test "should get new" do
-    get new_report_url
+    get new_channel_report_url(@channel)
     assert_response :success
   end
 
   test "should create report" do
     assert_difference('Report.count') do
-      post reports_url, params: { report: { category_id: @report.category_id, category_type_id: @report.category_type_id, document: @report.document, name: @report.name, user_id: @report.user_id } }
+      post channel_reports_url(@channel), params: { report: { channel_id: @report.channel_id, category_id: @report.category_id, category_type_id: @report.category_type_id, document: @report.document, name: @report.name, user_id: @report.user_id } }
     end
 
-    assert_redirected_to report_url(Report.last)
+    assert_redirected_to channel_report_url(@channel, Report.last)
   end
 
   test "should show report" do
-    get report_url(@report)
+    get channel_report_url(@channel, @report)
     assert_response :success
   end
 
   test "should get edit" do
-    get edit_report_url(@report)
+    get edit_channel_report_url(@channel, @report)
     assert_response :success
   end
 
   test "should update report" do
-    patch report_url(@report), params: { report: { category_id: @report.category_id, category_type_id: @report.category_type_id, document: @report.document, name: @report.name, user_id: @report.user_id } }
-    assert_redirected_to report_url(@report)
+    patch channel_report_url(@channel, @report), params: { report: { category_id: @report.category_id, category_type_id: @report.category_type_id, document: @report.document, name: @report.name, user_id: @report.user_id } }
+    assert_redirected_to channel_report_url(@channel, @report)
   end
 
   test "should destroy report" do
     assert_difference('Report.count', -1) do
-      delete report_url(@report)
+      delete channel_report_url(@channel, @report)
     end
-
-    assert_redirected_to reports_url
+    assert_redirected_to channel_url(@channel)
   end
 end
