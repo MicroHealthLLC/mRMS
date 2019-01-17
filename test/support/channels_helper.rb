@@ -63,13 +63,32 @@ module Support
         click_on 'Share Report'
         wait_for_ajax
     end
+    
+    def i_share_report_with_second_user
+        user = users(:second_user)
+        i_share_report_with_user user
+    end
 
-    def i_share_report_with_admin
+    def i_share_report_with_user user
+        find(:css, "#users_[value='#{user.id}']").set(true)
+        click_on 'Save'
     end
 
     def the_report_is_shared
         assert_selector "#flash_notice", 'Share Report updated successfully.'
     end
+
+    def i_go_to_upload_data
+        click_on 'Upload Data'        
+    end
+
+    def i_attach_xls_file
+       find("input[name='report[document]']", visible: false).set("#{Rails.root}/test/fixtures/files/file_a.xlsx")
+       wait_for_ajax
+       sleep 10
+    end
+
+    
 
     def i_go_to_edit_report
         click_on 'Edit'

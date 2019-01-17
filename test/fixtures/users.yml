@@ -20,3 +20,11 @@ second_user:
   login: 'second_user'
   encrypted_password: <%= Devise::Encryptor.digest(User, "123second_user45678") %>
   password_changed_at: <%= Date.today %>
+  
+third_user: 
+  id: 3,
+  email: 'third_user@gmail.com'
+  state: true
+  login: 'third_user'
+  encrypted_password: <%= Devise::Encryptor.digest(User, "123third_user45678") %>
+  password_changed_at: <%= Date.today %>  

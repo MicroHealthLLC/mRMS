@@ -17,8 +17,10 @@ class ChannelsTest < ApplicationSystemTestCase
     i_edit_report_name
     the_report_is_updated
     i_go_to_share_report
-    i_share_report_with_admin
+    i_share_report_with_second_user
     the_report_is_shared
+    i_go_to_upload_data
+    i_attach_xls_file
   end
   
   
