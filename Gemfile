@@ -44,6 +44,8 @@ group :test do
   gem 'database_cleaner'
   gem 'capybara', '~> 2.13'
   gem 'selenium-webdriver'
+  gem 'chromedriver-helper', '~> 1.0'
+  gem 'minitest-retry'
 end
 gem 'letter_opener'
 group :development do
@@ -80,7 +82,6 @@ gem 'will_paginate'
 gem 'will_paginate-bootstrap'
 gem 'jquery-datatables-rails'
 gem 'ajax-datatables-rails', '~>0.3.1'
-gem 'roo'
 gem 'roo-xls'
 gem 'rails_email_validator'
 gem 'exception_notification'
