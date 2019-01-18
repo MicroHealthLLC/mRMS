@@ -2,12 +2,9 @@ require 'test_helper'
 
 class ChannelsControllerTest < ActionDispatch::IntegrationTest
   setup do
+    @admin = users(:admin)
     @channel = channels(:one)
-  end
-
-  test "should get index" do
-    get channels_url
-    assert_response :success
+    sign_in @admin 
   end
 
   test "should get new" do
@@ -17,7 +14,7 @@ class ChannelsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create channel" do
     assert_difference('Channel.count') do
-      post channels_url, params: { channel: { is_public: @channel.is_public, name: @channel.name, user_id: @channel.user_id } }
+      post channels_url, params: { channel: { is_public: true, name: 'channel name', user_id: @admin.id, option: Channel::PUBLIC  } }
     end
 
     assert_redirected_to channel_url(Channel.last)
@@ -34,15 +31,16 @@ class ChannelsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update channel" do
-    patch channel_url(@channel), params: { channel: { is_public: @channel.is_public, name: @channel.name, user_id: @channel.user_id } }
+    patch channel_url(@channel), params: { channel: { is_public: @channel.is_public, name: 'new channel name', user_id: @channel.user_id, option: Channel::PUBLIC } }
     assert_redirected_to channel_url(@channel)
+    @channel.reload
+    assert_equal 'new channel name', @channel.name 
   end
 
   test "should destroy channel" do
     assert_difference('Channel.count', -1) do
       delete channel_url(@channel)
     end
-
-    assert_redirected_to channels_url
+    assert_redirected_to root_path
   end
 end

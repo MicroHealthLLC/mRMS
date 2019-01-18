@@ -32,7 +32,7 @@ class ChannelPermissionsController < ApplicationController
   def destroy
     @permission.destroy
     flash[:notice] = "Success"
-    redirect_to :back
+    redirect_back fallback_location: root_path
   end
 
   private

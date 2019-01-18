@@ -1,21 +1,14 @@
+
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  user_id: 1
-  channel_id: 1
-  can_view: false
-  can_add_report: false
-  can_edit: false
-  can_delete_report: false
-  can_remove_report: false
-  can_add_users: false
 
-two:
-  user_id: 1
+
+viewer_editor_permissions:
+  id: 1
+  user_id: 2
   channel_id: 1
-  can_view: false
+  can_view: true
   can_add_report: false
-  can_edit: false
+  can_edit: true
   can_delete_report: false
-  can_remove_report: false
   can_add_users: false

@@ -7,7 +7,7 @@ end
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.0.0', '>= 5.0.0.1'
+gem 'rails', '~> 5.1.0'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
 # Use Puma as the app server
@@ -38,8 +38,14 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   # Adds support for Capybara system testing and selenium driver
+ 
+end
+group :test do
+  gem 'database_cleaner'
   gem 'capybara', '~> 2.13'
   gem 'selenium-webdriver'
+  gem 'chromedriver-helper', '~> 1.0'
+  gem 'minitest-retry'
 end
 gem 'letter_opener'
 group :development do
@@ -76,7 +82,6 @@ gem 'will_paginate'
 gem 'will_paginate-bootstrap'
 gem 'jquery-datatables-rails'
 gem 'ajax-datatables-rails', '~>0.3.1'
-gem 'roo'
 gem 'roo-xls'
 gem 'rails_email_validator'
 gem 'exception_notification'

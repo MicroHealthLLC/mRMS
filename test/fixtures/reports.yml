@@ -1,15 +1,27 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
+  id: 1
   name: MyString
   category_id: 1
   category_type_id: 1
   user_id: 1
   document: MyString
+  channel_id: 1
 
 two:
+  id: 2
   name: MyString
   category_id: 1
   category_type_id: 1
   user_id: 1
   document: MyString
+  channel_id: 1
+report_with_personal_channel:
+  id: 3
+  name: MyString
+  category_id: 1
+  category_type_id: 1
+  user_id: 1
+  document: MyString
+  channel_id: 3
