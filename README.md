@@ -13,11 +13,16 @@ yum-config-manager --enable epel
 yum clean all && sudo yum update -y
 
 install ruby
-gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 \curl -sSL https://get.rvm.io | bash -s stable --ruby
 
-usermod -a -G rvm `whoami'
+gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
+
+curl -sSL https://get.rvm.io | sudo bash -s stable
+
+sudo usermod -a -G rvm `whoami`
 
 export PATH="$PATH:$HOME/.rvm/bin"
+
+logout then log back in
 
 rvm install ruby-2.3.6
 
