@@ -141,4 +141,15 @@ rails s -e production > /dev/null &
 
 start sidekiq bundle exec sidekiq -d -L log/sidekiq.log -C config/sidekiq.yml -e production
 
+# Setup
+go to your url of your install
+
+log in with temp account admin with password Admin@2018
+
+go to administration
+
+Change, configure and customize your application
+
+
+
 
