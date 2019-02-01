@@ -64,10 +64,12 @@ class EnumerationsController < ProtectForgeryApplication
       sseu = SpreadsheetEnumerationUpload.new(params[:file])
       sseu.upload_enumeration(enum)
       flash[:notice] = 'Upload done'
+      redirect_to enumeration_path(enum)
     else
-      flash[:error] = 'Type not foundd'
+      flash[:error] = 'Type not found'
+      redirect_to root_path
     end
-    redirect_to :back
+
   end
 
   private

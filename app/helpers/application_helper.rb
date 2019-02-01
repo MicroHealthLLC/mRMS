@@ -103,7 +103,7 @@ module ApplicationHelper
   end
 
   def change_password_user_link(user, options={})
-    link_to "<i class='fa'>Require Change Password</i>".html_safe, require_change_password_user_path(user)
+    link_to "<span class='fa-passwd-reset fa-stack'><i class='fa fa-undo fa-stack-2x'></i><i class='fa fa-lock fa-stack-1x'></i></span> ".html_safe, require_change_password_user_path(user)
   end
 
   def link_to_edit_if_can(text, options)

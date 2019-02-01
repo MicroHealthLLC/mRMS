@@ -7,10 +7,7 @@ class UserDatatable < Abstract
       User.login
       User.email
       CoreDemographic.first_name
-      CoreDemographic.middle_name
       CoreDemographic.last_name
-
-
       User.state
     }
   end
@@ -22,10 +19,7 @@ class UserDatatable < Abstract
       User.login
       User.email
       CoreDemographic.first_name
-      CoreDemographic.middle_name
       CoreDemographic.last_name
-
-
       User.state
     }
   end
@@ -41,7 +35,6 @@ class UserDatatable < Abstract
 
           user.first_name,
           user.last_name,
-
           user.state,
 
           user.deleted? ?   @view.restore_user_link(user, 'data-turbolinks'=> false) :  @view.delete_link(user, 'data-turbolinks'=> false),

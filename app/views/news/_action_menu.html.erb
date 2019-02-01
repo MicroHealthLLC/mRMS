@@ -7,7 +7,7 @@
       <% if @news.user_id == User.current.id or  @news.can?(:manage_roles) %>
           <%= edit_button(edit_news_path(@news)) %>
       <% end %>
-      <%= show_button(news_index_path, 'Back', 'reply', 'warning') %>
+      <%= show_button(news_index_path, 'Back', 'arrow-left', 'warning') %>
       <%#= show_button( params.permit(:from, :to, :status_type).merge(format: 'pdf'), ' Print', 'print', 'primary') %>
 
 

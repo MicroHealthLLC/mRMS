@@ -29,7 +29,7 @@ class CoreDemographicsController < ProtectForgeryApplication
     @user = @core_demographic.user
     respond_to do |format|
       if @user.update(core_demographic_update_params)
-        format.html { redirect_to :back, notice: I18n.t(:notice_successful_update) }
+        format.html { redirect_to @user, notice: I18n.t(:notice_successful_update) }
       else
         format.html { render 'edit' }
       end

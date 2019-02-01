@@ -73,7 +73,7 @@ class UsersController < ProtectForgeryApplication
   def destroy
     @user.destroy
     flash[:notice] = I18n.t('notice_successful_delete')
-    redirect_to :back
+    redirect_to users_path
   end
 
   # authorized by manage roles
@@ -92,7 +92,7 @@ class UsersController < ProtectForgeryApplication
     u.restore
     u.save
     flash[:notice] = 'User restored'
-    redirect_to :back
+    redirect_to users_path
   end
 
   def lock
@@ -101,7 +101,7 @@ class UsersController < ProtectForgeryApplication
     u.locked_at = Time.now
     u.save
     flash[:notice] = 'User locked'
-    redirect_to :back
+    redirect_to users_path
   end
 
   def unlock
@@ -110,7 +110,7 @@ class UsersController < ProtectForgeryApplication
     u.locked_at = nil
     u.save
     flash[:notice] = 'User unlocked'
-    redirect_to :back
+    redirect_to users_path
   end
 
 
@@ -156,14 +156,11 @@ class UsersController < ProtectForgeryApplication
     redirect_to user_path(@user)
   end
 
-
-
-
   def require_change_password
     @user.password_changed_at = 181.days.ago
     @user.save(validate: false)
     flash[:notice] = 'User require changing password next login'
-    redirect_to :back
+    redirect_to users_path
   end
 
   private

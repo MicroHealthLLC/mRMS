@@ -16,7 +16,7 @@ class ApplicationController < ActionController::Base
 
   rescue_from ActiveRecord::ValueTooLong do |exception|
     flash[:error] = exception.message
-    redirect_to :back
+    redirect_to root_path
   end
 
   def set_user
