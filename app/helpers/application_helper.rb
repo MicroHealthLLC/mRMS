@@ -64,8 +64,16 @@ module ApplicationHelper
     ''
   end
 
+  def default_user
+    image_tag 'male.png'
+  end
+
   def avatar(user)
-    image_tag user.profile_image
+    if File.exists?( "public#{user.profile_image}")
+      image_tag user.profile_image
+    else
+      default_user
+    end
   end
 
   def authoring(created, author, options={})

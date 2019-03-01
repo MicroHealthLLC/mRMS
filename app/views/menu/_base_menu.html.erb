@@ -5,7 +5,7 @@
 				<span> <!-- User image size is adjusted inside CSS, it should stay as it -->
 
 					<a href="/users/edit" id="show-shortcut">
-            <%= image_tag User.current.profile_image, class: 'online' %>
+            <%= avatar(User.current) %>
             <span>
 							<%= User.current.name %>
 						</span>
