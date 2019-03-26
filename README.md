@@ -1,5 +1,7 @@
 # mRMS
-MicroHealth Reports Made Simple
+MicroHealth Reports Made Simple.  Think of it as rocket chat, slack or teams for reporting.  You create channels just like those systems however rather than a chat window, its a reporting window that have different reports from your data sets.  We tried a few reporting systems but ultimately, they were too complex for the masses to master.  So we made it as simple as possible that even the most junior person can create reports.  Your data set can be in excel or csv, working on other sources outlined in issues.  However, in reality we found every system out there we use can export to excel or csv meaning the reporting system would work on all the data sets out there. You can brand it and configure the social login.
+
+![Home](home.png)
 
 # Installation:
 
