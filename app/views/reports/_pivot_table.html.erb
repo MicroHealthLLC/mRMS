@@ -26,11 +26,12 @@
   <%= javascript_include_tag 'smart_admin/jquery.ui.touch-punch.min' %>
   <%= javascript_include_tag 'smart_admin/c3.min' %>
   <%= javascript_include_tag 'smart_admin/c3_renderers.min' %>
+  <%= javascript_include_tag 'smart_admin/plotly-basic-latest.min' %>
+  <%= javascript_include_tag 'smart_admin/plotly_renderers' %>
   <!-- subtotal.js libs from ../dist -->
   <%= javascript_include_tag 'smart_admin/subtotal.min' %>
 
   <%= javascript_include_tag 'smart_admin/handsontable.full.min' %>
-
 
 
 
@@ -80,14 +81,15 @@
   <script>
       var renderers;
       $(document).ready(function(){
+          var derivers = $.pivotUtilities.derivers;
           var dataClass = $.pivotUtilities.SubtotalPivotData;
           var renderers = $.extend({},
               $.pivotUtilities.renderers,
               $.pivotUtilities.c3_renderers,
-              $.pivotUtilities.subtotal_renderers
+              $.pivotUtilities.subtotal_renderers,
+              $.pivotUtilities.plotly_renderers
           );
           default_query = {
-
               dataClass: dataClass,
               renderers: renderers,
               unusedAttrsVertical: false,

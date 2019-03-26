@@ -44,7 +44,7 @@ module ReportsHelper
   rescue CSV::MalformedCSVError => error
     @file.force_read_csv(document.path)
   rescue StandardError => error
-    Rollbar.critical("Read DOC: #{e.message}, file: #{file} ")
+    # Rollbar.critical("Read DOC: #{e.message}, file: #{file} ")
     @invalid_file_parse = "Error on parsing document"
   end
 end

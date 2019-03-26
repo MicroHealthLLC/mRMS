@@ -92,7 +92,7 @@ class SpreadsheetEnumerationUpload
         retry if can_retry
       end
       @invalid_file_parse = e.message == "invalid byte sequence in UTF-8" ? I18n.t("back_end.wrong_file") :  e.message
-      Rollbar.critical("IMPORT DOC: #{e.message}, file: #{file} ")
+      # Rollbar.critical("IMPORT DOC: #{e.message}, file: #{file} ")
       return @invalid_file_parse
     end
   end
