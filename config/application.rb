@@ -21,5 +21,7 @@ module SimpleReport
     config.time_zone = "Pacific Time (US & Canada)"
     config.active_record.time_zone_aware_types = [:datetime, :time]
 
+    config.elastic_apm.service_name = 'MRMS APM'
+
   end
 end

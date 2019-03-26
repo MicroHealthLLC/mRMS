@@ -7,7 +7,7 @@ end
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.1.0'
+gem 'rails', '~> 5.2.2'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
 # Use Puma as the app server
@@ -83,6 +83,7 @@ gem 'will_paginate-bootstrap'
 gem 'jquery-datatables-rails'
 gem 'ajax-datatables-rails', '~>0.3.1'
 gem 'roo-xls'
+
 gem 'rails_email_validator'
 gem 'exception_notification'
 gem 'toastr-rails'
@@ -100,7 +101,7 @@ gem 'jSignature'
 gem 'simple_form'
 gem 'sidekiq'
 gem 'cocoon'
-gem 'rollbar'
+gem 'elastic-apm'
 gem "audited", "~> 4.7"
 # breadcrumbs
 gem "breadcrumbs_on_rails"
@@ -123,7 +124,7 @@ if File.exist?(database_file)
     adapters.each do |adapter|
       case adapter
         when 'mysql2'
-          gem "mysql2", "~> 0.3.11", :platforms => [:mri, :mingw, :x64_mingw]
+          gem "mysql2"
           gem "activerecord-jdbcmysql-adapter", :platforms => :jruby
         when 'mysql'
           gem "activerecord-jdbcmysql-adapter", :platforms => :jruby

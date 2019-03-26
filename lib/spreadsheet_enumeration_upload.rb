@@ -19,7 +19,13 @@ class SpreadsheetEnumerationUpload
     @extname = File.extname(original_filename)
     case @extname
       when ".csv" then
-        Roo::CSV.new(file.path, csv_options: {encoding: 'ISO-8859-1'})
+        header = nil
+        tab = []
+        CSV.foreach(file.path, headers: true) do |row|
+            header = row.to_hash.keys if header.nil?
+            tab << row.to_hash
+        end
+        [header, tab, nil]
       when ".xls" then
         Roo::Excel.new(file.path)
       when ".xlsx" then

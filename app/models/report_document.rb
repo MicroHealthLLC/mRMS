@@ -51,4 +51,5 @@ class ReportDocument < ApplicationRecord
       self.errors.add(:file, "Could not read the doc, error #{e.message}")
     end
   end
+
 end

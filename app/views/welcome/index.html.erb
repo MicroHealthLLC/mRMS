@@ -7,7 +7,7 @@
       </div>
       <% if User.current.persisted? %>
           <div class="col-xs-12 hidden-xs col-sm-1 col-md-3">
-            <% News.includes(:user).order("id DESC").first(Setting['news_limit']).each do |news| %>
+            <% News.includes(:user).order("id DESC").first(Setting['news_limit'].to_i).each do |news| %>
                 <%= render partial: 'news/news', locals: {news: news} %>
             <% end %>
           </div>

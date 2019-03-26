@@ -1,25 +1,25 @@
 module PivotTableHelper
-  def render_pivot_information(table)
-    case table
-      when 'affiliation' then render_affiliation
-      when 'clearance' then render_clearance
-      when 'certification' then render_certification
-      when 'contact' then render_contact
-      when 'education' then render_education
-      when 'language' then render_language
-      when 'document' then render_document
-      when 'position' then render_position
-      when 'task' then render_task
-      when 'checklist' then render_checklist
-      when 'case' then render_case
-      when 'survey' then render_survey
-      when 'appointment' then render_appointment
-      when 'note' then render_note
-      else
-        render_user
-    end
-
-  end
+  # def render_pivot_information(table)
+  #   case table
+  #     when 'affiliation' then render_affiliation
+  #     when 'clearance' then render_clearance
+  #     when 'certification' then render_certification
+  #     when 'contact' then render_contact
+  #     when 'education' then render_education
+  #     when 'language' then render_language
+  #     when 'document' then render_document
+  #     when 'position' then render_position
+  #     when 'task' then render_task
+  #     when 'checklist' then render_checklist
+  #     when 'case' then render_case
+  #     when 'survey' then render_survey
+  #     when 'appointment' then render_appointment
+  #     when 'note' then render_note
+  #     else
+  #       render_user
+  #   end
+  #
+  # end
 
   def render_user
    CoreDemographic.includes(:user, :citizenship_type).

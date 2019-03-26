@@ -4,10 +4,17 @@ class ReportsController < ApplicationController
   before_action :set_report, only: [:save_pivottable, :delete_pivottable, :share_report, :upload_document, :show, :edit, :update, :destroy]
   before_action :authorize, except: [:index, :show]
 
+  include ReportsHelper
   # GET /reports/1
   # GET /reports/1.json
   def show
     render_403 unless  @channel.is_public? or @channel.is_creator? or @channel.my_permission.can_view_report?
+
+    # if @report.document_url
+    #   if params[:query_id] or params[:new_query]
+    #     @header, @tab, @error = render_pivot_information(@report.document.file)
+    #   end
+    # end
   end
 
   # GET /reports/new
