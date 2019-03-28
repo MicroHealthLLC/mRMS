@@ -28,22 +28,27 @@ class ReportsController < ApplicationController
 
   def upload_document
     if request.post?
-      @report_document = @report.document
-      if params[:url].present?
-        url= params[:url]
-        time = Time.now.to_i
-        `curl -L #{url} > /tmp/#{time}.xlsx`
-        @report_document.file=  File.new("/tmp/#{time}.xlsx")
-      else
-        @report_document.file = params[:report][:document]
+      respond_to do |format|
+        format.html do
+          @report_document = @report.document
+          if params[:url].present?
+            url= params[:url]
+            time = Time.now.to_i
+            `curl -L #{url} > /tmp/#{time}.xlsx`
+            @report_document.file=  File.new("/tmp/#{time}.xlsx")
+            @report_document.save
+            `rm /tmp/#{time}.xlsx`
+          end
+          redirect_to channel_report_path(@channel, @report)
+        end
+        format.js do
+          @report_document = @report.document
+          @report_document.file = params[:report][:document]
+          @report_document.save
+          render 'uploader/report_upload'
+        end
       end
-      @report_document.save
-      if params[:url].present?
-        `rm /tmp/#{time}.xlsx`
-        redirect_to channel_report_path(@channel, @report)
-      else
-        render 'uploader/report_upload'
-      end
+
 
     end
   end
