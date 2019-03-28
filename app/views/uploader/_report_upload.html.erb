@@ -44,31 +44,52 @@
   }
 </style>
 
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
+<div data-toggle="modal" class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div data-toggle="modal" class="modal-dialog" role="document">
+    <div data-toggle="modal" class="modal-content">
+      <div data-toggle="modal" class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="myModalLabel">Upload Files</h4>
       </div>
       <div id="files" class="files col-xs-12" ></div>
       <div id="errors" style="color: red;" class="files col-xs-12" ></div>
       <%= form_for(@report, url: upload_document_channel_report_path(@channel, @report), method: :post, html: { class: 'form-horizontal' , method: :post,  :multipart => true, :id => "fileupload" }) do |f| %>
-          <div class="modal-body">
+          <div data-toggle="modal" class="modal-body">
             <fieldset>
               <div class="form-group">
                 <%= f.label t('document'), class: 'col-md-2 control-label' %>
                 <div class="col-md-9">
-                  <div class=" btn btn-primary" >
+                  <div class="upload-btn-wrapper">
+                    <button class="btn">Upload a file</button>
                     <input id="fileupload" type="file" class="input-file" name="report[document]" />
-                    <i class="fa fa-picture-o input-file-trigger"><%= 'Upload' %></i>
                   </div>
-
                 </div>
+                <div class="col-md-12" style="text-align: center">
+                  Or
+                </div>
+                <div class="col-md-12">
+                  <label style="float: left">URL:  </label>
+                  <%= text_field_tag :url, '', class: 'col-md-9 form-control' , style: 'width: 80%' %>
+                  <%= f.submit :save, class: 'btn btn-primary', style: 'float: right' %>
+                </div>
+                <style>
+                  .upload-btn-wrapper {
+                    position: relative;
+                    overflow: hidden;
+                    display: inline-block;
+                  }
+                  .upload-btn-wrapper input[type=file] {
+                    font-size: 100px;
+                    position: absolute;
+                    left: 0;
+                    top: 0;
+                    opacity: 0;
+                  }
+                </style>
               </div>
             </fieldset>
           </div>
-          <div class="modal-footer">
+          <div data-toggle="modal" class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
           </div>
           </div>
@@ -94,15 +115,9 @@
         var fileInput  = document.querySelector( ".input-file" ),
             button     = document.querySelector( ".input-file-trigger" )
 
-        // action lorsque la "barre d'espace" ou "Entrée" est p ressée
-        button.addEventListener( "keydown", function( event ) {
-            if ( event.keyCode == 13 || event.keyCode == 32 ) {
-                fileInput.focus();
-            }
-        });
 
         // action lorsque le label est cliqué
-        button.addEventListener( "click", function( event ) {
+        $('#btn_upload_file').on( "click", function( event ) {
             fileInput.focus();
             return false;
         });

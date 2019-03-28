@@ -29,9 +29,24 @@ class ReportsController < ApplicationController
   def upload_document
     if request.post?
       @report_document = @report.document
-      @report_document.file = params[:report][:document]
+      if params[:url].present?
+        url= params[:url]
+        time = Time.now.to_i
+        `curl -L #{url} > #{time}.xlsx`
+        @report_document.file=  File.new(File.join(Rails.root,"#{time}.xlsx"))
+      else
+        @report_document.file = params[:report][:document]
+      end
+
+
       @report_document.save
-      render 'uploader/report_upload'
+      if params[:url].present?
+        `rm #{time}.xlsx`
+        channel_report_path(@channel, @report)
+      else
+        render 'uploader/report_upload'
+      end
+
     end
   end
 
