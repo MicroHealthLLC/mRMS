@@ -32,17 +32,18 @@ class ReportsController < ApplicationController
       if params[:url].present?
         url= params[:url]
         time = Time.now.to_i
-        `curl -L #{url} > #{time}.xlsx`
-        @report_document.file=  File.new(File.join(Rails.root,"#{time}.xlsx"))
+        `curl -L #{url} > /tmp/#{time}.xlsx`
+        @report_document.file=  File.new("/tmp/#{time}.xlsx")
       else
         @report_document.file = params[:report][:document]
       end
 
 
       @report_document.save
+      binding.pry
       if params[:url].present?
-        `rm #{time}.xlsx`
-        channel_report_path(@channel, @report)
+        `rm /tmp/#{time}.xlsx`
+        redirect_to channel_report_path(@channel, @report)
       else
         render 'uploader/report_upload'
       end
