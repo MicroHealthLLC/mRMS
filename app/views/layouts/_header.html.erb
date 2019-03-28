@@ -1,0 +1,61 @@
+<header id="header">
+  <div id="logo-group">
+
+    <!-- PLACE YOUR LOGO HERE -->
+    <span id="logo" > <%= link_to "#{image_tag( "logo.png", alt: '', size: '30x30', style: 'width: auto' )} #{Setting['application_name']}".html_safe , root_path %> </span>
+    <!-- END LOGO PLACEHOLDER -->
+
+
+  </div>
+  <%= yield :top_right %>
+
+  <% if current_user && !@simulate_no_user %>
+    <!-- projects dropdown -->
+
+    <!-- end projects dropdown -->
+
+    <!-- pulled right: nav area -->
+    <div class="pull-right">
+
+      <!-- collapse menu button -->
+      <div id="hide-menu" class="btn-header pull-right">
+        <span> <a href="javascript:void(0);" data-action="toggleMenu" title="Collapse Menu"><i class="fa fa-reorder"></i></a> </span>
+      </div>
+      <!-- end collapse menu -->
+
+
+
+      <!-- logout button -->
+      <div id="logout" class="btn-header transparent pull-right">
+        <span>
+          <%= link_to(destroy_user_session_path, title: 'Sign Out', data: {action: 'userLogout', 'logout-msg' => 'You can improve your security further after logging out by closing this opened browser'}) do %>
+            <i class="fas fa-sign-out-alt"></i>
+          <% end %>
+        </span>
+      </div>
+      <!-- end logout button -->
+
+      <!-- search mobile button (this is hidden till mobile view port) -->
+      <div id="search-mobile" class="btn-header transparent pull-right">
+        <span> <a href="javascript:void(0)" title="Search"><i class="fa fa-search"></i></a> </span>
+      </div>
+      <!-- end search mobile button -->
+
+
+      <!-- end input: search field -->
+
+      <!-- fullscreen button -->
+      <div id="fullscreen" class="btn-header transparent pull-right">
+        <span> <a href="javascript:void(0);" data-action="launchFullscreen" title="Full Screen"><i class="fa fa-arrows-alt"></i></a> </span>
+      </div>
+      <!-- end fullscreen button -->
+
+      <!-- multiple lang dropdown : find all flags in the flags page -->
+
+      <!-- end multiple lang -->
+
+    </div>
+    <!-- end pulled right: nav area -->
+  <% end %>
+
+</header>

@@ -2,12 +2,14 @@ class Devise::SessionsController < DeviseController
   prepend_before_action :require_no_authentication, only: [:new, :create]
   prepend_before_action :allow_params_authentication!, only: :create
   prepend_before_action :verify_signed_out_user, only: :destroy
-  prepend_before_action only: [:create, :destroy] { request.env["devise.skip_timeout"] = true }
+  prepend_before_action(only: [:create, :destroy]) { request.env["devise.skip_timeout"] = true }
   prepend_before_action :check_captcha, only: [:create] if ENV['RECAPTCHA_PUBLIC_KEY'].present?
   prepend_before_action :check_whitelists, only: [:create]
   prepend_before_action :check_blacklists, only: [:create]
+
   # GET /resource/sign_in
   def new
+    @setting = Setting.first || Setting.new
     self.resource = resource_class.new(sign_in_params)
     clean_up_passwords(resource)
     yield resource if block_given?
@@ -16,6 +18,7 @@ class Devise::SessionsController < DeviseController
 
   # POST /resource/sign_in
   def create
+    @setting = Setting.first || Setting.new
     self.resource = warden.authenticate!(auth_options)
     set_flash_message!(:notice, :signed_in)
     sign_in(resource_name, resource)

@@ -1,4 +1,9 @@
+# :nodoc:
 module ApplicationHelper
+  def left_menu
+    left_menu_entries(left_menu_content)
+  end
+
   include MenuHelper
   def format_date datetime
     if datetime.present?
@@ -395,4 +400,67 @@ module ApplicationHelper
     end
     note.html_safe
   end
+
+
+  private
+
+
+  def left_menu_entries(entries = [])
+    output = ''
+    entries.each do |entry|
+      children_selected = entry[:children] &&
+        entry[:children].any? {|child| current_page?(child[:href]) }
+      entry_selected =  current_page?(entry[:href])
+      li_class =
+      case
+        when children_selected
+          'open'
+        when entry_selected
+          'active'
+      end
+      output +=
+        content_tag(:li, class: li_class) do
+          subentry = ''
+          subentry +=
+            link_to entry[:href], title: entry[:title], class: entry[:class], target: entry[:target] do
+              link_text = ''
+              link_text += entry[:content].html_safe
+              if entry[:children]
+                if children_selected
+                  link_text += '<b class="collapse-sign"><em class="fa fa-minus-square-o"></em></b>'
+                else
+                  link_text += '<b class="collapse-sign"><em class="fa fa-plus-square-o"></em></b>'
+                end
+              end
+
+              link_text.html_safe
+            end
+          if entry[:children]
+            if children_selected
+              ul_style = 'display: block'
+            else
+              ul_style = ''
+            end
+            subentry +=
+              "<ul style='#{ul_style}'>" +
+                left_menu_entries(entry[:children]) +
+                "</ul>"
+          end
+
+          subentry.html_safe
+        end
+    end
+    output.html_safe
+  end
+
+  def left_menu_content
+    [
+      {
+        href: root_path,
+        title: _('blank'),
+        content: "<i class='fa fa-lg fa-fw fa-home'></i> <span class='menu-item-parent'>" + _('Blank') + "</span>",
+      },
+    ]
+  end
+
 end

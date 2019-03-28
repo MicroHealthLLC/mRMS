@@ -15,7 +15,7 @@ class ChannelsController < ApplicationController
     respond_to do |format|
       format.html {
       }
-      format.js { render :nothing => true }
+      format.js { render js: '' }
     end
   end
 

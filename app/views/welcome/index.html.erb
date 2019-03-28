@@ -1,27 +1,27 @@
-<div class="row">
+<div id="content" class="container">
+  <div class="row">
 
-  <% if user_signed_in? %>
-      <div class="col-xs-12 hidden-xs col-sm-1 col-md-1">  </div>
-      <div class="col-xs-12 col-sm-10 col-md-8" style="overflow: hidden;">
-        <%= @setting.home_page_content.html_safe if @setting.home_page_content %>
-      </div>
-      <% if User.current.persisted? %>
-          <div class="col-xs-12 hidden-xs col-sm-1 col-md-3">
-            <% News.includes(:user).order("id DESC").first(Setting['news_limit'].to_i).each do |news| %>
-                <%= render partial: 'news/news', locals: {news: news} %>
-            <% end %>
-          </div>
-      <% end %>
-  <% else  %>
-      <div class="col-xs-12 hidden-xs col-sm-1 col-md-1 col-lg-1">  </div>
-      <div class="col-xs-12 col-sm-6 col-md-6 col-lg-8" style="overflow: hidden">
-        <%= @setting.home_page_content.html_safe if @setting.home_page_content %>
-      </div>
-      <div class="col-xs-12 col-sm-5 col-md-4 col-lg-3" style="">
-        <%= render partial: 'devise/sessions/new_form' %>
-      </div>
+    <% if user_signed_in? %>
+        <div class="col-xs-12 hidden-xs col-sm-1 col-md-1">  </div>
+        <div class="col-xs-12 col-sm-10 col-md-8" style="overflow: hidden;">
+          <%= @setting.home_page_content.html_safe if @setting.home_page_content %>
+        </div>
+        <% if User.current.persisted? %>
+            <div class="col-xs-12 hidden-xs col-sm-1 col-md-3">
+              <% News.includes(:user).order("id DESC").first(Setting['news_limit'].to_i).each do |news| %>
+                  <%= render partial: 'news/news', locals: {news: news} %>
+              <% end %>
+            </div>
+        <% end %>
+    <% else  %>
+        <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8 hidden-xs hidden-sm">
+          <%= @setting.home_page_content.html_safe if @setting.home_page_content %>
+        </div>
+        <%= render partial: '/devise/sessions/new_form' %>
 
-  <% end %>
+
+    <% end %>
+  </div>
 </div>
 <script>
     $(document).ready(function(){

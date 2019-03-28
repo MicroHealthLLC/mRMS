@@ -102,4 +102,23 @@ Rails.application.routes.draw do
   end
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+
+
+# For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  root 'miscellaneous#blank_page'
+  # Miscellaneous
+  get 'miscellaneous/login',
+      to: 'miscellaneous#login',
+      as: :miscellaneous_login
+  get 'miscellaneous/register',
+      to: 'miscellaneous#register',
+      as: :miscellaneous_register
+  get 'miscellaneous/forgot_password',
+      to: 'miscellaneous#forgot_password',
+      as: :miscellaneous_forgot_password
+  get 'miscellaneous/locked_screen',
+      to: 'miscellaneous#locked_screen',
+      as: :miscellaneous_locked_screen
+
+
 end

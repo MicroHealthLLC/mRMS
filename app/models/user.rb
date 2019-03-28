@@ -4,6 +4,7 @@ class User < ApplicationRecord
 
   acts_as_paranoid
 
+  require 'red_carpet'
   # ldap_authenticatable
   if Rails.env.development?
     devise :database_authenticatable, :registerable, :timeoutable,

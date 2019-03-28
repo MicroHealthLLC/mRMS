@@ -7,9 +7,9 @@ class ApplicationController < ActionController::Base
   before_action :set_user
   before_action :set_enabled_modules
   before_action :module_visible
-
+  layout :get_layout
   around_action :user_time_zone, :if => :current_user
-  layout 'base'
+  # layout 'base'
   def set_enabled_modules
     @enabled_modules =  EnabledModule.active.pluck(:name).to_set
   end
@@ -17,6 +17,11 @@ class ApplicationController < ActionController::Base
   rescue_from ActiveRecord::ValueTooLong do |exception|
     flash[:error] = exception.message
     redirect_to root_path
+  end
+
+  def get_layout
+    return 'application'
+    user_signed_in? ? 'base' : 'application'
   end
 
   def set_user
