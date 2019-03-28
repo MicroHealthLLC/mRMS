@@ -37,10 +37,7 @@ class ReportsController < ApplicationController
       else
         @report_document.file = params[:report][:document]
       end
-
-
       @report_document.save
-      binding.pry
       if params[:url].present?
         `rm /tmp/#{time}.xlsx`
         redirect_to channel_report_path(@channel, @report)
