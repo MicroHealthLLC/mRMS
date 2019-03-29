@@ -10,15 +10,15 @@ class SettingsController < ProtectForgeryApplication
   end
 
   def create
-    @setting = Setting.first || Setting.new
-    @setting.attributes= setting_params
-    @setting.save
-
     Setting['application_name'] = params['application_name']
     Setting['news_limit'] = params['news_limit']
     Setting['spreadsheet_limit'] = params['spreadsheet_limit'] if params[:spreadsheet_limit].to_i < 50
     Setting['email_from'] = params['email_from']
     Setting['format_date'] = params['format_date']
+    Setting['section_1'] = params['section_1']
+    Setting['section_2'] = params['section_2']
+    Setting['section_3'] = params['section_3']
+    Setting['section_4'] = params['section_4']
     redirect_to settings_path
   end
 
@@ -95,11 +95,4 @@ class SettingsController < ProtectForgeryApplication
     theme.save
     redirect_to settings_path
   end
-
-  private
-
-  def setting_params
-    params.require(:setting).permit(:home_page_content)
-  end
-
 end

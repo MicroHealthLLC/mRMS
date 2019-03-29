@@ -2,9 +2,20 @@
   <div class="row">
 
     <% if user_signed_in? %>
-        <div class="col-xs-12 hidden-xs col-sm-1 col-md-1">  </div>
-        <div class="col-xs-12 col-sm-10 col-md-8" style="overflow: hidden;">
-          <%= @setting.home_page_content.html_safe if @setting.home_page_content %>
+        <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8 hidden-xs hidden-sm">
+          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+            <%= Setting['section_1'].to_s.html_safe %>
+          </div>
+          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+            <%= Setting['section_2'].to_s.html_safe %>
+          </div>
+
+          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+            <%= Setting['section_3'].to_s.html_safe %>
+          </div>
+          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+            <%= Setting['section_4'].to_s.html_safe %>
+          </div>
         </div>
         <% if User.current.persisted? %>
             <div class="col-xs-12 hidden-xs col-sm-1 col-md-3">
@@ -15,13 +26,23 @@
         <% end %>
     <% else  %>
         <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8 hidden-xs hidden-sm">
-          <%= @setting.home_page_content.html_safe if @setting.home_page_content %>
+          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+            <%= Setting['section_1'].to_s.html_safe %>
+          </div>
+          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+            <%= Setting['section_2'].to_s.html_safe %>
+          </div>
+
+          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+            <%= Setting['section_3'].to_s.html_safe %>
+          </div>
+          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+            <%= Setting['section_4'].to_s.html_safe %>
+          </div>
         </div>
         <%= render partial: '/devise/sessions/new_form' %>
-
-
     <% end %>
-  </div>
+    </div>
 </div>
 <script>
     $(document).ready(function(){

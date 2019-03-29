@@ -1,6 +1,7 @@
 <div id="tabs" class="ui-tabs ui-widget ui-widget-content ui-corner-all">
   <ul class="nav-tabs ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
     <li class="ui-state-default ui-corner-top"> <a class="ui-tabs-anchor" id="link-tabs-general" href="#tabs-home" >Home page</a></li>
+    <li class="ui-state-default ui-corner-top"> <a class="ui-tabs-anchor" id="link-tabs-general" href="#tabs-main" >Contents</a></li>
     <li class="ui-state-default ui-corner-top"> <a class="ui-tabs-anchor" id="link-tabs-modules" href="#tabs-module">Module page</a></li>
     <li class="ui-state-default ui-corner-top"> <a class="ui-tabs-anchor" id="link-tabs-modules" href="#tabs-theme">Themes</a></li>
     <li class="ui-state-default ui-corner-top"> <a class="ui-tabs-anchor" id="link-tabs-modules" href="#tabs-authentification">Authentication</a></li>
@@ -9,6 +10,10 @@
   </ul>
   <div id='tabs-home' style="display: block" class="nav-tabs-div ui-tabs-panel ui-widget-content ui-corner-bottom" >
     <%= render partial: 'general_setting' %>
+  </div>
+
+   <div id='tabs-main' style="display: block" class="nav-tabs-div ui-tabs-panel ui-widget-content ui-corner-bottom" >
+    <%= render partial: 'content' %>
   </div>
 
   <div id='tabs-module' style="display: none" class="nav-tabs-div ui-tabs-panel ui-widget-content ui-corner-bottom" >
