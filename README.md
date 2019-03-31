@@ -150,8 +150,11 @@ log in with temp account admin with password Admin@2018
 
 go to administration
 
-Change, configure and customize your application
+Change, configure and customize your application. Setup your social login redirect uri as below
 
-
-
+https://YourliveSiteDomain/users/auth/linkedin/callback
+https://YourliveSiteDomain/users/auth/google_oauth2/callback
+https://YourliveSiteDomain/users/auth/facebook/callback
+https://YourliveSiteDomain/users/auth/twitter/callback
+https://YourliveSiteDomain/users/auth/office365/callback
 
