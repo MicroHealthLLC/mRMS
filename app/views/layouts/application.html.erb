@@ -238,7 +238,7 @@ Use search to find needed section.
   * 'fixed-page-footer' - Fixes footer
   * 'container'         - boxed layout mode (non-responsive: will not work with fixed-navigation & fixed-ribbon)
 -->
-<body class="<%= Setting.theme(User.current.can?(:manage_roles)).values.join(' ') %>" style="min-height: 99vh; max-width: 99%">
+<body class="<%= Setting.theme(User.current.can?(:manage_roles)).values.join(' ') %>" style="min-height: 99vh; max-width: 100%">
 
 <!-- HEADER -->
 <%= render partial: 'layouts/header' unless @lock_screen %>
@@ -250,7 +250,7 @@ Use search to find needed section.
 <!-- END NAVIGATION -->
 
 <!-- MAIN PANEL -->
-<div id="main" role="main" >
+<div id="main" role="main" style="padding-left: 15px; padding-right: 15px;">
   <%= render_flash_messages %>
   <% if breadcrumbs.present? %>
       <ol class="breadcrumb" style="font-size: 18px">

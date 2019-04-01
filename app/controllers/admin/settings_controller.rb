@@ -15,10 +15,7 @@ class SettingsController < ProtectForgeryApplication
     Setting['spreadsheet_limit'] = params['spreadsheet_limit'] if params[:spreadsheet_limit].to_i < 50
     Setting['email_from'] = params['email_from']
     Setting['format_date'] = params['format_date']
-    Setting['section_1'] = params['section_1']
-    Setting['section_2'] = params['section_2']
-    Setting['section_3'] = params['section_3']
-    Setting['section_4'] = params['section_4']
+    Setting['terms'] = params['terms']
     redirect_to settings_path
   end
 
@@ -69,6 +66,14 @@ class SettingsController < ProtectForgeryApplication
     EnabledModule.where(name: selected_modules).update_all({status: true})
     EnabledModule.where(name: rejected_modules).update_all({status: false})
     redirect_to settings_path
+  end
+
+   def set_content
+     Setting['section_1'] = params['section_1']
+     Setting['section_2'] = params['section_2']
+     Setting['section_3'] = params['section_3']
+     Setting['section_4'] = params['section_4']
+     redirect_to settings_path
   end
 
   def set_theme

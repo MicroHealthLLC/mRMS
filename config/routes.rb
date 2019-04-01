@@ -33,6 +33,7 @@ Rails.application.routes.draw do
       post 'set_user_auth'
       post 'set_notification'
       post 'set_modules'
+      post 'set_content'
       post 'set_theme'
       post 'set_key_providers'
     end

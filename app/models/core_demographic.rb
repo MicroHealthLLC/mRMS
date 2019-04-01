@@ -24,7 +24,7 @@ class CoreDemographic < ApplicationRecord
 
   def self.safe_attributes
     [
-        :user_id, :first_name, :last_name, :middle_name,
+        :user_id, :first_name, :last_name, :middle_name, :time_zone,
         :note, :organization_id, user_attributes: [User.safe_attributes]
     ]
   end

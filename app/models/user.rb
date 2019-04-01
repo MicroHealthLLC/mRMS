@@ -20,6 +20,8 @@ class User < ApplicationRecord
 
   end
 
+  attr_accessor :terms
+
   # HAS ONE
   has_one :core_demographic
   accepts_nested_attributes_for :core_demographic
@@ -39,6 +41,7 @@ class User < ApplicationRecord
 
   default_scope  -> {includes(:core_demographic).references(:core_demographic)}
 
+  validates_presence_of :terms, on: :create
 
   def timeout_in
     super
@@ -89,6 +92,7 @@ class User < ApplicationRecord
       return where(email: auth.info.email || "#{auth.uid}@#{auth.provider}.com").first
     end
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+      user.terms = true
       user.provider = auth.provider
       user.uid = auth.uid
       user.email = auth.info.email || "#{auth.uid}@#{auth.provider}.com"
@@ -102,6 +106,7 @@ class User < ApplicationRecord
   def self.create_with_jwt_hash(jwt)
     email = jwt['email'].presence || jwt['preferred_username']
     where(provider: 'office365', uid: email).first_or_create do |user|
+      user.terms = true
       user.provider = 'office365'
       user.uid = email
       user.email = email

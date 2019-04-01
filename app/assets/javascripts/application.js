@@ -30,5 +30,4 @@
 
 // BOOTSTRAP JS
 
-// MAIN APP JS FILE
-//= require app.seed
+

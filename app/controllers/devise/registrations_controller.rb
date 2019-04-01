@@ -7,13 +7,13 @@ class Devise::RegistrationsController < DeviseController
 
    include MenuHelper
   def new
-    if @enabled_modules.include?('user_subscription')
+    # if @enabled_modules.include?('user_subscription')
       build_resource({})
       yield resource if block_given?
       respond_with resource
-    else
-      redirect_to root_path
-    end
+    # else
+    #   redirect_to root_path
+    # end
 
   end
 
@@ -44,23 +44,6 @@ class Devise::RegistrationsController < DeviseController
   # GET /resource/edit
   def edit
     @core_demographic = User.current.core_demographic || CoreDemographic.new(user_id: User.current.id)
-    if User.current.can?(:manage_roles)
-      if module_enabled?( 'languages')
-        @languages = []
-      end
-
-      if module_enabled?( 'contacts')
-        @contacts = []
-      end
-
-      if module_enabled?( 'documents')
-        @is_client_doc = true
-        @documents = []
-      end
-      # if module_enabled?( 'related_clients')
-      #   @related_clients = RelatedClient.visible
-      # end
-    end
     respond_to do |format|
       format.html{
         render :edit
