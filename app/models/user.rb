@@ -42,7 +42,7 @@ class User < ApplicationRecord
 
   default_scope  -> {includes(:core_demographic).references(:core_demographic)}
 
-  validates_presence_of :terms, on: :create
+  validates_acceptance_of :terms, on: :create
 
   def timeout_in
     super
@@ -274,7 +274,7 @@ class User < ApplicationRecord
   end
 
   def self.safe_attributes_with_password_with_core_demographic_without_state
-    [:login, :email, :password, :password_confirmation, :time_zone,
+    [:login, :email, :password, :password_confirmation, :time_zone, :terms,
      core_demographic_attributes: [[:id] + CoreDemographic.safe_attributes]]
   end
 
