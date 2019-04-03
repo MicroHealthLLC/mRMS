@@ -35,6 +35,12 @@ class ChannelPermissionsController < ApplicationController
     redirect_back fallback_location: root_path
   end
 
+  def leave_channel
+    ChannelNotification.create(channel_id: @channel, user_id: User.current.id, notification_type: 1)
+    ChannelPermission.where(channel_id: @channel, user_id: User.current.id).first.delete
+    redirect_back fallback_location: root_path
+  end
+
   private
 
   def set_permission

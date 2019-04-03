@@ -5,10 +5,16 @@ Rails.application.routes.draw do
   # match "/uploads/:id/:basename.:extension", :controller => "addfiles", :action => "download", via: :get
 
   resources :channels, except: [:index] do
+    resources :channel_notifications, only: [:edit]
     collection do
       match :reorder_handle, via: [:put]
     end
-    resources :channel_permissions, except: [:new, :edit]
+    resources :channel_permissions, except: [:new, :edit] do
+      collection do
+        get 'leave_channel'
+      end
+    end
+
     resources :reports, except: [:index] do
       member do
         match :save_pivottable, via: [:post]
@@ -105,7 +111,7 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
 
-# For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root 'miscellaneous#blank_page'
   # Miscellaneous
   get 'miscellaneous/login',

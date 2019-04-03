@@ -2,20 +2,71 @@
   <div class="col-md-12 ">
     <div class="pull-right">
       <% unless @channel.shared_report? %>
-        <% if !@channel.is_public? && !@channel.is_personal? && (@channel.is_creator? or @channel.my_permission.can_add_users?) %>
-            <%= show_button(channel_channel_permissions_path(@channel), ' Permissions', 'cog', 'warning')  %>
-        <% end %>
+          <% if !@channel.is_public? && !@channel.is_personal? && @channel.my_permission.can_view? %>
+              <%= show_button(channel_channel_permissions_path(@channel), ' Leave Channel', 'sign-out-alt', 'danger', {confirm: 'Do you want to leave this channel?'})  %>
+          <% end %>
 
-        <% if @channel.is_public? or @channel.is_creator? or (@channel.my_permission.can_add_report?) %>
-            <%= show_button(new_channel_report_url(@channel), ' Add Data set', 'play-circle', 'info')  %>
-        <% end %>
+          <% if !@channel.is_public? && !@channel.is_personal? && @channel.is_creator?  %>
+              <%= show_button('#', "Notifications (#{@channel.channel_notifications.where(seen: false).count})", 'bell', 'info',  {toggle:"modal", target:"#ChannelNotification" })  %>
 
-        <% if @channel.is_creator? or @channel.my_permission.can_edit? %>
-            <%= edit_button edit_channel_path(@channel) %>
-        <% end %>
+              <div data-toggle="modal" class="modal fade" id="ChannelNotification" tabindex="-1" role="dialog" aria-labelledby="ChannelNotification">
+                <div data-toggle="modal" class="modal-dialog" role="document">
+                  <div data-toggle="modal" class="modal-content">
+                    <div data-toggle="modal" class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                      <h4 class="modal-title" id="myModalLabel">Notification</h4>
+                    </div>
+                    <div id="files" class="files col-xs-12" ></div>
+                    <div id="errors" style="color: red;" class="files col-xs-12" ></div>
+                    <div data-toggle="modal" class="modal-body">
+                      <table class="table table-responsive table-bordered">
+                        <thead>
+                        <tr><th>User</th><th>Notification Type</th><th></th></tr>
+                        </thead>
+                        <tbody>
+                        <% @channel.channel_notifications.each do |cn|%>
+                            <tr id="channel_notification_<%= cn.id %>">
+                              <td> <%= cn.user.to_s %>   </td>
+                              <td>
+                                <% if cn.notification_type == 1 %>
+                                   Left Channel
+                                <% else %>
 
-        <% if @channel.is_creator?  %>
-            <%= delete_button channel_path(@channel), 'channel' %>
+                                <% end %>
+                              </td>
+
+                              <td>
+                                <% if cn.notification_type == 1 %>
+                                   <%= show_button '', edit_channel_channel_notification_path(cn), 'check', 'info', {remote: true}  %>
+                                <% else %>
+                                    <%= show_button 'Accept', edit_channel_channel_notification_path(cn, accept: true), 'check', 'success', {remote: true}  %>
+                              <% end %>
+                              </td>
+                            </tr>
+                        <% end %>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+          <% end %>
+
+          <% if !@channel.is_public? && !@channel.is_personal? && (@channel.is_creator? or @channel.my_permission.can_add_users?) %>
+              <%= show_button(channel_channel_permissions_path(@channel), ' Permissions', 'cog', 'warning')  %>
+          <% end %>
+
+          <% if @channel.is_public? or @channel.is_creator? or (@channel.my_permission.can_add_report?) %>
+              <%= show_button(new_channel_report_url(@channel), ' Add Data set', 'play-circle', 'info')  %>
+          <% end %>
+
+          <% if @channel.is_creator? or @channel.my_permission.can_edit? %>
+              <%= edit_button edit_channel_path(@channel) %>
+          <% end %>
+
+          <% if @channel.is_creator?  %>
+              <%= delete_button channel_path(@channel), 'channel' %>
           <% end %>
       <% end %>
 

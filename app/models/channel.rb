@@ -6,6 +6,7 @@ class Channel < ApplicationRecord
   has_many :reports, dependent: :destroy
   has_many :channel_permissions, dependent: :destroy
   has_many :channel_orders, dependent: :destroy
+  has_many :channel_notifications, dependent: :destroy
   belongs_to :user
 
   GROUPS = 1
