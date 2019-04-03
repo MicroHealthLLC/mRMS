@@ -8,7 +8,7 @@ class EmployeeDatatable < Abstract
       CoreDemographic.middle_name
       CoreDemographic.last_name
       User.state
-      Organization.name
+      Enumeration.name
     }
   end
 
@@ -20,7 +20,7 @@ class EmployeeDatatable < Abstract
       CoreDemographic.middle_name
       CoreDemographic.last_name
       User.state
-      Organization.name
+      Enumeration.name
     }
   end
 
@@ -35,8 +35,8 @@ class EmployeeDatatable < Abstract
 
           user.last_name,
           user.email ,
+          (user.organization_enum.to_s.presence || '-'),
 
-          user.organization.to_s,
           user.state
 
       ]
@@ -44,9 +44,8 @@ class EmployeeDatatable < Abstract
   end
 
   def get_raw_records
-    scope = User.employees.include_enumerations
-        # .includes(:job_detail=> [:organization]).
-        # references(:job_detail=> [:organization])
+    scope = User.employees.include_enumerations.
+         includes(:organization_enum).references(:organization_enum)
 
     case @options[:status_type]
       when 'active' then scope= scope.where(state: true)

@@ -17,7 +17,7 @@
   <tbody>
   <% permissions.each_with_index do |permission, idx| %>
       <tr>
-        <td><%=  permission.user.to_s %></td>
+        <td><%=  permission.user.to_s.strip.presence || permission.user.email %></td>
         <td><i class="fa fa-<%=  permission.can_view? ? 'check' : 'times' %>"></i></td>
         <td><i class="fa fa-<%=  permission.can_edit? ? 'check' : 'times' %>"></i></td>
         <td><i class="fa fa-<%=  permission.can_add_report? ? 'check' : 'times' %>"></i></td>

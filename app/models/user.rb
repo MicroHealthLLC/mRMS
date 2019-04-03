@@ -27,6 +27,7 @@ class User < ApplicationRecord
   accepts_nested_attributes_for :core_demographic
 
   belongs_to :role, optional: true
+  has_one :organization_enum,  through: :core_demographic
 
   has_many :user_attachments, foreign_key: :owner_id, dependent: :destroy
   accepts_nested_attributes_for :user_attachments, reject_if: :all_blank, allow_destroy: true
@@ -78,10 +79,6 @@ class User < ApplicationRecord
     user = get_user(auth)
     return user.deleted? if user
     false
-  end
-
-  def organization
-    # job_detail.try(:organization)
   end
 
   def self.get_user(auth)
