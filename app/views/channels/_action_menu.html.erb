@@ -3,7 +3,7 @@
     <div class="pull-right">
       <% unless @channel.shared_report? %>
           <% if !@channel.is_public? && !@channel.is_personal? && @channel.my_permission.can_view? %>
-              <%= show_button(channel_channel_permissions_path(@channel), ' Leave Channel', 'sign-out-alt', 'danger', {confirm: 'Do you want to leave this channel?'})  %>
+              <%= show_button(leave_channel_channel_channel_permissions_path(@channel), ' Leave Channel', 'sign-out-alt', 'danger', {confirm: 'Do you want to leave this channel?'})  %>
           <% end %>
 
           <% if !@channel.is_public? && !@channel.is_personal? && @channel.is_creator?  %>
@@ -37,9 +37,9 @@
 
                               <td>
                                 <% if cn.notification_type == 1 %>
-                                   <%= show_button '', edit_channel_channel_notification_path(cn), 'check', 'info', {remote: true}  %>
+                                   <%= show_button edit_channel_channel_notification_path(cn), '', 'check', 'info', {remote: true}  %>
                                 <% else %>
-                                    <%= show_button 'Accept', edit_channel_channel_notification_path(cn, accept: true), 'check', 'success', {remote: true}  %>
+                                    <%= show_button edit_channel_channel_notification_path(cn, accept: true),  'Accept', 'check', 'success', {remote: true}  %>
                               <% end %>
                               </td>
                             </tr>

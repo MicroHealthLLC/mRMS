@@ -2,7 +2,7 @@ class ChannelPermissionsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_channel
   before_action :set_permission, only: :destroy
-  before_action :authorize
+  before_action :authorize, except: [:leave_channel]
 
   def index
     @permissions = @channel.channel_permissions
@@ -36,9 +36,10 @@ class ChannelPermissionsController < ApplicationController
   end
 
   def leave_channel
-    ChannelNotification.create(channel_id: @channel, user_id: User.current.id, notification_type: 1)
-    ChannelPermission.where(channel_id: @channel, user_id: User.current.id).first.delete
-    redirect_back fallback_location: root_path
+    ChannelNotification.create(channel_id: @channel.id, user_id: User.current.id, notification_type: 1)
+    ChannelPermission.where(channel_id: @channel, user_id: User.current.id).first&.destroy
+    flash[:notice] = 'You left the channel'
+    redirect_to root_path
   end
 
   private
