@@ -35,13 +35,6 @@
         </div>
 
         <div class="form-group">
-          <label class="col-md-2 control-label">Status</label>
-          <div class="col-md-8">
-            <%= form.select :state, options_for_select([['Active', true],['Inactive', false]], selected: user.state), {}, {class: 'form-control'} %>
-          </div>
-        </div>
-
-        <div class="form-group">
           <label class="col-md-2 control-label">Time Zone</label>
           <div class="col-md-8">
             <%= form.time_zone_select :time_zone, ActiveSupport::TimeZone.us_zones, {},{class: 'form-control'} %>
