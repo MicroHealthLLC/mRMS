@@ -134,7 +134,7 @@ class UsersController < ProtectForgeryApplication
 
   def change_password
     if params[:user][:password] == params[:user][:password_confirmation]
-      if @user.update(password: params[:user][:password])
+      if @user.reset_password(params[:user][:password], params[:user][:password_confirmation])
         flash[:notice] = I18n.t('devise.passwords.updated_not_active')
       else
         flash[:error] = @user.errors.full_messages.join('<br/>')

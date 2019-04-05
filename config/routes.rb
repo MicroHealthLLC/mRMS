@@ -5,10 +5,11 @@ Rails.application.routes.draw do
   # match "/uploads/:id/:basename.:extension", :controller => "addfiles", :action => "download", via: :get
 
   resources :channels, except: [:index] do
-    resources :channel_notifications, only: [:edit]
+    resources :channel_notifications, only: [:edit, :destroy, :new]
     collection do
       match :reorder_handle, via: [:put]
     end
+
     resources :channel_permissions, except: [:new, :edit] do
       collection do
         get 'leave_channel'

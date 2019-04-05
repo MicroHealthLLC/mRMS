@@ -18,7 +18,6 @@ class Devise::SessionsController < DeviseController
 
   # POST /resource/sign_in
   def create
-    @setting = Setting.first || Setting.new
     self.resource = warden.authenticate!(auth_options)
     set_flash_message!(:notice, :signed_in)
     sign_in(resource_name, resource)

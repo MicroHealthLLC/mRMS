@@ -7,6 +7,8 @@ class ApplicationController < ActionController::Base
   before_action :set_user
   before_action :set_enabled_modules
   before_action :module_visible
+  before_action :set_channels
+  before_action :set_requested_channels
   layout :get_layout
   around_action :user_time_zone, :if => :current_user
   # layout 'base'
@@ -98,6 +100,30 @@ class ApplicationController < ActionController::Base
   end
 
   private
+
+
+  def set_channels
+    return if User.current.new_record?
+    scope  = []
+    scope<< Channel.is_public
+    scope<< Channel.for_user
+
+    scope.flatten.compact.each do |channel|
+      co = User.current.channel_orders.where(channel_id: channel.id).first
+      if co.nil?
+        ChannelOrder.create(channel_id: channel.id, user_id: User.current.id)
+      end
+    end
+    co= User.current.channel_orders.where(channel_id: -1).first
+    if co.nil?
+      ChannelOrder.create(channel_id: -1, user_id: User.current.id)
+    end
+    @channels = User.current.channel_orders.pluck(:channel_id)
+  end
+
+  def set_requested_channels
+    @requested_channels = Channel.for_shared_users - Channel.where(id: @channels)
+  end
 
   def user_time_zone(&block)
     Time.use_zone(User.current.time_zone, &block)

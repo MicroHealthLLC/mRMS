@@ -1,8 +1,18 @@
 class ChannelNotificationsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_channel
-  before_action :set_notification
-  before_action :authorize
+  before_action :set_notification, except: :new
+  before_action :authorize, only: :edit
+
+  def new
+    ChannelNotification.create(channel_id: @channel.id,
+                               user_id: User.current.id,
+                               seen: false,
+                               notification_type: ChannelNotification::REQUEST
+
+    )
+    redirect_back fallback_location: root_path
+  end
 
   def edit
     respond_to do |format|
@@ -16,6 +26,11 @@ class ChannelNotificationsController < ApplicationController
         render js: "$('#channel_notification_#{@channel_notification.id}').hide();"
       end
     end
+  end
+
+  def destroy
+    @channel_notification.destroy
+    redirect_back fallback_location: root_path
   end
 
   private

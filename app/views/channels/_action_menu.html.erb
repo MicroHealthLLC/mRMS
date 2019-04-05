@@ -29,18 +29,18 @@
                               <td> <%= cn.user.to_s %>   </td>
                               <td>
                                 <% if cn.notification_type == 1 %>
-                                   Left Channel
+                                    Left Channel
                                 <% else %>
-
+                                    Request
                                 <% end %>
                               </td>
 
                               <td>
                                 <% if cn.notification_type == 1 %>
-                                   <%= show_button edit_channel_channel_notification_path(cn), '', 'check', 'info', {remote: true}  %>
+                                    <%= show_button edit_channel_channel_notification_path(cn), '', 'check', 'info', {remote: true}  %>
                                 <% else %>
-                                    <%= show_button edit_channel_channel_notification_path(cn, accept: true),  'Accept', 'check', 'success', {remote: true}  %>
-                              <% end %>
+                                    <%= show_button '#',  'Accept', 'check', 'success', {toggle:"modal", target:"#AddPermissionModal#{cn.user_id}" }%>
+                                <% end %>
                               </td>
                             </tr>
                         <% end %>
@@ -50,7 +50,9 @@
                   </div>
                 </div>
               </div>
-
+              <% @channel.channel_notifications.where(notification_type: ChannelNotification::REQUEST).each do |cn|%>
+                  <%= render partial: 'channel_permissions/permission_modal', locals: {user_id: cn.user_id, channel: @channel, permission: ChannelPermission.new} %>
+              <% end %>
           <% end %>
 
           <% if !@channel.is_public? && !@channel.is_personal? && (@channel.is_creator? or @channel.my_permission.can_add_users?) %>

@@ -2,24 +2,13 @@
 <li class="<%= menu_active?('channels', 'new') %>">
   <a href="/channels/new" title="<%= 'new Channel' %>"><i class="fa fa-lg fa-fw fa-plus-circle"></i><span class="menu-item-parent"><%= 'Create Channel' %></span></a>
 </li>
-<%   scope  = []
-     scope<< Channel.is_public
-     scope<< Channel.for_user
 
-     scope.flatten.compact.each do |channel|
-       co = User.current.channel_orders.where(channel_id: channel.id).first
-       if co.nil?
-         ChannelOrder.create(channel_id: channel.id, user_id: User.current.id)
-       end
-     end
-     co= User.current.channel_orders.where(channel_id: -1).first
-     if co.nil?
-       ChannelOrder.create(channel_id: -1, user_id: User.current.id)
-     end
-     @channels = User.current.channel_orders.pluck(:channel_id)
-
-%>
-
+<li>
+  <a href="#" title="<%= 'Request Channel' %>" data-toggle="modal" data-target="#RequestEntranceModal" }>
+    <i class="fa-lg fa-fw fas fa-bowling-ball"></i>
+    <span class="menu-item-parent"><%= 'Request Channel' %></span>
+  </a>
+</li>
 <% @channels.each do |channel_id| %>
     <% if channel_id == -1 %>
 

@@ -12,6 +12,7 @@ class ChannelPermissionsController < ApplicationController
   def create
     @permission = @channel.channel_permissions.new(params[:channel_permission].permit!)
     if @permission.save
+      @channel.channel_notifications.where(user_id: @permission.user_id).delete_all
       flash[:notice] = "Success"
       render js: 'location.reload();'
     else
