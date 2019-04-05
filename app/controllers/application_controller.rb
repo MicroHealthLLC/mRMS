@@ -118,11 +118,11 @@ class ApplicationController < ActionController::Base
     if co.nil?
       ChannelOrder.create(channel_id: -1, user_id: User.current.id)
     end
-    @channels = User.current.channel_orders.pluck(:channel_id)
+    @ordered_channels = User.current.channel_orders.pluck(:channel_id)
   end
 
   def set_requested_channels
-    @requested_channels = Channel.for_shared_users - Channel.where(id: @channels)
+    @requested_channels = Channel.for_shared_users - Channel.where(id: @ordered_channels)
   end
 
   def user_time_zone(&block)

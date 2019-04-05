@@ -1,0 +1,30 @@
+<table class="table table-responsive table-bordered">
+  <thead>
+  <tr>
+    <th>Channel</th>
+    <th>Owner/ </th>
+    <th>Change Owner</th>
+    <th>Delete</th>
+  </tr>
+  </thead>
+
+  <tbody>
+
+  <% Channel.order('name ASC').each do |channel| %>
+      <tr>
+        <td><%= channel.name %></td>
+        <td><%= channel.user&.to_s || channel.user&.email %></td>
+        <td><%= form_for channel, remote: true do |form| %>
+              <%= form.select(:user_id, options_for_select(User.all.map{|user| [user.name, user.id]}, selected: channel.user_id), class: 'form_control') %>
+
+              <%= form.submit 'Change Owner', class: 'btn btn-success pull-right' %>
+          <% end %>
+        </td>
+        <td>
+          <%= delete_button channel_path(channel), 'channel' %>
+        </td>
+      </tr>
+  <% end %>
+
+  </tbody>
+</table>

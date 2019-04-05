@@ -9,7 +9,7 @@
     <span class="menu-item-parent"><%= 'Request Channel' %></span>
   </a>
 </li>
-<% @channels.each do |channel_id| %>
+<% @ordered_channels.each do |channel_id| %>
     <% if channel_id == -1 %>
 
         <li data-reorder-url="<%= reorder_handle_channels_path(channel_id: '-1') %>" data-reorder-param="<%= 'channel' %>" class=" sort-handle" >

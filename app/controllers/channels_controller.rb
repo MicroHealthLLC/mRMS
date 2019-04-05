@@ -2,7 +2,8 @@ class ChannelsController < ApplicationController
   before_action :authenticate_user!
   # before_action :set_channel, only: [:manage_users, :show, :edit, :update, :destroy]
   before_action :set_channel, only: [:show, :edit, :update, :destroy]
-  before_action :authorize
+  before_action :authorize, except: [:index]
+  before_action :require_admin, only: [:index]
 
 
   def index
@@ -59,9 +60,11 @@ class ChannelsController < ApplicationController
       if @channel.update(channel_params)
         format.html { redirect_to @channel, notice: 'Channel was successfully updated.' }
         format.json { render :show, status: :ok, location: @channel }
+        format.js {render js: 'alert("Saved")'}
       else
         format.html { render :edit }
         format.json { render json: @channel.errors, status: :unprocessable_entity }
+        format.js {render js: "alert('Error: #{@channel.errors.full_messages.join(',')}')"}
       end
     end
   end
@@ -97,7 +100,7 @@ class ChannelsController < ApplicationController
 
   def authorize
     access =  if @channel
-                @channel.is_public? or @channel.is_creator? or @channel.my_permission.can_view? or (@channel.my_permission.can_view? and @channel.my_permission.can_add_report? )
+                User.current.admin? or @channel.is_public? or @channel.is_creator? or @channel.my_permission.can_view? or (@channel.my_permission.can_view? and @channel.my_permission.can_add_report? )
               else
                 true
               end

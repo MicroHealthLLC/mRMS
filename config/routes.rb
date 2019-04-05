@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   get "/uploads/:report_id/:basename.:extension", :controller => "redocuments", :action => "download"
   # match "/uploads/:id/:basename.:extension", :controller => "addfiles", :action => "download", via: :get
 
-  resources :channels, except: [:index] do
+  resources :channels do
     resources :channel_notifications, only: [:edit, :destroy, :new]
     collection do
       match :reorder_handle, via: [:put]
