@@ -6,7 +6,7 @@
         <h4 class="modal-title" id="myModalLabel">Add Permission</h4>
       </div>
       <div data-toggle="modal" class="modal-body">
-        <%= form_for([channel, permission], method: :post, remote: true, html: { class: 'form-horizontal ', method: :post}) do |f| %>
+        <%= form_for([channel, permission], method: :post, remote: true, html: { class: 'smart-form form-horizontal ', method: :post}) do |f| %>
 
             <fieldset>
               <div class="form-group">
@@ -19,13 +19,40 @@
               <div class="form-group">
                 <%= f.label 'Permission', class: 'col-md-2 control-label' %>
                 <div class="col-md-9">
-                  <%= f.check_box :can_view %> Can View Channel <br/>
-                  <%= f.check_box :can_edit %> Can Edit Channel <br/>
-                  <%= f.check_box :can_add_report %> Can Add/Edit Report <br/>
-                  <%= f.check_box :can_view_report %> Can View Report <br/>
-                  <%= f.check_box :can_delete_report %> Can Delete Data Set <br/>
-                  <%= f.check_box :can_add_users %> Can Add/Change permission <br/>
-                  <%= f.check_box :can_download %> Can Download File <br/>
+                  <label class="toggle">
+                    <%= f.check_box :can_view %>
+                    <i data-swchon-text="ON" data-swchoff-text="OFF"></i> Can View Channel
+                  </label>
+
+                   <label class="toggle">
+                    <%= f.check_box :can_edit %>
+                    <i data-swchon-text="ON" data-swchoff-text="OFF"></i> Can Edit Channel
+                  </label>
+
+                   <label class="toggle">
+                    <%= f.check_box :can_add_report %>
+                    <i data-swchon-text="ON" data-swchoff-text="OFF"></i> Can Add/Edit Report
+                   </label>
+
+                   <label class="toggle">
+                    <%= f.check_box :can_view_report %>
+                    <i data-swchon-text="ON" data-swchoff-text="OFF"></i> Can View Report
+                  </label>
+
+                   <label class="toggle">
+                    <%= f.check_box :can_delete_report %>
+                    <i data-swchon-text="ON" data-swchoff-text="OFF"></i> Can Delete Data Set
+                  </label>
+
+                   <label class="toggle">
+                    <%= f.check_box :can_add_users %>
+                    <i data-swchon-text="ON" data-swchoff-text="OFF"></i>  Can Add/Change permission
+                  </label>
+
+                      <label class="toggle">
+                    <%= f.check_box :can_download %>
+                    <i data-swchon-text="ON" data-swchoff-text="OFF"></i> Can Download File
+                  </label>
                 </div>
               </div>
             </fieldset>
