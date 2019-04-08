@@ -19,11 +19,7 @@ class ChannelNotificationsController < ApplicationController
       format.js do
         @channel_notification.seen = true
         @channel_notification.save
-        if params[:accept]
-
-        end
-
-        render js: "$('#channel_notification_#{@channel_notification.id}').hide();"
+        render js: "$('#channel_notification_#{@channel_notification.id}').hide();$('.buttons').find('.fa-bell').text('Notification (#{@channel.channel_notifications.where(seen: false).count})')"
       end
     end
   end

@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-md-12 ">
-    <div class="pull-right">
+    <div class="pull-right buttons">
       <% unless @channel.shared_report? %>
           <% if !@channel.is_public? && !@channel.is_personal? && @channel.my_permission.can_view? %>
               <%= show_button(leave_channel_channel_channel_permissions_path(@channel), ' Leave Channel', 'sign-out-alt', 'danger', {confirm: 'Do you want to leave this channel?'})  %>
@@ -37,7 +37,7 @@
 
                               <td>
                                 <% if cn.notification_type == 1 %>
-                                    <%= show_button edit_channel_channel_notification_path(cn), '', 'check', 'info', {remote: true}  %>
+                                    <%= show_button edit_channel_channel_notification_path(@channel, cn), '', 'check', 'info', {remote: true}  %>
                                 <% else %>
                                     <%= show_button '#',  'Accept', 'check', 'success', {toggle:"modal", target:"#AddPermissionModal#{cn.user_id}" }%>
                                 <% end %>

@@ -72,7 +72,7 @@ class ChannelsController < ApplicationController
   # DELETE /channels/1
   # DELETE /channels/1.json
   def destroy
-    if @channel.is_creator?
+    if @channel.is_creator? || User.current.admin?
       # @channel.is_active = false
       # ChannelOrder.where(channel_id: @channel.id).delete_all
       @channel.destroy
