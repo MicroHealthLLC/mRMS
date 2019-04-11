@@ -79,7 +79,7 @@ rake assets:precompile
 # generate your secrets for config/secrets.yml
 rake secret
 
-put that output in config/secretys.yml
+put that output in config/secrets.yml
 
 #  Configure Nginx repo for CentOS 7
 nano /etc/yum.repos.d/nginx.repo
