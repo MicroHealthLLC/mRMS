@@ -14,7 +14,7 @@ yum-config-manager --enable epel
 
 yum clean all && sudo yum update -y
 
-install ruby
+# install ruby
 
 gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
 
@@ -32,7 +32,7 @@ rvm install ruby-devel-2.3.6
 
 bash -l -c "rvm use 2.3.6 --default"
 
-Install Mysql
+# Install Mysql
 yum install mariadb-server mariadb
 
 yum install mysql-devel
@@ -43,16 +43,16 @@ create database mrss_prod CHARACTER SET utf8 COLLATE utf8_general_ci;
 
 exit
 
-be sure git is installed
+# be sure git is installed
 yum install git
 
-and Imagemagick
+# and Imagemagick
 Install ImageMagick
 
-and Redis
+# and Redis
 Install Redis
 
-go to /var/www and from there
+# go to /var/www and from there
 cd /var/www/
 
 git clone https://github.com/MicroHealthLLC/mRSS
@@ -61,7 +61,7 @@ nano /var/www/mRSS/config/database.yml
 
 --enter the password for mysql where it says password then save and exit
 
-go to the cloned directory
+# go to the cloned directory
 cd /var/www/mRSS
 
 gem install rails
@@ -74,33 +74,41 @@ bundle install
 
 rails db:setup
 
+rake db:seed
+
 rake assets:precompile
 
-generate your secrets for config/secrets.yml
+# generate your secrets for config/secrets.yml
 rake secret
 
-put that output in config/secretys.yml
+put that output in config/secrets.yml
 
-Configure Nginx repo for CentOS 7
+#  Configure Nginx repo for CentOS 7
 nano /etc/yum.repos.d/nginx.repo
 
 then enter this below and save
-[nginx]
 
-name=nginx repo
 
-baseurl=http://nginx.org/packages/mainline/centos/7/$basearch/
+[nginx-stable]
 
-gpgcheck=0
+name=nginx stable repo
+
+baseurl=http://nginx.org/packages/centos/$releasever/$basearch/
+
+gpgcheck=1
 
 enabled=1
 
-Update yum and install nginx
+gpgkey=https://nginx.org/keys/nginx_signing.key
+
+
+
+# Update yum and install nginx
 yum update
 
 yum install -y nginx
 
-install passenger phusion
+# install passenger phusion
 yum install -y pygpgme curl
 
 curl --fail -sSLo /etc/yum.repos.d/passenger.repo https://oss-binaries.phusionpassenger.com/yum/definitions/el-passenger.repo
@@ -135,7 +143,7 @@ and you should create an admin user
 
 
 
-Running the server
+# Running the server
 
 start your app rails s -e production -b localhost -d 
 or 
