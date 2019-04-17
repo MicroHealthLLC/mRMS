@@ -25,6 +25,7 @@
       <% else %>
           <% if @report.channel.is_public? or @report.channel.is_creator? or @report.channel.my_permission.can_add_report? %>
               <%= show_button(channel_report_path(@channel, @report, new_query: true), 'New Report', 'arrow-down', 'info' ) if  @report.document_url %>
+              <%= show_button(channel_report_dashboards_path(@channel, @report), 'Dashboards', 'arrow-down', 'success' ) if  @report.document_url %>
               <%= show_button(new_channel_report_dashboard_path(@channel, @report), 'New Dashboard', 'arrow-down', 'primary' ) if  @report.document_url %>
           <% end %>
           <% if ((@report.channel.is_public? and (@report.created_by_id == User.current.id or @report.channel.is_creator?)) or (!@report.channel.is_public? and @report.channel.is_creator?) or @report.channel.my_permission.can_add_report?) %>

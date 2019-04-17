@@ -4,6 +4,7 @@
       <%= edit_button edit_channel_report_dashboard_path(@report.channel, @report, @dashboard) %>
 
       <%= delete_button channel_report_dashboard_path(@report.channel, @report, @dashboard), 'Dashboard' %>
+      <%= cancel_button channel_report_path(@channel, @report) %>
     </div>
   </div>
 </div>

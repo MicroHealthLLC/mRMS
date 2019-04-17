@@ -1,0 +1,23 @@
+
+<table class="table table-bordered" id="dashboard_table">
+  <thead>
+  <tr>
+
+    <th>Name</th>
+
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @dashboards.each do |dashboard| %>
+      <tr>
+        <td><%= link_to dashboard.name, [@channel, @report, dashboard] %></td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+<script>
+    $(document).ready(function(){
+        initDataTable('dashboard_table')
+    })
+</script>
