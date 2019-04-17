@@ -1,7 +1,9 @@
 <div>
-<div style="text-align: center">
-  <%= link_to pivot_table.name, channel_report_path(@channel, @report, query_id: pivot_table.id) %>
-</div>
+  <% if params[:remove_header] %>
+      <div style="text-align: center">
+        <%= link_to pivot_table.name, channel_report_path(@channel, @report, query_id: pivot_table.id) %>
+      </div>
+  <% end %>
   <% time = Time.now.to_i %>
   <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="margin-top: 50px; overflow-x: scroll;" >
