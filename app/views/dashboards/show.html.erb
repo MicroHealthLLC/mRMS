@@ -7,7 +7,7 @@
 
   <div class="row">
     <% @dashboard.save_pivot_tables.each do |pivot_table| %>
-        <div class="col-md-6" style="overflow: scroll; max-height: 600px">
+        <div class="col-md-6" style="max-height: 600px">
           <% params[:query_id] = pivot_table.id %>
           <% params[:remove_header] = true %>
           <%= render partial: 'reports/pivot_table', locals: {pivot_table: pivot_table} %>

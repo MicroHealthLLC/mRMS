@@ -1,4 +1,4 @@
-<div style="width: 260px; height: 295px; display: inline-block; margin: 10px; padding: 5px; border: 1px steelblue solid;">
+<div style="width: 260px; height: 300px; position: relative; float: left; display: inline-block; margin: 10px; padding: 5px; border: 1px steelblue solid;">
   <%= link_to channel_report_path(@channel, @report, query_id: pivot_table.id) do %>
 
       <% if (name = JSON.parse(pivot_table.content)['rendererName'].downcase) && name.include?('table') %>
@@ -7,13 +7,11 @@
           <%= image_tag "pivot/#{name.gsub(' ', '-')}.png" , size: '240x240'%>
       <% end %>
   <% end %>
-  <h2 style=" width: 100%;  height: 29px; align-content: center; text-align: center;">
+  <h2 style=" width: 100%;  align-content: center; text-align: center; position: absolute; bottom: 0px;">
     <%= pivot_table.name  %>
-    <%= link_to( '<i class="fa fa-trash"></i>'.html_safe, delete_pivottable_channel_report_path(@channel, @report, query_id: pivot_table.id),
-                 :method => :delete,
-                 :data => {:confirm => "Are you sure to delete this report?"}, style: "float: right;color: #9e2b2b;") if (pivot_table.user_id == User.current.id) or User.current.admin?  %>
-
-
-
   </h2>
+  <%= link_to( '<i class="fa fa-times"></i>'.html_safe, delete_pivottable_channel_report_path(@channel, @report, query_id: pivot_table.id),
+               :method => :delete,
+               :data => {:confirm => "Are you sure to delete this report?"}, style: "position: absolute; top: 0; float: right;color: #9e2b2b;") if (pivot_table.user_id == User.current.id) or User.current.admin?  %>
+
 </div>

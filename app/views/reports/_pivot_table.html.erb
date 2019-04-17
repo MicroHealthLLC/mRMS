@@ -1,9 +1,12 @@
 <div>
+<div style="text-align: center">
+  <%= link_to pivot_table.name, channel_report_path(@channel, @report, query_id: pivot_table.id) %>
+</div>
   <% time = Time.now.to_i %>
   <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="margin-top: 50px; overflow-x: scroll;" >
       <div class="diagramWrapper" style="margin-top: 25px;">
-        <div id="output_<%= time %>" class="pane"></div>
+        <div id="output_<%= time %>" class="pane" style="<%= "transform: scale(0.4);" if params[:remove_header] %>"></div>
       </div>
       <span class="changesOutput_<%= time %>" ></span>
     </div>
