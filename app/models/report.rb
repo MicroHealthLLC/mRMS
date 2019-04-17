@@ -9,6 +9,7 @@ class Report < ApplicationRecord
   has_many :save_pivot_tables
   has_many :report_documents
   has_many :shared_reports
+  has_many :dashboards
   has_many :users, through: :shared_reports
 
 
