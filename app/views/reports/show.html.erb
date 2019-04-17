@@ -5,7 +5,10 @@
     <%  if @report.document_url %>
         <%= render partial: 'modal' %>
         <% if params[:query_id] or params[:new_query] %>
-            <%= render partial: 'pivot_table' %>
+            <div class="row">
+              <%= render partial: 'pivot_table' %>
+            </div>
+
         <% else %>
             <section id="widget-grid" class="show_customer_account">
               <div class="row">

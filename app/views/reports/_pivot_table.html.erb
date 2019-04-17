@@ -1,12 +1,11 @@
 <div>
-
-
+  <% time = Time.now.to_i %>
   <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="margin-top: 50px; overflow-x: scroll;" >
       <div class="diagramWrapper" style="margin-top: 25px;">
-        <div id="output" class="pane"></div>
+        <div id="output_<%= time %>" class="pane"></div>
       </div>
-      <span class="changesOutput" ></span>
+      <span class="changesOutput_<%= time %>" ></span>
     </div>
   </div>
 
@@ -50,7 +49,7 @@
       display: none; }
     #show-url   { font-size: 9px; }
     #clear-all  { float: right; cursor: pointer; margin-top: -15px; }
-    #output     { margin-top: -15px; }
+    #output_<%= time %>     { margin-top: -15px; }
   </style>
   <% cache("#{@report.id}--#{@report.document.updated_at}") do %>
       <script>
@@ -108,14 +107,23 @@
               onRefresh: saveState
           }
           <% if params[:query_id] and query = SavePivotTable.find_by_id(params[:query_id]) %>
-          $("#output").pivotUI(json,  Object.assign(default_query, <%=  JSON.parse(query.content).to_json.html_safe %>) );
+          $("#output_<%= time %>").pivotUI(json,  Object.assign(default_query, <%=  JSON.parse(query.content).to_json.html_safe %>) );
           <% else %>
-          $("#output").pivotUI(json, default_query);
+          $("#output_<%= time %>").pivotUI(json, default_query);
 
 
 
           <% end %>
           function saveState(config) {
+              <% if params[:remove_header] %>
+              $(document).ready(function(){
+
+                  $("#output_<%= time %>").find('tr:first').remove();
+                  $("#output_<%= time %>").find('tr:first').remove();
+                  $("#output_<%= time %>").find('.pvtAxisContainer').remove();
+              })
+
+              <% else %>
 
               var config_copy = JSON.parse(JSON.stringify(config));
               //delete some values which are functions
@@ -124,11 +132,15 @@
               //delete some bulky default values
               delete config_copy["rendererOptions"];
               delete config_copy["localeStrings"];
+              console.log(config_copy['rendererName'])
               $('#savepivottable').show();
               $('#save_pivot_table_content').val(JSON.stringify(config_copy, undefined, 2));
+              <% end %>
+
           }
           // This function stores PivotTable config to LocalStorage.
       });
   </script>
 </div>
+
 
