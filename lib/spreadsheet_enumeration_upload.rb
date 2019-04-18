@@ -23,7 +23,11 @@ class SpreadsheetEnumerationUpload
         tab = []
         CSV.foreach(file.path, headers: true) do |row|
             header = row.to_hash.keys if header.nil?
-            tab << row.to_hash
+            treated_hash = row.to_hash.dup
+            treated_hash = treated_hash.each do |k, v|
+              treated_hash[k] = v.to_s.gsub(',', '').truncate(100)
+            end
+            tab << treated_hash
         end
         [header, tab, nil]
       when ".xls" then

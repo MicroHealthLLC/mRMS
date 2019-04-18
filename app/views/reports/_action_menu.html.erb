@@ -18,9 +18,7 @@
               <%= show_button('#', ' Update Report', 'arrow-down', 'info', {toggle:"modal", target:"#myRenameModal" }) if  @report.document_url %>
           <% end %>
           <input type="button" onclick="$('#output').find('.pvtRendererArea').attr('id', 'testTable'); tableToExcel('testTable', 'Pivot table export')" value="Export to Excel" class="btn btn-primary">
-          <input type="button" onclick="$('#output').find('.pvtRendererArea').attr('id', 'testTable');  exportSVG(document.getElementById('testTable') )" value="Export to SVG" class="btn btn-default">
 
-          <%#= link_to "<i class='fa fa-print' aria-hidden='true'> Print </i>".html_safe,  '#', class: "noprint btn btn-primary", onclick: 'window.print(); ' %>
           <%= cancel_button channel_report_path(@channel, @report) %>
       <% else %>
           <% if @report.channel.is_public? or @report.channel.is_creator? or @report.channel.my_permission.can_add_report? %>

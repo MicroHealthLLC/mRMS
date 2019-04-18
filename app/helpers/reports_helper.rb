@@ -18,7 +18,7 @@ module ReportsHelper
           next if index.zero?
           json = {}
           header.each_with_index  do |title, i|
-            json[title] = row[i].to_s.gsub(',', '')
+            json[title] = row[i].to_s.gsub(',', '').truncate(100)
           end
           tab << json
         end
@@ -32,7 +32,7 @@ module ReportsHelper
         content.each_row_streaming(pad_cells: true, offset: 1) do |row|
           json = {}
           header.each_with_index  do |title, i|
-            json[title] = row[i].value.to_s.gsub(',', '')
+            json[title] = row[i].value.to_s.gsub(',', '').truncate(100)
           end
           tab << json
         end
