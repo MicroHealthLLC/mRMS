@@ -1,15 +1,37 @@
+
+<%= stylesheet_link_tag 'pivot_style' %>
+<%= stylesheet_link_tag 'c3.min' %>
+<%= stylesheet_link_tag 'subtotal.min' %>
+<%= stylesheet_link_tag 'handsontable.full.min' %>
+<%= stylesheet_link_tag 'pivot.min' %>
+
+<%= javascript_include_tag 'pivottables/highstock' %>
+<%= javascript_include_tag 'pivottables/highcharts-more' %>
+<%= javascript_include_tag 'pivottables/treemap' %>
+
+<%= javascript_include_tag 'pivottables/pivot' %>
+<%= javascript_include_tag 'pivottables/d3.min' %>
+<%= javascript_include_tag 'pivottables/jquery.ui.touch-punch.min' %>
+<%= javascript_include_tag 'pivottables/c3.min' %>
+<%= javascript_include_tag 'pivottables/c3_renderers.min' %>
+<%= javascript_include_tag 'pivottables/plotly-basic-latest.min' %>
+<%= javascript_include_tag 'pivottables/plotly_renderers' %>
+<!-- subtotal.js libs from ../dist -->
+<%= javascript_include_tag 'pivottables/subtotal.min' %>
+
+<%= javascript_include_tag 'pivottables/handsontable.full.min' %>
+
 <div>
   <%= render partial: 'action_menu' %>
   <p>
     <strong>Name:</strong>
     <%= @dashboard.name %>
   </p>
-
   <div class="row">
-    <% @dashboard.save_pivot_tables.each do |pivot_table| %>
+    <% @dashboard.save_pivot_tables.each_with_index do |pivot_table, idx| %>
         <div class="col-md-6" style="max-height: 600px">
           <% params[:query_id] = pivot_table.id %>
-          <% params[:remove_header] = true %>
+          <% params[:number] = idx %>
           <%= render partial: 'reports/pivot_table', locals: {pivot_table: pivot_table} %>
         </div>
     <% end %>
