@@ -1,33 +1,11 @@
 <% @report.dashboards.each do |dashboard| %>
-    <% pivots_names =  dashboard.save_pivot_tables.map{|pivot_table| JSON.parse(pivot_table.content)['rendererName'].downcase } %>
     <div style="width: 260px; height: 300px; position: relative; float: left; display: inline-block; margin: 10px;
-        padding: 15px; border: 1px #e5f0f9 solid;  border-radius: 7px">
+        padding: 15px; border: 1px #f9dcd4 solid;  border-radius: 7px">
       <%= link_to  [@channel, @report, dashboard]  do %>
-          <% pivots_names.each_with_index do |name, idx| %>
-              <% if  name.include?('table') %>
-                  <%= image_tag "pivot/table.png", size: '220x220', class: "cropimg#{idx%2}" %>
-              <% else %>
-                  <%= image_tag "pivot/#{name.gsub(' ', '-')}.png" , size: '220x220', class: "cropimg#{idx%2}" %>
-              <% end %>
-          <% end %>
+              <%= image_tag "dashboard.png", size: '220x220' %>
       <% end %>
       <h2 style=" width: 100%;  align-content: center; text-align: center; position: absolute; bottom: 0px;">
         <%= dashboard.name  %>
       </h2>
     </div>
 <% end %>
-
-<style>
-  .cropimg0{
-    clip-path: polygon(100% 100%, 100% 0%, 0% 0%);
-    position: absolute;
-
-    left: 0;
-  }
-  .cropimg1{
-    clip-path: polygon(0% 0%, 0% 100%, 100% 100%);
-    position: absolute;
-
-    left: 0;
-  }
-</style>

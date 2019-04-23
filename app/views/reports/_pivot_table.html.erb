@@ -1,42 +1,45 @@
 <div>
-  <% if params[:remove_header] %>
+  <% if params[:controller] == 'dashboards' %>
       <div style="text-align: center">
         <%= link_to pivot_table.name, channel_report_path(@channel, @report, query_id: pivot_table.id) %>
       </div>
   <% end %>
-  <% time = Time.now.to_i %>
+  <% time = params[:number] %>
+
   <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="margin-top: 50px; overflow-x: scroll;" >
       <div class="diagramWrapper" style="margin-top: 25px;">
-        <div id="output_<%= time %>" class="pane" style="<%= "transform: scale(0.4);" if params[:remove_header] %>"></div>
+        <div id="output_<%= time %>" class="pane" style="<%= "transform: scale(0.4);" if params[:controller] == 'dashboards' %>"></div>
       </div>
       <span class="changesOutput_<%= time %>" ></span>
     </div>
   </div>
 
+  <% unless params[:controller] == 'dashboards' %>
+      <%= stylesheet_link_tag 'pivot_style' %>
+      <%= stylesheet_link_tag 'c3.min' %>
+      <%= stylesheet_link_tag 'subtotal.min' %>
+      <%= stylesheet_link_tag 'handsontable.full.min' %>
+      <%= stylesheet_link_tag 'pivot.min' %>
 
-  <%= stylesheet_link_tag 'pivot_style' %>
-  <%= stylesheet_link_tag 'c3.min' %>
-  <%= stylesheet_link_tag 'subtotal.min' %>
-  <%= stylesheet_link_tag 'handsontable.full.min' %>
-  <%= stylesheet_link_tag 'pivot.min' %>
+      <%= javascript_include_tag 'pivottables/highstock' %>
+      <%= javascript_include_tag 'pivottables/highcharts-more' %>
+      <%= javascript_include_tag 'pivottables/treemap' %>
 
-  <%= javascript_include_tag 'pivottables/highstock' %>
-  <%= javascript_include_tag 'pivottables/highcharts-more' %>
-  <%= javascript_include_tag 'pivottables/treemap' %>
+      <%= javascript_include_tag 'pivottables/pivot' %>
+      <%= javascript_include_tag 'pivottables/d3.min' %>
+      <%= javascript_include_tag 'pivottables/jquery.ui.touch-punch.min' %>
+      <%= javascript_include_tag 'pivottables/c3.min' %>
+      <%= javascript_include_tag 'pivottables/c3_renderers.min' %>
+      <%= javascript_include_tag 'pivottables/plotly-basic-latest.min' %>
+      <%= javascript_include_tag 'pivottables/plotly_renderers' %>
+      <!-- subtotal.js libs from ../dist -->
+      <%= javascript_include_tag 'pivottables/subtotal.min' %>
 
-  <%= javascript_include_tag 'pivottables/pivot' %>
-  <%= javascript_include_tag 'pivottables/d3.min' %>
-  <%= javascript_include_tag 'pivottables/jquery.ui.touch-punch.min' %>
-  <%= javascript_include_tag 'pivottables/c3.min' %>
-  <%= javascript_include_tag 'pivottables/c3_renderers.min' %>
-  <%= javascript_include_tag 'pivottables/plotly-basic-latest.min' %>
-  <%= javascript_include_tag 'pivottables/plotly_renderers' %>
-  <!-- subtotal.js libs from ../dist -->
-  <%= javascript_include_tag 'pivottables/subtotal.min' %>
+      <%= javascript_include_tag 'pivottables/handsontable.full.min' %>
 
-  <%= javascript_include_tag 'pivottables/handsontable.full.min' %>
 
+  <% end %>
 
   <style>
     .pvtAxisContainer { overflow: auto; } /*for IE11 and jQuery draggable scroll offset workaround*/
@@ -115,19 +118,14 @@
           $("#output_<%= time %>").pivotUI(json,  Object.assign(default_query, <%=  JSON.parse(query.content).to_json.html_safe %>) );
           <% else %>
           $("#output_<%= time %>").pivotUI(json, default_query);
-
-
-
           <% end %>
           function saveState(config) {
-              <% if params[:remove_header] %>
-              $(document).ready(function(){
-
-                  $("#output_<%= time %>").find('tr:first').remove();
-                  $("#output_<%= time %>").find('tr:first').remove();
-                  $("#output_<%= time %>").find('.pvtAxisContainer').remove();
-              })
-
+              <% if params[:controller] == 'dashboards' %>
+              console.log("loading")
+              console.log("#output_<%= time %>");
+              $("#output_<%= time %>").find('tr:first').remove();
+              $("#output_<%= time %>").find('tr:first').remove();
+              $("#output_<%= time %>").find('.pvtAxisContainer').remove();
               <% else %>
 
               var config_copy = JSON.parse(JSON.stringify(config));
