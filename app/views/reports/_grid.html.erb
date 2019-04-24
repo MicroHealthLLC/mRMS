@@ -8,7 +8,7 @@
           <%= image_tag "pivot/#{name.gsub(' ', '-')}.png" , size: '220x220'%>
       <% end %>
   <% end %>
-  <h2 style=" width: 100%;  align-content: center; text-align: center; position: absolute; bottom: 0px;">
+  <h2 style=" width: 100%;  align-content: center; text-align: center; position: absolute; bottom: 0px; left: 0;">
     <%= pivot_table.name  %>
   </h2>
   <%= link_to( '<i class="fa fa-times"></i>'.html_safe, delete_pivottable_channel_report_path(@channel, @report, query_id: pivot_table.id),

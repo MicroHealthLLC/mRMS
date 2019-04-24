@@ -7,9 +7,9 @@
   <% time = params[:number] %>
 
   <div class="row">
-    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="margin-top: 50px; overflow-x: scroll;" >
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="margin-top: 50px; overflow-x: auto;" >
       <div class="diagramWrapper" style="margin-top: 25px;">
-        <div id="output_<%= time %>" class="pane" style="<%= "transform: scale(0.4);" if params[:controller] == 'dashboards' %>"></div>
+        <div id="output_<%= time %>" class="pane" style="<%= "transform: scale(1);" if params[:controller] == 'dashboards' %>"></div>
       </div>
       <span class="changesOutput_<%= time %>" ></span>
     </div>
@@ -110,7 +110,8 @@
                   },
                   colSubtotalDisplay: {
                       hideOnExpand: true
-                  }
+                  },
+                  plotly: {width: '<%= params[:controller] == 'dashboards' ? '49%' : '100%' %>', height: '90%'}
               },
               onRefresh: saveState
           }
