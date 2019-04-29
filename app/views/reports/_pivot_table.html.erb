@@ -110,8 +110,12 @@
                   },
                   colSubtotalDisplay: {
                       hideOnExpand: true
-                  },
-                  plotly: {width: '<%= params[:controller] == 'dashboards' ? '48%' : '100%' %>', height: '90%'}
+                  }
+                  <% if params[:controller] == 'dashboards' %>
+                  , plotly: {width: '48%', height: '90%'}
+                  <% end %>
+
+
               },
               onRefresh: saveState
           }
