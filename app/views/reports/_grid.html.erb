@@ -4,6 +4,8 @@
 
       <% if (name = JSON.parse(pivot_table.content)['rendererName'].downcase) && name.include?('table') %>
           <%= image_tag "pivot/table.png", size: '220x220'%>
+      <% elsif (name = JSON.parse(pivot_table.content)['rendererName'].downcase) && name.include?('heatmap') %>
+          <%= image_tag "pivot/heatmap.png", size: '220x220'%>
       <% else %>
           <%= image_tag "pivot/#{name.gsub(' ', '-')}.png" , size: '220x220'%>
       <% end %>
