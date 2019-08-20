@@ -208,10 +208,9 @@ GEM
     multi_json (1.13.1)
     multi_xml (0.6.0)
     multipart-post (2.0.0)
-    mysql2 (0.5.2)
     net-ldap (0.16.1)
     nio4r (2.3.1)
-    nokogiri (1.10.2)
+    nokogiri (1.10.4)
       mini_portile2 (~> 2.4.0)
     oauth (0.5.4)
     oauth2 (1.4.1)
@@ -394,7 +393,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  activerecord-jdbcmysql-adapter
   ajax-datatables-rails (~> 0.3.1)
   audited (~> 4.7)
   awesome_print
@@ -428,7 +426,6 @@ DEPENDENCIES
   mini_magick
   minitest-retry
   momentjs-rails (>= 2.9.0)
-  mysql2
   omniauth-facebook
   omniauth-github
   omniauth-google-oauth2
