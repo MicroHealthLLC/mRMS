@@ -26,11 +26,11 @@ export PATH="$PATH:$HOME/.rvm/bin"
 
 logout then log back in
 
-rvm install ruby-2.3.6
+rvm install ruby-2.5.3
 
-rvm install ruby-devel-2.3.6
+rvm install ruby-devel-2.5.3
 
-bash -l -c "rvm use 2.3.6 --default"
+bash -l -c "rvm use 2.5.3 --default"
 
 # Install Mysql
 yum install mariadb-server mariadb
@@ -119,7 +119,7 @@ then go edit passenger.conf
 nano /etc/nginx/conf.d/passenger.conf
 
 -where it says passenger_ruby change what you see there to what you see below. If that doesn't work then do this "which passenger-config" to get the path to put next to passenger_ruby
-passenger_ruby /usr/local/rvm/gems/ruby-2.3.6/wrappers/ruby;
+passenger_ruby /usr/local/rvm/gems/ruby-2.5.3/wrappers/ruby;
 
 --uncomment the line above and the line below along with the passenger_ruby line e.g. remove this"#"
 
