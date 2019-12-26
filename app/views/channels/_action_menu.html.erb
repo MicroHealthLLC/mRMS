@@ -40,6 +40,7 @@
                                     <%= show_button edit_channel_channel_notification_path(@channel, cn), '', 'check', 'info', {remote: true}  %>
                                 <% else %>
                                     <%= show_button '#',  'Accept', 'check', 'success', {toggle:"modal", target:"#AddPermissionModal#{cn.user_id}" }%>
+                                   <%= link_to 'Reject Request', channel_channel_notification_path(@channel, cn), class: 'btn btn-warning', data: {method: :delete} %>
                                 <% end %>
                               </td>
                             </tr>
