@@ -10,7 +10,7 @@ class User < ApplicationRecord
     devise :database_authenticatable, :registerable, :timeoutable,
            :recoverable, :rememberable, :trackable, :lockable, :omniauthable,
            :password_expirable, :password_archivable,
-           :session_limitable, :secure_validatable
+           :session_limitable
 
   else
     devise :authy_authenticatable, :database_authenticatable, :registerable, :timeoutable,

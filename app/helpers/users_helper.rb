@@ -1,10 +1,10 @@
 module UsersHelper
   def password_min
-    User.password_length.min
+    Devise.password_length.min
   end
 
   def password_max
-    User.password_length.max
+    Devise.password_length.max
   end
 
   def user_admin_show_page
