@@ -38,8 +38,9 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   # Adds support for Capybara system testing and selenium driver
-
+  gem 'letter_opener'
 end
+
 group :test do
   gem 'database_cleaner'
   gem 'capybara', '~> 2.13'
@@ -47,11 +48,11 @@ group :test do
   gem 'chromedriver-helper', '~> 1.0'
   gem 'minitest-retry'
 end
-gem 'letter_opener'
+
 group :development do
   gem 'awesome_print', require: 'ap'
   gem 'better_errors'
-  gem 'letter_opener'
+  # gem 'letter_opener'
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
   gem 'web-console', '>= 3.3.0'
   gem 'listen', '>= 3.0.5', '< 3.2'
@@ -91,7 +92,7 @@ gem "paranoia"
 gem "mini_magick"
 gem "request_store"
 gem "binding_of_caller"
-gem 'rails-pry'
+# gem 'rails-pry'
 gem 'pry-rails'
 gem 'prawn-rails'
 gem 'prawn-table'

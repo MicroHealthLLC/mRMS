@@ -272,7 +272,7 @@ Use search to find needed section.
           <tr> <th>Channel</th> <th>Action</th></tr>
           </thead>
           <tbody>
-          <% @requested_channels.each do |requested_channel| %>
+          <% @requested_channels&.each do |requested_channel| %>
               <tr>
                 <td><%= requested_channel.to_s %></td>
                 <td>
