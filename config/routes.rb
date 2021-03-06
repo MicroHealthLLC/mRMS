@@ -35,6 +35,9 @@ Rails.application.routes.draw do
   # Routes For Normal users
   resources :core_demographics, only: [:show]
   resources :news
+  resources :one_drives, only: [:index, :new] do
+    get 'set_auth', on: :collection
+  end
   resources :roles
   resources :settings, only: [:index, :create] do
     collection do

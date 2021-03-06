@@ -72,6 +72,7 @@ gem "omniauth-facebook"
 gem "omniauth-github"
 gem "omniauth-twitter"
 gem "omniauth-google-oauth2"
+gem "microsoft_graph_auth"
 
 # ..
 gem 'therubyracer', platforms: :ruby
