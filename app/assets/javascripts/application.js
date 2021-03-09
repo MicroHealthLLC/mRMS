@@ -9,7 +9,7 @@
 //= require dataTables/jquery.dataTables
 //= require plugin/datatables/dataTables.colVis.min.js
 //= require plugin/datatables/dataTables.tableTools.min.js
-//= require plugin/datatable-responsive/dataTables.responsive.min.js
+//= require plugin/datatable-responsive/data-tables.responsive.min.js
 //= require buttons.colVis.min
 //= require dataTables.buttons.min
 //= require plugin/datatables/buttons.html5.min
