@@ -39,6 +39,9 @@
     <% end %>
 <% end %>
 
+<li class="<%= menu_active?('one_drives') %>">
+  <a href="/one_drives" title="<%= 'one_drive' %>"><i class="fa-lg fab fa-dropbox"></i><span class="padding-7"><%= 'One Drives' %></span></a>
+</li>
 
 <% if module_enabled?('news') && can?(:manage_roles, :manage_news, :view_news) %>
     <li class="<%= menu_active?('news') %>">

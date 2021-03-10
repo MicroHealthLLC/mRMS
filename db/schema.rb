@@ -319,6 +319,8 @@ ActiveRecord::Schema.define(version: 20180407163846) do
     t.boolean  "authy_enabled",                          default: false
     t.string   "time_zone"
     t.string   "uuid"
+    t.text "onedrive_access_token"
+    t.text "onedrive_refresh_token"
     t.index ["authy_id"], name: "index_users_on_authy_id", using: :btree
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
     t.index ["deleted_at"], name: "index_users_on_deleted_at", using: :btree

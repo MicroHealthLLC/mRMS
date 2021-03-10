@@ -1,0 +1,23 @@
+<div class="module-title">
+  <h2 class="module-title-text">ONE DRIVES</h2>
+</div>
+
+<section id="widget-grid" class="news_section">
+  <% if @drives.present? %>
+    <div class="row">
+      <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <% @drives.each do |drive| %>
+          <%= render partial: 'one_drive', locals: {drive: drive} %>
+        <% end %>
+      </article>
+    </div>
+  <% else %>
+    <div class="row" style="margin-bottom: 10px">
+      <div class="col-md-12 ">
+        <div class="pull-right">
+          <%= show_button(connect_with_onedrive_url, "Connect with One Drive", "plus", "primary") %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</section>

@@ -32,9 +32,11 @@ Rails.application.routes.draw do
 
   devise_for :users, :controllers => { omniauth_callbacks: 'callbacks' }
 
+  match '/auth/microsoft_graph_auth/callback', to: 'auth#callback', via: [:get, :post]
   # Routes For Normal users
   resources :core_demographics, only: [:show]
   resources :news
+  resources :one_drives, only: [:index]
   resources :roles
   resources :settings, only: [:index, :create] do
     collection do

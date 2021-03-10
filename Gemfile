@@ -39,6 +39,7 @@ group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   # Adds support for Capybara system testing and selenium driver
   gem 'letter_opener'
+  gem 'dotenv-rails'
 end
 
 group :test do
@@ -72,7 +73,11 @@ gem "omniauth-facebook"
 gem "omniauth-github"
 gem "omniauth-twitter"
 gem "omniauth-google-oauth2"
-
+# OAuth
+gem 'omniauth-oauth2', '~> 1.3.1'
+# REST calls to Microsoft Graph
+gem 'httparty', '~> 0.17.1'
+gem 'one_drive'
 # ..
 gem 'therubyracer', platforms: :ruby
 gem 'execjs'

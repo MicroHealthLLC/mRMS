@@ -1,0 +1,14 @@
+<article class="news-article">
+  <header>
+    <h3>
+      <b>File Name: </b> <%= drive["name"] %>
+    </h3>
+  </header>
+  <div class="wiki">
+    <!-- <p> <b>ID: </b> <%= drive["id"] %></p> -->
+    <p> <b>Last Modified: </b> <%= format_date(drive["lastModifiedDateTime"]) %></p>
+    <p> <b>Created By: </b> <%= drive["createdBy"]["user"]["displayName"] %></p>
+    <%= link_to "View", drive["webUrl"], target: "_blank", class: "btn btn-large btn-primary" %>
+    <%= link_to "Download", drive["@microsoft.graph.downloadUrl"], target: "_blank", class: "btn btn-large btn-info" %>
+  </div>
+</article>
