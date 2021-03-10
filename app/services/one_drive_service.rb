@@ -25,6 +25,7 @@ class OneDriveService
         nested_children = get_nested_children(child)
         get_items_from_children(nested_children)
       else
+        next unless ['csv', 'xls', 'xlsx'].include? child["name"].split('.')[1]
         @drive_items << child
       end
     end
