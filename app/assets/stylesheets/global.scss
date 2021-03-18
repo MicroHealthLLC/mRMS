@@ -90,3 +90,39 @@ ul.dropdown-links a:hover{
   margin: 5px 11px;
   border-bottom: 1px solid skyblue;
 }
+
+.aside-nav1::-webkit-scrollbar {
+  display: none;
+}
+
+.aside-nav1 {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.tooltip {
+  z-index: 9999999999;
+}
+.form-control {
+  border-radius: .42rem !important;
+}
+.smart-form *,
+.smart-form *:after,
+.smart-form *:before {
+  box-sizing: border-box !important;
+}
+.sign-button {
+  float: right;
+  margin: 0;
+  padding: 0 22px;
+  font: 300 15px/29px 'Open Sans', Helvetica, Arial, sans-serif;
+}
+.omniauth-login {
+  i:hover {
+    color: #1bc5bd;
+  }
+}
+
+.fade.in.tooltip{
+  opacity: 1 !important;
+  font-weight: normal;
+}

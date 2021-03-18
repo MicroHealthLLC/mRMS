@@ -23,3 +23,4 @@ Rails.application.config.assets.precompile +=
 Rails.application.config.assets.precompile += %w(jquery.tagsinput.css pivot.min.css c3.min.css  lightbox2.css subtotal.min.css pivot_style.css handsontable.full.min.css)
 #JS
 Rails.application.config.assets.precompile += %w(plugin/pace/pace.min.js pivottables/* chat.js signature.js  lightbox2.js jquery.tagsinput.js form_builder/form-builder.min.js form_builder/form-render.min.js)
+Rails.application.config.assets.paths << Rails.root.join('vendor')

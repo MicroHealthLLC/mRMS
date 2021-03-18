@@ -1,0 +1,73 @@
+<!--begin::Aside-->
+<div class="aside aside-left d-flex aside-fixed" id="kt_aside">
+  <!--begin::Primary-->
+  <div class="aside-primary d-flex flex-column align-items-center flex-row-auto">
+    <!--begin::Brand-->
+    <div class="aside-brand d-flex flex-column align-items-center flex-column-auto py-5 py-lg-10">
+      <!--begin::Logo-->
+      <%= link_to "#{image_tag( "logo.png", alt: '', size: '30x30', style: 'width: auto', class: 'max-h-30px')}".html_safe , root_path %> </span>
+      <!--end::Logo-->
+    </div>
+    <!--end::Brand-->
+    <!--begin::Nav Wrapper-->
+    <div class="aside-nav1 d-flex flex-column align-items-center flex-column-fluid py-5" style="overflow-y: auto !important; max-height: 60vh;">
+      <!--begin::Nav-->
+      <ul class="nav flex-column" role="tablist">
+        <% if user_signed_in? %>
+          <%= render  partial: 'menu/signed_in' %>
+        <% else %>
+          <%= render partial: 'menu/not_signed_in' %>
+        <% end %>
+      </ul>
+      <!--end::Nav-->
+    </div>
+    <!--end::Nav Wrapper-->
+    <!--begin::Footer-->
+    <div class="aside-footer d-flex flex-column align-items-center flex-column-auto py-4 py-lg-10 mt-auto">
+      <!--begin::Aside Toggle-->
+      <!-- <span class="aside-toggle btn btn-icon btn-primary btn-hover-primary shadow-sm" id="kt_aside_toggle" data-toggle="tooltip" data-placement="right" title="Toggle Aside">
+        <i class="ki ki-bold-arrow-back icon-sm"></i>
+      </span> -->
+      <!--end::Aside Toggle-->
+      <!--begin::Quick Actions-->
+
+      <!--end::Quick Actions-->
+      <!--begin::Quick Panel-->
+      <!--end::Quick Panel-->
+      <!--begin::User-->
+
+      <% if user_signed_in? %>
+        <a href="/users/edit" class="btn btn-icon btn-clean btn-lg w-40px h-40px" data-toggle="tooltip" data-placement="right" title="Profile">
+          <span class="symbol symbol-30 symbol-lg-40">
+            <span class="svg-icon svg-icon-xl">
+              <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                  <polygon points="0 0 24 0 24 24 0 24" />
+                  <path d="M12,11 C9.790861,11 8,9.209139 8,7 C8,4.790861 9.790861,3 12,3 C14.209139,3 16,4.790861 16,7 C16,9.209139 14.209139,11 12,11 Z" fill="#000000" fill-rule="nonzero" opacity="0.3" />
+                  <path d="M3.00065168,20.1992055 C3.38825852,15.4265159 7.26191235,13 11.9833413,13 C16.7712164,13 20.7048837,15.2931929 20.9979143,20.2 C21.0095879,20.3954741 20.9979143,21 20.2466999,21 C16.541124,21 11.0347247,21 3.72750223,21 C3.47671215,21 2.97953825,20.45918 3.00065168,20.1992055 Z" fill="#000000" fill-rule="nonzero" />
+                </g>
+              </svg>
+            </span>
+            <!--<span class="symbol-label font-size-h5 font-weight-bold">S</span>-->
+          </span>
+        </a>
+      <% end %>
+
+      <a href="<%= user_signed_in? ? destroy_session_path(:user) : new_session_path(:user) %>" class="btn btn-icon btn-clean btn-lg w-40px h-40px" id="kt_quick_user_toggle" data-toggle="tooltip" data-placement="right" title="<%=user_signed_in? ? 'Logout' : 'Sign In' %>">
+        <span class="symbol symbol-30 symbol-lg-40">
+          <span class="svg-icon svg-icon-xl">
+            <% if user_signed_in? %>
+              <i class="flaticon-logout"></i>
+            <% else %>
+              <i class="fas fa-sign-in-alt"></i>
+            <% end %>
+          </span>
+          <!--<span class="symbol-label font-size-h5 font-weight-bold">S</span>-->
+        </span>
+      </a>
+      <!--end::User-->
+    </div>
+    <!--end::Footer-->
+  </div>
+  <!--end::Primary-->
+</div>

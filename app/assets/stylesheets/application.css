@@ -32,9 +32,8 @@
   *= require bootstrap.min.css
   *= require font-awesome.min.css
   *= require bootstrap-social
-
-
-
+  *= require assets/theme/css/style.bundle.css
+  *= require assets/theme/plugins/global/plugins.bundle.css
 
   <!-- SmartAdmin RTL Support  -->
   *= require smartadmin-rtl.min.css

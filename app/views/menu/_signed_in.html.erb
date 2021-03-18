@@ -1,17 +1,20 @@
-<ul id="sortable">
 
-  <li class="<%= menu_active?('home') %>">
-    <a href="<%= "/" %>" title="Home"><i class="fa fa-lg fa-fw fa-home"></i> <span class="menu-item-parent">Home</span></a>
+  <li class="nav-item mb-3" data-toggle="tooltip" data-placement="right" data-container="body" data-boundary="window" title="Home">
+    <a href="/" class="nav-link btn btn-icon btn-clean btn-lg <%= menu_active?('welcome') %>">
+      <span class="svg-icon svg-icon-xl">
+        <i class="flaticon-home-2"></i>
+      </span>
+    </a>
   </li>
 
   <%= render partial: 'menu/other_links' %>
 
-  <script>
+  <!-- <script>
       $( function() {
           $( "#sortable" ).sortable();
           $( "#sortable" ).disableSelection();
       } );
-  </script>
+  </script> -->
   <% if User.current.admin? %>
       <%= render partial: 'menu/admin' %>
   <% end %>

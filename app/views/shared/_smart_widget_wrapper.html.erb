@@ -1,9 +1,9 @@
-<div class="jarviswidget jarviswidget-color-blueLight" id="<%= wid_id %>" data-widget-deletebutton="false"  data-widget-sortable='false' data-widget-editbutton="false">
-  <header>
-    <h2><strong><%= wid_title %></strong> </h2>
+<div class="card card-custom jarviswidget jarviswidget-color-blueLight" id="<%= wid_id %>" data-widget-deletebutton="false"  data-widget-sortable='false' data-widget-editbutton="false">
+  <header class="card-header" style="flex-direction: row-reverse; padding: 1rem; min-height: 60px; height: 62px;">
+    <h2><strong><%= wid_title %>asdasdasd</strong> </h2>
   </header>
   <div>
-    <div class="widget-body no-padding">
+    <div class="card-body widget-body no-padding">
       <div class="row">
         <div class="col-xs-12" style="overflow: hidden" id="<%= wid_id %>_container">
           <%= yield %>
@@ -12,3 +12,6 @@
     </div>
   </div>
 </div>
+
+
+
