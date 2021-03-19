@@ -1,4 +1,6 @@
 //= require assets/theme/plugins/global/plugins.bundle.js
+//= require assets/theme/plugins/custom/datatables/datatables.bundle.js
+
 //= require jquery2
 //= require jquery
 //= require jquery-ui.min
