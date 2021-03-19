@@ -3682,10 +3682,10 @@ input[type="button"].btn-block {
 
 .custom-select-sm {
   height: calc(1.35em + 1.1rem + 2px);
-  padding-top: 0.55rem;
-  padding-bottom: 0.55rem;
-  padding-left: 0.75rem;
-  font-size: 0.925rem; }
+  padding-top: 0.55rem !important;
+  padding-bottom: 0.55rem !important;
+  padding-left: 0.75rem !important;
+  font-size: 0.925rem !important; }
 
 .custom-select-lg {
   height: calc(1.5em + 1.65rem + 2px);

@@ -1,11 +1,11 @@
 <!--begin::Aside-->
-<div class="aside aside-left d-flex aside-fixed" id="kt_aside">
+<div class="aside aside-left d-flex aside-fixed" id="kt_aside" style="overflow: auto;max-height: 100vh; position: fixed; height: 100vh;">
   <!--begin::Primary-->
   <div class="aside-primary d-flex flex-column align-items-center flex-row-auto">
     <!--begin::Brand-->
     <div class="aside-brand d-flex flex-column align-items-center flex-column-auto py-5 py-lg-10">
       <!--begin::Logo-->
-      <%= link_to "#{image_tag( "logo.png", alt: '', size: '30x30', style: 'width: auto', class: 'max-h-30px')}".html_safe , root_path %> </span>
+      <%= link_to "#{image_tag( "logo.png", alt: '', size: '30x30', style: 'width: auto', class: 'max-h-30px')}".html_safe , root_path, data: {container: 'body', toggle: 'tooltip', placement: "right", title: Setting['application_name']} %>
       <!--end::Logo-->
     </div>
     <!--end::Brand-->
@@ -37,7 +37,7 @@
       <!--begin::User-->
 
       <% if user_signed_in? %>
-        <a href="/users/edit" class="btn btn-icon btn-clean btn-lg w-40px h-40px" data-toggle="tooltip" data-placement="right" title="Profile">
+        <a href="/users/edit" class="btn btn-icon btn-clean btn-lg w-40px h-40px" data-toggle="tooltip" data-placement="right" title="Profile" data-container='body'>
           <span class="symbol symbol-30 symbol-lg-40">
             <span class="svg-icon svg-icon-xl">
               <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -53,7 +53,7 @@
         </a>
       <% end %>
 
-      <a href="<%= user_signed_in? ? destroy_session_path(:user) : new_session_path(:user) %>" class="btn btn-icon btn-clean btn-lg w-40px h-40px" id="kt_quick_user_toggle" data-toggle="tooltip" data-placement="right" title="<%=user_signed_in? ? 'Logout' : 'Sign In' %>">
+      <a href="<%= user_signed_in? ? destroy_session_path(:user) : new_session_path(:user) %>" class="btn btn-icon btn-clean btn-lg w-40px h-40px" id="kt_quick_user_toggle" data-toggle="tooltip" data-placement="right" data-container='body' title="<%=user_signed_in? ? 'Logout' : 'Sign In' %>">
         <span class="symbol symbol-30 symbol-lg-40">
           <span class="svg-icon svg-icon-xl">
             <% if user_signed_in? %>

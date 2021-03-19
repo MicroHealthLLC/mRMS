@@ -29,10 +29,12 @@
     <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
       <div class="ui-tabs ui-widget ui-widget-content ui-corner-all" id="tabs">
         <% Enumeration.get_subclasses.sort{|a,b| t(a::OptionName) <=> t(b::OptionName) }.each do |klass| %>
-            <h3><%= t klass::OptionName %></h3>
+            <div class="d-flex align-items-center justify-content-between mb-4">
+              <h3><%= t klass::OptionName %></h3>
+              <%= link_to I18n.t("enumeration_new_label"), new_enumeration_path(:type => klass.name), class: 'btn btn-primary'  %>
+            </div>
             <div class="row">
               <div class="col-md-12">
-                <p><%= link_to I18n.t("enumeration_new_label"), new_enumeration_path(:type => klass.name), class: 'btn btn-primary'  %></p>
                 <% enumerations = klass.where(nil) %>
                 <% if enumerations.any? %>
                     <%= render partial: 'enum_table',

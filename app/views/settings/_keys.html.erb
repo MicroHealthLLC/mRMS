@@ -2,20 +2,17 @@
     <% ['OFFICE365', 'GOOGLE', 'FACEBOOK', 'GITHUB', 'TWITTER'].each do |provider| %>
         <fieldset>
           <legend><%= provider %> </legend>
-          <div class="row">
-            <div class="form-group">
-              <%= label_tag provider.downcase, "#{provider} KEY", class: 'col-md-2 control-label', title: provider %>
-              <div class="col-md-9">
-                <%= text_field_tag "#{provider.downcase}[key]", Setting["#{provider}_KEY"] , {class: 'form-control'} %>
-              </div>
+          <div class="form-group">
+            <%= label_tag provider.downcase, "#{provider} KEY", class: 'col-md-2 control-label', title: provider %>
+            <div class="col-md-9">
+              <%= text_field_tag "#{provider.downcase}[key]", Setting["#{provider}_KEY"] , {class: 'form-control'} %>
             </div>
           </div>
-          <div class="row">
-            <div class="form-group">
-              <%= label_tag provider.downcase, "#{provider} SECRET", class: 'col-md-2 control-label', title: provider %>
-              <div class="col-md-9">
-                <%= text_field_tag "#{provider.downcase}[secret]", Setting["#{provider}_SECRET"] , {class: 'form-control'} %>
-              </div>
+
+          <div class="form-group">
+            <%= label_tag provider.downcase, "#{provider} SECRET", class: 'col-md-2 control-label', title: provider %>
+            <div class="col-md-9">
+              <%= text_field_tag "#{provider.downcase}[secret]", Setting["#{provider}_SECRET"] , {class: 'form-control'} %>
             </div>
           </div>
         </fieldset>

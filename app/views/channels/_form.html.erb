@@ -1,6 +1,5 @@
 <%= form_for(channel, html: { class: 'form-horizontal' }) do |form| %>
     <fieldset>
-      <legend></legend>
       <% if channel.errors.any? %>
           <div id="error_explanation">
             <h2><%= pluralize(channel.errors.count, "error") %> prohibited this channel from being saved:</h2>
@@ -12,7 +11,6 @@
             </ul>
           </div>
       <% end %>
-
 
       <div class="form-group">
         <%= form.label 'Channel', class: 'col-md-2 control-label' %>
@@ -63,17 +61,15 @@
         </div>
       </div>
 
-
       <div class="form-group">
         <%= form.label 'Description', class: 'col-md-2 control-label' %>
-        <div class="col-md-10">
+        <div class="col-md-8">
           <%= form.text_area :description, class: 'form-control ck-editor'  %>
         </div>
       </div>
 
-
       <div class="form-group" >
-        <div class="col-md-11">
+        <div class="col-md-10">
           <%= link_to t('button_cancel'), :back, class: 'btn btn-warning pull-right' %>
           <%= form.submit t('button_save'), class: 'btn btn-success pull-right' %>
         </div>

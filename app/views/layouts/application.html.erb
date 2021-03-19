@@ -97,16 +97,17 @@ Use search to find needed section.
 <div class="d-flex flex-row flex-column-fluid page">
   <%= render partial: 'layouts/left_panel_v1' if current_user && !@simulate_no_user %>
   <!-- END NAVIGATION -->
-
-  <!-- MAIN PANEL -->
-  <div id="main" role="main" class="w-100 p-5">
-    <%= render_flash_messages %>
-    <% if breadcrumbs.present? %>
-        <ol class="breadcrumb" style="font-size: 18px">
-          <%= render_breadcrumbs :tag => :li, :separator => "" %>
-        </ol>
-    <% end %>
-    <%= yield %>
+  <div class="d-flex flex-column flex-row-fluid wrapper" id="kt_wrapper" style="margin-left: 100px;">
+    <!-- MAIN PANEL -->
+    <div id="main" role="main" class="w-100 p-5">
+      <%= render_flash_messages %>
+      <% if breadcrumbs.present? %>
+          <ol class="breadcrumb" style="font-size: 18px">
+            <%= render_breadcrumbs :tag => :li, :separator => "" %>
+          </ol>
+      <% end %>
+      <%= yield %>
+    </div>
   </div>
 </div>
 <div data-toggle="modal" class="modal fade" id="RequestEntranceModal" tabindex="-1" role="dialog" aria-labelledby="RequestEntranceModal">

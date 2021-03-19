@@ -70,12 +70,12 @@ module ApplicationHelper
   end
 
   def default_user
-    image_tag 'male.png'
+    image_tag 'male.png', class: 'avatar-img'
   end
 
   def avatar(user)
     if File.exists?( "public#{user.profile_image}")
-      image_tag user.profile_image
+      image_tag user.profile_image, class: 'avatar-img'
     else
       default_user
     end
