@@ -1,30 +1,35 @@
-<table class="table table-separate table-head-custom">
-  <thead>
-  <tr>
-    <th>Channel</th>
-    <th>Owner/ </th>
-    <th>Change Owner</th>
-    <th>Delete</th>
-  </tr>
-  </thead>
+<div class="card card-custom gutter-b">
+  <div class="card-body">
+    <table class="table table-separate table-head-custom">
+      <thead>
+        <tr>
+          <th>Channel</th>
+          <th>Owner/ </th>
+          <th>Change Owner</th>
+          <th></th>
+          <th>Delete</th>
+        </tr>
+      </thead>
 
-  <tbody>
-
-  <% Channel.order('name ASC').each do |channel| %>
-      <tr>
-        <td><%= channel.name %></td>
-        <td><%= channel.user&.to_s || channel.user&.email %></td>
-        <td><%= form_for channel, remote: true do |form| %>
-              <%= form.select(:user_id, options_for_select(User.all.map{|user| [user.name, user.id]}, selected: channel.user_id), class: 'form_control') %>
-
-              <%= form.submit 'Change Owner', class: 'btn btn-success pull-right' %>
-          <% end %>
-        </td>
-        <td>
-          <%= delete_button channel_path(channel), 'channel' %>
-        </td>
-      </tr>
-  <% end %>
-
-  </tbody>
-</table>
+      <tbody>
+        <% Channel.order('name ASC').each do |channel| %>
+          <tr>
+            <td><%= channel.name %></td>
+            <td><%= channel.user&.to_s || channel.user&.email %></td>
+              <%= form_for channel, remote: true do |form| %>
+                <td>
+                  <%= form.select(:user_id, options_for_select(User.all.map{|user| [user.name, user.id]}, selected: channel.user_id), class: 'form_control') %>
+                </td>
+                <td>
+                  <%= form.submit 'Change Owner', class: 'btn btn-success' %>
+                </td>
+              <% end %>
+            <td>
+              <%= delete_button channel_path(channel), 'channel' %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
