@@ -1,92 +1,81 @@
 
 <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
-  <div class="well no-padding">
+  <div class="card card-custom">
+    <div class="card-header">
+      <h3 class="card-title">
+        Sign In
+      </h3>
+    </div>
+
+    <!--begin::Form-->
     <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: {id: 'login-form', class: 'smart-form client-form'}) do |f| %>
-        <header>
-          Sign In
-        </header>
+      <div class="card-body">
+        <div class="form-group">
+          <label>Email / Username <span class="text-danger">*</span></label>
+          <%= f.text_field :login, autofocus: true, class: 'form-control', placeholder: 'Enter your email / username' %>
+        </div>
 
-        <fieldset>
+        <div class="form-group">
+          <label>Password <span class="text-danger">*</span></label>
+          <%= f.password_field :password, autocomplete: "off", class: 'form-control',placeholder: 'Enter your password' %>
+        </div>
 
-          <section>
-            <label class="label">E-mail / Username</label>
-            <label class="input"> <i class="icon-append fa fa-user"></i>
-              <%= f.text_field :login, autofocus: true %>
-              <b class="tooltip tooltip-top-right"><i class="fa fa-user txt-color-teal"></i> Please enter Login</b>
-            </label>
-          </section>
+        <div class="form-group">
+          <label>Language</label>
+          <%= select_tag "language", options_for_select(["English" ], "English"), class: 'form-control' %>
+        </div>
 
-          <section>
-            <label class="label">Password</label>
-            <label class="input"> <i class="icon-append fa fa-lock"></i>
-              <%= f.password_field :password, autocomplete: "off" %>
-              <b class="tooltip tooltip-top-right"><i class="fa fa-lock txt-color-teal"></i> Enter your password</b>
-            </label>
-          </section>
+        <div class="form-group">
+          <label class="checkbox pl-sm-0">
+            <%= f.check_box :remember_me %>
+            <span class="d-inline-flex"></span><post class="font-weight-normal ml-3">Stay signed in</post>
+          </label>
+        </div>
 
-          <div class="form-group">
-            <label>Language</label>
-            <%= select_tag "language", options_for_select(["English" ], "English"), class: 'form-control' %>
-          </div>
+        <div class="form-group mb-0">
+          <%= render "devise/shared/links" %>
+        </div>
 
-          <div class="note">
-            <%= render "devise/shared/links" %>
-          </div>
+      </div>
+      <div class="card-footer">
+        <button type="submit" class="btn btn-primary sign-button">Sign in</button>
 
-          <section>
-            <label class="checkbox">
-              <%= f.check_box :remember_me %>
-              <i></i>Stay signed in</label>
-          </section>
-        </fieldset>
-        <footer>
-          <button type="submit" class="btn btn-primary">
-            Sign in
-          </button>
-        </footer>
+        <h5 class="text-center my-5"> - Or sign in using -</h5>
+
+        <ul class="list-inline text-center omniauth-login">
+          <%- if devise_mapping.omniauthable? %>
+              <% if Setting['GITHUB_KEY'].present? && Setting['GITHUB_SECRET'].present?  %>
+                  <li>
+                    <a href="<%= omniauth_authorize_path(resource_name, :github) %>" class=""><i class="fab fa-github fa-lg"></i></a>
+                  </li>
+              <% end %>
+
+              <% if Setting['OFFICE365_KEY'].present? && Setting['OFFICE365_SECRET'].present?  %>
+                  <li>
+                    <a href="<%= omniauth_authorize_path(resource_name, :office365) %>" class=""><i class="fab fa-microsoft fa-lg"></i></a>
+                  </li>
+              <% end %>
+
+              <% if Setting['FACEBOOK_KEY'].present? && Setting['FACEBOOK_SECRET'].present?  %>
+                  <li>
+                    <a href="<%= omniauth_authorize_path(resource_name, :facebook) %>" class=""><i class="fab fa-facebook fa-lg"></i></a>
+                  </li>
+              <% end %>
+
+              <% if Setting['TWITTER_KEY'].present? && Setting['TWITTER_SECRET'].present?  %>
+                  <li>
+                    <a href="<%= omniauth_authorize_path(resource_name, :twitter) %>" class=""><i class="fab fa-twitter fa-lg"></i></a>
+                  </li>
+              <% end %>
+
+              <% if Setting['GOOGLE_KEY'].present? && Setting['GOOGLE_SECRET'].present?  %>
+                  <li>
+                    <a href="<%= omniauth_authorize_path(resource_name, :google_oauth2) %>" class=""><i class="fab fa-google fa-lg"></i></a>
+                  </li>
+              <% end %>
+          <% end %>
+        </ul>
+      </div>
     <% end %>
-
   </div>
-
-  <h5 class="text-center"> - Or sign in using -</h5>
-
-  <ul class="list-inline text-center">
-    <%- if devise_mapping.omniauthable? %>
-        <% if Setting['GITHUB_KEY'].present? && Setting['GITHUB_SECRET'].present?  %>
-            <li>
-              <a href="<%= omniauth_authorize_path(resource_name, :github) %>" class=""><i class="fab fa-github fa-lg"></i></a>
-            </li>
-        <% end %>
-
-        <% if Setting['OFFICE365_KEY'].present? && Setting['OFFICE365_SECRET'].present?  %>
-            <li>
-              <a href="<%= omniauth_authorize_path(resource_name, :office365) %>" class=""><i class="fab fa-microsoft fa-lg"></i></a>
-            </li>
-        <% end %>
-
-        <% if Setting['FACEBOOK_KEY'].present? && Setting['FACEBOOK_SECRET'].present?  %>
-            <li>
-              <a href="<%= omniauth_authorize_path(resource_name, :facebook) %>" class=""><i class="fab fa-facebook fa-lg"></i></a>
-            </li>
-        <% end %>
-
-        <% if Setting['TWITTER_KEY'].present? && Setting['TWITTER_SECRET'].present?  %>
-            <li>
-              <a href="<%= omniauth_authorize_path(resource_name, :twitter) %>" class=""><i class="fab fa-twitter fa-lg"></i></a>
-            </li>
-        <% end %>
-
-        <% if Setting['GOOGLE_KEY'].present? && Setting['GOOGLE_SECRET'].present?  %>
-            <li>
-              <a href="<%= omniauth_authorize_path(resource_name, :google_oauth2) %>" class=""><i class="fab fa-google fa-lg"></i></a>
-            </li>
-        <% end %>
-
-
-    <% end %>
-
-  </ul>
-
 </div>
-
-

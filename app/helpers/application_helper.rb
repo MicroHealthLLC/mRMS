@@ -70,12 +70,12 @@ module ApplicationHelper
   end
 
   def default_user
-    image_tag 'male.png'
+    image_tag 'male.png', class: 'avatar-img'
   end
 
   def avatar(user)
     if File.exists?( "public#{user.profile_image}")
-      image_tag user.profile_image
+      image_tag user.profile_image, class: 'avatar-img'
     else
       default_user
     end
@@ -152,12 +152,18 @@ module ApplicationHelper
   end
 
   def edit_button(url)
-    show_button(url, 'Edit', 'edit', 'success')
+    show_theme_button(url, 'Edit', 'flaticon2-pen', 'success')
   end
 
   def show_button(url, text, icon, btn_style, data_options = {})
-    link_to  url, class: "noprint btn btn-#{btn_style}", data: data_options do
-      "<i class='fa fa-#{icon}' aria-hidden='true'> #{text} </i>".html_safe
+    link_to  url, class: "noprint btn btn-#{btn_style} mr-2", data: data_options do
+      "<i class='fa fa-#{icon}' aria-hidden='true'></i>#{text}".html_safe
+    end
+  end
+
+  def show_theme_button(url, text, icon, btn_style, data_options = {})
+    link_to  url, class: "btn btn-#{btn_style} mr-2", data: data_options do
+      "<i class='#{icon}' aria-hidden='true'></i> #{text}".html_safe
     end
   end
 
@@ -165,19 +171,19 @@ module ApplicationHelper
     link_to( url, class: 'btn btn-danger',
              :method => :delete,
              :data => {:confirm => "Are you sure to delete this #{object_title}?"}) do
-      '<i class="far fa-trash-alt" aria-hidden="true"> Delete</i>'.html_safe
+      '<i class="flaticon-delete" aria-hidden="true"></i>Delete'.html_safe
     end
   end
 
   def cancel_button(url)
     if url == :back
       if request.env["HTTP_REFERER"].present? and request.env["HTTP_REFERER"] != request.env["REQUEST_URI"]
-        show_button(url, 'Back' , 'arrow-left', 'warning')
+        show_theme_button(url, 'Back' , 'flaticon2-back', 'warning')
       else
-        show_button(root_path, 'Back' , 'arrow-left', 'warning')
+        show_theme_button(root_path, 'Back' , 'flaticon2-back', 'warning')
       end
     else
-      show_button(url, 'Back' , 'arrow-left', 'warning')
+      show_theme_button(url, 'Back' , 'flaticon2-back', 'warning')
     end
   end
 
@@ -227,9 +233,8 @@ module ApplicationHelper
     if action
       params[:controller] == controller && params[:action] == action ? 'active' : ''
     else
-      params[:controller]== controller ? 'active' : ''
+      params[:controller] == controller ? 'active' : ''
     end
-
   end
 
   def channel_active?(channel)

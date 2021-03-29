@@ -90,3 +90,124 @@ ul.dropdown-links a:hover{
   margin: 5px 11px;
   border-bottom: 1px solid skyblue;
 }
+
+.aside-nav1::-webkit-scrollbar {
+  display: none;
+}
+
+.aside-nav1 {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.tooltip {
+  z-index: 9999999999;
+}
+.form-control {
+  border-radius: .42rem !important;
+}
+.smart-form *,
+.smart-form *:after,
+.smart-form *:before {
+  box-sizing: border-box !important;
+}
+.sign-button {
+  float: right;
+  margin: 0;
+  padding: 0 22px;
+  font: 300 15px/29px 'Open Sans', Helvetica, Arial, sans-serif;
+}
+.omniauth-login {
+  i:hover {
+    color: #1bc5bd;
+  }
+}
+
+.fade.in.tooltip{
+  opacity: 1 !important;
+  font-weight: normal;
+}
+
+.ui-tabs-panel {
+  border: 0 !important;
+}
+.ui-tabs-nav {
+  margin: 1rem !important;
+  width: 100%;
+  text-align: center;
+  display: flex;
+  border: 0 !important;
+  .ui-tabs-anchor {
+    color: #B5B5C3 !important;
+    background: transparent !important;
+  }
+  .ui-tabs-active {
+    .ui-tabs-anchor {
+      color: #ffffff !important;
+      background-color: #1BC5BD !important;
+    }
+  }
+}
+.avatar-img {
+  border-radius: 50%;
+  margin-right: 1rem;
+  height: 4rem;
+}
+.cke {
+  border: 1px solid #E4E6EF !important;
+  /*border-radius: .42rem !important;*/
+}
+.jarviswidget-loader {
+  display: none;
+}
+.select2 {
+  .selection {
+    .select2-selection {
+      background-color: #ffffff;
+      border: 1px solid #E4E6EF;
+      padding-top: 8px;
+      height: 38px;
+      border-radius: .42rem;
+      &:focus {
+        outline: 0;
+        border-color: #1BC5BD;
+      }
+    }
+  }
+}
+.select2-search__field {
+  display: block;
+  width: 100%;
+  height: calc(1.5em + 1.3rem + 2px);
+  padding: 0.65rem 1rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #3F4254;
+  background-color: #ffffff;
+  background-clip: padding-box;
+  border: 1px solid #E4E6EF;
+  border-radius: 0.42rem;
+  box-shadow: none;
+}
+select[name*="table_length"] {
+  width: 4rem !important;
+  padding: .5rem !important;
+}
+.table thead tr,
+.fc-head-container thead tr {
+  background-color: transparent !important;
+  background-image: unset !important;
+}
+.dataTables_info{
+  font-weight: normal !important;
+  color: #3F4254 !important;
+  font-style: inherit !important;
+}
+table.dataTable thead .sorting_asc,
+table.dataTable thead .sorting_desc {
+  background-image: none;
+  background-color: transparent;
+}
+table.dataTable thead .sorting {
+  background: transparent !important;
+}

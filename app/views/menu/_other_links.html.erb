@@ -1,52 +1,66 @@
-
-<li class="<%= menu_active?('channels', 'new') %>">
-  <a href="/channels/new" title="<%= 'new Channel' %>"><i class="fa fa-lg fa-fw fa-plus-circle"></i><span class="menu-item-parent"><%= 'Create Channel' %></span></a>
-</li>
-
-<li>
-  <a href="#" title="<%= 'Request Channel' %>" data-toggle="modal" data-target="#RequestEntranceModal" }>
-    <i class="fa-lg fa-fw fas fa-bowling-ball"></i>
-    <span class="menu-item-parent"><%= 'Request Channel' %></span>
+<li class="nav-item mb-3" data-toggle="tooltip" data-placement="right" data-container="body" data-boundary="window" title="<%= 'Create Channel' %>">
+  <a href="/channels/new" class="nav-link btn btn-icon btn-clean btn-lg <%= menu_active?('channels', 'new') %>" >
+    <span class="svg-icon svg-icon-xl">
+      <i class="flaticon-add"></i>
+    </span>
   </a>
 </li>
+
+<li class="nav-item mb-3" data-toggle="tooltip" data-placement="right" data-container="body" data-boundary="window" title="<%= 'Request Channel' %>">
+  <a href="#" class="nav-link btn btn-icon btn-clean btn-lg">
+    <span class="svg-icon svg-icon-xl">
+      <i class="fa-lg fa-fw fas fa-bowling-ball"></i>
+    </span>
+  </a>
+</li>
+
 <% @ordered_channels.each do |channel_id| %>
-    <% if channel_id == -1 %>
+  <% if channel_id == -1 %>
+    <li class="nav-item mb-3 sort-handle" data-toggle="tooltip" data-placement="right" data-container="body" data-boundary="window" title="Personal" data-reorder-url="<%= reorder_handle_channels_path(channel_id: '-1') %>" data-reorder-param="<%= 'channel' %>">
+      <a href="#" class="nav-link btn btn-icon btn-clean btn-lg" data-toggle="modal" data-target="#RequestEntranceModal">
+        <span class="svg-icon svg-icon-xl">
+          <i class="fa fa-lg fa-fw fa-circle"></i>
+        </span>
+      </a>
 
-        <li data-reorder-url="<%= reorder_handle_channels_path(channel_id: '-1') %>" data-reorder-param="<%= 'channel' %>" class=" sort-handle" >
-          <a href="#"><i class="fa fa-lg fa-fw fa-circle"></i> <span class="menu-item-parent"> Personal</span>
-            <i class="fa fa-sort pull-right" style="font-size: 13px !important;margin-top: 5px;">
+      <!-- <ul>
+        <%# Channel.shared_report %>
+        <%# Channel.my_personal_channel.each do |channel| %>
+            <li class="<%#= channel_active?(channel)  %>">
+              <a href="/channels/<%#= channel.id %>" title="<%#= channel.name %>"><i class="fa-lg fa-fw <%#= channel.icon || 'far fa-square' %>"></i><span class="menu-item-parent"><%#= channel.name %></span></a>
+            </li>
+        <%# end  %>
+      </ul -->
 
-            </i>
-          </a>
-          <ul>
-            <% Channel.shared_report %>
-            <% Channel.my_personal_channel.each do |channel| %>
-                <li class="<%= channel_active?(channel)  %>">
-                  <a href="/channels/<%= channel.id %>" title="<%=  channel.name %>"><i class="fa-lg fa-fw <%= channel.icon || 'far fa-square' %>"></i><span class="menu-item-parent"><%= channel.name %></span></a>
-                </li>
-            <% end  %>
-          </ul>
-        </li>
-
+    </li>
 
     <% elsif channel = Channel.not_personal.find_by_id(channel_id) %>
-        <li data-reorder-url="<%= reorder_handle_channels_path(channel_id: channel ? channel.id : '-1') %>" data-reorder-param="<%= 'channel' %>" class=" sort-handle <%= channel_active?(channel)  %>">
-          <a href="/channels/<%= channel.id %>" title="<%=  channel.name %>"><i class="fa-lg fa-fw <%= channel.icon || 'far fa-square' %>"></i><span class="menu-item-parent"><%= channel.name %> </span>
-            <i class="fa fa-sort pull-right" style="font-size: 13px !important;margin-top: 5px;">
-
-            </i></a>
-        </li>
+      <li class="nav-item mb-3 sort-handle" data-toggle="tooltip" data-placement="right" data-container="body" data-boundary="window" title="<%= channel.name %>" data-reorder-url="<%= reorder_handle_channels_path(channel_id: channel ? channel.id : '-1') %>" data-reorder-param="<%= 'channel' %>">
+        <a href="/channels/<%= channel.id %>" class="nav-link btn btn-icon btn-clean btn-lg <%= channel_active?(channel) %>">
+          <span class="svg-icon svg-icon-xl">
+            <i class="fa-lg fa-fw <%= channel.icon || 'far fa-square' %>"></i>
+          </span>
+        </a>
+      </li>
     <% end %>
 <% end %>
 
-<li class="<%= menu_active?('one_drives') %>">
-  <a href="/one_drives" title="<%= 'one_drive' %>"><i class="fa-lg fab fa-dropbox"></i><span class="padding-7"><%= 'One Drives' %></span></a>
+<li class="nav-item mb-3" data-toggle="tooltip" data-placement="right" data-container="body" data-boundary="window" title="<%= 'One Drives' %>">
+  <a href="/one_drives" class="nav-link btn btn-icon btn-clean btn-lg <%= menu_active?('one_drives') %>">
+    <span class="svg-icon svg-icon-xl">
+      <i class="fa-lg fa-fw fab fa-dropbox"></i>
+    </span>
+  </a>
 </li>
 
 <% if module_enabled?('news') && can?(:manage_roles, :manage_news, :view_news) %>
-    <li class="<%= menu_active?('news') %>">
-      <a href="/news" title="<%= 'news' %>"><i class="fa fa-lg fa-fw fa-newspaper-o"></i><span class="menu-item-parent"><%= 'news' %></span></a>
-    </li>
+  <li class="nav-item mb-3" data-toggle="tooltip" data-placement="right" data-container="body" data-boundary="window" data-original-title="<%= 'news' %>">
+    <a href="/news" class="nav-link btn btn-icon btn-clean btn-lg <%= menu_active?('news') %>">
+      <span class="svg-icon svg-icon-xl">
+        <i class="fa fa-lg fa-fw fa-newspaper-o"></i>
+      </span>
+    </a>
+  </li>
 <% end %>
 
 <style>

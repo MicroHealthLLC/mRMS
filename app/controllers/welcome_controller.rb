@@ -1,6 +1,7 @@
 class WelcomeController < ApplicationController
 
   def index
+    redirect_to new_user_session_path unless user_signed_in?
     session[:appointment_store_id] = nil if User.current_user.can?(:manage_roles)
     if session[:employee_id]
       session[:appointment_store_id] = nil

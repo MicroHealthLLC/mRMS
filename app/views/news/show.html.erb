@@ -1,25 +1,29 @@
 
 <%= render partial: 'action_menu' %>
-<article class="news-article">
-  <header>
-    <h3><%= avatar(@news.user) %>
-      <%= link_to h(@news.title), news_path(@news) %>
-    </h3>
-    <p class="author"><%= authoring @news.created_at, @news.user %></p>
-  </header>
-  <div class="wiki">
-    <%= @news.summary.html_safe %>
+<div class="card card-custom gutter-b news-article">
+  <div class="card-header">
+    <div class="card-title">
+      <%= avatar(@news.user) %>
+      <h3 class="card-label mx-0">
+        <%= link_to h(@news.title), news_path(@news), class: 'd-block' %>
+        <small style="font-size: 65%"><%= authoring @news.created_at, @news.user %></small>
+      </h3>
+    </div>
   </div>
- <div class="wiki">
-    <%= @news.description.html_safe %>
+  <div class="card-body wiki">
+    <p>
+      <%= @news.summary.html_safe %>
+    </p>
+    <p>
+      <%= @news.description.html_safe %>
+    </p>
+    <p>
+      <strong><%= t('attachments') %>:</strong>
+      <% @news.post_attachments.each do |attachment| %>
+          <%= render 'attachments/attachment_show_only', :attachment => attachment %>
+      <% end %>
+    </p>
   </div>
-
-  <p>
-    <strong><%= t('attachments') %>:</strong>
-    <% @news.post_attachments.each do |attachment| %>
-        <%= render 'attachments/attachment_show_only', :attachment => attachment %>
-    <% end %>
-  </p>
-</article>
+</div>
 
 

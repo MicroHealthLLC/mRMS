@@ -3,11 +3,11 @@
     <div class="pull-right buttons">
       <% unless @channel.shared_report? %>
           <% if !@channel.is_public? && !@channel.is_personal? && @channel.my_permission.can_view? %>
-              <%= show_button(leave_channel_channel_channel_permissions_path(@channel), ' Leave Channel', 'sign-out-alt', 'danger', {confirm: 'Do you want to leave this channel?'})  %>
+              <%= show_theme_button(leave_channel_channel_channel_permissions_path(@channel), ' Leave Channel', 'flaticon-logout', 'danger', {confirm: 'Do you want to leave this channel?'})  %>
           <% end %>
 
           <% if !@channel.is_public? && !@channel.is_personal? && @channel.is_creator?  %>
-              <%= show_button('#', "Notifications (#{@channel.channel_notifications.where(seen: false).count})", 'bell', 'info',  {toggle:"modal", target:"#ChannelNotification" })  %>
+              <%= show_theme_button('#', "Notifications (#{@channel.channel_notifications.where(seen: false).count})", 'flaticon2-bell-4', 'info',  {toggle:"modal", target:"#ChannelNotification" })  %>
 
               <div data-toggle="modal" class="modal fade" id="ChannelNotification" tabindex="-1" role="dialog" aria-labelledby="ChannelNotification">
                 <div data-toggle="modal" class="modal-dialog" role="document">
@@ -57,11 +57,11 @@
           <% end %>
 
           <% if !@channel.is_public? && !@channel.is_personal? && (@channel.is_creator? or @channel.my_permission.can_add_users?) %>
-              <%= show_button(channel_channel_permissions_path(@channel), ' Permissions', 'cog', 'warning')  %>
+              <%= show_theme_button(channel_channel_permissions_path(@channel), ' Permissions', 'flaticon2-gear', 'warning')  %>
           <% end %>
 
           <% if @channel.is_public? or @channel.is_creator? or (@channel.my_permission.can_add_report?) %>
-              <%= show_button(new_channel_report_url(@channel), ' Add Data set', 'play-circle', 'info')  %>
+              <%= show_theme_button(new_channel_report_url(@channel), ' Add Data set', 'flaticon2-notepad', 'info')  %>
           <% end %>
 
           <% if @channel.is_creator? or @channel.my_permission.can_edit? %>
@@ -78,4 +78,3 @@
   </div>
 </div>
 
-   

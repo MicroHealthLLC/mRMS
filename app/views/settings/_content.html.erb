@@ -1,28 +1,28 @@
 <%= form_for(@setting, url: set_content_settings_path, html: { method: 'post',  class: 'form-horizontal' }) do |f| %>
 
-    <div class="row">
-      <div class="col-md12">
+    <div class="row mx-auto">
+      <div class="col-md-12">
         <h2>Section 1</h2>
         <%= text_area_tag :section_1, Setting['section_1'], class: 'ck-editor'%>
       </div>
     </div>
 
-    <div class="row">
-      <div class="col-md12">
+    <div class="row mx-auto">
+      <div class="col-md-12">
         <h2>Section 2</h2>
         <%= text_area_tag :section_2, Setting['section_2'], class: 'ck-editor' %>
       </div>
     </div>
 
-    <div class="row">
-      <div class="col-md12">
+    <div class="row mx-auto">
+      <div class="col-md-12">
         <h2>Section 3</h2>
         <%= text_area_tag :section_3, Setting['section_3'], class: 'ck-editor' %>
       </div>
     </div>
 
-    <div class="row">
-      <div class="col-md12">
+    <div class="row mx-auto">
+      <div class="col-md-12">
         <h2>Section 4</h2>
         <%= text_area_tag :section_4, Setting['section_4'], class: 'ck-editor' %>
       </div>

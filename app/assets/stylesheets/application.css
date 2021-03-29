@@ -16,9 +16,9 @@
  *
  * SmartAdmin Styles : Caution! DO NOT change the order
    <!-- SmartAdmin Styles : Caution! DO NOT change the order -->
-  *= require smartadmin-production-plugins.min.css
+ *= require smartadmin-production-plugins.min.css
  *= require smartadmin-production
- *= require smartadmin-skins
+ * require smartadmin-skins
  *
  * We recommend you use "your_style.scss" to override SmartAdmin
  * specific styles this will also ensure you retrain your customization with
@@ -33,12 +33,9 @@
   *= require font-awesome.min.css
   *= require bootstrap-social
 
-
-
-
   <!-- SmartAdmin RTL Support  -->
   *= require smartadmin-rtl.min.css
-  *= require dataTables/jquery.dataTables
+  * require dataTables/jquery.dataTables
   *= require buttons.dataTables.min
   *= require pivot
   *= require clockpicker
@@ -47,6 +44,10 @@
   *= require style.css
   *= require devise_authy
 
+  *= require assets/theme/plugins/custom/datatables/datatables.bundle.css
+  *= require assets/theme/plugins/global/plugins.bundle.css
+  *= require assets/theme/plugins/custom/prismjs/prismjs.bundle.css
+  *= require assets/theme/css/style.bundle.css
   <!-- Scoped Style -->
   *= require responsive.dataTables.min
 

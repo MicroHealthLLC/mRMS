@@ -1,3 +1,5 @@
+//= require assets/theme/plugins/global/plugins.bundle.js
+
 //= require jquery2
 //= require jquery
 //= require jquery-ui.min
@@ -23,6 +25,8 @@
 //= require turbolinks
 //= require settings
 //= require devise_authy.js
+//= require assets/theme/js/scripts.bundle.js
+//= require assets/theme/plugins/custom/datatables/datatables.bundle.js
 
 
 // IMPORTANT: APP CONFIG
