@@ -140,7 +140,9 @@ Enable nginx service
         systemctl enable nginx
 
 Then start nginx service 
-       systemctl start nginx
+
+        systemctl start nginx
+
 
 # Setup
 go to your url of your install
