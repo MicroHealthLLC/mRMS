@@ -6,80 +6,79 @@ MicroHealth Reports Made Simple.  Think of it as rocket chat, slack or teams for
 # Installation:
 
 update centos
-yum update
+        yum update
 
-yum install -y epel-release yum-utils
+        yum install -y epel-release yum-utils
 
-yum-config-manager --enable epel
+        yum-config-manager --enable epel
 
-yum clean all && sudo yum update -y
+        um clean all && sudo yum update -y
 
 # install ruby
+        gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
 
-gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
+        curl -sSL https://get.rvm.io | sudo bash -s stable
 
-curl -sSL https://get.rvm.io | sudo bash -s stable
+        sudo usermod -a -G rvm `whoami`
 
-sudo usermod -a -G rvm `whoami`
+        export PATH="$PATH:$HOME/.rvm/bin"
 
-export PATH="$PATH:$HOME/.rvm/bin"
+        logout then log back in
 
-logout then log back in
+        rvm install ruby-2.6.6
 
-rvm install ruby-2.6.6
+        rvm install ruby-devel-2.6.6
 
-rvm install ruby-devel-2.6.6
-
-bash -l -c "rvm use 2.6.6 --default"
+        bash -l -c "rvm use 2.6.6 --default"
 
 # Install Mysql
-yum install mariadb-server mariadb
+        yum install mariadb-server mariadb
 
-yum install mysql-devel
+        yum install mysql-devel
 
-mysql -u root -p
+        mysql -u root -p
 
-create database mrss_prod CHARACTER SET utf8 COLLATE utf8_general_ci;
+        create database mrss_prod CHARACTER SET utf8 COLLATE utf8_general_ci;
 
-exit
+        exit
 
 # be sure git is installed
-yum install git
+        yum install git
 
 # and Imagemagick
-Install ImageMagick
+        Yum install imagemagick
 
 # and Redis
-Install Redis
+        yum install redis
 
 # go to /var/www and from there
-cd /var/www/
+        cd /var/www/
 
-git clone https://github.com/MicroHealthLLC/mRSS
+        git clone https://github.com/MicroHealthLLC/mRMS
 
-nano /var/www/mRSS/config/database.yml
+        nano /var/www/mRSS/config/database.yml
 
---enter the password for mysql where it says password then save and exit
+ --enter the password for mysql where it says password then save and exit
 
 # go to the cloned directory
-cd /var/www/mRSS
+        cd /var/www/mRMS
 
-gem install rails
+        gem install rails
 
-gem install bundler
+        gem install bundler
 
-yum install nodejs
+        yum install nodejs
 
-bundle install
+        bundle install
 
-rails db:setup
+        rails db:setup
 
-rake db:seed
+        rake db:seed
 
-rake assets:precompile
+        rake assets:precompile
 
 # generate your secrets for config/secrets.yml
-rake secret
+        rake secret
 
 put that output in config/secrets.yml
 
@@ -93,7 +92,7 @@ put that output in config/secrets.yml
 
 # install nginx
         passenger-install-nginx-module
-choose one.  install it into the directory of your choice.  but for the conf below, chose /etc/nginx/
+ choose one.  install it into the directory of your choice.  but for the conf below, chose /etc/nginx/
 
 # edit nginx.conf
 
@@ -136,39 +135,17 @@ you will have to create an nginx service now
 
 ----end---
 
-        enable the service
+Enable nginx service
 
         systemctl enable nginx
 
-        then start the service 
-
-        service nginx start
-
-`Bundle install`
-
-create mysql database simple_report
-
-go to config directory and edit database.yml to connect to mysql
-
-'rails generate simple_form:install'
-
-`rake db:migrate`
-
-and you should create an admin user 
-
-
-# Running the server
-
-start your app rails s -e production -b localhost -d 
-or 
-rails s -e production > /dev/null &
-
-start sidekiq bundle exec sidekiq -d -L log/sidekiq.log -C config/sidekiq.yml -e production
+Then start nginx service 
+       systemctl start nginx
 
 # Setup
 go to your url of your install
 
-log in with temp account admin with password Admin@2018
+log in with temp account 'admin' with password 'Admin@2018'
 
 go to administration
 
