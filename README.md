@@ -98,7 +98,7 @@ put that output in config/secrets.yml
 
         nano /etc/nginx/conf/nginx.conf
 
-Below "http {+ section, add these
+Below "http {" section, add these
 
         passenger_root /usr/share/ruby/vendor_ruby/phusion_passenger/locations.ini;
         passenger_ruby /usr/local/rvm/gems/ruby-2.6.6/wrappers/ruby;
