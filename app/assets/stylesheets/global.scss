@@ -159,12 +159,16 @@ ul.dropdown-links a:hover{
 .jarviswidget-loader {
   display: none;
 }
+.select2-selection__arrow b {
+  line-height: 2;
+  font-size: 18px;
+}
 .select2 {
   .selection {
     .select2-selection {
       background-color: #ffffff;
       border: 1px solid #E4E6EF;
-      padding-top: 8px;
+      padding-top: 3px;
       height: 38px;
       border-radius: .42rem;
       &:focus {

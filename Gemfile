@@ -107,7 +107,7 @@ gem 'jSignature'
 gem 'simple_form'
 gem 'sidekiq'
 gem 'cocoon'
-gem 'elastic-apm'
+# gem 'elastic-apm'
 gem "audited", "~> 4.7"
 # breadcrumbs
 gem "breadcrumbs_on_rails"

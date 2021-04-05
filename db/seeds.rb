@@ -6,9 +6,10 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-user = User.new(email: 'admin@gmail.com',
-                admin: true,
-                state: true,
-                password: 'Admin@2018', login: 'admin' )
-
+user = User.find_or_initialize_by(email: 'admin@gmail.com')
+user.admin =
+user.admin = true
+user.state = true
+user.password = 'Admin@2018'
+user.login = 'admin'
 user.save

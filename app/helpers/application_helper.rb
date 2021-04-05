@@ -190,8 +190,10 @@ module ApplicationHelper
   # Renders flash messages
   def render_flash_messages
     s = ''
-    flash.each do |k,v|
-      s << content_tag('div', v.to_s.html_safe, :class => "flash #{k}", :id => "flash_#{k}") if k != 'timedout'
+    close = "<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>"
+    flash.each do |k, v|
+      klass = k == 'notice' ? 'info' : 'danger'
+      s << content_tag('div', [v.to_s, close].join(' ').html_safe , :class => "alert alert-dismissible show alert-#{klass}", :id => "flash_#{k}", :role => 'alert') if k != 'timedout'
     end
     s.html_safe
   end

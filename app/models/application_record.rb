@@ -14,10 +14,6 @@ class ApplicationRecord < ActiveRecord::Base
     self.created_by_id = User.current_user.id if self.class.column_names.include?('created_by_id')
   end
 
-  after_create do
-    # EmailWorker.perform_in(1.second, self.class.to_s, self.id)
-  end
-
   after_update do
     if self.class.to_s != 'User'
       # EmailUpdateWorker.perform_async(self.class.to_s, self.id)

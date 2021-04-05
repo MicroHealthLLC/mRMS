@@ -135,15 +135,10 @@ GEM
     devise_ldap_authenticatable (0.8.7)
       devise (>= 3.4.1)
       net-ldap (>= 0.16.0)
-    domain_name (0.5.20190701)
-      unf (>= 0.0.5, < 1.0.0)
     dotenv (2.7.6)
     dotenv-rails (2.7.6)
       dotenv (= 2.7.6)
       railties (>= 3.2)
-    elastic-apm (3.13.0)
-      concurrent-ruby (~> 1.0)
-      http (>= 3.0)
     erubi (1.10.0)
     exception_notification (4.4.3)
       actionmailer (>= 4.0, < 7)
@@ -155,25 +150,12 @@ GEM
       ruby2_keywords
     faraday-net_http (1.0.1)
     ffi (1.14.2)
-    ffi-compiler (1.0.1)
-      ffi (>= 1.0.0)
-      rake
     file_validators (3.0.0)
       activemodel (>= 3.2)
       mime-types (>= 1.0)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
     hashie (4.1.0)
-    http (4.4.1)
-      addressable (~> 2.3)
-      http-cookie (~> 1.0)
-      http-form_data (~> 2.2)
-      http-parser (~> 1.2.0)
-    http-cookie (1.0.3)
-      domain_name (~> 0.5)
-    http-form_data (2.3.0)
-    http-parser (1.2.3)
-      ffi-compiler (>= 1.0, < 2.0)
     httparty (0.17.3)
       mime-types (~> 3.0)
       multi_xml (>= 0.5.2)
@@ -396,9 +378,6 @@ GEM
       thread_safe (~> 0.1)
     uglifier (4.2.0)
       execjs (>= 0.3.0, < 3)
-    unf (0.1.4)
-      unf_ext
-    unf_ext (0.0.7.7)
     warden (1.2.9)
       rack (>= 2.0.9)
     web-console (3.7.0)
@@ -440,7 +419,6 @@ DEPENDENCIES
   devise_ldap_authenticatable
   devise_security_extension!
   dotenv-rails
-  elastic-apm
   exception_notification
   execjs
   file_validators
@@ -492,4 +470,4 @@ DEPENDENCIES
   will_paginate-bootstrap
 
 BUNDLED WITH
-   2.2.13
+   2.2.15

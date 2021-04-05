@@ -9,13 +9,4 @@ class SavePivotTable < ApplicationRecord
   belongs_to :report, optional: true
   delegate :channel, to: :report
 
-
-  after_create do
-    ReportWorker.perform_in(1.second,  self.id, 1)
-  end
-
-  after_update do
-    ReportWorker.perform_in(1.second,  self.id, 2)
-  end
-
 end

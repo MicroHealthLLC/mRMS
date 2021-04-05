@@ -31,14 +31,6 @@ class Report < ApplicationRecord
     report_documents.destroy_all
   end
 
-  after_create do
-    DataSetWorker.perform_in(1.second,  self.id, 1)
-  end
-
-  after_update do
-    DataSetWorker.perform_in(1.second,  self.id, 2)
-  end
-
   def active_users
     if channel.is_personal?
       shared_reports.map(&:user) + channel.active_users
