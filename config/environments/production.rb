@@ -97,11 +97,11 @@ Rails.application.configure do
   end
 
   # Exception Notifier Gem
-  Rails.application.config.middleware.use ExceptionNotification::Rack,
-                                          :email => {
-                                              :exception_recipients => %w{bilel.kedidi@gmail.com e67b35dd.microhealthllc.com@amer.teams.ms}
-                                          }
-
+ # Rails.application.config.middleware.use ExceptionNotification::Rack,
+   #                                       :email => {
+    #                                          :exception_recipients => %w{bilel.kedidi@gmail.com e67b35dd.microhealthllc.com@amer.teams.ms}
+    #                                      }
+#
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
