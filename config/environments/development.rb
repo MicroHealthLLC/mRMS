@@ -27,11 +27,11 @@ Rails.application.configure do
   end
 
 
-  if File.exist?("#{Rails.root}/config/emails.yml")
-    emails = YAML::load(File.open("#{Rails.root}/config/emails.yml"))
-    config.action_mailer.delivery_method = :letter_opener
-    config.action_mailer.default_url_options = emails['action_mailer_config'].symbolize_keys
-  end
+  #if File.exist?("#{Rails.root}/config/emails.yml")
+  #  emails = YAML::load(File.open("#{Rails.root}/config/emails.yml"))
+ #   config.action_mailer.delivery_method = :letter_opener
+ #   config.action_mailer.default_url_options = emails['action_mailer_config'].symbolize_keys
+#  end
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = false
 
