@@ -38,7 +38,7 @@ update centos
 
         mysql -u root -p
 
-        create database mrss_prod CHARACTER SET utf8 COLLATE utf8_general_ci;
+        create database mrms_prod CHARACTER SET utf8 COLLATE utf8_general_ci;
 
         exit
 
@@ -56,7 +56,7 @@ update centos
 
         git clone https://github.com/MicroHealthLLC/mRMS
 
-        nano /var/www/mRSS/config/database.yml
+        nano /var/www/mRMS/config/database.yml
 
  --enter the password for mysql where it says password then save and exit
 
