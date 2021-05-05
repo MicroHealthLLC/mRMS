@@ -53,4 +53,5 @@
 
   <!-- Application-wide Style -->
   *= require global
+  *= require custom
  */
