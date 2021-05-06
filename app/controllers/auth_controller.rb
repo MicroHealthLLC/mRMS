@@ -4,9 +4,9 @@ class AuthController < ApplicationController
     code = params[:code]
 
     options = { :body =>
-      { "client_id" => "#{ENV['AZURE_APP_ID']}",
-        "redirect_uri" => "http://localhost:3000/auth/microsoft_graph_auth/callback",
-        "client_secret" => "#{ENV['AZURE_APP_SECRET']}",
+      { "client_id" => "#{ENV['AZURE_KEY']}",
+        "redirect_uri" => "#{ENV['CALLBACK_URL']}/auth/microsoft_graph_auth/callback",
+        "client_secret" => "#{ENV['AZURE_SECRET']}",
         "code" => "#{code}",
         "scope" => "files.readwrite.all",
         "grant_type" => "authorization_code"

@@ -1,5 +1,5 @@
 <%= form_tag(set_key_providers_settings_path, method: 'post',  class: 'form-horizontal' ) do |f| %>
-    <% ['OFFICE365', 'GOOGLE', 'FACEBOOK', 'GITHUB', 'TWITTER'].each do |provider| %>
+    <% ['OFFICE365', 'GOOGLE', 'FACEBOOK', 'GITHUB', 'TWITTER', 'AZURE'].each do |provider| %>
         <fieldset>
           <legend><%= provider %> </legend>
           <div class="form-group">
