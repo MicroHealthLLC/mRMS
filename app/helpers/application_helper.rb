@@ -471,7 +471,7 @@ module ApplicationHelper
   end
 
   def connect_with_onedrive_url
-    "https://login.microsoftonline.com/common/oauth2/v2.0/authorize?client_id=#{ENV['AZURE_APP_ID']}&scope=#{ENV['AZURE_SCOPES']}&response_type=code&redirect_uri=#{ENV['CALLBACK_URL']}/auth/microsoft_graph_auth/callback"
+    "https://login.microsoftonline.com/common/oauth2/v2.0/authorize?client_id=#{ENV['AZURE_KEY']}&scope=#{ENV['AZURE_SCOPES']}&response_type=code&redirect_uri=#{ENV['CALLBACK_URL']}/auth/microsoft_graph_auth/callback"
   end
 
 end

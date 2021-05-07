@@ -1,18 +1,22 @@
+<div class="card card-custom mt-3 mb-4">
 <div class="row">
-  <div class="col-md-12 ">
+  <div class="col-md-12 mt-5 mb-4 ">
     <div class="pull-right">
       <%= show_button('#', ' Add Permission', 'plus', 'primary', {toggle:"modal", target:"#AddPermissionModal" })  %>
 
       <%= cancel_button channel_path(@channel) %>
+
     </div>
+         <%= render partial: 'permission_modal', locals: {user_id: params[:user_id], channel: @channel, permission: @permission} %>
+<h2>
+ <strong style="margin-left: 20px;"> <%= @channel.name %> </strong>
+</h2>
   </div>
+
 </div>
 
-<%= render partial: 'permission_modal', locals: {user_id: params[:user_id], channel: @channel, permission: @permission} %>
-<h2>
-  <%= @channel.name %>
-</h2>
 
+</div>
 
 <section id="widget-grid" class="channel">
   <div class="row">

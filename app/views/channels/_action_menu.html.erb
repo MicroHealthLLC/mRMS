@@ -13,13 +13,13 @@
                 <div data-toggle="modal" class="modal-dialog" role="document">
                   <div data-toggle="modal" class="modal-content">
                     <div data-toggle="modal" class="modal-header">
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                      <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button> -->
                       <h4 class="modal-title" id="myModalLabel">Notification</h4>
                     </div>
                     <div id="files" class="files col-xs-12" ></div>
                     <div id="errors" style="color: red;" class="files col-xs-12" ></div>
                     <div data-toggle="modal" class="modal-body">
-                      <table class="table table-responsive table-bordered">
+                      <table class="table table-separate table-head-custom">
                         <thead>
                         <tr><th>User</th><th>Notification Type</th><th></th></tr>
                         </thead>
@@ -35,12 +35,14 @@
                                 <% end %>
                               </td>
 
-                              <td>
+                              <td class="display-contents">
                                 <% if cn.notification_type == 1 %>
                                     <%= show_button edit_channel_channel_notification_path(@channel, cn), '', 'check', 'info', {remote: true}  %>
                                 <% else %>
+                                  <div class="padding-top-5">
                                     <%= show_button '#',  'Accept', 'check', 'success', {toggle:"modal", target:"#AddPermissionModal#{cn.user_id}" }%>
-                                   <%= link_to 'Reject Request', channel_channel_notification_path(@channel, cn), class: 'btn btn-warning', data: {method: :delete} %>
+                                    <%= link_to 'Reject Request', channel_channel_notification_path(@channel, cn), class: 'btn btn-warning', data: {method: :delete} %>
+                                  </div>
                                 <% end %>
                               </td>
                             </tr>

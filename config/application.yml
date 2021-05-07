@@ -24,3 +24,8 @@ TWITTER_KEY: ''
 TWITTER_SECRET: ''
 
 CALLBACK_URL: "https://cms.microhealthllc.com"
+
+# Onedrive Azure
+AZURE_KEY: ""
+AZURE_SECRET: ""
+AZURE_SCOPES: "offline_access files.readwrite.all"

@@ -22,7 +22,20 @@
 <%= javascript_include_tag 'pivottables/handsontable.full.min' %>
 
 <div>
-  <%= render partial: 'action_menu' %>
+
+  <!-- <%= render partial: 'action_menu' %> -->
+
+  <div class="noprint row">
+  <div class="col-md-12 ">
+    <div class="pull-right" style="margin-bottom: 10px">
+      <% if current_user.admin? %>
+        <%= edit_button edit_channel_report_dashboard_path(@report.channel, @report, @dashboard) %>
+        <%= delete_button channel_report_dashboard_path(@report.channel, @report, @dashboard), 'Dashboard' %>
+      <% end %>
+        <%= cancel_button channel_report_path(@channel, @report) %>
+    </div>
+  </div>
+</div>
   <p>
     <strong>Name:</strong>
     <%= @dashboard.name %>

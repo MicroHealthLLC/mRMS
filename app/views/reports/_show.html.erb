@@ -1,4 +1,5 @@
-<div class="col-xs-12 col-sm-6">
+<div class="card card-custom gutter-b mt-2 p-2 " style="margin-bottom: 8px !important;">
+  <%= render partial: 'action_menu' %>
   <p>
     <strong>Data Set:</strong>
     <%= @report.name %>
@@ -15,10 +16,6 @@
     <strong>Channel:</strong>
     <%= @report.channel %>
   </p>
-
-
-</div>
-<div class="col-xs-12 col-sm-6">
   <p>
     <strong>Created by:</strong>
     <%= @report.created_by %> at <%= format_date_time @report.created_at %>

@@ -7,7 +7,7 @@ class OneDriveService
   end
 
   def call
-    one_drive = OneDrive::V1.new(ENV['AZURE_APP_ID'], "#{ENV['CALLBACK_URL']}/auth/microsoft_graph_auth/callback", ENV['AZURE_SCOPES'])
+    one_drive = OneDrive::V1.new(ENV['AZURE_KEY'], "#{ENV['CALLBACK_URL']}/auth/microsoft_graph_auth/callback", ENV['AZURE_SCOPES'])
     one_drive.set_token @access_token
 
     children = one_drive.get_children_of_special_folder('Documents')['value']

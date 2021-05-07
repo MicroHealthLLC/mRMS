@@ -11166,7 +11166,7 @@ aside {
   position: fixed;
 }
 .fixed-header #main {
-  margin-top: 49px;
+
 }
 #logo-group > span {
   display: inline-block;
@@ -15255,6 +15255,9 @@ html.hidden-menu-mobile-lock {
 .padding-gutter {
   padding: 13px !important;
 }
+.padding-top-5 {
+  padding-top: 5px !important;
+}
 .padding-top-10 {
   padding-top: 10px !important;
 }
@@ -16911,7 +16914,6 @@ label:hover input[type="checkbox"][disabled].checkbox:checked + span:before {
 }
 .menu-on-top #main {
   margin-left: 0px !important;
-  margin-top: 69px !important;
 }
 .menu-on-top .minifyme,
 .menu-on-top #hide-menu,
@@ -17128,7 +17130,7 @@ label:hover input[type="checkbox"][disabled].checkbox:checked + span:before {
  * FIXED TOP HEADER
  */
 body.menu-on-top.fixed-header {
-  padding-top: 49px;
+
 }
 /*
  * FIXED TOP HEADER + NAV

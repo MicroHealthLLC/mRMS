@@ -1,7 +1,6 @@
-<%= render partial: 'action_menu' %>
-
 <div class="card card-custom gutter-b mt-5">
  <div class="card-body">
+  <%= render partial: 'action_menu' %>
   <p>
     <strong>Channel :</strong>
     <%= @channel.name %>
@@ -20,7 +19,6 @@
     <strong>Last update :</strong>
     <%= @channel.updated_by %> at <%= format_date_time @channel.updated_at %>
   </p>
-
  </div>
 </div>
 
