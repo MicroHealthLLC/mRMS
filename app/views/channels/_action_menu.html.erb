@@ -7,7 +7,7 @@
           <% end %>
 
           <% if !@channel.is_public? && !@channel.is_personal? && @channel.is_creator?  %>
-              <%= show_theme_button('#', "Notifications (#{@channel.channel_notifications.where(seen: false).count})", 'flaticon2-bell-4', 'info',  {toggle:"modal", target:"#ChannelNotification" })  %>
+              <%= show_theme_button('#', "Notifications (#{@channel.channel_notifications.where(seen: false).count})", 'far fa-bell', 'info',  {toggle:"modal", target:"#ChannelNotification" })  %>
 
               <div data-toggle="modal" class="modal fade" id="ChannelNotification" tabindex="-1" role="dialog" aria-labelledby="ChannelNotification">
                 <div data-toggle="modal" class="modal-dialog" role="document">
@@ -59,11 +59,11 @@
           <% end %>
 
           <% if !@channel.is_public? && !@channel.is_personal? && (@channel.is_creator? or @channel.my_permission.can_add_users?) %>
-              <%= show_theme_button(channel_channel_permissions_path(@channel), ' Permissions', 'flaticon2-gear', 'warning')  %>
+              <%= show_theme_button(channel_channel_permissions_path(@channel), ' Permissions', 'fas fa-cog', 'warning')  %>
           <% end %>
 
           <% if @channel.is_public? or @channel.is_creator? or (@channel.my_permission.can_add_report?) %>
-              <%= show_theme_button(new_channel_report_url(@channel), ' Add Data set', 'flaticon2-notepad', 'info')  %>
+              <%= show_theme_button(new_channel_report_url(@channel), ' Add Data set', 'fas fa-clipboard-check', 'info')  %>
           <% end %>
 
           <% if @channel.is_creator? or @channel.my_permission.can_edit? %>
