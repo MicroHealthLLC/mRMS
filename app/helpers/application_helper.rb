@@ -152,12 +152,12 @@ module ApplicationHelper
   end
 
   def edit_button(url)
-    show_theme_button(url, 'Edit', 'flaticon2-pen', 'success')
+    show_theme_button(url, 'Edit', 'fas fa-edit', 'success')
   end
 
   def show_button(url, text, icon, btn_style, data_options = {})
     link_to  url, class: "noprint btn btn-#{btn_style} mr-2", data: data_options do
-      "<i class='fa fa-#{icon}' aria-hidden='true'></i>#{text}".html_safe
+      "<i class='fas fa-#{icon}' aria-hidden='true'></i>#{text}".html_safe
     end
   end
 
@@ -171,19 +171,19 @@ module ApplicationHelper
     link_to( url, class: 'btn btn-danger',
              :method => :delete,
              :data => {:confirm => "Are you sure to delete this #{object_title}?"}) do
-      '<i class="flaticon-delete" aria-hidden="true"></i>Delete'.html_safe
+      '<i class="fas fa-trash-alt" aria-hidden="true"></i>Delete'.html_safe
     end
   end
 
   def cancel_button(url)
     if url == :back
       if request.env["HTTP_REFERER"].present? and request.env["HTTP_REFERER"] != request.env["REQUEST_URI"]
-        show_theme_button(url, 'Back' , 'flaticon2-back', 'warning')
+        show_theme_button(url, 'Back' , 'fas fa-angle-left', 'warning')
       else
-        show_theme_button(root_path, 'Back' , 'flaticon2-back', 'warning')
+        show_theme_button(root_path, 'Back' , 'fas fa-angle-left', 'warning')
       end
     else
-      show_theme_button(url, 'Back' , 'flaticon2-back', 'warning')
+      show_theme_button(url, 'Back' , 'fas fa-angle-left', 'warning')
     end
   end
 
