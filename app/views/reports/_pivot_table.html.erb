@@ -1,13 +1,13 @@
 <div>
   <% if params[:controller] == 'dashboards' %>
-      <div style="text-align: center">
+      <div style="text-align: center; margin-top: 30px;">
         <%= link_to pivot_table.name, channel_report_path(@channel, @report, query_id: pivot_table.id) %>
       </div>
   <% end %>
   <% time = params[:number] %>
 
   <div class="row">
-    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="margin-top: 50px; overflow-x: auto;" >
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="margin-bottom: 40px; overflow-x: auto;" >
       <div class="diagramWrapper" style="margin-top: 25px;">
         <div id="output_<%= time %>" class="pane" style="<%= "transform: scale(1);" if params[:controller] == 'dashboards' %>"></div>
       </div>
