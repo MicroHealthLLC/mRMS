@@ -29,3 +29,7 @@ CALLBACK_URL: "https://cms.microhealthllc.com"
 AZURE_KEY: ""
 AZURE_SECRET: ""
 AZURE_SCOPES: "offline_access files.readwrite.all"
+
+MRMS_DATABASE_HOST: "localhost"
+MRMS_DATABASE_USERNAME: "root"
+MRMS_DATABASE_PASSWORD: ""

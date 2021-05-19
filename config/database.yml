@@ -30,10 +30,11 @@ staging:
 test:
   adapter: mysql2
   database: simple_report_test
-  host: localhost
-  username: root
-  password: admin
+  host: <%= ENV['MRMS_DATABASE_HOST'] %>
+  username: <%= ENV['MRMS_DATABASE_USERNAME'] %>
+  password: <%= ENV['MRMS_DATABASE_PASSWORD'] %>
   encoding: utf8
+  pool: 25
 
 # PostgreSQL configuration example
 #production:
