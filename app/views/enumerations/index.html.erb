@@ -1,21 +1,23 @@
-<div class="module-title">
-  <h2 class='module-title-text'>ENUMERATIONS</h2>
-</div>
+<div class="card ">
+  <div class="module-title mt-3 pl-3">
+    <h2 class='module-title-text'>ENUMERATIONS</h2>
+  </div>
 
-<div class="row">
-  <%= form_tag  upload_enumerations_path, method: :post,  class: 'form_submit form-horizontal',  :multipart => true  do %>
-      <div class="col-xs-12 col-sm-4">
-        <%= file_field_tag :file, multiple: false, require: true %>
-        <br />
-      </div>
-      <div class="col-xs-10 col-sm-6">
-        <% options = Enumeration.get_subclasses.sort{|a,b| a.to_s <=> b.to_s }.map{|e| [e.to_s.gsub(/(?<=[a-z])(?=[A-Z])/, ' '), e.to_s]} %>
-        <%= select_tag :type, options_for_select(options)  %>
-      </div>
-      <div class="col-xs-2">
-        <%= submit_tag :import, class: 'btn btn-primary', id: 'import_spreadsheet_submit' %>
-      </div>
-  <% end %>
+  <div class="row">
+    <%= form_tag  upload_enumerations_path, method: :post,  class: 'form_submit form-horizontal col-sm-12',  :multipart => true  do %>
+        <div class="col-xs-12 col-sm-4 pt-3">
+          <%= file_field_tag :file, multiple: false, require: true %>
+          <br />
+        </div>
+        <div class="col-xs-10 col-sm-4 pt-3">
+          <% options = Enumeration.get_subclasses.sort{|a,b| a.to_s <=> b.to_s }.map{|e| [e.to_s.gsub(/(?<=[a-z])(?=[A-Z])/, ' '), e.to_s]} %>
+          <%= select_tag :type, options_for_select(options)  %>
+        </div>
+        <div class="col-xs-2 ml-5 pt-3">
+          <%= submit_tag :import, class: 'btn btn-primary', id: 'import_spreadsheet_submit' %>
+        </div>
+    <% end %>
+  </div>
 </div>
 <br />
 

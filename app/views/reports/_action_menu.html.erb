@@ -17,9 +17,11 @@
           <% if ((@report.channel.is_public? and @report.created_by_id == User.current.id) or (!@report.channel.is_public? and @report.channel.is_creator?) or @report.channel.my_permission.can_add_report?) %>
               <%= show_button('#', ' Update Report', 'arrow-down', 'info', {toggle:"modal", target:"#myRenameModal" }) if  @report.document_url %>
           <% end %>
-          <input type="button" onclick="$('#output').find('.pvtRendererArea').attr('id', 'testTable'); tableToExcel('testTable', 'Pivot table export')" value="Export to Excel" class="btn btn-primary">
+            <%= link_to "Export to Excel", "/uploads/#{@report.id}/#{File.basename(@report.document.file_url)}",  class: 'btn btn-primary', target: '_blank' %>
 
-          <%= cancel_button channel_report_path(@channel, @report) %>
+            <!-- <input type="button" onclick="$('#output').find('.pvtRendererArea').attr('id', 'testTable'); tableToExcel('testTable', 'Pivot table export')" value="Export to Excel" class="btn btn-primary"> -->
+
+           <%= cancel_button :back %>
       <% else %>
           <% if @report.channel.is_public? or @report.channel.is_creator? or @report.channel.my_permission.can_add_report? %>
               <%= show_button(channel_report_path(@channel, @report, new_query: true), 'New Report', 'arrow-down', 'info' ) if  @report.document_url %>

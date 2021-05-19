@@ -12,6 +12,9 @@
           <%= devise_error_messages! %>
           <% f.object.core_demographic ||= CoreDemographic.new %>
           <%= f.fields_for :core_demographic do |form| %>
+            <div class="form-group" style="margin-top: -15px;">
+              <h3>* Required</h3>
+            </div>
             <div class="form-group">
               <%= form.label t('profile.first_name') %>
               <%= form.text_field :first_name, placeholder: 'First name', class: 'form-control' %>
@@ -35,7 +38,7 @@
           </div>
 
           <div class="form-group">
-            <label>Login</label>
+            <label>Login *</label>
             <%= f.text_field :login, placeholder: 'Login' , class: 'form-control' %>
           </div>
 
@@ -121,7 +124,9 @@
         </button>
       </div>
       <div data-toggle="modal" class="modal-body custom-scroll terms-body">
-        <%= Setting['terms'] %>
+        <div id="left">
+          <%= Setting['conditions'].to_s.html_safe %>
+        </div>
       </div>
       <div data-toggle="modal" class="modal-footer">
         <button type="button" class="btn btn-secondary mb-0" data-dismiss="modal">
@@ -208,7 +213,7 @@
       },
       // Do not change code below
       errorPlacement : function(error, element) {
-        error.insertAfter(element.parent());
+        error.insertBefore(element.parent());
       }
     });
 

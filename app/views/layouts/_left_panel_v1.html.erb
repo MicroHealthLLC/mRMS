@@ -1,9 +1,9 @@
 <!--begin::Aside-->
-<div class="aside aside-left d-flex aside-fixed" id="kt_aside" style="overflow: auto;max-height: 100vh; position: fixed; height: 100vh;">
+<div class="side aside-left d-flex aside-fixed ml-5" id="kt_aside" style="overflow: auto;max-height: 100vh; position: fixed; height: 100vh;">
   <!--begin::Primary-->
   <div class="aside-primary d-flex flex-column align-items-center flex-row-auto" id="sidebar">
     <!--begin::Brand-->
-    <div class="aside-brand d-flex flex-column align-items-center flex-column-auto py-5 py-lg-10">
+    <div class="aside-brand d-flex flex-column align-items-center flex-column-auto flex-row-auto py-5 py-lg-10">
       <!--begin::Logo-->
       <%= link_to "#{image_tag( "logo.png", alt: '', size: '30x30', style: 'width: auto', class: 'max-h-30px')}".html_safe , root_path, data: {container: 'body', toggle: 'tooltip', placement: "right", title: Setting['application_name']} %>
       <!--end::Logo-->
