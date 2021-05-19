@@ -1,0 +1,42 @@
+name: e2e-tests
+on: [push]
+jobs:
+  cypress-run:
+    runs-on: ubuntu-latest
+    services:
+      db:
+        env:
+          MYSQL_ALLOW_EMPTY_PASSWORD: yes
+        image: mysql:8.0
+        ports:
+          - 3306
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '2.6.1' # Specify your version
+
+      - name: Start rails server and run e2e test
+        env:
+          RAILS_ENV: test
+          MRMS_DATABASE_USERNAME: root
+          MRMS_DATABASE_PASSWORD: root
+          MRMS_DATABASE_HOST: 127.0.0.1
+          CYPRESS_RECORD_KEY: 6705ecc8-296e-4042-8ecf-14a7e77da1c0
+
+        run: |
+          sudo apt-get -yqq install libpq-dev
+          sudo service mysql start
+          gem install bundler
+          bundle install --jobs 4 --retry 3
+          yarn add cypress
+          bundle exec rails db:create
+          bundle exec rails db:migrate RAILS_ENV=test
+          bundle exec rails db:seed RAILS_ENV=test
+          bundle exec rails assets:precompile RAILS_ENV=test
+          bundle exec rails server -e test -p 5017 -d
+          yarn cypress run --record --parallel --project ./e2e

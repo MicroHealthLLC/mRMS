@@ -116,6 +116,8 @@ GEM
     concurrent-ruby (1.1.8)
     connection_pool (2.2.3)
     crass (1.0.6)
+    cypress-on-rails (1.10.1)
+      rack
     database_cleaner (2.0.1)
       database_cleaner-active_record (~> 2.0.0)
     database_cleaner-active_record (2.0.0)
@@ -391,6 +393,7 @@ GEM
       nokogiri (~> 1.8)
 
 PLATFORMS
+  x86_64-darwin-18
   x86_64-darwin-19
   x86_64-linux
 
@@ -409,6 +412,7 @@ DEPENDENCIES
   ckeditor_rails
   cocoon
   coffee-rails
+  cypress-on-rails (~> 1.0)
   database_cleaner
   devise
   devise-authy

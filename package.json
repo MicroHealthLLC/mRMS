@@ -1,5 +1,7 @@
 {
   "name": "simple_report",
   "private": true,
-  "dependencies": {}
+  "dependencies": {
+    "cypress": "^7.3.0"
+  }
 }
