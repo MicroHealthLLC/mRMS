@@ -188,6 +188,7 @@ GEM
     letter_opener (1.7.0)
       launchy (~> 2.2)
     libv8 (3.16.14.19)
+    libv8 (3.16.14.19-x86_64-darwin-18)
     libv8 (3.16.14.19-x86_64-linux)
     listen (3.1.5)
       rb-fsevent (~> 0.9, >= 0.9.4)
@@ -213,6 +214,7 @@ GEM
     multi_json (1.15.0)
     multi_xml (0.6.0)
     multipart-post (2.1.1)
+    mysql2 (0.5.3)
     net-ldap (0.17.0)
     nio4r (2.5.7)
     nokogiri (1.11.4-x86_64-darwin)
@@ -398,6 +400,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  activerecord-jdbcmysql-adapter
   ajax-datatables-rails (~> 0.3.1)
   audited (~> 4.7)
   awesome_print
@@ -433,6 +436,7 @@ DEPENDENCIES
   mini_magick
   minitest-retry
   momentjs-rails (>= 2.9.0)
+  mysql2
   omniauth-facebook
   omniauth-github
   omniauth-google-oauth2

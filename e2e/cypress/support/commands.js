@@ -7,3 +7,9 @@ Cypress.Commands.add("login", (email, password) => {
   cy.get('.d-inline-flex').click({force: true})
   cy.get('.btn').click({force: true})
 })
+
+// Logout Command
+Cypress.Commands.add("logout", () => {
+  cy.get('[data-cy=logout]').click()
+  cy.get('#flash_notice').contains('Signed out successfully.')
+})
