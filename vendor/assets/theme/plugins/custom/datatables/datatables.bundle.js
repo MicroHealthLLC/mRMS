@@ -15486,8 +15486,8 @@ var defaults = {
 		"paginate": {
 			"first": '<i class="ki ki-double-arrow-back"></i>',
 			"last": '<i class="ki ki-double-arrow-next"></i>',
-			"next": '<i class="ki ki-arrow-next"></i>',
-			"previous": '<i class="ki ki-arrow-back"></i>'
+			"next": '<i class="fas fa-arrow-right"></i>',
+			"previous": '<i class="fas fa-arrow-left"></i>'
 		}
 	}
 };

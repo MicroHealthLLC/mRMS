@@ -13,7 +13,7 @@ whitelist_ip:
 blacklist_ip:
   default: ''
 user_default_state:
-  default: 'false'
+  default: 0
 remember_for:
   default: 2
 expire_after:

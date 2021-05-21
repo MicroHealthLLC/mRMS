@@ -39,7 +39,9 @@ class User < ApplicationRecord
   has_many :channel_notifications
   has_many :reports, through: :shared_reports
 
-  STATUS = [['Active', true],['Inactive', false]]
+  enum state: [ :pending, :active, :archived ]
+
+  # STATUS = [['Active', true],['Inactive', false]]
 
   default_scope  -> {includes(:core_demographic).references(:core_demographic)}
 
