@@ -22,7 +22,7 @@ class EmployeesController < ProtectForgeryApplication
 
   def new
     r = Role.where(role_type_id: RoleType.default.try(:id)).first
-    @user = User.new(state: true, role_id: r.try(:id))
+    @user = User.new(state: :pending, role_id: r.try(:id))
     @user.core_demographic = CoreDemographic.new
     # @user.job_detail = JobDetail.new
   end

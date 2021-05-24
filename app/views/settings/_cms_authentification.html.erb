@@ -3,7 +3,7 @@
     <div class="form-group">
       <%= label_tag "default_auth_user", "Default User Status: ", class: 'col-md-2 control-label' %>
       <div class="col-md-9">
-        <%= select_tag :user_default_state, options_for_select(User::STATUS, selected: Setting['user_default_state']), {class: 'form-control'} %>
+        <%= select_tag :user_default_state, options_for_select(User.states.except(:pending).keys.map { |w| [w.humanize, w] }, selected: Setting['user_default_state']), {class: 'form-control'} %>
       </div>
     </div>
 

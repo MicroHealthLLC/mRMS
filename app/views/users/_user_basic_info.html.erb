@@ -27,7 +27,7 @@
       <div class="form-group">
         <label class="col-md-2 control-label">Status</label>
         <div class="col-md-9">
-          <%= f.select :state, options_for_select([['Active', true],['Inactive', false]], selected: user.state), {}, {class: 'form-control'} %>
+          <%= f.select :state, options_for_select(User.states.except(:pending).keys.map { |w| [w.humanize, w] }, selected: user.state), {}, {class: 'form-control'} %>
         </div>
       </div>
 
