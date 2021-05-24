@@ -13,10 +13,11 @@
           <% f.object.core_demographic ||= CoreDemographic.new %>
           <%= f.fields_for :core_demographic do |form| %>
             <div class="form-group" style="margin-top: -15px;">
-              <h3>* Required</h3>
+              <h3><span class="text-danger">*</span> Required</h3>
             </div>
             <div class="form-group">
               <%= form.label t('profile.first_name') %>
+              <span class="text-danger">*</span>
               <%= form.text_field :first_name, placeholder: 'First name', class: 'form-control' %>
             </div>
 
@@ -27,6 +28,7 @@
 
             <div class="form-group">
               <%= form.label t('profile.last_name') %>
+              <span class="text-danger">*</span>
               <%= form.text_field :last_name, placeholder: 'Last name', class: 'form-control' %>
             </div>
 
@@ -38,22 +40,26 @@
           </div>
 
           <div class="form-group">
-            <label>Login *</label>
+            <label>Login</label>
+            <span class="text-danger">*</span>
             <%= f.text_field :login, placeholder: 'Login' , class: 'form-control' %>
           </div>
 
           <div class="form-group">
             <label><%= t(:email) %></label>
+            <span class="text-danger">*</span>
             <%= f.email_field :email, placeholder: 'Email' , class: 'form-control' %>
           </div>
 
           <div class="form-group">
             <label><%= t('profile.password') %></label>
+            <span class="text-danger">*</span>
             <%= f.password_field :password, autocomplete: "off", placeholder: 'Password' , class: 'form-control' %>
           </div>
 
           <div class="form-group">
             <label><%= t('profile.password_confirmation') %></label>
+            <span class="text-danger">*</span>
             <%= f.password_field :password_confirmation, autocomplete: "off", placeholder: 'Password confirmation' , class: 'form-control' %>
           </div>
 
