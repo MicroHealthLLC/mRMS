@@ -28,7 +28,7 @@
   <div class="noprint row">
   <div class="col-md-12 ">
     <div class="pull-right" style="margin-bottom: 10px">
-      <% if @report.channel.is_creator? %>
+      <% if current_user.id == @dashboard.user_id %>
         <%= edit_button edit_channel_report_dashboard_path(@report.channel, @report, @dashboard) %>
         <%= delete_button channel_report_dashboard_path(@report.channel, @report, @dashboard), 'Dashboard' %>
       <% end %>
