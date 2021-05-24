@@ -123,7 +123,7 @@ en:
  # USER.
   user_subscription: User subscription
   login: Username
-  email: Email *
+  email: Email
   new_user: New User
   fax: Fax
   phone: Phone Number
@@ -135,18 +135,18 @@ en:
     profile: profile
     my_profile: My Profile
     name: Name
-    first_name: First Name *
+    first_name: First Name
     middle_name: Middle Name
-    last_name: Last Name *
+    last_name: Last Name
     birthday: Birth Date
     gender: Gender
     religion: Religion
     ethnicity: Ethnicity
     marital_status: Marital Status
     citizenship: Citizenship
-    password: Password *
+    password: Password
     current_password: Current password
-    password_confirmation: Password confirmation *
+    password_confirmation: Password confirmation
  # DOCUMENTS
   client_documents: Client Documents
   my_client_documents: My Client Documents
