@@ -35,7 +35,7 @@ class UserDatatable < Abstract
 
           user.first_name,
           user.last_name,
-          user.state,
+          user.state.humanize,
 
           user.deleted? ?   @view.restore_user_link(user, 'data-turbolinks'=> false) :  @view.delete_link(user, 'data-turbolinks'=> false),
           user.locked_at? ?   @view.unlock_user_link(user, 'data-turbolinks'=> false) :  @view.lock_user_link(user, 'data-turbolinks'=> false),

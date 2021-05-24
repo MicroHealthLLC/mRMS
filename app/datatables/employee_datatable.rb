@@ -37,7 +37,7 @@ class EmployeeDatatable < Abstract
           user.email ,
           (user.organization_enum.to_s.presence || '-'),
 
-          user.state
+          user.state.humanize
 
       ]
     end
@@ -48,11 +48,11 @@ class EmployeeDatatable < Abstract
          includes(:organization_enum).references(:organization_enum)
 
     case @options[:status_type]
-      when 'active' then scope= scope.where(state: true)
-      when 'inactive' then scope = scope.where(state: false)
+      when 'active' then scope= scope.where(state: :active)
+      when 'inactive' then scope = scope.where(state: :inactive)
       when 'all' then scope
       else
-        scope = scope.where(state: true)
+        scope = scope.where(state: :active)
     end
 
     return scope

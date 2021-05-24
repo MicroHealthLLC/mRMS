@@ -39,7 +39,7 @@ class User < ApplicationRecord
   has_many :channel_notifications
   has_many :reports, through: :shared_reports
 
-  enum state: [ :pending, :active, :archived ]
+  enum state: [ :pending, :active, :inactive ]
 
   # STATUS = [['Active', true],['Inactive', false]]
 
