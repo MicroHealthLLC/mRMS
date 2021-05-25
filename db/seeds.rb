@@ -9,7 +9,7 @@
 user = User.find_or_initialize_by(email: 'admin@gmail.com')
 user.admin =
 user.admin = true
-user.state = 1
+user.state = :active
 user.password = 'Admin@2018'
 user.login = 'admin'
 user.save
