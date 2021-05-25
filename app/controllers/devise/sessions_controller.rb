@@ -6,7 +6,7 @@ class Devise::SessionsController < DeviseController
   prepend_before_action :check_captcha, only: [:create] if ENV['RECAPTCHA_PUBLIC_KEY'].present?
   prepend_before_action :check_whitelists, only: [:create]
   prepend_before_action :check_blacklists, only: [:create]
-  prepend_before_action :check_state, only: [:create]
+  # prepend_before_action :check_state, only: [:create]
 
   # GET /resource/sign_in
   def new
