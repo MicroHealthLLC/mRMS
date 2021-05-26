@@ -1,0 +1,63 @@
+
+<div class="tab-pane" id="kt_aside_tab_2">
+  <!--begin::Aside Menu-->
+  <div class="aside-menu-wrapper flex-column-fluid " id="kt_aside_menu_wrapper" style="height: 50px;">
+    <!--begin::Menu Container-->
+    <div id="kt_aside_menu" class="aside-menu border-bottom " data-menu-vertical="1" data-menu-scroll="1">
+     <div class="h-75 d-inline-block">
+      <!--begin::Menu Nav-->
+        <ul class="menu-nav" style="max-height: calc(100vh - 9rem);overflow-y: auto;" >
+          <li class="menu-item menu-item-active" aria-haspopup="true" style="margin-left: 15px !important;margin-bottom: 10px !important;">
+            <a href="/">
+            <img alt="Logo" src="/assets/logo.png">
+             <span class="menu-text ml-5"><%= Setting['application_name']%></span>
+          </li>
+          <% if user_signed_in? %>
+            <%= render  partial: 'menu/signed_in' %>
+          <% else %>
+            <%= render partial: 'menu/not_signed_in' %>
+          <% end %>
+          <!-- <li class="menu-item" aria-haspopup="true">
+            <a href="https://keenthemes.com/metronic/preview/demo3/builder.html" class="menu-link btn btn-clean shadow-none">
+              <span class="svg-icon menu-icon ">
+                <i class="fas fa-home"></i>
+
+              </span>
+              <span class="menu-text">Builder</span>
+            </a>
+          </li> -->
+        </ul>
+        <!--end::Menu Nav-->
+        </div>
+        <!--begin::Footer-->
+    <div class="aside-footer d-flex flex-column align-items-center flex-column-auto" style=" position: absolute; bottom: 10px;">
+      <% if user_signed_in? %>
+        <a href="/users/edit" class="menu-link btn btn-clean shadow-none" data-container='body'>
+            <span class=" menu-icon">
+              <i class="fas fa-user"></i>
+            </span>
+            <span class="menu-text">Profile</span>
+        </a>
+      <% end %>
+      <a href="<%= user_signed_in? ? destroy_session_path(:user) : new_session_path(:user) %>"  id="kt_quick_user_toggle" data-toggle="tooltip" data-placement="right" class="menu-link btn btn-clean shadow-none   data-container='body' title="<%=user_signed_in? ? 'Logout' : 'Sign In' %>">
+        <span class="symbol symbol-30 symbol-lg-40">
+          <span class="menu-icon">
+            <% if user_signed_in? %>
+              <i class="fas fa-sign-out-alt"></i>
+              <span class="menu-text">Logout</span>
+            <% else %>
+              <i class="fas fa-sign-in-alt"></i>
+            <% end %>
+          </span>
+          <!--<span class="symbol-label font-size-h5 font-weight-bold">S</span>-->
+        </span>
+      </a>
+      <!--end::User-->
+    </div>
+    <!--end::Footer-->
+    </div>
+    <!--end::Menu Container-->
+  </div>
+  <!--end::Aside Menu-->
+</div>
+<!--end::Tab Pane-->

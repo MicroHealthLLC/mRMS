@@ -266,3 +266,6 @@ fieldset{
   border-radius: 4px;
   margin: 0 .25rem;
 }
+.aside-secondary-enabled .aside {
+    width: 425px !important;
+}

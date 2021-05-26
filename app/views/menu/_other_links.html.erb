@@ -1,64 +1,137 @@
-<li class="nav-item mb-3" data-toggle="tooltip" data-placement="right" data-container="body" data-boundary="window" title="<%= 'Create Channel' %>">
+<!-- <li class="nav-item mb-3" data-toggle="tooltip" data-placement="right" data-container="body" data-boundary="window" title="<%= 'Create Channel' %>">
   <a href="/channels/new" class="nav-link btn btn-icon btn-clean btn-lg <%= menu_active?('channels', 'new') %>" >
     <span class="svg-icon svg-icon-xl">
+      <i class="fas fa-folder-plus"><small class="pl-3"> Create Channel</small>
+  </a></i>
+    </span>
+</li> -->
+<li class="menu-item" data-toggle="tooltip" data-placement="right" data-container="body" data-boundary="window" >
+  <a href="/channels/new" class="menu-link btn btn-clean shadow-none <%= menu_active?('channels', 'new') %>" >
+    <span class="svg-icon menu-icon">
       <i class="fas fa-folder-plus"></i>
     </span>
+    <span class="menu-text">Create Channel</span>
   </a>
 </li>
 
-<li class="nav-item mb-3" data-toggle="tooltip" data-placement="right" data-container="body" data-boundary="window" title="<%= 'Request Channel' %>" >
+<!-- <li class="nav-item mb-3" data-toggle="tooltip" data-placement="right" data-container="body" data-boundary="window" title="<%= 'Request Channel' %>" >
   <a href="#" class="nav-link btn btn-icon btn-clean btn-lg" data-toggle="modal" data-target="#RequestEntranceModal">
     <span class="svg-icon svg-icon-xl">
-      <i class="fa-lg fa-fw fas fa-bowling-ball"></i>
+      <i class="fa-lg fa-fw fas fa-bowling-ball"> <small class="pl-3">Request Channel</small></i>
     </span>
+  </a>
+</li> -->
+<li class="menu-item" aria-haspopup="true" data-toggle="tooltip" data-placement="right" data-container="body" data-boundary="window" >
+   <a href="#" class="menu-link btn btn-clean shadow-none" data-toggle="modal" data-target="#RequestEntranceModal">
+    <span class="svg-icon menu-icon">
+     <i class="fas fa-bowling-ball"></i>
+    </span>
+    <span class="menu-text">Request Channel</span>
   </a>
 </li>
 
-<% @ordered_channels.each do |channel_id| %>
-  <% if channel_id == -1 %>
-    <li class="nav-item mb-3 sort-handle" data-toggle="tooltip" data-placement="right" data-container="body" data-boundary="window" title="Personal" data-reorder-url="<%= reorder_handle_channels_path(channel_id: '-1') %>" data-reorder-param="<%= 'channel' %>">
-      <a href="#" class="nav-link btn btn-icon btn-clean btn-lg" data-toggle="modal" data-target="#RequestEntranceModal">
-        <span class="svg-icon svg-icon-xl">
-          <i class="fa fa-lg fa-fw fa-circle"></i>
-        </span>
-      </a>
+<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+  <a href="javascript:;" class="menu-link menu-toggle btn btn-clean shadow-none">
+    <span class="svg-icon menu-icon">
+      <i class="fas fa-users"></i>
+    </span>
+    <span class="menu-text">Public</span>
+    <i class="menu-arrow"></i>
+  </a>
+  <div class="menu-submenu">
+    <i class="menu-arrow"></i>
+    <ul class="menu-subnav">
+      <% Channel.is_public.each do |channel|  %>
+        <li class="menu-item sort-handle" data-toggle="tooltip" data-placement="right" data-container="body" data-boundary="window" data-reorder-url="<%= reorder_handle_channels_path(channel_id: channel.id) %>" data-reorder-param="<%= 'channel' %>">
+           <a href="/channels/<%= channel.id %>" class="menu-link btn btn-clean shadow-none <%= channel_active?(channel) %>">
+            <span class="svg-icon menu-icon">
+             <i class="fa-lg fa-fw <%= channel.icon || 'far fa-square' %>"></i>
+            </span>
+            <span class="menu-text"><%= channel.name %></span>
+          </a>
+        </li>
+      <% end %>
+      </ul>
+    </div>
+  </li>
+<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+  <a href="javascript:;" class="menu-link menu-toggle btn btn-clean shadow-none">
+    <span class="svg-icon menu-icon">
+     <i class="fas fa-user-shield"></i>
+    </span>
+    <span class="menu-text">Personal</span>
+    <i class="menu-arrow"></i>
+  </a>
+  <div class="menu-submenu">
+    <i class="menu-arrow"></i>
+    <ul class="menu-subnav">
+      <% Channel.personal.each do |channel|  %>
+         <li class="menu-item sort-handle" data-toggle="tooltip" data-placement="right" data-container="body" data-boundary="window" data-reorder-url="<%= reorder_handle_channels_path(channel_id: channel.id) %>" data-reorder-param="<%= 'channel' %>">
+           <a href="/channels/<%= channel.id %>" class="menu-link btn btn-clean shadow-none <%= channel_active?(channel) %>">
+            <span class="svg-icon menu-icon">
+             <i class="fa-lg fa-fw <%= channel.icon || 'far fa-square' %>"></i>
+            </span>
+            <span class="menu-text"><%= channel.name %></span>
+          </a>
+        </li>
+      <% end %>
+      </ul>
+    </div>
+</li>
 
-      <!-- <ul>
-        <%# Channel.shared_report %>
-        <%# Channel.my_personal_channel.each do |channel| %>
-            <li class="<%#= channel_active?(channel)  %>">
-              <a href="/channels/<%#= channel.id %>" title="<%#= channel.name %>"><i class="fa-lg fa-fw <%#= channel.icon || 'far fa-square' %>"></i><span class="menu-item-parent"><%#= channel.name %></span></a>
-            </li>
-        <%# end  %>
-      </ul -->
-
-    </li>
-
-    <% elsif channel = Channel.not_personal.find_by_id(channel_id) %>
-      <li class="nav-item mb-3 sort-handle" data-toggle="tooltip" data-placement="right" data-container="body" data-boundary="window" title="<%= channel.name %>" data-reorder-url="<%= reorder_handle_channels_path(channel_id: channel ? channel.id : '-1') %>" data-reorder-param="<%= 'channel' %>">
-        <a href="/channels/<%= channel.id %>" class="nav-link btn btn-icon btn-clean btn-lg <%= channel_active?(channel) %>">
-          <span class="svg-icon svg-icon-xl">
-            <i class="fa-lg fa-fw <%= channel.icon || 'far fa-square' %>"></i>
-          </span>
-        </a>
-      </li>
-    <% end %>
-<% end %>
-
-<li class="nav-item mb-3" data-toggle="tooltip" data-placement="right" data-container="body" data-boundary="window" title="<%= 'One Drives' %>">
+<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+  <a href="javascript:;" class="menu-link menu-toggle btn btn-clean shadow-none ">
+    <span class="svg-icon menu-icon">
+     <i class="fas fa-user-friends"></i>
+    </span>
+    <span class="menu-text">Group</span>
+    <i class="menu-arrow"></i>
+  </a>
+  <div class="menu-submenu">
+    <i class="menu-arrow"></i>
+    <ul class="menu-subnav">
+      <% Channel.for_shared_users.each do |channel|  %>
+         <li class="menu-item sort-handle" data-toggle="tooltip" data-placement="right" data-container="body" data-boundary="window" data-reorder-url="<%= reorder_handle_channels_path(channel_id: channel.id) %>" data-reorder-param="<%= 'channel' %>">
+           <a href="/channels/<%= channel.id %>" class="menu-link btn btn-clean shadow-none <%= channel_active?(channel) %>">
+            <span class="svg-icon menu-icon">
+             <i class="fa-lg fa-fw <%= channel.icon || 'far fa-square' %>"></i>
+            </span>
+            <span class="menu-text"><%= channel.name %></span>
+          </a>
+        </li>
+      <% end %>
+      </ul>
+    </div>
+  </li>
+<!-- <li class="nav-item mb-3" data-toggle="tooltip" data-placement="right" data-container="body" data-boundary="window" title="<%= 'One Drives' %>">
   <a href="/one_drives" class="nav-link btn btn-icon btn-clean btn-lg <%= menu_active?('one_drives') %>">
     <span class="svg-icon svg-icon-xl">
       <i class="fa-lg fa-fw fab fa-dropbox"></i>
     </span>
   </a>
+</li> -->
+<li class="menu-item" data-toggle="tooltip" data-placement="right" data-container="body" data-boundary=" window" >
+  <a href="/one_drives" class="menu-link btn btn-clean shadow-none <%= menu_active?('one_drives') %>">
+    <span class="svg-icon menu-icon">
+      <i class="fa-lg fa-fw fab fa-dropbox"></i>
+    </span>
+     <span class="menu-text">One Drive</span>
+  </a>
 </li>
-
 <% if module_enabled?('news') && can?(:manage_roles, :manage_news, :view_news) %>
-  <li class="nav-item mb-3" data-toggle="tooltip" data-placement="right" data-container="body" data-boundary="window" data-original-title="<%= 'news' %>">
+  <!-- <li class="nav-item mb-3" data-toggle="tooltip" data-placement="right" data-container="body" data-boundary="window" data-original-title="<%= 'news' %>">
     <a href="/news" class="nav-link btn btn-icon btn-clean btn-lg <%= menu_active?('news') %>">
       <span class="svg-icon svg-icon-xl">
         <i class="fa fa-lg fa-fw fa-newspaper-o"></i>
       </span>
+    </a>
+  </li> -->
+  <li class="menu-item" ata-toggle="tooltip" data-placement="right" data-container="body" >
+     <a href="/news" class="menu-link btn btn-clean shadow-none <%= menu_active?('news') %>">
+      <span class="svg-icon menu-icon">
+        <i class="fa fa-lg fa-fw fa-newspaper-o"></i>
+      </span>
+       <span class="menu-text">News</span>
     </a>
   </li>
 <% end %>

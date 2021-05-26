@@ -36645,7 +36645,7 @@ button {
     display: inline; }
 
 .btn.btn-clean {
-  color: #B5B5C3;
+  color: #3F4254;
   background-color: transparent;
   border-color: transparent; }
   .btn.btn-clean i {
@@ -36693,7 +36693,7 @@ button {
   .show > .btn.btn-clean.dropdown-toggle,
   .show .btn.btn-clean.btn-dropdown {
     color: #1BC5BD;
-    background-color: #F3F6F9;
+    /*background-color: #F3F6F9;*/
     border-color: transparent; }
     .btn.btn-clean:not(:disabled):not(.disabled):active:not(.btn-text) i, .btn.btn-clean:not(:disabled):not(.disabled).active i,
     .show > .btn.btn-clean.dropdown-toggle i,

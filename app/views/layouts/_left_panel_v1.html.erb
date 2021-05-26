@@ -1,16 +1,17 @@
-<!--begin::Aside-->
-<div class="side aside-left d-flex aside-fixed ml-5" id="kt_aside" style="overflow: auto;max-height: 100vh; position: fixed; height: 100vh;">
+<div class="aside aside-left d-flex aside-fixed" id="kt_aside" style="overflow: auto;max-height: 100vh; position: fixed; height: 100vh; width: 30vh;">
   <!--begin::Primary-->
   <div class="aside-primary d-flex flex-column align-items-center flex-row-auto" id="sidebar">
     <!--begin::Brand-->
     <div class="aside-brand d-flex flex-column align-items-center flex-column-auto flex-row-auto py-5 py-lg-10">
+      <div class="aside-secondary d-flex flex-row-fluid">
       <!--begin::Logo-->
       <%= link_to "#{image_tag( "logo.png", alt: '', size: '30x30', style: 'width: auto', class: 'max-h-30px')}".html_safe , root_path, data: {container: 'body', toggle: 'tooltip', placement: "right", title: Setting['application_name']} %>
       <!--end::Logo-->
+      </div>
     </div>
     <!--end::Brand-->
     <!--begin::Nav Wrapper-->
-    <div class="aside-nav1 d-flex flex-column align-items-center flex-column-fluid py-5" style="overflow-y: auto !important; max-height: 70vh;">
+    <div class="aside-nav1 d-flex flex-column align-items-left flex-column-fluid py-5 pl-10" style="overflow-y: auto !important; max-height: 60vh; width: 30vh;">
       <!--begin::Nav-->
       <ul class="nav flex-column" role="tablist">
         <% if user_signed_in? %>
@@ -24,18 +25,6 @@
     <!--end::Nav Wrapper-->
     <!--begin::Footer-->
     <div class="aside-footer d-flex flex-column align-items-center flex-column-auto py-4 py-lg-10 mt-auto">
-      <!--begin::Aside Toggle-->
-      <!-- <span class="aside-toggle btn btn-icon btn-primary btn-hover-primary shadow-sm" id="kt_aside_toggle" data-toggle="tooltip" data-placement="right" title="Toggle Aside">
-        <i class="ki ki-bold-arrow-back icon-sm"></i>
-      </span> -->
-      <!--end::Aside Toggle-->
-      <!--begin::Quick Actions-->
-
-      <!--end::Quick Actions-->
-      <!--begin::Quick Panel-->
-      <!--end::Quick Panel-->
-      <!--begin::User-->
-
       <% if user_signed_in? %>
         <a href="/users/edit" class="btn btn-icon btn-clean btn-lg w-40px h-40px" data-toggle="tooltip" data-placement="right" title="Profile" data-container='body'>
           <span class="symbol symbol-30 symbol-lg-40">
@@ -66,8 +55,10 @@
         </span>
       </a>
       <!--end::User-->
+
     </div>
     <!--end::Footer-->
   </div>
   <!--end::Primary-->
+
 </div>
