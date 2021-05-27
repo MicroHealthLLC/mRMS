@@ -89,7 +89,7 @@ class ApplicationController < ActionController::Base
 
     respond_to do |format|
       format.html {
-        render :template => 'common/error', :layout => 'base', :status => @status
+        render :template => 'common/error', :layout => 'application', :status => @status
       }
       format.any { head @status }
     end

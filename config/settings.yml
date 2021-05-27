@@ -13,7 +13,7 @@ whitelist_ip:
 blacklist_ip:
   default: ''
 user_default_state:
-  default: 0
+  default: :pending
 remember_for:
   default: 2
 expire_after:
