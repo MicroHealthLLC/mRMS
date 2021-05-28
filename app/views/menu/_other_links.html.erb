@@ -47,7 +47,7 @@
             <span class="svg-icon menu-icon">
              <i class="fa-lg fa-fw <%= channel.icon || 'far fa-square' %>"></i>
             </span>
-            <span class="menu-text"><%= channel.name %></span>
+            <span class="menu-text"><%= truncate(channel.name, :length => 14 )  %></span>
           </a>
         </li>
       <% end %>
@@ -71,7 +71,7 @@
             <span class="svg-icon menu-icon">
              <i class="fa-lg fa-fw <%= channel.icon || 'far fa-square' %>"></i>
             </span>
-            <span class="menu-text"><%= channel.name %></span>
+            <span class="menu-text"><%= truncate(channel.name, :length => 14 )  %></span>
           </a>
         </li>
       <% end %>
@@ -96,7 +96,7 @@
             <span class="svg-icon menu-icon">
              <i class="fa-lg fa-fw <%= channel.icon || 'far fa-square' %>"></i>
             </span>
-            <span class="menu-text"><%= channel.name %></span>
+            <span class="menu-text"><%= truncate(channel.name, :length => 14 )  %></span>
           </a>
         </li>
       <% end %>

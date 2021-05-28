@@ -60688,3 +60688,17 @@ body {
 @media (max-width: 425px) {
   .offcanvas-mobile {
     width: 90% !important; } }
+
+@media (max-width: 718px) {
+    #kt_aside_tab_2 {
+        display: none;
+    }
+}
+
+.aside-menu .menu-nav > .menu-item > .menu-heading .menu-arrow:before,
+        .aside-menu .menu-nav > .menu-item > .menu-link .menu-arrow:before {
+          font-family: fontawesome !important;
+          content: "\f054"; }
+          [direction="rtl"] .aside-menu .menu-nav > .menu-item > .menu-heading .menu-arrow:before, [direction="rtl"]
+          .aside-menu .menu-nav > .menu-item > .menu-link .menu-arrow:before {
+            content: "\f054" !important; }

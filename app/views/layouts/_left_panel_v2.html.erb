@@ -1,34 +1,28 @@
 
-<div class="tab-pane" id="kt_aside_tab_2">
+<div class="tab-pane " id="kt_aside_tab_2" aria-labelledby="headingOne">
   <!--begin::Aside Menu-->
-  <div class="aside-menu-wrapper flex-column-fluid " id="kt_aside_menu_wrapper" style="height: 50px;">
+  <div class="aside-menu-wrapper flex-column-fluid" id="kt_aside_menu_wrapper" style="height: 50px;">
     <!--begin::Menu Container-->
     <div id="kt_aside_menu" class="aside-menu border-bottom " data-menu-vertical="1" data-menu-scroll="1">
      <div class="h-75 d-inline-block">
       <!--begin::Menu Nav-->
-        <ul class="menu-nav" style="max-height: calc(100vh - 9rem);overflow-y: auto;" >
-          <li class="menu-item menu-item-active" aria-haspopup="true" style="margin-left: 15px !important;margin-bottom: 10px !important;">
-            <a href="/">
-            <img alt="Logo" src="/assets/logo.png">
-             <span class="menu-text ml-5"><%= Setting['application_name']%></span>
+        <ul class="menu-nav example" style="max-height: calc(100vh - 9rem);overflow-y: auto; width: 200px;" >
+          <li class="menu-item menu-item-active" aria-haspopup="true" style="margin-left: 65px !important;margin-bottom: 10px !important;">
+            <div>
+            <!--begin::Logo-->
+                  <%= link_to "#{image_tag( "logo.png", alt: '')}".html_safe, root_path, data: {container: 'body', toggle: 'tooltip', placement: "right"}  %>
+            <!--end::Logo-->
+                 <span class="menu-text ml-5"><%= Setting['application_name']%></span>
+            </div>
           </li>
           <% if user_signed_in? %>
             <%= render  partial: 'menu/signed_in' %>
           <% else %>
             <%= render partial: 'menu/not_signed_in' %>
           <% end %>
-          <!-- <li class="menu-item" aria-haspopup="true">
-            <a href="https://keenthemes.com/metronic/preview/demo3/builder.html" class="menu-link btn btn-clean shadow-none">
-              <span class="svg-icon menu-icon ">
-                <i class="fas fa-home"></i>
-
-              </span>
-              <span class="menu-text">Builder</span>
-            </a>
-          </li> -->
         </ul>
         <!--end::Menu Nav-->
-        </div>
+    </div>
         <!--begin::Footer-->
     <div class="aside-footer d-flex flex-column align-items-center flex-column-auto" style=" position: absolute; bottom: 10px;">
       <% if user_signed_in? %>
@@ -55,9 +49,12 @@
       <!--end::User-->
     </div>
     <!--end::Footer-->
-    </div>
-    <!--end::Menu Container-->
   </div>
+    <!--end::Menu Container-->
+ </div>
   <!--end::Aside Menu-->
 </div>
 <!--end::Tab Pane-->
+<span class=" btn btn-icon btn-primary btn-hover-primary shadow-sm mt-3 mr-3" data-target="#kt_aside_tab_2" data-toggle="collapse" data-placement="right" data-container="body" data-boundary="window" aria-expanded="true" aria-controls="collapseOne">
+  <i class="fas fa-chevron-left"></i>
+</span>
