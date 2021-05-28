@@ -82,3 +82,13 @@
         height: auto
     }
 }
+/* Hide scrollbar for Chrome, Safari and Opera */
+ #kt_aside::-webkit-scrollbar {
+     display: none;
+ }
+
+ /* Hide scrollbar for IE, Edge and Firefox */
+ #kt_aside{
+   -ms-overflow-style: none;  /* IE and Edge */
+   scrollbar-width: none;  /* Firefox */
+ }

@@ -110,7 +110,7 @@ Use search to find needed section.
     </div>
   </div>
 </div>
-<% if @user && @user.state == "active" %>
+<% if current_user %>
   <div data-toggle="modal" class="modal fade" id="RequestEntranceModal" tabindex="-1" role="dialog" aria-labelledby="RequestEntranceModal">
     <div data-toggle="modal" class="modal-dialog" role="document">
       <div data-toggle="modal" class="modal-content">
