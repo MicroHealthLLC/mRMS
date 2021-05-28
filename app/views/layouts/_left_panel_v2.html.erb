@@ -33,7 +33,7 @@
             <span class="menu-text">Profile</span>
         </a>
       <% end %>
-      <a href="<%= user_signed_in? ? destroy_session_path(:user) : new_session_path(:user) %>"  id="kt_quick_user_toggle" data-toggle="tooltip" data-placement="right" class="menu-link btn btn-clean shadow-none   data-container='body' title="<%=user_signed_in? ? 'Logout' : 'Sign In' %>">
+      <a href="<%= user_signed_in? ? destroy_session_path(:user) : new_session_path(:user) %>"  id="kt_quick_user_toggle" data-toggle="tooltip" data-placement="right" class="menu-link btn btn-clean shadow-none"   data-container='body' title="<%=user_signed_in? ? 'Logout' : 'Sign In' %>">
         <span class="symbol symbol-30 symbol-lg-40">
           <span class="menu-icon">
             <% if user_signed_in? %>
@@ -55,6 +55,7 @@
   <!--end::Aside Menu-->
 </div>
 <!--end::Tab Pane-->
-<span class=" btn btn-icon btn-primary btn-hover-primary shadow-sm mt-3 mr-3" data-target="#kt_aside_tab_2" data-toggle="collapse" data-placement="right" data-container="body" data-boundary="window" aria-expanded="true" aria-controls="collapseOne">
+<!-- <span class=" btn btn-icon btn-primary btn-hover-primary shadow-sm mt-3 mr-3" data-target="#kt_aside_tab_2" data-toggle="collapse" data-placement="right" data-container="body" data-boundary="window" aria-expanded="true" aria-controls="collapseOne">
   <i class="fas fa-chevron-left"></i>
 </span>
+ -->
