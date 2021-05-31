@@ -20,7 +20,7 @@ class SettingsController < ProtectForgeryApplication
   end
 
   def set_key_providers
-    ['OFFICE365', 'GOOGLE', 'FACEBOOK', 'GITHUB', 'TWITTER'].each do |provider|
+    ['OFFICE365', 'GOOGLE', 'FACEBOOK', 'GITHUB', 'TWITTER', 'AZURE'].each do |provider|
       Setting["#{provider}_SECRET"] = params["#{provider.downcase}"]['secret']
       Setting["#{provider}_KEY"] = params["#{provider.downcase}"]['key']
     end
@@ -30,6 +30,7 @@ class SettingsController < ProtectForgeryApplication
       config.omniauth :facebook, Setting['FACEBOOK_KEY'], Setting['FACEBOOK_SECRET']
       config.omniauth :twitter, Setting['TWITTER_KEY'], Setting['TWITTER_SECRET'], scope: 'user:email'
       config.omniauth :google_oauth2, Setting['GOOGLE_KEY'],  Setting['GOOGLE_SECRET']
+      config.omniauth :microsoft_graph_auth, Setting['AZURE_KEY'],  Setting['AZURE_SECRET'], scope: 'offline_access files.readwrite.all'
     end
     redirect_to settings_path
   end
