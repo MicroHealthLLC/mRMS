@@ -6,8 +6,8 @@ module OmniauthPatch
           options.client_id = Setting["GOOGLE_KEY"]
           options.client_secret = Setting["GOOGLE_SECRET"]
         when 'microsoft_graph_auth'
-          options.client_id = ENV["AZURE_KEY"]
-          options.client_secret = ENV["AZURE_SECRET"]
+          options.client_id = Setting["AZURE_KEY"]
+          options.client_secret = Setting["AZURE_SECRET"]
         else
           options.client_id = Setting["#{options.name.upcase}_KEY"]
           options.client_secret = Setting["#{options.name.upcase}_SECRET"]
