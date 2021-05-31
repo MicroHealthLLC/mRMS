@@ -42,7 +42,7 @@
   </p>
   <div class="row">
     <% @dashboard.save_pivot_tables.each_with_index do |pivot_table, idx| %>
-        <div class="col-md-10" style="max-height: auto; padding-right: 10px; margin-left: 20px; margin-right: 20px;">
+        <div class="col-md-5" style="max-height: auto; padding-right: 10px; margin-left: 20px; margin-right: 20px;">
           <% params[:query_id] = pivot_table.id %>
           <% params[:number] = idx %>
           <%= render partial: 'reports/pivot_table', locals: {pivot_table: pivot_table} %>
