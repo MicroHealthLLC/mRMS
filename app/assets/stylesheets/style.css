@@ -266,3 +266,11 @@ fieldset{
   border-radius: 4px;
   margin: 0 .25rem;
 }
+.aside-secondary-enabled .aside {
+    width: 425px !important;
+}
+.aside-menu .menu-nav > .menu-item > .menu-heading .menu-arrow:before,
+        .aside-menu .menu-nav > .menu-item > .menu-link .menu-arrow:before {
+          font-size: x-small !important;
+          font-weight: 100 !important;
+           }

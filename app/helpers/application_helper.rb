@@ -239,6 +239,22 @@ module ApplicationHelper
     end
   end
 
+  def menu_open?
+    if (params[:controller] == 'channels' && params[:action] == 'index')
+      'menu-item-open'
+    else
+      ['users', 'settings', 'enumerations'].include?(params[:controller]) ? 'menu-item-open' : ''
+    end
+  end
+
+  def anchor_active?
+    if (params[:controller] == 'channels' && params[:action] == 'index')
+      'active'
+    else
+      ['users', 'settings', 'enumerations'].include?(params[:controller]) ? 'active' : ''
+    end
+  end
+
   def channel_active?(channel)
     if @channel.try(:id) == channel.id
       'active'

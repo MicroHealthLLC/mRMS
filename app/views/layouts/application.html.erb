@@ -13,7 +13,6 @@
   <%= stylesheet_link_tag  'application', media: 'all', 'data-turbolinks-track'=> 'reload' %>
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
   <%= javascript_include_tag 'application', 'data-turbolinks-track'=> 'reload' %>
-
   <!-- FAVICONS -->
   <%= favicon_link_tag 'favicon.ico' %>
 
@@ -95,9 +94,11 @@ Use search to find needed section.
 <!-- Note: This width of the aside area can be adjusted through LESS variables -->
 <%#= render partial: 'layouts/left_panel' if current_user && !@simulate_no_user %>
 <div class="d-flex flex-row flex-column-fluid page bg-white">
-  <%= render partial: 'layouts/left_panel_v1' if current_user && !@simulate_no_user %>
+  <%= render partial: 'layouts/left_panel_v2' if current_user && !@simulate_no_user %>
+  <%#= render partial: 'layouts/left_panel_v1' if current_user && !@simulate_no_user %>
   <!-- END NAVIGATION -->
-  <div class="d-flex flex-column flex-row-fluid wrapper" id="kt_wrapper" style="margin-left: 100px;">
+  <div class="d-flex flex-column flex-row-fluid wrapper" id="kt_wrapper" style="margin-left: 5px; max-height: 100vh; overflow-y: scroll;">
+<!--    <button  data-toggle="collapse" data-target="#kt_aside_tab_2" aria-expanded="true" aria-controls="collapseOne" style="float: left;">=</button> -->
     <!-- MAIN PANEL -->
     <div id="main" role="main" class="w-100 p-5">
       <%= render_flash_messages %>

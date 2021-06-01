@@ -1,13 +1,68 @@
 
-  <li class="nav-item mb-3" data-toggle="tooltip" data-placement="right" data-container="body" data-boundary="window" title="Home">
+<!--   <li class="nav-item mb-3" data-toggle="tooltip" data-placement="right" data-container="body" data-boundary="window" title="Home">
     <a href="/" class="nav-link btn btn-icon btn-clean btn-lg <%= menu_active?('welcome') %>">
       <span class="svg-icon svg-icon-xl">
-        <i class="fas fa-home"></i>
+        <i class="fas fa-home"> <small class="pl-2">Home</small> </i>
       </span>
     </a>
-  </li>
+  </li> -->
+  <li class="menu-item" aria-haspopup="true" data-toggle="tooltip" data-placement="right" data-container="body" data-boundary="window">
+    <a href="/" class="menu-link btn btn-clean shadow-none <%= menu_active?('welcome') %>">
+      <span class="svg-icon menu-icon ">
+        <i class="fas fa-home"></i>
+        </span>
+      <span class="menu-text <%= menu_active?('welcome')%>">Home</span>
+    </a>
+   </li>
+   <!-- <li class="nav-item mb-3" data-toggle="tooltip" data-placement="right" data-container="body" data-boundary="window" title="Public">
+    <a href="/" class="nav-link btn btn-icon btn-clean btn-lg <%= menu_active?('welcome') %>">
+      <span class="svg-icon svg-icon-xl">
+        <i class="fas fa-user-shield"><small class="pl-2">Public</small> </i>
+      </span>
+    </a>
+  </li> -->
+  <!--  <li class="menu-item" aria-haspopup="true">
+    <a href="/" class="menu-link btn btn-clean shadow-none <%= menu_active?('welcome') %>">
+      <span class="svg-icon menu-icon">
+         <i class="fas fa-user-shield"></i>
+        </span>
+      <span class="menu-text">Public</span>
+    </a>
+   </li> -->
 
+  <!--  <li class="nav-item mb-3" data-toggle="tooltip" data-placement="right" data-container="body" data-boundary="window" title="Group">
+    <a href="/" class="nav-link btn btn-icon btn-clean btn-lg <%= menu_active?('welcome') %>">
+      <span class="svg-icon svg-icon-xl">
+        <i class="fa fa-object-group"><small class="pl-2">Group</small> </i>
+      </span>
+    </a>
+  </li> -->
+   <!-- <li class="menu-item" aria-haspopup="true">
+    <a href="/" class="menu-link btn btn-clean shadow-none <%= menu_active?('welcome') %>">
+      <span class="svg-icon menu-icon">
+        <i class="fas fa-users"></i>
+        </span>
+      <span class="menu-text">Group</span>
+    </a>
+   </li> -->
+
+   <!-- <li class="nav-item mb-3" data-toggle="tooltip" data-placement="right" data-container="body" data-boundary="window" title="Private">
+    <a href="/" class="nav-link btn btn-icon btn-clean btn-lg <%= menu_active?('welcome') %>">
+      <span class="svg-icon svg-icon-xl">
+        <i class="fa fa-user-secret"><small class="pl-2">Personal</small> </i>
+      </span>
+    </a>
+  </li> -->
+  <!-- <li class="menu-item" aria-haspopup="true" data-toggle="tooltip" data-placement="right" data-container="body" data-boundary="window" >
+     <a href="/" class="menu-link btn btn-clean shadow-none <%= menu_active?('welcome') %>">
+      <span class="svg-icon menu-icon">
+         <i class="fa fa-user-secret"></i>
+        </span>
+      <span class="menu-text">Private</span>
+    </a>
+   </li> -->
   <%= render partial: 'menu/other_links' %>
+
 
   <!-- <script>
       $( function() {
@@ -19,3 +74,4 @@
       <%= render partial: 'menu/admin' %>
   <% end %>
 </ul>
+
