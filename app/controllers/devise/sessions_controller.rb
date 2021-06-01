@@ -80,7 +80,7 @@ class Devise::SessionsController < DeviseController
 
   def check_state
     @user = User.find_by_login(params["user"]["login"])
-    if @user && @user.state == "inactive"
+    unless @user && @user.state == "active"
       set_flash_message!(:alert, :inactive)
       self.resource = resource_class.new devise_parameter_sanitizer.sanitize(:sign_in)
       respond_with_navigational(resource) { render :new }
