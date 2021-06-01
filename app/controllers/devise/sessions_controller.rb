@@ -6,7 +6,7 @@ class Devise::SessionsController < DeviseController
   prepend_before_action :check_captcha, only: [:create] if ENV['RECAPTCHA_PUBLIC_KEY'].present?
   prepend_before_action :check_whitelists, only: [:create]
   prepend_before_action :check_blacklists, only: [:create]
-  # prepend_before_action :check_state, only: [:create]
+  prepend_before_action :check_state, only: [:create]
 
   # GET /resource/sign_in
   def new
@@ -80,7 +80,7 @@ class Devise::SessionsController < DeviseController
 
   def check_state
     @user = User.find_by_login(params["user"]["login"])
-    unless @user && @user.state == "active"
+    if @user && @user.state == "inactive"
       set_flash_message!(:alert, :inactive)
       self.resource = resource_class.new devise_parameter_sanitizer.sanitize(:sign_in)
       respond_with_navigational(resource) { render :new }
