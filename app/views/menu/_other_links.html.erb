@@ -65,7 +65,7 @@
   <div class="menu-submenu">
     <i class="menu-arrow"></i>
     <ul class="menu-subnav">
-      <% Channel.personal.each do |channel|  %>
+      <% Channel.my_personal_channel.each do |channel|  %>
          <li class="menu-item sort-handle" data-toggle="tooltip" data-placement="right" data-container="body" data-boundary="window" data-reorder-url="<%= reorder_handle_channels_path(channel_id: channel.id) %>" data-reorder-param="<%= 'channel' %>">
            <a href="/channels/<%= channel.id %>" class="menu-link menu-item-active btn btn-clean shadow-none <%= channel_active?(channel) %>">
             <span class="svg-icon menu-icon">
@@ -90,7 +90,7 @@
   <div class="menu-submenu">
     <i class="menu-arrow"></i>
     <ul class="menu-subnav">
-      <% Channel.for_shared_users.each do |channel|  %>
+      <% Channel.for_user.each do |channel|  %>
          <li class="menu-item sort-handle" data-toggle="tooltip" data-placement="right" data-container="body" data-boundary="window" data-reorder-url="<%= reorder_handle_channels_path(channel_id: channel.id) %>" data-reorder-param="<%= 'channel' %>">
            <a href="/channels/<%= channel.id %>" class="menu-link btn btn-clean shadow-none <%= channel_active?(channel) %>">
             <span class="svg-icon menu-icon">
