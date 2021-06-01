@@ -8,9 +8,8 @@
   </a>
 </li> -->
 
-
-<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-  <a href="javascript:;" class="menu-link menu-toggle btn btn-clean shadow-none <%= menu_active?('welcome') %> ">
+<li class="menu-item menu-item-submenu <%= menu_open? %>" aria-haspopup="true" data-menu-toggle="hover">
+  <a href="javascript:;" class="menu-link menu-toggle btn btn-clean shadow-none <%= anchor_active? %> ">
     <span class="svg-icon menu-icon">
       <i class="fas fa-cogs"></i>
     </span>
@@ -21,13 +20,14 @@
     <i class="menu-arrow"></i>
     <ul class="menu-subnav">
 
-        <li class="menu-item" aria-haspopup="true" data-toggle="tooltip" data-placement="right" data-container="body" data-boundary="window">
-   <a href="/users" class="menu-link btn btn-clean shadow-none">
+  <li class="menu-item" aria-haspopup="true" data-toggle="tooltip" data-placement="right" data-container="body" data-boundary="window">
+
+   <a href="/users" class="menu-link btn btn-clean shadow-none <%= menu_active?('users') %> ">
       <span class="svg-icon menu-icon">
           <i class="fas fa-user-friends"></i>
         </span>
       <span class="menu-text">Users</span>
-    </a>
+   </a>
  </li>
 
 <!-- <li class="nav-item mb-3" data-toggle="tooltip" data-placement="right" data-container="body" data-boundary="window" title="All Channels">
@@ -38,7 +38,7 @@
   </a>
 </li> -->
 <li class="menu-item" aria-haspopup="true" data-toggle="tooltip" data-placement="right" data-container="body" data-boundary="window" >
-    <a href="<%= channels_path %>" class="menu-link btn btn-clean shadow-none">
+    <a href="<%= channels_path %>" class="menu-link btn btn-clean shadow-none <%= menu_active?('channels','index') %> ">
       <span class="svg-icon menu-icon ">
           <i class="fas fa-clone"></i>
         </span>
@@ -53,9 +53,8 @@
     </span>
   </a>
 </li> -->
-
-<li class="menu-item" aria-haspopup="true" data-toggle="tooltip" data-placement="right" data-container="body" data-boundary="window" >
-    <a href="<%= channels_path %>" class="menu-link btn btn-clean shadow-none">
+<li class="menu-item " aria-haspopup="true" data-toggle="tooltip" data-placement="right" data-container="body" data-boundary="window" >
+    <a href="/enumerations" class="menu-link btn btn-clean shadow-none <%= menu_active?('enumerations') %> ">
       <span class="svg-icon menu-icon">
          <i class="fas fa-sliders-h"></i>
         </span>
@@ -72,7 +71,7 @@
 </li> -->
 
 <li class="menu-item" aria-haspopup="true" data-toggle="tooltip" data-placement="right" data-container="body" data-boundary="window" >
-     <a href="/settings" class="menu-link btn btn-clean shadow-none">
+     <a href="/settings" class="menu-link btn btn-clean shadow-none <%= menu_active?('settings') %> ">
       <span class="svg-icon menu-icon">
          <i class="fas fa-cog"></i>
         </span>
@@ -85,4 +84,3 @@
     </ul>
   </div>
 </li>
-
