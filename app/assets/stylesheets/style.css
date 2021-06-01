@@ -266,6 +266,7 @@ fieldset{
   border-radius: 4px;
   margin: 0 .25rem;
 }
+
 .aside-secondary-enabled .aside {
     width: 425px !important;
 }
@@ -274,3 +275,8 @@ fieldset{
           font-size: x-small !important;
           font-weight: 100 !important;
            }
+
+.dropdown-toggle.nav-link:after, .dropdown-toggle.btn:after {
+  font-family: fontawesome !important;
+  content: "\f078" !important;
+   }

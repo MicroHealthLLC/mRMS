@@ -36562,7 +36562,7 @@ button {
 
 .dropdown-toggle.nav-link:after, .dropdown-toggle.btn:after {
   margin-left: 0.5rem/*rtl:ignore*/;
-  font-family: Ki;
+  font-family: fontawesome ;
   font-style: normal;
   font-weight: normal;
   font-variant: normal;
@@ -36573,7 +36573,8 @@ button {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   font-smoothing: antialiased;
-  content: ""; }
+  content: "\f078";
+   }
 
 .dropdown-toggle.nav-link:before, .dropdown-toggle.btn:before {
   margin-right: 0.5rem/*rtl:ignore*/;
