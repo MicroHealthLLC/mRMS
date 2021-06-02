@@ -243,7 +243,7 @@ module ApplicationHelper
     if (params[:controller] == 'channels' && params[:action] == 'index')
       'menu-item-open'
     else
-      ['users', 'settings', 'enumerations'].include?(params[:controller]) ? 'menu-item-open' : ''
+      ['users', 'settings', 'enumerations','news'].include?(params[:controller]) ? 'menu-item-open' : ''
     end
   end
 
@@ -251,7 +251,7 @@ module ApplicationHelper
     if (params[:controller] == 'channels' && params[:action] == 'index')
       'active'
     else
-      ['users', 'settings', 'enumerations'].include?(params[:controller]) ? 'active' : ''
+      ['users', 'settings', 'enumerations', 'news'].include?(params[:controller]) ? 'active' : ''
     end
   end
 
