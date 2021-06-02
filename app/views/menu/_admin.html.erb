@@ -69,6 +69,14 @@
     </span>
   </a>
 </li> -->
+<li class="menu-item" data-toggle="tooltip" data-placement="right" data-container="body" >
+     <a href="/news" class="menu-link btn btn-clean shadow-none <%= menu_active?('news') %>">
+      <span class="svg-icon menu-icon">
+        <i class="fa fa-lg fa-fw fa-newspaper-o"></i>
+      </span>
+       <span class="menu-text <%= menu_active?('news')%>">News</span>
+    </a>
+  </li>
 
 <li class="menu-item" aria-haspopup="true" data-toggle="tooltip" data-placement="right" data-container="body" data-boundary="window" >
      <a href="/settings" class="menu-link btn btn-clean shadow-none <%= menu_active?('settings') %> ">
