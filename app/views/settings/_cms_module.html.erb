@@ -14,12 +14,13 @@
                 <div class="form-group mx-auto" id="<%= "tabs-#{tab}" %>">
                   <% values.each do |em| %>
                     <label class="checkbox pl-sm-0">
-                      <%= check_box_tag em.name, em.status, em.status %>
-                      <span class="d-inline-flex"></span><post class="font-weight-normal ml-3"><%= t(em.name) %></post>
+                        <%= check_box_tag em.name, em.status, em.status, disabled: em.name == 'reports' && em.status %>
+                      <span class="d-inline-flex"></span>
+                      <post class="font-weight-normal ml-3"><%= t(em.name) %></post>
                     </label>
-                  <% end -%>
+                  <% end %>
                 </div>
-            <% end -%>
+            <% end %>
           </div>
         </article>
       </div>
