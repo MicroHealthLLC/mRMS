@@ -33,11 +33,13 @@
           </div>
         </div>
         <% if User.current.persisted? %>
+          <% if module_enabled?('news') && can?(:manage_roles, :manage_news, :view_news) %>
             <div class="col-xs-12 hidden-xs col-sm-1 col-md-4">
               <% News.includes(:user).order("id DESC").first(Setting['news_limit'].to_i).each do |news| %>
                   <%= render partial: 'news/news', locals: {news: news} %>
               <% end %>
             </div>
+          <% end %>
         <% end %>
     <% else  %>
         <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8 hidden-xs hidden-sm">

@@ -1,13 +1,3 @@
-
-<!-- <li class="nav-item mb-3" data-toggle="tooltip" data-placement="right" data-container="body" data-boundary="window" title="Users">
-  <a href="/users" class="nav-link btn btn-icon btn-clean btn-lg">
-    <span class="svg-icon menu-icon">
-      <i class="fas fa-user-friends"></i>
-    </span>
-    <span class="menu-text">Users</span>
-  </a>
-</li> -->
-
 <li class="menu-item menu-item-submenu <%= menu_open? %>" aria-haspopup="true" data-menu-toggle="hover">
   <a href="javascript:;" class="menu-link menu-toggle btn btn-clean shadow-none <%= anchor_active? %> ">
     <span class="svg-icon menu-icon">
@@ -19,76 +9,52 @@
   <div class="menu-submenu">
     <i class="menu-arrow"></i>
     <ul class="menu-subnav">
+      <li class="menu-item" aria-haspopup="true" data-toggle="tooltip" data-placement="right" data-container="body" data-boundary="window">
+        <a href="/users" class="menu-link btn btn-clean shadow-none <%= menu_active?('users') %> ">
+          <span class="svg-icon menu-icon">
+            <i class="fas fa-user-friends"></i>
+          </span>
+          <span class="menu-text">Users</span>
+        </a>
+      </li>
 
-  <li class="menu-item" aria-haspopup="true" data-toggle="tooltip" data-placement="right" data-container="body" data-boundary="window">
+      <li class="menu-item" aria-haspopup="true" data-toggle="tooltip" data-placement="right" data-container="body" data-boundary="window" >
+        <a href="<%= channels_path %>" class="menu-link btn btn-clean shadow-none <%= menu_active?('channels','index') %> ">
+          <span class="svg-icon menu-icon ">
+            <i class="fas fa-clone"></i>
+          </span>
+          <span class="menu-text">All Channels</span>
+        </a>
+      </li>
 
-   <a href="/users" class="menu-link btn btn-clean shadow-none <%= menu_active?('users') %> ">
-      <span class="svg-icon menu-icon">
-          <i class="fas fa-user-friends"></i>
-        </span>
-      <span class="menu-text">Users</span>
-   </a>
- </li>
+      <li class="menu-item " aria-haspopup="true" data-toggle="tooltip" data-placement="right" data-container="body" data-boundary="window" >
+        <a href="/enumerations" class="menu-link btn btn-clean shadow-none <%= menu_active?('enumerations') %> ">
+          <span class="svg-icon menu-icon">
+            <i class="fas fa-sliders-h"></i>
+          </span>
+          <span class="menu-text">Enumerations</span>
+        </a>
+      </li>
 
-<!-- <li class="nav-item mb-3" data-toggle="tooltip" data-placement="right" data-container="body" data-boundary="window" title="All Channels">
-  <a href="<%= channels_path %>" class="nav-link btn btn-icon btn-clean btn-lg">
-    <span class="svg-icon svg-icon-xl">
-      <i class="fas fa-clone"></i>
-    </span>
-  </a>
-</li> -->
-<li class="menu-item" aria-haspopup="true" data-toggle="tooltip" data-placement="right" data-container="body" data-boundary="window" >
-    <a href="<%= channels_path %>" class="menu-link btn btn-clean shadow-none <%= menu_active?('channels','index') %> ">
-      <span class="svg-icon menu-icon ">
-          <i class="fas fa-clone"></i>
-        </span>
-       <span class="menu-text">All Channels</span>
-    </a>
- </li>
+      <% if module_enabled?('news') && can?(:manage_roles, :manage_news, :view_news) %>
+        <li class="menu-item" data-toggle="tooltip" data-placement="right" data-container="body" >
+          <a href="/news" class="menu-link btn btn-clean shadow-none <%= menu_active?('news') %>">
+            <span class="svg-icon menu-icon">
+              <i class="fa fa-lg fa-fw fa-newspaper-o"></i>
+            </span>
+            <span class="menu-text <%= menu_active?('news')%>">News</span>
+          </a>
+        </li>
+      <% end %>
 
-<!-- <li class="nav-item mb-3" data-toggle="tooltip" data-placement="right" data-container="body" data-boundary="window" title="Enumerations">
-  <a href="/enumerations" class="nav-link btn btn-icon btn-clean btn-lg">
-    <span class="svg-icon svg-icon-xl">
-      <i class="fas fa-sliders-h"></i>
-    </span>
-  </a>
-</li> -->
-<li class="menu-item " aria-haspopup="true" data-toggle="tooltip" data-placement="right" data-container="body" data-boundary="window" >
-    <a href="/enumerations" class="menu-link btn btn-clean shadow-none <%= menu_active?('enumerations') %> ">
-      <span class="svg-icon menu-icon">
-         <i class="fas fa-sliders-h"></i>
-        </span>
-      <span class="menu-text">Enumerations</span>
-    </a>
- </li>
-
-<!-- <li class="nav-item mb-3" data-toggle="tooltip" data-placement="right" data-container="body" data-boundary="window" title="Settings">
-  <a href="/settings" class="nav-link btn btn-icon btn-clean btn-lg">
-    <span class="svg-icon svg-icon-xl">
-      <i class="fas fa-cog"></i>
-    </span>
-  </a>
-</li> -->
-<li class="menu-item" data-toggle="tooltip" data-placement="right" data-container="body" >
-     <a href="/news" class="menu-link btn btn-clean shadow-none <%= menu_active?('news') %>">
-      <span class="svg-icon menu-icon">
-        <i class="fa fa-lg fa-fw fa-newspaper-o"></i>
-      </span>
-       <span class="menu-text <%= menu_active?('news')%>">News</span>
-    </a>
-  </li>
-
-<li class="menu-item" aria-haspopup="true" data-toggle="tooltip" data-placement="right" data-container="body" data-boundary="window" >
-     <a href="/settings" class="menu-link btn btn-clean shadow-none <%= menu_active?('settings') %> ">
-      <span class="svg-icon menu-icon">
-         <i class="fas fa-cog"></i>
-        </span>
-      <span class="menu-text">Settings</span>
-    </a>
- </li>
-
-
-
+      <li class="menu-item" aria-haspopup="true" data-toggle="tooltip" data-placement="right" data-container="body" data-boundary="window" >
+        <a href="/settings" class="menu-link btn btn-clean shadow-none <%= menu_active?('settings') %> ">
+          <span class="svg-icon menu-icon">
+            <i class="fas fa-cog"></i>
+          </span>
+          <span class="menu-text">Settings</span>
+        </a>
+      </li>
     </ul>
   </div>
 </li>
