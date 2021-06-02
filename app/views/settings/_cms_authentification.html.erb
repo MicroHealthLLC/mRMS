@@ -1,11 +1,11 @@
 <%= form_tag(set_user_auth_settings_path, method: 'post', id: 'save_details_form',  class: 'form-horizontal' ) do |f| %>
 
-    <div class="form-group">
-      <%= label_tag "default_auth_user", "Default User Status: ", class: 'col-md-2 control-label' %>
+    <!-- <div class="form-group">
+      <%#= label_tag "default_auth_user", "Default User Status: ", class: 'col-md-2 control-label' %>
       <div class="col-md-9">
-        <%= select_tag :user_default_state, options_for_select(User.states.except(:pending).keys.map { |w| [w.humanize, w] }, selected: Setting['user_default_state']), {class: 'form-control'} %>
+        <%#= select_tag :user_default_state, options_for_select(User.states.keys.map { |w| [w.humanize, w] }, selected: Setting['user_default_state']), {class: 'form-control'} %>
       </div>
-    </div>
+    </div> -->
 
 
     <div class="form-group">
