@@ -3,7 +3,7 @@
     <div class="pull-right buttons">
       <% unless @channel.shared_report? %>
           <% if !@channel.is_public? && !@channel.is_personal? && @channel.my_permission.can_view? %>
-              <%= show_theme_button(leave_channel_channel_channel_permissions_path(@channel), ' Leave Channel', 'flaticon-logout', 'danger', {confirm: 'Do you want to leave this channel?'})  %>
+              <%= show_theme_button(leave_channel_channel_channel_permissions_path(@channel), ' Leave Channel', 'fontawesome-logout', 'danger', {confirm: 'Do you want to leave this channel?'})  %>
           <% end %>
 
           <% if !@channel.is_public? && !@channel.is_personal? && @channel.is_creator?  %>
