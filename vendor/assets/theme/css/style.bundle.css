@@ -60704,8 +60704,3 @@ body {
           [direction="rtl"] .aside-menu .menu-nav > .menu-item > .menu-heading .menu-arrow:before, [direction="rtl"]
           .aside-menu .menu-nav > .menu-item > .menu-link .menu-arrow:before {
             content: "\f054" !important; }
-
-
-.fontawesome-logout:before {
-  font-family: fontawesome;
-  content: "\f08b" !important;  }
