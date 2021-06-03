@@ -11,9 +11,15 @@
         <% end %>
       </article>
     </div>
+  <% elsif current_user.onedrive_access_token.present? %>
+    <div class="row" style="margin-bottom: 10px">
+      <h4 class="col-md-12 pt-10 text-align-center">
+        One Drive Documents folder do not have any related file with following extensions('csv', 'xls', 'xlsx')
+      </h4>
+    </div>
   <% else %>
     <div class="row" style="margin-bottom: 10px">
-      <div class="col-md-12 ">
+      <div class="col-md-12">
         <div class="pull-right">
           <%= show_button(connect_with_onedrive_url, "Connect with One Drive", "plus", "primary") %>
         </div>
