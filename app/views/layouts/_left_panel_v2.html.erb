@@ -1,36 +1,45 @@
-
-<div class="tab-pane " id="kt_aside_tab_2" aria-labelledby="headingOne">
-  <!--begin::Aside Menu-->
-  <div class="aside-menu-wrapper flex-column-fluid" id="kt_aside_menu_wrapper" style="height: 50px;">
-    <!--begin::Menu Container-->
-    <div id="kt_aside_menu" class="aside-menu border-bottom " data-menu-vertical="1" data-menu-scroll="1">
-     <div class="h-75 d-inline-block">
-      <!--begin::Menu Nav-->
-        <ul class="menu-nav hide_scroll_bar" style="max-height: calc(100vh - 9rem);overflow-y: auto; width: 200px;" >
-          <li class="menu-item menu-item-active" aria-haspopup="true" style="margin-left: 65px !important;margin-bottom: 10px !important;">
-            <div>
-            <!--begin::Logo-->
-                  <%= link_to "#{image_tag( "logo.png", alt: '')}".html_safe, root_path, data: {container: 'body', toggle: 'tooltip', placement: "right"}  %>
-            <!--end::Logo-->
-                 <span class="menu-text ml-3"><%=link_to Setting['application_name']%></span>
+<div class="aside aside-left d-flex aside-fixed" id="kt_aside">
+  <!--begin::Secondary-->
+  <div class="aside-secondary d-flex flex-row-fluid">
+    <!--begin::Workspace-->
+    <div class="aside-workspace scroll scroll-push border-bottom" style="max-height: calc(100vh - 10rem); width: 220px; height: 200px;">
+      <!--begin::Tab Content-->
+      <div class="tab-content">
+        <!--begin::Tab Pane-->
+        <div class="tab-pane active" id="kt_aside_tab_1">
+          <div class="aside-menu-wrapper flex-column-fluid" id="kt_aside_menu_wrapper">
+            <div id="kt_aside_menu" class="aside-menu" data-menu-vertical="1" data-menu-scroll="1">
+              <ul class="menu-nav pl-0" style="list-style-type: none;">
+                <li class="menu-item menu-item-active" aria-haspopup="true" style="margin-left: 65px !important;margin-bottom: 10px !important;">
+                  <div>
+                    <!--begin::Logo-->
+                    <%= link_to "#{image_tag( "logo.png", alt: '')}".html_safe, root_path, data: {container: 'body', toggle: 'tooltip', placement: "right"}  %>
+                    <!--end::Logo-->
+                    <span class="menu-text ml-3"><%=link_to Setting['application_name']%></span>
+                  </div>
+                </li>
+                <% if user_signed_in? %>
+                  <%= render  partial: 'menu/signed_in' %>
+                <% else %>
+                  <%= render partial: 'menu/not_signed_in' %>
+                <% end %>
+              </ul>
             </div>
-          </li>
-          <% if user_signed_in? %>
-            <%= render  partial: 'menu/signed_in' %>
-          <% else %>
-            <%= render partial: 'menu/not_signed_in' %>
-          <% end %>
-        </ul>
-        <!--end::Menu Nav-->
+          </div>
+        </div>
+        <!--end::Tab Pane-->
+      </div>
+      <!--end::Tab Content-->
     </div>
-        <!--begin::Footer-->
-    <div class="aside-footer d-flex flex-column align-items-center flex-column-auto" style=" position: absolute; bottom: 10px;">
+    <!--end::Workspace-->
+    <!--begin::Footer-->
+    <div class="aside-footer d-flex flex-column align-items-center flex-column-auto py-4 py-lg-10" style=" position: absolute; bottom: 0px;">
       <% if user_signed_in? %>
-        <a href="/users/edit" class="menu-link btn btn-clean shadow-none <%= @user ? 'active' : '' %>" data-container='body'>
-            <span class=" menu-icon">
-              <i class="fas fa-user"></i>
-            </span>
-            <span class="menu-text">Profile</span>
+        <a href="/users/edit" class="menu-link btn btn-clean shadow-none <%= @user ? 'active' : '' %>" data-container='body' class="menu-link" >
+          <span class=" menu-icon">
+            <i class="fas fa-user"></i>
+          </span>
+          <span class="menu-text">Profile</span>
         </a>
       <% end %>
       <a href="<%= user_signed_in? ? destroy_session_path(:user) : new_session_path(:user) %>"  id="kt_quick_user_toggle" data-toggle="tooltip" data-placement="right" class="menu-link btn btn-clean shadow-none"   data-container='body' title="<%=user_signed_in? ? 'Logout' : 'Sign In' %>">
@@ -50,12 +59,5 @@
     </div>
     <!--end::Footer-->
   </div>
-    <!--end::Menu Container-->
- </div>
-  <!--end::Aside Menu-->
+  <!--end::Secondary-->
 </div>
-<!--end::Tab Pane-->
-<!-- <span class=" btn btn-icon btn-primary btn-hover-primary shadow-sm mt-3 mr-3" data-target="#kt_aside_tab_2" data-toggle="collapse" data-placement="right" data-container="body" data-boundary="window" aria-expanded="true" aria-controls="collapseOne">
-  <i class="fas fa-chevron-left"></i>
-</span>
- -->
