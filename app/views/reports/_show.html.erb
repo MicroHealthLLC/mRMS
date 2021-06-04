@@ -32,7 +32,6 @@
           <p class="noprint">
             <strong>Document:</strong>
             <%= link_to '', "/uploads/#{@report.id}/#{File.basename(@report.document.file_url)}",  class: 'fa fa-fw fa-download', style: 'white-space: nowrap;', target: '_blank' %>
-            <%= link_to '', "https://docs.google.com/viewer?url=https://mrms.microhealthllc.com#{@report.document.file_url}",  class: 'fa fa-fw fa-eye', style: 'white-space: nowrap;' , target: '_blank' %>
             <%= @report.document.read_attribute(:file) %>
           </p>
       <% else %>
