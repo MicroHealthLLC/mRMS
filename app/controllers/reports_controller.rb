@@ -31,13 +31,14 @@ class ReportsController < ApplicationController
       respond_to do |format|
         format.html do
           @report_document = @report.document
-          if params[:url].present?
+          url = params[:url] || params[:report][:document]["0"]["@microsoft.graph.downloadUrl"]
+          if url.present?
             url= params[:url]
-            time = Time.now.to_i
-            `curl -L #{url} > /tmp/#{time}.xlsx`
-            @report_document.file=  File.new("/tmp/#{time}.xlsx")
+            file_name = params[:report][:document]["0"]["name"] || "#{Time.now.to_i}.xlxs"
+            `curl -L #{url} > /tmp/#{file_name}`
+            @report_document.file=  File.new("/tmp/#{file_name}")
             @report_document.save
-            `rm /tmp/#{time}.xlsx`
+            `rm /tmp/#{file_name}`
           end
           redirect_to channel_report_path(@channel, @report)
         end
@@ -48,8 +49,6 @@ class ReportsController < ApplicationController
           render 'uploader/report_upload'
         end
       end
-
-
     end
   end
 

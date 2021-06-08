@@ -12,4 +12,7 @@ class WelcomeController < ApplicationController
     end
     @setting = Setting.first || Setting.new
   end
+
+  def onedriveredirect
+  end
 end
