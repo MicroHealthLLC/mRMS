@@ -1,6 +1,6 @@
 class UsersController < ProtectForgeryApplication
   before_action  :authenticate_user!
-  before_action :find_user, except: [:restore, :index, :active, :audit, :recently_connected]
+  before_action :find_user, except: [:restore, :index, :active, :audit, :recently_connected, :really_destroy]
 
   before_action :require_admin, only: [:index, :destroy, :active]
   before_action :authorize, except: [:index, :destroy, :active, :search_users,
@@ -55,6 +55,7 @@ class UsersController < ProtectForgeryApplication
         render json: UserDatatable.new(view_context,options)
       }
     end
+    @users = User.all
   end
 
   def active
@@ -63,7 +64,7 @@ class UsersController < ProtectForgeryApplication
       user.last_seen_at = 1.year.ago
       user.save
     end
-    @users = User.where(state: true).
+    @users = User.where(state: 'active').
         includes(:core_demographic).
         references(:core_demographic)
   rescue ActiveRecord::RecordNotFound
@@ -71,8 +72,17 @@ class UsersController < ProtectForgeryApplication
   end
 
   def destroy
-    @user.destroy
-    flash[:notice] = I18n.t('notice_successful_delete')
+    @user = User.find(params[:id])
+
+    if @user.destroy
+        redirect_to users_path, notice: "User deleted."
+    end
+  end
+
+  def really_destroy
+    u = User.unscoped.find params[:id]
+    u.really_destroy!
+    flash[:notice] = 'User deleted'
     redirect_to users_path
   end
 

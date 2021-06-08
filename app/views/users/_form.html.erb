@@ -1,0 +1,38 @@
+<div id="tabs" class="ui-tabs ui-widget ui-widget-content ui-corner-all">
+  <ul class="nav-tabs ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
+    <li class="ui-state-default ui-corner-top"> <a class="ui-tabs-anchor" id="link-tabs-general" href="#tabs-all-users" >All Users</a></li>
+    <li class="ui-state-default ui-corner-top"> <a class="ui-tabs-anchor" id="link-tabs-general" href="#tabs-active-users" >Active users</a></li>
+    <li class="ui-state-default ui-corner-top"> <a class="ui-tabs-anchor" id="link-tabs-modules" href="#tabs-audit-users">Audit Users</a></li>
+    <li class="ui-state-default ui-corner-top"> <a class="ui-tabs-anchor" id="link-tabs-modules" href="#tabs-deleted-users">Deleted Users</a></li>
+  </ul>
+
+  <div id='tabs-all-users'  class="nav-tabs-div ui-tabs-panel ui-widget-content ui-corner-bottom" >
+    <%= render partial: 'users/list' , locals: { users: User.without_deleted } %>
+  </div>
+
+  <div id='tabs-active-users'  class="nav-tabs-div ui-tabs-panel ui-widget-content ui-corner-bottom" >
+     <%= render :partial => "users/active"  , locals: {users:  @users.where(state: 'active')} %>
+  </div>
+
+  <div id='tabs-audit-users'  class="nav-tabs-div ui-tabs-panel ui-widget-content ui-corner-bottom" >
+    <div class="row">
+      <%= render :partial => "users/audit"  , locals: { users: @users }%>
+    </div>
+  </div>
+
+  <div id='tabs-deleted-users'  class="nav-tabs-div ui-tabs-panel ui-widget-content ui-corner-bottom" >
+    <div class="row">
+      <div class="col-xs-12">
+        <%= render :partial => "users/deletedUsers" ,
+                    locals: { users: User.only_deleted } %>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  $( function() {
+    $tabs = $( "#tabs" ).tabs();
+  } );
+</script>

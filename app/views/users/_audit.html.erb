@@ -1,4 +1,4 @@
-<table class="table  table-responsive" id="users_table">
+<table class="table table-separate table-head-custom" id="users_audit">
   <thead>
   <tr>
     <th><%= t :login %></th>
@@ -15,7 +15,7 @@
 
 
   <tbody>
-  <% @users.each do |user| %>
+  <% users.each do |user| %>
       <tr>
         <td><%= user.name %></td>
         <td><%= user.email %></td>
@@ -34,6 +34,6 @@
 
 <script>
   $(document).ready(function(){
-    initDataTable('users_table')
+    initDataTable('users_audit')
   })
 </script>

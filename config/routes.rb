@@ -90,6 +90,7 @@ Rails.application.routes.draw do
       put 'attachments'
       post 'image_upload'
       get 'remove_image'
+      delete 'really_destroy'
     end
 
     resources :core_demographics, only: [:create, :update]

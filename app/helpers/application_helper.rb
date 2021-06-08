@@ -98,13 +98,17 @@ module ApplicationHelper
     options = {
         :method => :delete,
         :data => {:confirm => t(:text_are_you_sure)}
-    }.merge(options)
+     }.merge(options)
 
     link_to "<i class='far fa-lg fa-trash-alt'></i>".html_safe, url, options
   end
 
   def restore_user_link(user, options={})
     link_to "<i class='fa fa-lg fa-recycle'></i>".html_safe, restore_user_path(user), 'data-turbolinks'=> false
+  end
+
+  def permanently_delete_user(user , options={})
+    link_to  "<i class='far fa-lg fa-trash-alt'></i>".html_safe, really_destroy_user_path(user)
   end
 
   def lock_user_link(user, options={})

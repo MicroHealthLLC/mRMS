@@ -1,4 +1,4 @@
-<table class="table table-separate table-head-custom" id="users_active">
+<table class="table table-separate table-head-custom" id="users_deleted">
   <thead>
   <tr>
     <th><%= t :login %></th>
@@ -7,10 +7,8 @@
 
     <th> <%= t('profile.middle_name') %> </th>
     <th> <%= t('profile.last_name') %> </th>
-    <th> <%= t('role') %> </th>
-
     <th> <%= t('status') %> </th>
-    <th></th>
+    <th><%= 'Delete'%></th>
   </tr>
   </thead>
 
@@ -24,10 +22,10 @@
 
     <td><%= user.middle_name %></td>
     <td><%= user.last_name %></td>
-    <td><%= user.role.to_s %></td>
 
-    <td><%= user.active? %></td>
-    <td><%= link_to 'Sign out', active_users_path(user_id: user.id), method: 'post' %></td>
+    <td><%= user.deleted? %></td>
+    <!-- <td><%#= link_to 'Delete' ,user, :method => :really_destroy!, :data => {:confirm => t(:permanently_delete)}%></td> -->
+    <td><%= link_to 'Delete', really_destroy_user_path(user.id), method: :delete, data: {confirm: t(:permanently_delete)} %></td>
   </tr>
   <% end %>
   </tbody>
@@ -35,6 +33,6 @@
 
 <script>
   $(document).ready(function(){
-    initDataTable('users_active')
+    initDataTable('users_deleted')
   })
 </script>
