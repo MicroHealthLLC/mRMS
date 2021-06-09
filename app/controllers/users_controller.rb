@@ -73,25 +73,18 @@ class UsersController < ProtectForgeryApplication
 
   def destroy
     @user = User.find(params[:id])
-
-    if @user.destroy
-        redirect_to users_path, notice: "User deleted."
-    end
+    @user.destroy
+        # redirect_to users_path, notice: "User deleted."
   end
 
   def really_destroy
     u = User.unscoped.find params[:id]
     u.really_destroy!
-    flash[:notice] = 'User deleted'
-    redirect_to users_path
+    #flash[:notice] = 'User deleted'
+     redirect_to users_path
   end
 
   # authorized by manage roles
-
-
-
-
-
   def audit
     @users = User.includes(:core_demographic).
         references(:core_demographic)

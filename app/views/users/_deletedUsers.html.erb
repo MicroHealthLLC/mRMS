@@ -13,20 +13,18 @@
   </thead>
 
   <tbody>
-
   <% users.each do |user| %>
-  <tr>
-    <td><%= user.name %></td>
-    <td><%= user.email %></td>
-    <td><%= user.first_name %></td>
+    <tr>
+      <td><%= user.name %></td>
+      <td><%= user.email %></td>
+      <td><%= user.first_name %></td>
 
-    <td><%= user.middle_name %></td>
-    <td><%= user.last_name %></td>
+      <td><%= user.middle_name %></td>
+      <td><%= user.last_name %></td>
 
-    <td><%= user.deleted? %></td>
-    <!-- <td><%#= link_to 'Delete' ,user, :method => :really_destroy!, :data => {:confirm => t(:permanently_delete)}%></td> -->
-    <td><%= link_to 'Delete', really_destroy_user_path(user.id), method: :delete, data: {confirm: t(:permanently_delete)} %></td>
-  </tr>
+      <td><%= user.deleted? %></td>
+      <td><%= link_to 'Delete', really_destroy_user_path(user.id), method: :delete, data: {confirm: t(:permanently_delete)} %></td>
+    </tr>
   <% end %>
   </tbody>
 </table>

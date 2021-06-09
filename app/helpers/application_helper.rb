@@ -108,7 +108,7 @@ module ApplicationHelper
   end
 
   def permanently_delete_user(user , options={})
-    link_to  "<i class='far fa-lg fa-trash-alt'></i>".html_safe, really_destroy_user_path(user)
+    link_to  "<i class='far fa-lg fa-trash-alt'></i>".html_safe, really_destroy_user_path(user),'data-turbolinks'=> false, method: :delete
   end
 
   def lock_user_link(user, options={})
