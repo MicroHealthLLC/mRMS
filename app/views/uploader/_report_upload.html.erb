@@ -4,9 +4,6 @@
   <div data-toggle="modal" class="modal-dialog" role="document">
     <div data-toggle="modal" class="modal-content">
       <div data-toggle="modal" class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
         <h4 class="modal-title" id="myModalLabel">Upload Files</h4>
       </div>
       <div id="files" class="files col-xs-12" ></div>
@@ -35,7 +32,7 @@
                 OR
               </div>
               <div class="col-md-12">
-                <label class="pt-3 pr-3" style="float: left">URL:  </label>
+                <label class="pt-3 pr-3" style="float: left">URL  </label>
                 <%= text_field_tag :url, '', class: 'col-md-9 form-control' , style: 'width: 80%' %>
                 <%= f.submit :save, class: 'btn btn-primary', style: 'float: right' %>
               </div>
@@ -128,11 +125,18 @@
           url: '<%= upload_document_channel_report_path(@channel, @report) %>',
           data: params,
           success: function (result) {
-          //do somthing here
-            window.alert("success!!");
+            Swal.fire(
+              'Successfully Added!',
+              'Your file has been uploaded.',
+              'success'
+            )
           },
           error: function (){
-            window.alert("something wrong!");
+            Swal.fire(
+              'Something went wrong!',
+              'Contact to Service Team!',
+              'error'
+            )
           }
         });
       }
@@ -142,7 +146,6 @@
   });
 
   var oneDriveApplicationId = "<%= Setting['AZURE_KEY']%>";
-  var accessToken = "<%= current_user.onedrive_access_token %>";
   function launchOneDrivePicker() {
     return new Promise(function (resolve, reject) {
       var odOptions = {
@@ -152,8 +155,7 @@
         openInNewWindow: true,
         advanced: {
           filter: "folder,.csv,.xls,.xlsx",
-          redirectUri: "http://localhost:3000/welcome/onedriveredirect",
-          accessToken: accessToken
+          redirectUri: "http://localhost:3000/welcome/onedriveredirect"
         },
         success: function (files) { resolve(files); },
         cancel: function () { resolve(null); },
