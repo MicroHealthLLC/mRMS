@@ -58,46 +58,54 @@ class UserDatatable < Abstract
      if user.deleted?
         @view.restore_user_link(user, 'data-turbolinks' => false)
      else
-       "<i class='far fa-lg fa-trash-alt kt_sweetalert_demo_9 cursor-pointer'></i>
+       "<i class='far fa-lg fa-trash-alt cursor-pointer' id='kt_sweetalert_demo_#{user.id}'></i>
         <script type='text/javascript'>
-          $('.kt_sweetalert_demo_9').click(function (e) {
+          $('[id^=kt_sweetalert_demo_]').click(function (e) {
               Swal.fire({
                 title: 'Are you sure?',
-                text: '',
+                input: 'checkbox',
+                inputPlaceholder: 'Delete Permanently',
                 icon: 'warning',
                 showCancelButton: true,
-                confirmButtonText: 'Delete Permanently!',
-                cancelButtonText: 'Soft Delete!',
+                confirmButtonText: 'Delete',
+                cancelButtonText: 'Cancel',
                 reverseButtons: true
               }).then(function (result) {
-                if (result.value) {
-                  $.ajax({
-                    url: '/users/#{user.id}/really_destroy',
-                    type: 'delete',
-                    success: function(response){
-                      Swal.fire(
-                        'Deleted!',
-                        'User has been deleted Permanently.',
-                        'success'
-                      )
-                      window.location.reload();
-                    }
-                  })
-                  // result.dismiss can be 'cancel', 'overlay',
-                  // 'close', and 'timer'
+                if (result.isConfirmed) {
+                  if(result.value) {
+                    $.ajax({
+                      url: '/users/#{user.id}/really_destroy',
+                      type: 'delete',
+                      success: function(response){
+                        Swal.fire(
+                          'Deleted!',
+                          'User has been deleted Permanently.',
+                          'success'
+                        )
+                        window.location.reload();
+                      }
+                    })
+                  }
+                  else {
+                    $.ajax({
+                      url:'users/#{user.id}',
+                      type: 'delete',
+                      success: function(response){
+                        Swal.fire(
+                          'Soft Deleted',
+                          'User has been soft deleted:)',
+                          'success'
+                        )
+                        window.location.reload();
+                      }
+                    })
+                  }
                 } else if (result.dismiss === 'cancel') {
-                  $.ajax({
-                    url:'users/#{user.id}',
-                    type: 'delete',
-                    success: function(response){
-                      Swal.fire(
-                        'Soft Deleted',
-                        'User has been soft deleted:)',
-                        'success'
-                      )
-                      window.location.reload();
-                    }
-                  })
+                  Swal.fire(
+                    'Cancelled',
+                    'User is not deleted:)',
+                    'error'
+                  )
                 }
               });
             });
