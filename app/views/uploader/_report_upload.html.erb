@@ -146,6 +146,7 @@
   });
 
   var oneDriveApplicationId = "<%= Setting['AZURE_KEY']%>";
+  var baseUrl = "<%= ENV['CALLBACK_URL'] %>";
   function launchOneDrivePicker() {
     return new Promise(function (resolve, reject) {
       var odOptions = {
@@ -155,7 +156,7 @@
         openInNewWindow: true,
         advanced: {
           filter: "folder,.csv,.xls,.xlsx",
-          redirectUri: "http://localhost:3000/welcome/onedriveredirect"
+          redirectUri: baseUrl + "/welcome/onedriveredirect"
         },
         success: function (files) { resolve(files); },
         cancel: function () { resolve(null); },
