@@ -3,6 +3,7 @@ en:
  #DEFAULT SETTING
   label_no_data: No data to display
   text_are_you_sure: Are you sure to delete this record?
+  permanently_delete: Are you sure to delete this record permanently?
   notice_successful_create: Successful creation.
   notice_successful_update: Successful update.
   error_update: Error on update.
