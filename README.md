@@ -160,4 +160,4 @@ https://YourliveSiteDomain/users/auth/twitter/callback
 https://YourliveSiteDomain/users/auth/office365/callback
 
 For onedrive
-https://YourliveSiteDomain/auth/microsoft_graph_auth/callback
+https://YourliveSiteDomain/welcome/onedriveredirect
