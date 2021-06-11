@@ -1,83 +1,80 @@
 <%= form_for(channel, html: { class: 'form-horizontal' }) do |form| %>
-    <fieldset>
-      <% if channel.errors.any? %>
-          <div id="error_explanation">
-            <h2><%= pluralize(channel.errors.count, "error") %> prohibited this channel from being saved:</h2>
-
-            <ul>
-              <% channel.errors.full_messages.each do |message| %>
-                  <li><%= message %></li>
-              <% end %>
-            </ul>
-          </div>
-      <% end %>
-
-      <div class="form-group">
-        <%= form.label 'Channel', class: 'col-md-2 control-label' %>
-        <div class="col-md-8">
-          <%= form.hidden_field :user_id %>
-          <%= form.text_field :name, placeholder: 'Channel', class: 'form-control' %>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <div class="col-md-2 control-label">
-          <i class="" id="icon_result"></i>
-          <%= form.label 'Icon', class: '' %>
-        </div>
-
-        <div class="col-md-8">
-          <%= form.select :icon, options_for_select(Channel::ICONS, selected: form.object.icon), class: 'form-control'%>
-
-          <script>
-            $(function(){
-                $('#channel_icon').on('change', function(){
-                    $("#icon_result").removeAttr("class");
-                    $("#icon_result").attr("class", $(this).val() );
-                })
-            })
-          </script>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <%= form.label 'Options', class: 'col-md-2 control-label' %>
-        <div class="col-md-8">
-        <% if channel.is_group? %>
-          <%= form.radio_button :option, Channel::PUBLIC, :disabled => true %> Public
-        <% else %>
-          <%= form.radio_button :option, Channel::PUBLIC, :disabled => false %> Public
-        <% end %>
-        <% if channel.is_public? %>
-          <%= form.radio_button :option, Channel::GROUPS, :disabled => true %> GROUPS
-        <% else %>
-          <%= form.radio_button :option, Channel::GROUPS, :disabled => false %> GROUPS
-        <% end %>
-        <% if channel.is_group? or channel.is_public? %>
-          <%= form.radio_button :option, Channel::PERSONAL, :disabled => true %> Personal
-        <% else %>
-          <%= form.radio_button :option, Channel::PERSONAL, :disabled => false %> Personal
-        <% end %>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <%= form.label 'Description', class: 'col-md-2 control-label' %>
-        <div class="col-md-8">
-          <%= form.text_area :description, class: 'form-control ck-editor'  %>
-        </div>
-      </div>
-
-      <div class="form-group" >
-        <div class="col-md-10">
-          <% if @channel.id %>
-            <%= link_to t('button_cancel'), channel_path(@channel), class: 'btn btn-warning pull-right' %>
-          <% else %>
-            <%= link_to t('button_cancel'), new_channel_path, class: 'btn btn-warning pull-right' %>
+  <fieldset>
+    <% if channel.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(channel.errors.count, "error") %> prohibited this channel from being saved:</h2>
+        <ul>
+          <% channel.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
           <% end %>
-          <%= form.submit t('button_save'), class: 'btn btn-success pull-right' %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="form-group">
+      <%= form.label 'Channel', class: 'col-md-2 control-label' %>
+      <div class="col-md-8">
+        <%= form.hidden_field :user_id %>
+        <%= form.text_field :name, placeholder: 'Channel', class: 'form-control' %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-md-2 control-label">
+        <i class="" id="icon_result"></i>
+        <%= form.label 'Icon', class: '' %>
+      </div>
+
+      <div class="col-md-8">
+        <%= form.select :icon, options_for_select(Channel::ICONS, selected: form.object.icon), class: 'form-control'%>
+
+        <script>
+          $(function(){
+            $('#channel_icon').on('change', function(){
+              $("#icon_result").removeAttr("class");
+              $("#icon_result").attr("class", $(this).val() );
+            })
+          })
+        </script>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-md-2 col-form-label text-align-right pt-5">Options</label>
+      <div class="col-md-8 col-form-label pt-0">
+        <div class="radio-inline">
+          <label class="radio radio-primary <%= channel.is_group? ? 'radio-disabled' : '' %>">
+            <input type="radio" name="channel[option]" value="2" <%= channel.is_group? ? 'disabled' : 'checked' %> />
+            <span></span>Public
+          </label>
+          <label class="radio radio-primary <%= channel.is_public? ? 'radio-disabled' : '' %>">
+            <input type="radio" name="channel[option]" value="1" <%= channel.is_public? ? 'disabled' : 'checked' %> />
+            <span></span>Groups
+          </label>
+          <label class="radio radio-primary <%= channel.is_group? || channel.is_public? ? 'radio-disabled' : '' %>">
+            <input type="radio" name="channel[option]" value="3" <%= channel.is_group? || channel.is_public? ? 'disabled' : 'checked' %>/>
+            <span></span>Personal
+          </label>
         </div>
       </div>
-    </fieldset>
+    </div>
 
+    <div class="form-group">
+      <%= form.label 'Description', class: 'col-md-2 control-label' %>
+      <div class="col-md-8">
+        <%= form.text_area :description, class: 'form-control ck-editor'  %>
+      </div>
+    </div>
+
+    <div class="form-group" >
+      <div class="col-md-10">
+        <% if @channel.id %>
+          <%= link_to t('button_cancel'), channel_path(@channel), class: 'btn btn-warning pull-right' %>
+        <% else %>
+          <%= link_to t('button_cancel'), new_channel_path, class: 'btn btn-warning pull-right' %>
+        <% end %>
+        <%= form.submit t('button_save'), class: 'btn btn-success pull-right' %>
+      </div>
+    </div>
+  </fieldset>
 <% end %>
