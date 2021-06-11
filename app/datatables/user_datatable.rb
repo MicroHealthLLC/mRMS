@@ -63,6 +63,7 @@ class UserDatatable < Abstract
           $('[id^=kt_sweetalert_demo_]').click(function (e) {
               Swal.fire({
                 title: 'Are you sure?',
+                text: 'If Delete Permanently checked, You will not be able to recover this User!',
                 input: 'checkbox',
                 inputPlaceholder: 'Delete Permanently',
                 icon: 'warning',
@@ -81,8 +82,9 @@ class UserDatatable < Abstract
                           'Deleted!',
                           'User has been deleted Permanently.',
                           'success'
-                        )
-                        window.location.reload();
+                        ).then(function() {
+                          window.location.reload();
+                        });
                       }
                     })
                   }
@@ -93,17 +95,18 @@ class UserDatatable < Abstract
                       success: function(response){
                         Swal.fire(
                           'Soft Deleted',
-                          'User has been soft deleted:)',
+                          'User has been soft deleted.',
                           'success'
-                        )
-                        window.location.reload();
+                        ).then(function() {
+                          window.location.reload();
+                        });
                       }
                     })
                   }
                 } else if (result.dismiss === 'cancel') {
                   Swal.fire(
                     'Cancelled',
-                    'User is not deleted:)',
+                    'User is not deleted',
                     'error'
                   )
                 }
