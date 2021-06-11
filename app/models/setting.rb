@@ -95,6 +95,7 @@ class Setting < ApplicationRecord
       available_settings["#{provider}_KEY"] = { 'default'=> ENV["#{provider}_KEY"] }
       available_settings["#{provider}_SECRET"] = { 'default'=> ENV["#{provider}_SECRET"] }
     end
+    available_settings["CALLBACK_URL"] = { 'default'=> ENV["CALLBACK_URL"] }
   end
   load_available_settings
 

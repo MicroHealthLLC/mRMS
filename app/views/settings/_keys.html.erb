@@ -18,6 +18,16 @@
         </fieldset>
     <% end %>
 
+    <fieldset>
+      <legend> CALLBACK URL </legend>
+      <div class="form-group">
+        <%= label_tag "callback_url", "CALLBACK URL", class: 'col-md-2 control-label', title: "CALLBACK URL" %>
+        <div class="col-md-9">
+          <%= text_field_tag "callback_url", Setting["CALLBACK_URL"] , {class: 'form-control'} %>
+        </div>
+      </div>
+    </fieldset>
+
     <div class="form-group margin-top-10" >
       <div class="col-xs-12">
         <%= submit_tag t('button_save'), class: 'btn btn-success pull-right' %>

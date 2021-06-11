@@ -38,7 +38,7 @@ class ReportsController < ApplicationController
             @report_document.file=  File.new("/tmp/#{time}.xlsx")
             @report_document.save
             `rm /tmp/#{time}.xlsx`
-
+            redirect_to channel_report_path(@channel, @report)
           else
             url = params[:report][:document]["0"]["@microsoft.graph.downloadUrl"]
             file_name = params[:report][:document]["0"]["name"]
@@ -49,8 +49,6 @@ class ReportsController < ApplicationController
             @report_document.save
             `rm public/uploads/tmp/#{file_name}`
           end
-
-          redirect_to channel_report_path(@channel, @report)
         end
         format.js do
           @report_document = @report.document
