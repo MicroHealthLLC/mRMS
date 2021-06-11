@@ -5,10 +5,11 @@
     <th><%= t :email %></th>
     <th> <%= t('profile.first_name') %> </th>
 
-    <th> <%= t('profile.middle_name') %> </th>
+
     <th> <%= t('profile.last_name') %> </th>
     <th> <%= t('status') %> </th>
-    <th><%= 'Delete'%></th>
+    <th><%= t('restore') %></th>
+    <th><%= t('delete') %></th>
   </tr>
   </thead>
 
@@ -19,12 +20,12 @@
       <td><%= user.email %></td>
       <td><%= user.first_name %></td>
 
-      <td><%= user.middle_name %></td>
+
       <td><%= user.last_name %></td>
 
       <td><%= user.state.humanize %></td>
-      <td><i class="far fa-lg fa-trash-alt cursor-pointer delete-icon" data-value='<%= user.id%>' on> </i></td>
-      <!-- <td><%#= link_to 'Delete', really_destroy_user_path(user.id), method: :delete, data: {confirm: t(:permanently_delete)} %></td> -->
+      <td><%= restore_user_link(user, 'data-turbolinks' => false) %></td>
+      <td><i class="far fa-lg fa-trash-alt cursor-pointer delete-icon" data-value='<%= user.id%>'> </i></td>
     </tr>
   <% end %>
   </tbody>

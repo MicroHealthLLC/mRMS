@@ -357,6 +357,8 @@ en:
   title: Title
   last_updated: Last updated
   status: Status
+  delete: Delete
+  restore: Restore
   assigned_to: Assigned To
   type: Type
   category: Category
