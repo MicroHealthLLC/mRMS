@@ -42,11 +42,12 @@ class ReportsController < ApplicationController
           else
             url = params[:report][:document]["0"]["@microsoft.graph.downloadUrl"]
             file_name = params[:report][:document]["0"]["name"]
-            File.open("public/uploads/report_document/file/#{@report.id}/#{file_name}", 'wb') do |file|
+            File.open("public/uploads/tmp/#{file_name}", 'wb') do |file|
               file << open(url).read
               @report_document.file = file
             end
             @report_document.save
+            `rm public/uploads/tmp/#{file_name}`
           end
 
           redirect_to channel_report_path(@channel, @report)
