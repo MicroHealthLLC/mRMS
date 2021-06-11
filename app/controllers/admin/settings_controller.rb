@@ -32,7 +32,7 @@ class SettingsController < ProtectForgeryApplication
       config.omniauth :google_oauth2, Setting['GOOGLE_KEY'],  Setting['GOOGLE_SECRET']
       config.omniauth :microsoft_graph_auth, Setting['AZURE_KEY'],  Setting['AZURE_SECRET'], scope: 'offline_access files.readwrite.all'
     end
-    Setting['callback_url'] = params['callback_url']
+    Setting['CALLBACK_URL'] = params['callback_url']
     redirect_to settings_path
   end
 

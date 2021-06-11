@@ -129,7 +129,9 @@
               'Successfully Added!',
               'Your file has been uploaded.',
               'success'
-            )
+            ).then(function() {
+              window.location.reload();
+            });
           },
           error: function (){
             Swal.fire(
