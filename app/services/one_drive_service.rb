@@ -24,7 +24,7 @@ class OneDriveService
   private
 
   def get_one_drive_docs
-    one_drive = OneDrive::V1.new(Setting['AZURE_KEY'], "#{ENV['CALLBACK_URL']}/auth/microsoft_graph_auth/callback", ENV['AZURE_SCOPES'])
+    one_drive = OneDrive::V1.new(Setting['AZURE_KEY'], "#{Setting['CALLBACK_URL']}/auth/microsoft_graph_auth/callback", ENV['AZURE_SCOPES'])
     one_drive.set_token @access_token
     one_drive.get_children_of_special_folder('Documents')
   end
@@ -54,7 +54,7 @@ class OneDriveService
   def get_new_access_token
     options = { :body =>
       { "client_id" => "#{Setting['AZURE_KEY']}",
-        "redirect_uri" => "#{ENV['CALLBACK_URL']}/auth/microsoft_graph_auth/callback",
+        "redirect_uri" => "#{Setting['CALLBACK_URL']}/auth/microsoft_graph_auth/callback",
         "client_secret" => "#{Setting['AZURE_SECRET']}",
         "refresh_token" => "#{@user.onedrive_refresh_token}",
         "grant_type" => "refresh_token"

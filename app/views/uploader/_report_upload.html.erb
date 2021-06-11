@@ -146,7 +146,7 @@
   });
 
   var oneDriveApplicationId = "<%= Setting['AZURE_KEY']%>";
-  var baseUrl = "<%= ENV['CALLBACK_URL'] %>";
+  var baseUrl = "<%= Setting['CALLBACK_URL'] %>";
   function launchOneDrivePicker() {
     return new Promise(function (resolve, reject) {
       var odOptions = {
