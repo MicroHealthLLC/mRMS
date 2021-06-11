@@ -81,7 +81,7 @@ class UsersController < ProtectForgeryApplication
     u = User.unscoped.find params[:id]
     u.really_destroy!
     #flash[:notice] = 'User deleted'
-     redirect_to users_path
+     # redirect_to users_path
   end
 
   # authorized by manage roles
