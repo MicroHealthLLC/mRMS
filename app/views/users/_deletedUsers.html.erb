@@ -22,8 +22,9 @@
       <td><%= user.middle_name %></td>
       <td><%= user.last_name %></td>
 
-      <td><%= user.deleted? %></td>
-      <td><%= link_to 'Delete', really_destroy_user_path(user.id), method: :delete, data: {confirm: t(:permanently_delete)} %></td>
+      <td><%= user.state.humanize %></td>
+      <td><i class="far fa-lg fa-trash-alt cursor-pointer delete-icon" data-value='<%= user.id%>' on> </i></td>
+      <!-- <td><%#= link_to 'Delete', really_destroy_user_path(user.id), method: :delete, data: {confirm: t(:permanently_delete)} %></td> -->
     </tr>
   <% end %>
   </tbody>
@@ -33,4 +34,40 @@
   $(document).ready(function(){
     initDataTable('users_deleted')
   })
+
+  $('.delete-icon').on('click', function (e) {
+    var id = $(this).data("value");
+
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You will not be able to recover this User!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Delete',
+      cancelButtonText: 'Cancel',
+      reverseButtons: true
+    }).then(function (result) {
+      if (result.isConfirmed) {
+        $.ajax({
+          url: '/users/'+id+'/really_destroy',
+          type: 'delete',
+          success: function(response){
+            Swal.fire(
+              'Deleted!',
+              'User has been deleted Permanently.',
+              'success'
+            ).then(function() {
+              window.location.reload();
+            });
+          }
+        })
+      } else if (result.dismiss === 'cancel') {
+        Swal.fire(
+          'Cancelled',
+          'User is not deleted',
+          'error'
+        )
+      }
+    });
+  });
 </script>
