@@ -43,8 +43,8 @@
       <label class="col-md-2 col-form-label text-align-right pt-5">Options</label>
       <div class="col-md-8 col-form-label pt-0">
         <div class="radio-inline">
-          <label class="radio radio-primary <%= channel.is_group? || channel.is_personal? ? 'radio-disabled' : '' %>">
-            <input type="radio" name="channel[option]" value="2" <%= channel.is_group? || channel.is_personal? ? 'disabled' : 'checked' %> />
+          <label class="radio radio-primary <%= channel.is_personal? ? 'radio-disabled' : '' %>">
+            <input type="radio" name="channel[option]" value="2" <%= channel.is_personal? ? 'disabled' : 'checked' %> />
             <span></span>Public
           </label>
           <label class="radio radio-primary <%= channel.is_public? || channel.is_personal? ? 'radio-disabled' : '' %>">
