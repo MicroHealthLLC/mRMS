@@ -1,4 +1,5 @@
 class Devise::RegistrationsController < DeviseController
+  prepend_before_action :check_self_registration, only: [:new, :create]
   prepend_before_action :require_no_authentication, only: [:new, :create, :cancel]
   prepend_before_action :authenticate_scope!, only: [:edit, :update, :destroy]
   prepend_before_action :set_minimum_password_length, only: [:new, :edit]
@@ -167,6 +168,13 @@ class Devise::RegistrationsController < DeviseController
     unless verify_recaptcha
       self.resource = resource_class.new devise_parameter_sanitizer.sanitize(:sign_up)
       respond_with_navigational(resource) { render :new }
+    end
+  end
+
+  def check_self_registration
+    if Setting['self_registration'] == 'Disabled'
+      flash[:error] = 'You can not register on this site!'
+      redirect_to root_path
     end
   end
 end
