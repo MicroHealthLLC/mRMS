@@ -51,6 +51,7 @@ class SettingsController < ProtectForgeryApplication
     Setting['maximum_attempts'] = params['maximum_attempts']
     Setting['unlock_in'] = params['unlock_in']
     Setting['expire_after'] = params['expire_after']
+    Setting['self_registration'] = params['self_registration']
     Devise.setup do |config|
       config.remember_for = Setting['remember_for'].to_i.weeks
       config.timeout_in = Setting['timeout_in'].to_i.minutes

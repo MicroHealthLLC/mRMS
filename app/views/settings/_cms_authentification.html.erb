@@ -7,6 +7,12 @@
       </div>
     </div>
 
+    <div class="form-group">
+      <%= label_tag "self_registration", "Self Registration ", class: 'col-md-2 control-label' %>
+      <div class="col-md-9">
+        <%= select_tag :self_registration, options_for_select(['Disabled', 'Enabled'], selected: Setting['self_registration']), {class: 'form-control'} %>
+      </div>
+    </div>
 
     <div class="form-group">
       <%= label_tag "remember_for", "Remember For (Weeks): ", class: 'col-md-2 control-label', title: "The time the user will be remembered without asking for credentials again." %>
