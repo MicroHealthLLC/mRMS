@@ -1,18 +1,21 @@
 <%= form_tag share_report_channel_report_path(@channel, @report) do  %>
-    <p>&nbsp;Share this Data Set with the following users:</p>
-    <div class="row">
-      <% @users.each do |user| %>
-          <div class="col-md-3">
-            <%= check_box_tag "users[]", user.id, @shared_reports.include?(user.id) %> <%= user.to_s %>
-          </div>
-      <% end %>
+  <p>&nbsp;Share Data Set with the selected Users:</p>
 
+  <div class="form-group row">
+    <label class="col-form-label text-right col-lg-2 col-sm-12">Users:</label>
+    <div class="col-lg-8 col-md-9 col-sm-12">
+      <select class="form-control select2" id="kt_select2_3" name="users[]" multiple="multiple">
+        <% @users.each do |user| %>
+          <option value="<%= user.id%>" <%=  @shared_reports.include?(user.id) ? 'selected' : ''%>> <%= user.name %> </option>
+        <% end %>
+      </select>
     </div>
+  </div>
 
-    <div class="form-group" >
-      <div class="col-md-11">
-        <%= link_to t('button_cancel'), channel_report_path(@channel, @report), class: 'btn btn-warning pull-right' %>
-        <%= submit_tag t('button_save'), class: 'btn btn-success pull-right' %>
-      </div>
+  <div class="form-group" >
+    <div class="">
+      <%= link_to t('button_cancel'), channel_report_path(@channel, @report), class: 'btn btn-warning pull-right' %>
+      <%= submit_tag t('button_save'), class: 'btn btn-success pull-right' %>
     </div>
+  </div>
 <% end %>
