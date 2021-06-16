@@ -193,6 +193,34 @@ ul.dropdown-links a:hover{
   border-radius: 0.42rem;
   box-shadow: none;
 }
+.select2-selection--multiple {
+  .select2-search--inline {
+    padding: 3px;
+    margin-left: 5px;
+    border-radius: 5px;
+  }
+  .select2-search__field {
+    min-width: 150px;
+    margin-top: 0px !important;
+  }
+  .select2-search input {
+    background: transparent;
+  }
+}
+.select2-selection__choice, .select2-results__option--highlighted {
+  padding-top: 3px;
+  padding-bottom: 3px;
+  border-radius: 5px;
+  color: #ffffff;
+  background-color: #1BC5BD;
+  border-color: #1BC5BD;
+  box-shadow: none;
+  border: 0;
+}
+
+.select2-container--open .select2-dropdown, .select2-drop-active {
+  border: none;
+}
 select[name*="table_length"] {
   width: 4rem !important;
   padding: .5rem !important;
