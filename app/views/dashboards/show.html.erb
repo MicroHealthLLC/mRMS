@@ -23,30 +23,40 @@
 
 <div>
 
-  <!-- <%= render partial: 'action_menu' %> -->
+  <!-- <%#= render partial: 'action_menu' %> -->
 
   <div class="noprint row">
-  <div class="col-md-12 ">
-    <div class="pull-right" style="margin-bottom: 10px">
-      <% if current_user.id == @dashboard.user_id %>
-        <%= edit_button edit_channel_report_dashboard_path(@report.channel, @report, @dashboard) %>
-        <%= delete_button channel_report_dashboard_path(@report.channel, @report, @dashboard), 'Dashboard' %>
-      <% end %>
-        <%= cancel_button channel_report_path(@channel, @report) %>
+    <div class="col-md-12 ">
+      <div class="pull-right" style="margin-bottom: 10px">
+        <% if current_user.id == @dashboard.user_id %>
+          <%= edit_button edit_channel_report_dashboard_path(@report.channel, @report, @dashboard) %>
+          <%= delete_button channel_report_dashboard_path(@report.channel, @report, @dashboard), 'Dashboard' %>
+        <% end %>
+          <%= cancel_button channel_report_path(@channel, @report) %>
+      </div>
     </div>
   </div>
-</div>
   <p>
     <strong>Name:</strong>
     <%= @dashboard.name %>
   </p>
+</div>
+<section id="widget-grid" class="channel">
   <div class="row">
-    <% @dashboard.save_pivot_tables.each_with_index do |pivot_table, idx| %>
-        <div class="col-md-5" style="max-height: auto; padding-right: 10px; margin-left: 20px; margin-right: 20px;">
+    <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      <% @dashboard.save_pivot_tables.each_with_index do |pivot_table, idx| %>
+        <div class="col-md-6" style="max-height: auto;">
           <% params[:query_id] = pivot_table.id %>
           <% params[:number] = idx %>
-          <%= render partial: 'reports/pivot_table', locals: {pivot_table: pivot_table} %>
+          <%= render  partial: 'reports/pivot_table',
+                      layout: 'shared/smart_widget_wrapper',
+                      locals: {
+                        wid_id: 'Dashboard',
+                        wid_title: '',
+                        pivot_table: pivot_table
+                      } %>
         </div>
-    <% end %>
+      <% end %>
+    </article>
   </div>
-</div>
+</section>
