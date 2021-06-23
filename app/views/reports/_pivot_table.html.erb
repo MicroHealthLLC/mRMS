@@ -1,4 +1,4 @@
-<div>
+<div class="responsivePlotly" style="padding-inline:20px;">
   <% if params[:controller] == 'dashboards' %>
       <div style="margin-top: 10px; font-size: 18px">
         <%= link_to pivot_table.name, channel_report_path(@channel, @report, query_id: pivot_table.id) %>
