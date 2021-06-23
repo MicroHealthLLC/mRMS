@@ -87,7 +87,7 @@
         layout = {
           title: titleText,
           hovermode: 'closest',
-          width: window.innerWidth / 1.4,
+          width: window.innerWidth / 1.6,
           height: window.innerHeight / 1.4 - 50
         };
         if (traceOptions.type === 'pie') {
@@ -120,8 +120,8 @@
             automargin: true
           };
         }
-        result = $("<div>").appendTo($("body"));
-        Plotly.newPlot(result[0], data, $.extend(layout, layoutOptions, opts.plotly), opts.plotlyConfig);
+        result = $("<div>").appendTo($(".responsivePlotly"));
+        Plotly.newPlot(result[0], data, {responsive: true}, $.extend(layout, layoutOptions, opts.plotly), opts.plotlyConfig);
         return result.detach();
       };
     };
@@ -175,7 +175,7 @@
             title: pivotData.rowAttrs.join('-'),
             automargin: true
           },
-          width: window.innerWidth / 1.5,
+          width: window.innerWidth / 1.6,
           height: window.innerHeight / 1.4 - 50
         };
         renderArea = $("<div>", {
