@@ -1,7 +1,7 @@
 class ReportDocument < ApplicationRecord
   include ReportsHelper
   belongs_to :user, optional: true
-  belongs_to :report
+  belongs_to :report, optional: true
 
   before_create do
     self.user_id = User.current.id

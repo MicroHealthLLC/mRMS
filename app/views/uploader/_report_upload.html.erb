@@ -8,11 +8,11 @@
       </div>
       <div id="files" class="files col-xs-12" ></div>
       <div id="errors" style="color: red;" class="files col-xs-12" ></div>
-      <%= form_for(@report, url: upload_document_channel_report_path(@channel, @report), method: :post, html: { class: 'form-horizontal' , method: :post,  :multipart => true, :id => "fileupload" }) do |f| %>
+      <%#= form_for(@report, url: upload_document_channel_report_path(@channel, @report), method: :post, remote: true, html: { class: 'form-horizontal', multipart: true, id: "fileupload"}) do |f| %>
         <div data-toggle="modal" class="modal-body">
           <fieldset>
             <div class="form-group">
-              <%= f.label t('document'), class: 'col-md-3 control-label text-align-left' %>
+              <label class='col-md-3 control-label text-align-left'>Document</label>
               <div class="col-md-9">
                 <div class="upload-btn-wrapper">
                   <button class="btn btn-secondary">Upload a file</button>
@@ -22,7 +22,7 @@
               <div class="col-md-12 py-3 text-align-center">
                 OR
               </div>
-              <%= f.label t('one_drive'), class: 'col-md-3 control-label text-align-left' %>
+              <label class='col-md-3 control-label text-align-left'>One Drive</label>
               <div class="col-md-9">
                 <div class="upload-btn-wrapper">
                   <button class="btn btn-info" id="OpenOneDrive">Open from OneDrive</button>
@@ -34,7 +34,7 @@
               <div class="col-md-12">
                 <label class="pt-3 pr-3" style="float: left">URL  </label>
                 <%= text_field_tag :url, '', class: 'col-md-9 form-control' , style: 'width: 80%' %>
-                <%= f.submit :save, class: 'btn btn-primary', style: 'float: right' %>
+                <%#= f.submit :save, class: 'btn btn-primary', style: 'float: right' %>
               </div>
               <style>
                 .upload-btn-wrapper {
@@ -56,8 +56,8 @@
         <div data-toggle="modal" class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         </div>
+    <% #end %>
       </div>
-    <% end %>
   </div>
 </div>
 
@@ -73,8 +73,8 @@
   $(document).ready(function(){
     $(function () {
       'use strict';
-      url: '<%= upload_document_channel_report_path(@channel, @report) %>';
       $('#fileupload').fileupload({
+        url: '<%= upload_document_channel_report_path(@channel, @report) %>',
         dataType: 'script',
         add: function(e, data){
           var uploadErrors = [];
@@ -87,7 +87,7 @@
           } else {
             data.context = $(tmpl('template-upload', data.files[0]));
             $('#files').append(data.context);
-            data.submit()
+            data.submit();
           }
         },
         done: function (e, data) {
@@ -118,28 +118,12 @@
     launchOneDrivePicker().then(function (result) {
       if (result) {
         const file = result.value
-        var params = { report: { document: file } }
+        var params = { report: { document: file }, one_drive: true }
         console.log(params)
         $.ajax({
           type: "POST",
           url: '<%= upload_document_channel_report_path(@channel, @report) %>',
           data: params,
-          success: function (result) {
-            Swal.fire(
-              'Successfully Added!',
-              'Your file has been uploaded.',
-              'success'
-            ).then(function() {
-              window.location.reload();
-            });
-          },
-          error: function (){
-            Swal.fire(
-              'Something went wrong!',
-              'Contact to Service Team!',
-              'error'
-            )
-          }
         });
       }
     }).catch(function (reason) {

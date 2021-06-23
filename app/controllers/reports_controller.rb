@@ -29,7 +29,7 @@ class ReportsController < ApplicationController
   def upload_document
     if request.post?
       respond_to do |format|
-        format.html do
+        format.js do
           @report_document = @report.document
           if params[:url].present?
             url= params[:url]
@@ -38,8 +38,8 @@ class ReportsController < ApplicationController
             @report_document.file=  File.new("/tmp/#{time}.xlsx")
             @report_document.save
             `rm /tmp/#{time}.xlsx`
-            redirect_to channel_report_path(@channel, @report)
-          else
+            # redirect_to channel_report_path(@channel, @report)
+          elsif params[:one_drive].present?
             url = params[:report][:document]["0"]["@microsoft.graph.downloadUrl"]
             file_name = params[:report][:document]["0"]["name"]
             File.open("public/uploads/tmp/#{file_name}", 'wb') do |file|
@@ -48,12 +48,11 @@ class ReportsController < ApplicationController
             end
             @report_document.save
             `rm public/uploads/tmp/#{file_name}`
+          else
+            @report_document.file = params[:report][:document]
+            @report_document.save
           end
-        end
-        format.js do
-          @report_document = @report.document
-          @report_document.file = params[:report][:document]
-          @report_document.save
+          # render report_document: @report_document, status: :ok
           render 'uploader/report_upload'
         end
       end
