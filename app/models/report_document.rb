@@ -13,7 +13,7 @@ class ReportDocument < ApplicationRecord
 
   mount_uploader :file, ReportUploader
 
-  validates_presence_of :file, :report_id
+  validates_presence_of :file
   # validates :file,
   #           :file_size => {
   #               :less_than_or_equal_to => Setting[:spreadsheet_limit].to_i.megabytes.to_i

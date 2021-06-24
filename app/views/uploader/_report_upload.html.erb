@@ -1,10 +1,10 @@
 <script type="text/javascript" src="https://js.live.net/v7.2/OneDrive.js"></script>
 
-<div data-toggle="modal" class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div data-toggle="modal" class="modal fade" id="uploadFileModal" tabindex="-1" role="dialog" aria-labelledby="uploadFileModalLabel">
   <div data-toggle="modal" class="modal-dialog" role="document">
     <div data-toggle="modal" class="modal-content">
       <div data-toggle="modal" class="modal-header">
-        <h4 class="modal-title" id="myModalLabel">Upload Files</h4>
+        <h4 class="modal-title" id="uploadFileModalLabel">Upload Files</h4>
       </div>
       <div id="files" class="files col-xs-12" ></div>
       <div id="errors" style="color: red;" class="files col-xs-12" ></div>
@@ -34,6 +34,7 @@
               <div class="col-md-12">
                 <label class="pt-3 pr-3" style="float: left">URL  </label>
                 <%= text_field_tag :url, '', class: 'col-md-9 form-control' , style: 'width: 80%' %>
+                <button class="btn btn-primary" id="save_url">Save</button>
                 <%#= f.submit :save, class: 'btn btn-primary', style: 'float: right' %>
               </div>
               <style>
@@ -74,8 +75,11 @@
     $(function () {
       'use strict';
       $('#fileupload').fileupload({
-        url: '<%= upload_document_channel_report_path(@channel, @report) %>',
+        url: '<%= upload_document_channel_reports_path(@channel) %>',
         dataType: 'script',
+        formData: {
+          id: '<%= @report ? @report.id : ""%>'
+        },
         add: function(e, data){
           var uploadErrors = [];
 
@@ -113,17 +117,44 @@
     });
   })
 
+  function validURL(str) {
+    var pattern = new RegExp('^(https?:\\/\\/)?'+ // protocol
+      '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ // domain name
+      '((\\d{1,3}\\.){3}\\d{1,3}))'+ // OR ip (v4) address
+      '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+ // port and path
+      '(\\?[;&a-z\\d%_.~+=-]*)?'+ // query string
+      '(\\#[-a-z\\d_]*)?$','i'); // fragment locator
+    return !!pattern.test(str);
+  }
+
+  document.getElementById("save_url").addEventListener("click", function (e) {
+    e.preventDefault();
+    var url = document.getElementById("url").value;
+    if (validURL(url)) {
+      var params = {url: url, id: '<%= @report ? @report.id : ""%>'}
+      $.ajax({
+        type: "POST",
+        url: '<%= upload_document_channel_reports_path(@channel) %>',
+        data: params
+      });
+    }
+    else {
+      $('<p style="color: red;">Upload file error: Not a valid URL<i class="elusive-remove" style="padding-left:10px;"/></p>')
+            .appendTo('#files');
+      setTimeout(function(){ document.getElementById("files").innerHTML = ''; }, 2000);
+    }
+  });
+
   document.getElementById("OpenOneDrive").addEventListener("click", function (e) {
     e.preventDefault();
     launchOneDrivePicker().then(function (result) {
       if (result) {
         const file = result.value
-        var params = { report: { document: file }, one_drive: true }
-        console.log(params)
+        var params = { report: { document: file }, id: '<%= @report ? @report.id : ""%>', one_drive: true }
         $.ajax({
           type: "POST",
-          url: '<%= upload_document_channel_report_path(@channel, @report) %>',
-          data: params,
+          url: '<%= upload_document_channel_reports_path(@channel) %>',
+          data: params
         });
       }
     }).catch(function (reason) {

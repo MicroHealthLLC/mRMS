@@ -16,7 +16,7 @@
       <div class="form-group">
         <%= f.label 'Data Set', class: 'col-md-2 control-label' %>
         <div class="col-md-9">
-          <%= f.text_field :name , class: 'form-control' %>
+          <%= f.text_field :name , class: 'form-control', required: true %>
         </div>
       </div>
 
@@ -29,9 +29,12 @@
 
       <div class="form-group">
         <%= f.label 'Document', class: 'col-md-2 control-label' %>
-        <div class="col-md-9">
-          <%= f.hidden_field :document %>
-          <%= show_button('#', ' Upload Data', 'upload', 'info', {toggle:"modal", target:"#myModal" }) %>
+        <div class="col-md-2">
+          <%= f.hidden_field :report_document_ids %>
+          <%= show_button('#', ' Upload Data', 'upload', 'info', {toggle:"modal", target:"#uploadFileModal" }) %>
+        </div>
+        <div class="col-md-4">
+          <p id="file_name" class="pt-3"> </p>
         </div>
       </div>
 

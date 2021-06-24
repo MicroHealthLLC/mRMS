@@ -1,6 +1,16 @@
 <% if @report_document.errors.any? %>
   $('#errors').html('<%= j @report_document.errors.full_messages.join(', ') %>');
 <% else %>
- $('#errors').html('')
-  location.reload();
+  $('#errors').html('');
+  url = window.location.href.split('/');
+  if (url[url.length -1] === "new") {
+    $('#report_report_document_ids').val('<%= @report_document.id %>');
+    $('.modal-backdrop').remove();
+    $('#uploadFileModal').modal('hide');
+    $('#file_name').html('<%= @report_document.file.filename %>');
+    $('.modal-backdrop').remove();
+    $('#url').val('');
+  }  else {
+    location.reload();
+  }
 <% end %>

@@ -12,6 +12,7 @@ class Report < ApplicationRecord
   has_many :dashboards
   has_many :users, through: :shared_reports
 
+  validates_presence_of :name
 
   # mount_uploader :document, ReportUploader
 
