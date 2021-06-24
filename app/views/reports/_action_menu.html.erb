@@ -29,7 +29,7 @@
           <% end %>
           <% if ((@report.channel.is_public? and (@report.created_by_id == User.current.id or @report.channel.is_creator?)) or (!@report.channel.is_public? and @report.channel.is_creator?) or @report.channel.my_permission.can_add_report?) %>
               <span>
-                <%= show_button('#', ' Upload Data', 'upload', 'info', {toggle:"modal", target:"#myModal" }) %>
+                <%= show_button('#', ' Upload Data', 'upload', 'info', {toggle:"modal", target:"#uploadFileModal" }) %>
               </span>
           <% end %>
 

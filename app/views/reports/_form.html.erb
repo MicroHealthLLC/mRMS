@@ -1,4 +1,4 @@
-<%= form_for([@channel, @report], html: { class: 'form-horizontal' }) do |f| %>
+<%= form_for([@channel, @report], html: { class: 'form-horizontal' }, multipart: true,) do |f| %>
     <fieldset>
       <legend></legend>
       <% if @report.errors.any? %>
@@ -16,15 +16,25 @@
       <div class="form-group">
         <%= f.label 'Data Set', class: 'col-md-2 control-label' %>
         <div class="col-md-9">
-          <%= f.text_field :name , class: 'form-control' %>
+          <%= f.text_field :name , class: 'form-control', required: true %>
         </div>
       </div>
-
 
       <div class="form-group">
         <%= f.label 'Channel', class: 'col-md-2 control-label' %>
         <div class="col-md-9">
           <%= f.select :channel_id , options_for_select(Channel.where( id: @channel.id).pluck(:name, :id), selected:  @channel.id) , class: 'form-control' %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <%= f.label 'Document', class: 'col-md-2 control-label' %>
+        <div class="col-md-2">
+          <%= f.hidden_field :report_document_ids %>
+          <%= show_button('#', ' Upload Data', 'upload', 'info', {toggle:"modal", target:"#uploadFileModal" }) %>
+        </div>
+        <div class="col-md-4">
+          <p id="file_name" class="pt-3"> </p>
         </div>
       </div>
 
@@ -35,8 +45,6 @@
         </div>
       </div>
 
-
-
       <div class="form-group" >
         <div class="col-md-11">
           <%= link_to t('button_cancel'), channel_path(@channel), class: 'btn btn-warning pull-right' %>
@@ -44,5 +52,5 @@
         </div>
       </div>
     </fieldset>
-
 <% end %>
+<%= render partial: 'uploader/report_upload' %>

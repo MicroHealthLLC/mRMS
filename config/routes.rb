@@ -21,8 +21,10 @@ Rails.application.routes.draw do
       member do
         match :save_pivottable, via: [:post]
         match :delete_pivottable, via: [:delete]
-        match :upload_document, via: [:get, :post]
         match :share_report, via: [:get, :post]
+      end
+      collection do
+        match :upload_document, via: [:get, :post]
       end
     end
   end

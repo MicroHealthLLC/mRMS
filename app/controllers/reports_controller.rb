@@ -1,8 +1,9 @@
 class ReportsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_channel
-  before_action :set_report, only: [:save_pivottable, :delete_pivottable, :share_report, :upload_document, :show, :edit, :update, :destroy]
+  before_action :set_report, only: [:save_pivottable, :delete_pivottable, :share_report, :show, :edit, :update, :destroy]
   before_action :authorize, except: [:index, :show]
+  before_action :set_repot_document, only: :create
 
   include ReportsHelper
   # GET /reports/1
@@ -28,32 +29,32 @@ class ReportsController < ApplicationController
 
   def upload_document
     if request.post?
+      set_report if params[:id].present?
       respond_to do |format|
-        format.html do
-          @report_document = @report.document
+        format.js do
+          @report_document = @report ? @report.document : ReportDocument.new
           if params[:url].present?
             url= params[:url]
             time = Time.now.to_i
             `curl -L #{url} > /tmp/#{time}.xlsx`
             @report_document.file=  File.new("/tmp/#{time}.xlsx")
-            @report_document.save
+            @report_document.save!
             `rm /tmp/#{time}.xlsx`
-            redirect_to channel_report_path(@channel, @report)
-          else
+            # redirect_to channel_report_path(@channel, @report)
+          elsif params[:one_drive].present?
             url = params[:report][:document]["0"]["@microsoft.graph.downloadUrl"]
             file_name = params[:report][:document]["0"]["name"]
             File.open("public/uploads/tmp/#{file_name}", 'wb') do |file|
               file << open(url).read
               @report_document.file = file
             end
-            @report_document.save
+            @report_document.save!
             `rm public/uploads/tmp/#{file_name}`
+          else
+            @report_document.file = params[:report][:document]
+            @report_document.save!
           end
-        end
-        format.js do
-          @report_document = @report.document
-          @report_document.file = params[:report][:document]
-          @report_document.save
+          # render report_document: @report_document, status: :ok
           render 'uploader/report_upload'
         end
       end
@@ -80,6 +81,7 @@ class ReportsController < ApplicationController
     @report.user_id = User.current.id
     respond_to do |format|
       if @report.save
+        @report_document.update!(report_id: @report.id) if @report_document
         format.html { redirect_to channel_report_path(@channel, @report), notice: 'Data set was successfully created.' }
         format.json { render :show, status: :created, location: @report }
       else
@@ -154,6 +156,10 @@ class ReportsController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def report_params
     params.require(:report).permit(Report.safe_attributes)
+  end
+
+  def set_repot_document
+    @report_document = ReportDocument.find_by_id(params['report']['report_document_ids'].to_i) rescue nil
   end
 
   def authorize
