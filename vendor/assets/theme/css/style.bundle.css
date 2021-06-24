@@ -60402,13 +60402,12 @@ body {
 @media (max-width: 991.98px) {
   .aside {
     z-index: 1001;
-    position: fixed;
     top: 0;
     bottom: 0;
     -webkit-transition: left 0.3s ease, right 0.3s ease, bottom 0.3s ease, top 0.3s ease;
     transition: left 0.3s ease, right 0.3s ease, bottom 0.3s ease, top 0.3s ease;
     left: -295px;
-    width: 275px; }
+    width: 30%; }
     .aside.aside-on {
       -webkit-transition: left 0.3s ease, right 0.3s ease, bottom 0.3s ease, top 0.3s ease;
       transition: left 0.3s ease, right 0.3s ease, bottom 0.3s ease, top 0.3s ease;
