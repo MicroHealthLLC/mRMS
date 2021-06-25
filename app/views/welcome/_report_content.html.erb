@@ -1,0 +1,12 @@
+<% channel.reports.each do |report|%>
+  <div class="card col-md-4" style="width: 18rem; shape-margin: 10px;">
+    <div class="card-body">
+      <h5 class="card-title" ><%= link_to( report.name, channel_report_path(channel, report ))  %></h5>
+      <a class="card-link" title ="<%= channel.name %>"><b>Channel : </b> <%= channel.name.truncate(15) %></a>
+      <p class="card-text"><%= report.description.truncate(25).html_safe%></p>
+      <p  class="card-link"><b>Created By: </b><%= channel.created_by %></p>
+      <p><b>Updated By: </b><%= channel.updated_by %></p>
+      <p><b>Last Update: </b><%= channel.updated_at %></p>
+    </div>
+  </div>
+<% end %>

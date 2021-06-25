@@ -2,6 +2,9 @@ class WelcomeController < ApplicationController
 
   def index
     redirect_to new_user_session_path unless user_signed_in?
+    @personal_channels = Channel.my_personal_channel.includes(:reports)
+    @public_channels = Channel.is_public.includes(:reports)
+    @group_channels = Channel.for_user
     session[:appointment_store_id] = nil if User.current_user.can?(:manage_roles)
     if session[:employee_id]
       session[:appointment_store_id] = nil
