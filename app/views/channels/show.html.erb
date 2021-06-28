@@ -1,24 +1,28 @@
 <div class="card card-custom gutter-b mt-5">
  <div class="card-body">
   <%= render partial: 'action_menu' %>
-  <p>
-    <strong>Channel :</strong>
-    <%= @channel.name %>
-  </p>
+   <div class="row mt-5">
+      <div class="col-6" title="<%= @channel.name %>" id="name_title">
+        <strong>Channel :</strong>
+        <%= @channel.name.truncate(35) %>
+      </div>
 
-  <p>
-    <strong>Description :</strong>
-    <%= @channel.description.to_s.html_safe %>
-  </p>
+      <div class="col-6 d-flex ">
+        <strong style="width:88px !important;">Description :</strong>
+        <div class="w-75 " title ="<%= @channel.description.html_safe %>" id="description_title" >
+          <%= @channel.description.truncate(50).html_safe%>
+        </div>
+      </div>
 
-  <p>
-    <strong>Created by :</strong>
-    <%= @channel.user %> at <%= format_date_time @channel.created_at %>
-  </p>
-  <p>
-    <strong>Last update :</strong>
-    <%= @channel.updated_by %> at <%= format_date_time @channel.updated_at %>
-  </p>
+      <div class="col-6">
+        <strong>Created by :</strong>
+        <%= @channel.user %> at <%= format_date_time @channel.created_at %>
+      </div>
+      <div class="col-6">
+        <strong>Last update :</strong>
+        <%= @channel.updated_by %> at <%= format_date_time @channel.updated_at %>
+      </div>
+   </div>
  </div>
 </div>
 
@@ -36,4 +40,18 @@
   </div>
 </section>
 
+<script>
+  $('#description_title').tooltip({
+    content: function(){
+      var element = $( this );
+      return element.attr('title');
+    }
+  });
+  $('#name_title').tooltip({
+    content: function(){
+      var element = $( this );
+      return element.attr('title');
+    }
+  });
+</script>
 
