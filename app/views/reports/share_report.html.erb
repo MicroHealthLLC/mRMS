@@ -1,14 +1,21 @@
-
-
-<section id="widget-grid" class="case_watcher_section">
-  <div class="row">
-    <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-      <%= render partial: 'watcher_form',
-                 layout: 'shared/smart_widget_wrapper',
-                 locals: {
-                     wid_id: 'watcher',
-                     wid_title: 'Share Report'
-                 } %>
-    </article>
-  </div>
-</section>
+  <section id="widget-grid" class="case_watcher_section">
+    <div class="row">
+      <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <% if @share_report_with_user %>
+          <%= render  partial: 'watcher_form',
+                      layout: 'shared/smart_widget_wrapper',
+                      locals: {
+                        wid_id: 'watcher',
+                        wid_title: 'Share Report'
+                      }%>
+        <% else %>
+          <%= render  partial: 'channels/add_report_into_dashboard',
+                      layout: 'shared/smart_widget_wrapper',
+                      locals: {
+                        wid_id: 'watcher',
+                        wid_title: 'Add report into dashboards'
+                      } %>
+        <% end %>
+      </article>
+    </div>
+  </section>

@@ -1,0 +1,22 @@
+<%= form_tag  shared_report_channel_report_dashboards_path(@channel, @report), method: :post,  class: 'form_submit form-horizontal col-sm-12',  :multipart => true  do %>
+
+    <%= hidden_field_tag :query_id, @query_id %>
+
+    <div class="form-group row">
+      <label class="col-form-label text-right col-lg-2 col-sm-12">Dashboards:</label>
+      <div class="col-lg-8 col-md-9 col-sm-12">
+        <select class="form-control select2" id="kt_select2_3" name="dashboards[]" multiple="multiple">
+          <% @dashboards.each do |dashboard| %>
+            <option value="<%= dashboard.id%>"> <%= dashboard.name %> </option>
+          <% end %>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group" >
+      <div class="col-md-11">
+        <%= link_to t('button_cancel'), channel_path(@channel), class: 'btn btn-warning pull-right' %>
+        <%= submit_tag t('button_save'), class: 'btn btn-success pull-right' %>
+      </div>
+    </div>
+<% end %>

@@ -280,3 +280,7 @@ fieldset{
   font-family: fontawesome !important;
   content: "\f078" !important;
    }
+
+.card-opacity-7{
+  opacity: 0.7 !important;
+}

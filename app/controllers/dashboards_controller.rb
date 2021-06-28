@@ -32,6 +32,7 @@ class DashboardsController < ApplicationController
   def create
     @dashboard = Dashboard.new(dashboard_params)
     @dashboard.user_id = User.current.id
+    @dashboard.save_pivot_tables = SavePivotTable.where(id: JSON.parse(params[:pivot_table_ids]))
     respond_to do |format|
       if @dashboard.save
         format.html { redirect_to [@channel, @report, @dashboard], notice: 'Dashboard was successfully created.' }
@@ -47,6 +48,7 @@ class DashboardsController < ApplicationController
   # PATCH/PUT /dashboards/1.json
   def update
     respond_to do |format|
+      @dashboard.save_pivot_tables = SavePivotTable.where(id: JSON.parse(params[:pivot_table_ids]))
       if @dashboard.update(dashboard_params)
         format.html { redirect_to [@channel, @report, @dashboard], notice: 'Dashboard was successfully updated.' }
         format.json { render :show, status: :ok, location: @dashboard }
@@ -54,6 +56,19 @@ class DashboardsController < ApplicationController
         format.html { render :edit }
         format.json { render json: @dashboard.errors, status: :unprocessable_entity }
       end
+    end
+  end
+
+  def shared_report
+    pivot_table_id = params[:query_id]
+    if pivot_table_id
+      dashboard_ids = params[:dashboards]
+      dashboards = Dashboard.where(id: dashboard_ids)
+      dashboards.each do |dashboard|
+        report_dashboard = ReportDashboard.find_or_create_by(dashboard_id: dashboard.id, pivot_table_id: pivot_table_id)
+      end
+      flash[:notice] = "Share Report updated successfully"
+      redirect_to channel_report_path(@channel, @report)
     end
   end
 
@@ -88,7 +103,7 @@ class DashboardsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def dashboard_params
-    params.require(:dashboard).permit(:report_id, :name, report_dashboards_attributes: ReportDashboard.safe_attributes )
+    params.require(:dashboard).permit(:report_id, :name )
   end
 
 
