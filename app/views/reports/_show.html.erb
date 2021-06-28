@@ -22,10 +22,6 @@
       <%= @report.created_by %> at <%= format_date_time @report.created_at %>
     </div>
 
-    <div class="col-6 mb-3">
-      <strong>Updated by:</strong>
-      <%= @report.updated_by %> at <%= format_date_time @report.updated_at %>
-    </div>
     <% if @report.document_url && (@report.channel.is_public? or @channel.is_creator? or @channel.my_permission.can_download?) %>
       <% if File.exists?("#{Rails.root}/public#{@report.document_url}") %>
         <div class="noprint col-6 mb-3">
@@ -37,6 +33,11 @@
         <span style="color: red;"> File does not exist on server, please re-upload it again.</span>
       <% end %>
     <% end %>
+
+    <div class="col-6 mb-3">
+      <strong>Updated by:</strong>
+      <%= @report.updated_by %> at <%= format_date_time @report.updated_at %>
+    </div>
   </div>
 </div>
 
