@@ -1,41 +1,56 @@
 <div class="row">
   <div class="col-md-12  ">
     <%= render partial: 'show'%>
-    <%  if @report.document_url %>
-        <%= render partial: 'modal' %>
-        <% if params[:query_id] or params[:new_query] %>
-            <div class="px-0">
-              <%#= render partial: 'pivot_table' %>
-               <section id="widget-grid" class="channel col-12 px-0 ">
-                <div class="col-md-12 px-0">
-                  <article class="col-xs-12 col-md-12 col-sm-12 col-12 px-0">
-                    <%= render partial: 'pivot_table',
-                               layout: 'shared/smart_widget_wrapper',
-                               locals: {
-                                   wid_id: 'Report',
-                                   wid_title: 'Data ',
-                               } %>
-                  </article>
-                </div>
-              </section>
+    <% if @report.document_url %>
+      <%= render partial: 'modal' %>
+      <% if params[:query_id] or params[:new_query] %>
+        <div class="px-0">
+          <section id="widget-grid" class="channel col-12 px-0 ">
+            <div class="col-md-12 px-0">
+              <article class="col-xs-12 col-md-12 col-sm-12 col-12 px-0">
+                <%= render  partial: 'pivot_table',
+                            layout: 'shared/smart_widget_wrapper',
+                            locals: {
+                              wid_id: 'Report',
+                              wid_title: 'Data ',
+                            } %>
+              </article>
             </div>
-        <% else %>
-            <section id="widget-grid" class="show_customer_account">
-              <div class="row">
-                <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                  <%= render partial: 'reports_and_dashboards',
-                             layout: 'shared/smart_widget_wrapper',
-                             locals: {
-                                 wid_id: 'reports',
-                                 wid_title: 'Reports'
-                             } %>
-                </article>
-              </div>
-            </section>
-        <% end %>
+          </section>
+        </div>
+      <% else %>
+        <div id="widget-grid">
+          <section class="show_customer_account">
+            <div class="row">
+              <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <%= render  partial: 'reports',
+                            layout: 'shared/smart_widget_wrapper',
+                            locals: {
+                              wid_id: 'reports',
+                              wid_title: 'Reports'
+                            } %>
+              </article>
+            </div>
+          </section>
+
+          <section id="widget-grid"  class="show_customer_account">
+            <div class="row">
+              <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <%= render  partial: 'dashboards',
+                            layout: 'shared/smart_widget_wrapper',
+                            locals: {
+                              wid_id: 'dashboards',
+                              wid_title: 'Dashboards'
+                            } %>
+              </article>
+            </div>
+          </section>
+        </div>
+      <% end %>
     <% end %>
   </div>
 </div>
+
 <style>
   @media print
   {

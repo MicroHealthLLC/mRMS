@@ -1,3 +1,8 @@
-<% SavePivotTable.where(report_id: @report.id).each do |pivot_table| %>
+<% tables = SavePivotTable.where(report_id: @report.id) %>
+<% if tables.present? %>
+  <%tables.each do |pivot_table| %>
     <%= render partial: 'grid', locals: {pivot_table: pivot_table} %>
+  <% end %>
+<% else %>
+  <div class="alert alert-light center text-align-center w-25" role="alert">No Report to display!</div>
 <% end %>
