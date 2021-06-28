@@ -1,41 +1,56 @@
 <div class="card card-custom gutter-b mt-2 p-2 " style="margin-bottom: 8px !important;">
   <%= render partial: 'action_menu' %>
-  <div class="row" >
-    <p class="col-6">
+  <div class="row mt-5" >
+    <div class="col-6" title="<%= @report.name %>" id="data_title">
       <strong>Data Set:</strong>
       <%= @report.name %>
-    </p>
+    </div>
     <% if @p = SavePivotTable.find_by_id(params[:query_id]) %>
-      <p class="col-6">
+      <div class="col-6 mb-3">
         <strong>Report Name:</strong>
-        <%= @p.name %>
-      </p>
+        <%= @report.name.truncate(35) %>
+      </div>
     <% end %>
 
-    <p class="col-6">
+    <div class="col-6 mb-3" title="<%= @report.name %>" id="channel_title">
       <strong>Channel:</strong>
-      <%= @report.channel %>
-    </p>
+      <%= @report.channel.name.truncate(35) %>
+    </div>
 
-    <p class="col-6">
+    <div class="col-6 mb-3">
       <strong>Created by:</strong>
       <%= @report.created_by %> at <%= format_date_time @report.created_at %>
-    </p>
+    </div>
 
-    <p class="col-6">
+    <div class="col-6 mb-3">
       <strong>Updated by:</strong>
       <%= @report.updated_by %> at <%= format_date_time @report.updated_at %>
-    </p>
-  </div>
-  <% if @report.document_url && (@report.channel.is_public? or @channel.is_creator? or @channel.my_permission.can_download?) %>
-    <% if File.exists?("#{Rails.root}/public#{@report.document_url}") %>
-      <p class="noprint">
-        <strong>Document:</strong>
-        <%= link_to '', "/uploads/#{@report.id}/#{File.basename(@report.document.file_url)}",  class: 'fa fa-fw fa-download', style: 'white-space: nowrap;', target: '_blank' %>
-        <%= @report.document.read_attribute(:file) %>
-      </p>
-    <% else %>
-      <span style="color: red;"> File does not exist on server, please re-upload it again.</span>
+    </div>
+    <% if @report.document_url && (@report.channel.is_public? or @channel.is_creator? or @channel.my_permission.can_download?) %>
+      <% if File.exists?("#{Rails.root}/public#{@report.document_url}") %>
+        <div class="noprint col-6 mb-3">
+          <strong>Document:</strong>
+          <%= link_to '', "/uploads/#{@report.id}/#{File.basename(@report.document.file_url)}",  class: 'fa fa-fw fa-download', style: 'white-space: nowrap;', target: '_blank' %>
+          <%= @report.document.read_attribute(:file) %>
+        </div>
+      <% else %>
+        <span style="color: red;"> File does not exist on server, please re-upload it again.</span>
+      <% end %>
     <% end %>
-  <% end %>
+  </div>
 </div>
+
+<script>
+  $('#data_title').tooltip({
+    content: function(){
+      var element = $( this );
+      return element.attr('title');
+    }
+  });
+  $('#channel_title').tooltip({
+    content: function(){
+      var element = $( this );
+      return element.attr('title');
+    }
+  });
+</script>
