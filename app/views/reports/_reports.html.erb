@@ -1,3 +1,9 @@
-<% SavePivotTable.where(report_id: @report.id).each do |pivot_table| %>
-    <%= render partial: 'grid', locals: {pivot_table: pivot_table} %>
-<% end %>
+<div class="col-md-12">
+  <% if  SavePivotTable.where(report_id: @report.id).length >=1 %>
+    <h1><b>Reports</b></h1>
+  <% end %>
+
+  <% SavePivotTable.where(report_id: @report.id).each do |pivot_table| %>
+      <%= render partial: 'grid', locals: {pivot_table: pivot_table} %>
+  <% end %>
+</div>
