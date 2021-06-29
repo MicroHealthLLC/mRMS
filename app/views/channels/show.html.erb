@@ -40,6 +40,8 @@
   </div>
 </section>
 
+<%= will_paginate @reports, renderer: BootstrapPagination::Rails, class: 'pull-right'%>
+
 <script>
   $('#description_title').tooltip({
     content: function(){

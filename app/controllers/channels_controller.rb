@@ -24,7 +24,7 @@ class ChannelsController < ApplicationController
   # GET /channels/1.json
   def show
     reports = @channel.shared_report? ? User.current.reports : @channel.visible_reports
-    @reports = reports.where(channel_id: Channel.pluck(:id)).uniq
+    @reports = reports.where(channel_id: Channel.pluck(:id)).paginate(page: params[:page], per_page: 10)
   end
 
   # GET /channels/new
