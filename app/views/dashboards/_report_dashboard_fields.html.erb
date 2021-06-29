@@ -11,6 +11,18 @@
                  options_for_select(SavePivotTable.where(report_id: @report.id).pluck(:name, :id),
                                     selected: f.object.pivot_table_id), {}, {class: 'form-control'} %>
   </div>
+      <div class="col-md-12 d-flex" id="report">
+        <% SavePivotTable.where(report_id: @report.id).each do |r| %>
+            <div id="report_<%=r.id%>" class="card text-right mx-2" style="width: 18rem;" onclick="reportCard(<%= r.id %>)">
+              <div class="card-body">
+                <%= image_tag "pivot/col-heatmap.png", size: '210x210'%>
+                <h5 class="card-title"><%= r.name %></h5>
+                <p class="card-text">.</p>
+                <a href="#" class="btn btn-primary">Go somewhere</a>
+              </div>
+            </div>
+        <% end %>
+      </div>
   <div class="col-md-2">
     <%= link_to_remove_association  "<i class='far fa-trash-alt'></i>".html_safe , f, class: 'btn btn-danger' %>
 

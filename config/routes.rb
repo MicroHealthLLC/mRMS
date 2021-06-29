@@ -17,7 +17,12 @@ Rails.application.routes.draw do
     end
 
     resources :reports, except: [:index] do
-      resources :dashboards
+      resources :dashboards do
+        collection  do
+          match :shared_report, via: [:get, :post]
+        end
+      end
+
       member do
         match :save_pivottable, via: [:post]
         match :delete_pivottable, via: [:delete]

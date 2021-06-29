@@ -1,8 +1,7 @@
-<%= form_with(model: [@channel, @report, dashboard], local: true, html: { class: 'form-horizontal' }) do |form| %>
+<%= form_with(model: [@channel, @report, dashboard], local: true, html: { class: 'form-horizontal', id: 'reportForm' }) do |form| %>
     <% if dashboard.errors.any? %>
         <div id="error_explanation">
           <h2><%= pluralize(dashboard.errors.count, "error") %> prohibited this dashboard from being saved:</h2>
-
           <ul>
             <% dashboard.errors.full_messages.each do |message| %>
                 <li><%= message %></li>
@@ -10,26 +9,35 @@
           </ul>
         </div>
     <% end %>
-    <%= form.hidden_field :report_id %>
-
-
+    <%= form.hidden_field :report_id , id: 'report_id'%>
     <div class="form-group">
-      <%= form.label 'Dashboard Name', class: 'col-md-2 control-label' %>
+      <%= form.label 'Dashboard Name:', class: 'col-md-2 control-label' %>
       <div class="col-md-9">
-        <%= form.text_field :name , class: 'form-control' %>
+        <%= form.text_field :name , class: 'form-control' , id: 'dashboard_name'%>
       </div>
     </div>
+    <div class="form-group" id='tasks'>
+      <%= form.label 'Reports:', class: 'col-md-2 control-label' %>
+      <div class="col-md-10 d-flex pl-1" id="report">
+        <% SavePivotTable.where(report_id: @report.id).each do |r| %>
+            <div id="report_<%=r.id%>" class="card text-right mx-2 card-opacity-7" style="width: 18rem;" onclick="reportCard(<%= r.id %>)">
+              <div class="card-body py-3">
+                <%#= image_tag "pivot/col-heatmap.png", size: '190x190', class: "w-100"%>
+                <% if (name = JSON.parse(r.content)['rendererName'].downcase) && name.include?('table') %>
+                    <%= image_tag "pivot/table.png", size: '180x180', class: "w-100" %>
+                <% elsif (name = JSON.parse(r.content)['rendererName'].downcase) && name.include?('heatmap') %>
+                    <%= image_tag "pivot/heatmap.png", size: '180x180', class: "w-100" %>
+                <% else %>
+                    <%= image_tag "pivot/#{name.gsub(' ', '-')}.png", class: "w-100", size: '180x180'%>
+                <% end %>
 
-    <h3>Reports</h3>
-    <div id='tasks'>
-      <%= form.fields_for :report_dashboards do |report_dashboard| %>
-          <%= render 'report_dashboard_fields', :f => report_dashboard %>
-      <% end %>
-      <div class='links'>
-        <%= link_to_add_association 'add Report', form, :report_dashboards, class: 'btn btn-primary' %>
+                <h5 class="card-title text-center mb-0"><%= r.name %></h5>
+              </div>
+            </div>
+        <% end %>
       </div>
     </div>
-
+    <input type="hidden" name="pivot_table_ids" id="pivotReportIDs">
     <div class="form-group" >
       <div class="col-md-11">
         <%= link_to t('button_cancel'), channel_report_path(@channel, @report), class: 'btn btn-warning pull-right' %>
@@ -37,3 +45,33 @@
       </div>
     </div>
 <% end %>
+<script>
+  var pivotReportIDs = []
+  $(document).ready(function() {
+    pivotReportIDs = <%= @dashboard.save_pivot_tables.pluck(:id) %>
+    if(pivotReportIDs.length > 0 ){
+      pivotReportIDs.forEach(function (id, index) {
+        $(`#report_${id}`).addClass("bg-light")
+        $(`#report_${id}`).removeClass("card-opacity-7")
+        $(`#report_${id} > div.header`).addClass("d-block")
+      });
+    }
+  });
+  reportCards = document.getElementById("report");
+  function reportCard(id){
+    if(pivotReportIDs.length > 0 && pivotReportIDs.includes(id)){
+      indexId = pivotReportIDs.indexOf(id)
+      pivotReportIDs.splice(indexId, 1);
+      $(`#report_${id}`).toggleClass("bg-light");
+      $(`#report_${id}`).addClass("card-opacity-7");
+      document.getElementById("pivotReportIDs").value = JSON.stringify(pivotReportIDs);
+    }else
+    {
+      pivotReportIDs.push(id)
+      $(`#report_${id}`).addClass("bg-light")
+      $(`#report_${id} > div.header`).addClass("d-block")
+      $(`#report_${id}`).removeClass("card-opacity-7");
+      document.getElementById("pivotReportIDs").value = JSON.stringify(pivotReportIDs);
+    }
+  }
+</script>

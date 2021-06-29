@@ -9,8 +9,8 @@ class ReportsController < ApplicationController
   # GET /reports/1
   # GET /reports/1.json
   def show
+    @query_id = params[:query_id] rescue nil
     render_403 unless  @channel.is_public? or @channel.is_creator? or @channel.my_permission.can_view_report?
-
     # if @report.document_url
     #   if params[:query_id] or params[:new_query]
     #     @header, @tab, @error = render_pivot_information(@report.document.file)
@@ -62,15 +62,22 @@ class ReportsController < ApplicationController
   end
 
   def share_report
-    @shared_reports = @report.shared_reports.pluck(:user_id)
-    @users = User.where.not(id: User.current.id)
-    if request.post?
-      @report.shared_reports.where(user_id: (@shared_reports.map(&:to_s) - Array.wrap(params[:users]) ) ).where.not(user_id: User.current.id).delete_all
-      (Array.wrap(params[:users]) - @shared_reports.map(&:to_s)).each do |user_id|
-        @report.shared_reports.create(user_id: user_id)
+    @shared_report_with_dashboard = params[:shared_report_with_dashboard]
+    if @shared_report_with_dashboard
+        @query_id = params[:query_id]
+        @dashboards = @report.dashboards
+        @shared_dashboards = ReportDashboard.where(pivot_table_id: @query_id).pluck(:dashboard_id)
+    else
+      @shared_reports = @report.shared_reports.pluck(:user_id)
+      @users = User.where.not(id: User.current.id)
+      if request.post?
+        @report.shared_reports.where(user_id: (@shared_reports.map(&:to_s) - Array.wrap(params[:users]) ) ).where.not(user_id: User.current.id).delete_all
+        (Array.wrap(params[:users]) - @shared_reports.map(&:to_s)).each do |user_id|
+          @report.shared_reports.create(user_id: user_id)
+        end
+        flash[:notice] = "Share Report updated successfully"
+        redirect_to channel_report_path(@channel, @report)
       end
-      flash[:notice] = "Share Report updated successfully"
-      redirect_to channel_report_path(@channel, @report)
     end
   end
 
