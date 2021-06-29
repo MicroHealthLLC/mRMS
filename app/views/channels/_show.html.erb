@@ -1,34 +1,59 @@
-<table style='width: 100%' class="table table-separate table-head-custom" id="reports_table">
-  <thead>
-  <tr>
-    <th>Name</th>
-    <th>Date created</th>
-    <th>Created By</th>
-    <th>Date last updated</th>
-    <th>Updated By</th>
-  <% if @channel.is_personal? %>
-    <th>Shared</th>
-  <% end %>
-  </tr>
-  </thead>
-  <tbody>
+<div class="row d-flex">
   <% @reports.each do |report| %>
-      <tr>
-        <td><%= ( @channel.is_public? or @channel.is_creator? or @channel.my_permission.can_view_report?) ? link_to( report.name, channel_report_path(@channel, report )) : report.name %></td>
-        <td><%= format_date_time report.created_at %></td>
-        <td><%= report.created_by %></td>
-        <td><%= format_date_time report.updated_at %></td>
-        <td><%= report.updated_by %></td>
-      <% if @channel.is_personal? %>
-        <td><%= report.shared_reports.where.not(user_id: User.current.id).present? %></td>
-      <% end %>
-      </tr>
+    <div class="col-3">
+      <!--begin::Card-->
+      <div class="bg-color-lighten card card-custom card-stretch gutter-b">
+        <!--begin::Body-->
+        <div class="card-body py-4">
+          <!--begin::User-->
+          <div class="d-flex align-items-center">
+            <!--begin::Pic-->
+            <div class="flex-shrink-0 mr-4">
+              <div class="symbol symbol-circle symbol-lg-75">
+                <% name = JSON.parse(report&.save_pivot_tables&.first&.content)["rendererName"].downcase rescue nil %>
+                <% if (name && name.include?('table')) %>
+                    <%= image_tag "pivot/table.png", size: '220x220'%>
+                <% elsif (name && name.include?('heatmap')) %>
+                    <%= image_tag "pivot/heatmap.png", size: '220x220'%>
+                <% elsif name%>
+                    <%= image_tag "pivot/#{name.gsub(' ', '-')}.png" , size: '220x220'%>
+                <% else %>
+                  <%= image_tag "pivot/area-chart.png", size: '220x220'%>
+                <% end %>
+              </div>
+            </div>
+            <!--end::Pic-->
+            <!--begin::Title-->
+            <div class="d-flex flex-column">
+              <a href="#" class="text-dark font-weight-bold text-hover-primary font-size-h4 mb-0"><%= ( @channel.is_public? or @channel.is_creator? or @channel.my_permission.can_view_report?) ? link_to( report.name, channel_report_path(@channel, report )) : report.name %></a>
+            </div>
+            <!--end::Title-->
+          </div>
+          <!--end::User-->
+          <!--begin::Desc-->
+          <p class="mb-7"><%= report.description.present? ? report.description.html_safe : 'No Description' %></p>
+          <!--end::Desc-->
+          <!--begin::Info-->
+          <div class="mb-7">
+            <div class="d-flex justify-content-between align-items-center">
+              <span class="text-dark-75 font-weight-bolder mr-2">Updated By: </span>
+              <a href="#" class="text-muted text-hover-primary"><%= report.updated_by %></a>
+            </div>
+            <div class="d-flex justify-content-between align-items-center">
+              <span class="text-dark-75 font-weight-bolder mr-2">Updated At:</span>
+              <span class="text-muted font-weight-bold"><%= format_date_time report.updated_at %></span>
+            </div>
+            <% if @channel.is_personal? %>
+              <div class="d-flex justify-content-between align-items-center">
+                  <span class="text-dark-75 font-weight-bolder mr-2">Shared: </span>
+                  <a href="#" class="text-muted text-hover-primary"><%= report.shared_reports.where.not(user_id: User.current.id).present? %></a>
+              </div>
+            <% end %>
+          </div>
+        <!--end::Body-->
+        </div>
+      <!--end:: Card-->
+      </div>
+    </div>
   <% end %>
-  </tbody>
-</table>
-
-<script>
-    $(document).ready(function(){
-        initDataTable('reports_table')
-    })
-</script>
+</div>
