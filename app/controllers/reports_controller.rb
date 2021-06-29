@@ -62,13 +62,12 @@ class ReportsController < ApplicationController
   end
 
   def share_report
-    @share_report_with_user = false
-    if params[:shared_report_with_dashboard]
+    @shared_report_with_dashboard = params[:shared_report_with_dashboard]
+    if @shared_report_with_dashboard
         @query_id = params[:query_id]
         @dashboards = @report.dashboards
         @shared_dashboards = ReportDashboard.where(pivot_table_id: @query_id).pluck(:dashboard_id)
     else
-      @share_report_with_user = true
       @shared_reports = @report.shared_reports.pluck(:user_id)
       @users = User.where.not(id: User.current.id)
       if request.post?

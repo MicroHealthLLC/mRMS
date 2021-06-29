@@ -15,7 +15,7 @@
 
     <div class="form-group" >
       <div class="col-md-11">
-        <%= link_to t('button_cancel'), channel_path(@channel), class: 'btn btn-warning pull-right' %>
+        <%= link_to t('button_cancel'), channel_report_path(@channel, @report), class: 'btn btn-warning pull-right' %>
         <%= submit_tag t('button_save'), class: 'btn btn-success pull-right' %>
       </div>
     </div>

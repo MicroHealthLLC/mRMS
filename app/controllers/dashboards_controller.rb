@@ -64,12 +64,15 @@ class DashboardsController < ApplicationController
     if pivot_table_id
       dashboard_ids = params[:dashboards]
       dashboards = Dashboard.where(id: dashboard_ids)
+      ReportDashboard.where(pivot_table_id: pivot_table_id).destroy_all
       dashboards.each do |dashboard|
         report_dashboard = ReportDashboard.find_or_create_by(dashboard_id: dashboard.id, pivot_table_id: pivot_table_id)
       end
       flash[:notice] = "Share Report updated successfully"
-      redirect_to channel_report_path(@channel, @report)
+    else
+      flash[:alert] = "Could not find pivot table"
     end
+    redirect_to channel_report_path(@channel, @report)
   end
 
   # DELETE /dashboards/1
