@@ -118,6 +118,17 @@ var named_function = function(){
     $( "select" ).select2({
         theme: "bootstrap"
     });
+
+    $("#channelReportSelect").select2({
+        theme: "bootstrap",
+        templateResult: function (d) {
+          return $(d.text);
+       },
+        templateSelection: function (d) {
+          return $(d.text);
+        }
+    });
+
     $( "label select" ).select2("destroy");
     $( ".fb-select.form-group select" ).select2("destroy");
     $('.select2').prev().hide()

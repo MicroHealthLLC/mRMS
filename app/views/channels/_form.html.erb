@@ -26,16 +26,11 @@
       </div>
 
       <div class="col-md-8">
-        <%= form.select :icon, options_for_select(Channel::ICONS, selected: form.object.icon), class: 'form-control'%>
-
-        <script>
-          $(function(){
-            $('#channel_icon').on('change', function(){
-              $("#icon_result").removeAttr("class");
-              $("#icon_result").attr("class", $(this).val() );
-            })
-          })
-        </script>
+        <select id="channelReportSelect" name="channel[icon]">
+          <%= Channel::ICONS.each do |i|%>
+            <option value="<%= i %>">  <%= '<i class="' + i + '"></i><span>&nbsp; '+ i +' </span>'  %> </option>
+          <% end %>
+        </select>
       </div>
     </div>
 
