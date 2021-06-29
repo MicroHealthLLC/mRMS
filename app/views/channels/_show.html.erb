@@ -1,12 +1,12 @@
-<div class="col-md-12 col-12 d-flex">
+<div class="row d-flex">
   <% @reports.each do |report| %>
-    <div class="">
+    <div class="col-3">
       <!--begin::Card-->
-      <div class="bg-color-lighten card card-custom card-stretch gutter-b mx-5">
+      <div class="bg-color-lighten card card-custom card-stretch gutter-b">
         <!--begin::Body-->
-        <div class="card-body pt-4">
+        <div class="card-body py-4">
           <!--begin::User-->
-          <div class="d-flex align-items-center mb-7">
+          <div class="d-flex align-items-center">
             <!--begin::Pic-->
             <div class="flex-shrink-0 mr-4">
               <div class="symbol symbol-circle symbol-lg-75">
@@ -31,20 +31,16 @@
           </div>
           <!--end::User-->
           <!--begin::Desc-->
-          <p class="mb-7"><%= report.description.html_safe %></p>
+          <p class="mb-7"><%= report.description.present? ? report.description.html_safe : 'No Description' %></p>
           <!--end::Desc-->
           <!--begin::Info-->
           <div class="mb-7">
             <div class="d-flex justify-content-between align-items-center">
-              <span class="text-dark-75 font-weight-bolder mr-2">Updated at: </span>
+              <span class="text-dark-75 font-weight-bolder mr-2">Updated By: </span>
               <a href="#" class="text-muted text-hover-primary"><%= report.updated_by %></a>
             </div>
-            <div class="d-flex justify-content-between align-items-cente my-1">
-              <span class="text-dark-75 font-weight-bolder mr-2">Created by:</span>
-              <a href="#" class="text-muted text-hover-primary"><%= report.created_at %></a>
-            </div>
             <div class="d-flex justify-content-between align-items-center">
-              <span class="text-dark-75 font-weight-bolder mr-2">Date last updated:</span>
+              <span class="text-dark-75 font-weight-bolder mr-2">Updated At:</span>
               <span class="text-muted font-weight-bold"><%= format_date_time report.updated_at %></span>
             </div>
             <% if @channel.is_personal? %>
