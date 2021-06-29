@@ -7,7 +7,7 @@
       <div class="col-lg-8 col-md-9 col-sm-12">
         <select class="form-control select2" id="kt_select2_3" name="dashboards[]" multiple="multiple">
           <% @dashboards.each do |dashboard| %>
-            <option value="<%= dashboard.id%>"> <%= dashboard.name %> </option>
+            <option value="<%= dashboard.id%>" <%=  @shared_dashboards.include?(dashboard.id) ? 'selected' : ''%>> <%= dashboard.name %> </option>
           <% end %>
         </select>
       </div>
