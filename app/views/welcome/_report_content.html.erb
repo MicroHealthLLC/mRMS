@@ -1,12 +1,41 @@
-<% channel.reports.each do |report|%>
-  <div class="card col-md-4" style="width: 18rem; shape-margin: 10px;">
-    <div class="card-body">
-      <h5 class="card-title" ><%= link_to( report.name, channel_report_path(channel, report ))  %></h5>
-      <a class="card-link" title ="<%= channel.name %>"><b>Channel : </b> <%= channel.name.truncate(15) %></a>
-      <p class="card-text"><%= report.description.truncate(25).html_safe%></p>
-      <p  class="card-link"><b>Created By: </b><%= channel.created_by %></p>
-      <p><b>Updated By: </b><%= channel.updated_by %></p>
-      <p><b>Last Update: </b><%= channel.updated_at %></p>
+<% reports = @flag3 ? channel.reports.limit(3) : channel.reports %>
+<% reports.each do |report|%>
+  <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6">
+    <!--begin::Card-->
+    <div class="card card-custom gutter-b card-stretch">
+      <!--begin::Body-->
+      <div class="card-body pt-4">
+        <!--begin::User-->
+        <div class="d-flex align-items-center mb-7">
+          <!--begin::Pic-->
+          <div class="flex-shrink-0 mr-4">
+            <div class="symbol symbol-circle symbol-lg-75">
+              <% name = JSON.parse(report&.save_pivot_tables&.first&.content)["rendererName"].downcase rescue nil %>
+              <% if (name && name.include?('table')) %>
+                  <%= image_tag "pivot/table.png", size: '220x220'%>
+              <% elsif (name && name.include?('heatmap')) %>
+                  <%= image_tag "pivot/heatmap.png", size: '220x220'%>
+              <% elsif name%>
+                  <%= image_tag "pivot/#{name.gsub(' ', '-')}.png" , size: '220x220'%>
+              <% else %>
+                <%= image_tag "pivot/table.png", size: '220x220'%>
+              <% end %>
+            </div>
+          </div>
+          <!--end::Pic-->
+          <!--begin::Title-->
+          <div class="d-flex flex-column" title ="<%= report.name %>">
+            <%= link_to( report.name, channel_report_path(channel, report ))  %>
+          </div>
+          <!--end::Title-->
+        </div>
+        <!--end::User-->
+        <!--begin::Desc-->
+        <p  title ="<%= channel.name %>"><b>Channel : </b> <%= link_to( channel.name.truncate(15) , channel_path(channel)  ) %></p>
+        <!--end::Desc-->
+      <!--end::Body-->
+      </div>
+    <!--end:: Card-->
     </div>
   </div>
 <% end %>

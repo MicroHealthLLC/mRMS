@@ -1,42 +1,16 @@
 <div id="content" class="container">
   <div class="row">
     <div class="col-md-9" >
-      <div class="col-md-12">
-       <h2><b>Public Reports</b></h2>
-      </div>
-      <div class="row">
-        <% @public_channels.each do |channel| %>
-          <%= render partial: 'report_content' , locals: { channel: channel  } %>
+      <%= render partial: 'reports' %>
+      <div class="col-md-3" style="margin-top: 35px;">
+        <% if module_enabled?('news') %>
+          <div class="hidden-xs">
+            <% News.includes(:user).order("id DESC").first(Setting['news_limit'].to_i).each do |news| %>
+              <%= render partial: 'news/news', locals: {news: news} %>
+            <% end %>
+          </div>
         <% end %>
       </div>
-
-      <div class="col-md-12 mt-2 mb-2">
-       <h2><b>Personal Reports</b></h2>
-      </div>
-      <div class="row">
-        <% @personal_channels.each do |channel| %>
-          <%= render partial: 'report_content' , locals: { channel: channel  } %>
-        <% end %>
-      </div>
-
-      <div class="col-md-12 mt-2 mb-2">
-       <h2><b>Group Reports</b></h2>
-      </div>
-      <div class="row">
-        <% @group_channels.each do |channel| %>
-          <%= render partial: 'report_content' , locals: { channel: channel  } %>
-        <% end %>
-      </div>
-    </div>
-
-    <div class="col-md-3" style="margin-top: 35px;">
-      <% if module_enabled?('news') %>
-        <div class="hidden-xs">
-          <% News.includes(:user).order("id DESC").first(Setting['news_limit'].to_i).each do |news| %>
-            <%= render partial: 'news/news', locals: {news: news} %>
-          <% end %>
-        </div>
-      <% end %>
     </div>
   </div>
 </div>
