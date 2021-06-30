@@ -156,6 +156,8 @@ class ReportsController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_report
     @report = Report.find(params[:id])
+    @report.frequently_count += 1
+    @report.save!
   rescue ActiveRecord::RecordNotFound
     render_404
   end

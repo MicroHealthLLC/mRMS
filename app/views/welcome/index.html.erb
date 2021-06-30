@@ -2,15 +2,15 @@
   <div class="row">
     <div class="col-md-9" >
       <%= render partial: 'reports' %>
-      <div class="col-md-3" style="margin-top: 35px;">
-        <% if module_enabled?('news') %>
-          <div class="hidden-xs">
-            <% News.includes(:user).order("id DESC").first(Setting['news_limit'].to_i).each do |news| %>
-              <%= render partial: 'news/news', locals: {news: news} %>
-            <% end %>
-          </div>
-        <% end %>
-      </div>
+    </div>
+    <div class="col-md-3" style="margin-top: 35px;">
+      <% if module_enabled?('news') %>
+        <div class="hidden-xs">
+          <% News.includes(:user).order("id DESC").first(Setting['news_limit'].to_i).each do |news| %>
+            <%= render partial: 'news/news', locals: {news: news} %>
+          <% end %>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>
