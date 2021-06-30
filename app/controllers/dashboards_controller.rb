@@ -32,7 +32,10 @@ class DashboardsController < ApplicationController
   def create
     @dashboard = Dashboard.new(dashboard_params)
     @dashboard.user_id = User.current.id
-    @dashboard.save_pivot_tables = SavePivotTable.where(id: JSON.parse(params[:pivot_table_ids]))
+    pivot_table_ids = JSON.parse(params[:pivot_table_ids]) rescue nil
+    if pivot_table_ids.present?
+      @dashboard.save_pivot_tables = SavePivotTable.where(id: pivot_table_ids)
+    end
     respond_to do |format|
       if @dashboard.save
         format.html { redirect_to [@channel, @report, @dashboard], notice: 'Dashboard was successfully created.' }

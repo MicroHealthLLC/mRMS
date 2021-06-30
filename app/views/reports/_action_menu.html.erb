@@ -1,13 +1,13 @@
 <div class="noprint row">
   <div class="col-md-12 ">
     <div class="pull-right mt-3" style="margin-bottom: 10px">
+      <% if @query_id %>
+        <span>
+          <%= show_button(share_report_channel_report_path(@report.channel, @report, shared_report_with_dashboard: true, query_id: @query_id), 'Connect with dashboards', 'fas fa-share', 'info') %>
+        </span>
+      <% end %>
 
-      <% if @report.channel.is_personal? and @report.channel.is_creator?  %>
-          <% if @query_id %>
-            <span>
-              <%= show_button(share_report_channel_report_path(@report.channel, @report, shared_report_with_dashboard: true, query_id: @query_id), 'Connect with dashboards', 'fas fa-share', 'info') %>
-            </span>
-          <% end %>
+      <% if @report.channel.is_personal? && @report.channel.is_creator? %>
           <span>
             <%= show_button(share_report_channel_report_path(@report.channel, @report), ' Share Report', 'plus', 'primary') %>
           </span>
