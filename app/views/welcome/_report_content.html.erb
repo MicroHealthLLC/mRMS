@@ -8,11 +8,17 @@
     <% elsif name%>
         <%= image_tag "pivot/#{name.gsub(' ', '-')}.png" , size: '220x220'%>
     <% else %>
-      <%= image_tag "pivot/table.png", size: '220x220'%>
+      <%= image_tag "dashboard.png", size: '220x220'%>
     <% end %>
   <% end %>
-  <div class="text-center">
-    <p> Data Set: <%= report.name.truncate(15)  %> </p>
-    <p> Channel: <%= report.channel.name.truncate(15)  %></p>
+  <div class="text-center pb-3">
+    <div class="row pt-3">
+      <b class="col-5 text-align-right">Data Set:</b>
+      <p class="col-7 text-align-left data_title" title="<%= report.name %>"> <%= report.name.truncate(25) %> </p>
+    </div>
+    <div class="row">
+      <b class="col-5 text-align-right">Channel:</b>
+      <p class="col-7 text-align-left data_title" title="<%= report.channel.name %>"> <%= report.channel.name.truncate(25) %> </p>
+    </div>
   </div>
 </div>

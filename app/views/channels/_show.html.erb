@@ -18,7 +18,7 @@
                 <% elsif name%>
                     <%= image_tag "pivot/#{name.gsub(' ', '-')}.png" , size: '220x220'%>
                 <% else %>
-                  <%= image_tag "pivot/area-chart.png", size: '220x220'%>
+                  <%= image_tag "dashboard.png", size: '220x220'%>
                 <% end %>
               </div>
             </div>
@@ -31,7 +31,7 @@
           </div>
           <!--end::User-->
           <!--begin::Desc-->
-          <p class="mb-7"><%= report.description.present? ? report.description.html_safe : 'No Description' %></p>
+          <div class="mb-7 data_title" title="<%= report.description.html_safe %>"><%= report.description.present? ? report.description.truncate(50).html_safe : 'No Description' %></div>
           <!--end::Desc-->
           <!--begin::Info-->
           <div class="mb-7">

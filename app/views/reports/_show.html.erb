@@ -1,7 +1,7 @@
 <div class="card card-custom gutter-b mt-2 p-2 " style="margin-bottom: 8px !important;">
   <%= render partial: 'action_menu' %>
   <div class="row mt-5" >
-    <div class="col-6" title="<%= @report.name %>" id="data_title">
+    <div class="col-6 data_title" title="<%= @report.name %>">
       <strong>Data Set:</strong>
       <%= @report.name %>
     </div>
@@ -12,7 +12,7 @@
       </div>
     <% end %>
 
-    <div class="col-6 mb-3" title="<%= @report.name %>" id="channel_title">
+    <div class="col-6 mb-3 data_title" title="<%= @report.channel.name %>">
       <strong>Channel:</strong>
       <%= @report.channel.name.truncate(35) %>
     </div>
@@ -40,18 +40,3 @@
     </div>
   </div>
 </div>
-
-<script>
-  $('#data_title').tooltip({
-    content: function(){
-      var element = $( this );
-      return element.attr('title');
-    }
-  });
-  $('#channel_title').tooltip({
-    content: function(){
-      var element = $( this );
-      return element.attr('title');
-    }
-  });
-</script>
