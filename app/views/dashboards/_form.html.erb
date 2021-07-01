@@ -11,16 +11,19 @@
     <% end %>
     <%= form.hidden_field :report_id , id: 'report_id'%>
     <div class="form-group">
-      <%= form.label 'Dashboard Name:', class: 'col-md-2 control-label' %>
+      <%= form.label 'Dashboard Name:', class: 'col-md-3 control-label' %>
       <div class="col-md-9">
         <%= form.text_field :name , class: 'form-control' , id: 'dashboard_name'%>
       </div>
     </div>
+    <div class="col-md-12 d-flex" ondrop = "dragDrop(event)" ondragover = "allowDrop(event)" style="min-height: 100px; background-color: gray ;">
+
+    </div>
     <div class="form-group" id='tasks'>
-      <%= form.label 'Reports:', class: 'col-md-2 control-label' %>
-      <div class="col-md-10 d-flex pl-1" id="report">
+      <%= form.label 'Reports:', class: 'col-md-3 control-label' %>
+      <div class="col-md-9 d-flex pl-1" id="report">
         <% SavePivotTable.where(report_id: @report.id).each do |r| %>
-            <div id="report_<%=r.id%>" class="card text-right mx-2 card-opacity-7" style="width: 18rem;" onclick="reportCard(<%= r.id %>)">
+            <div id="report_<%=r.id%>" class="card text-right mx-2 card-opacity-7" style="width: 18rem;" onclick="reportCard(<%= r.id %>)" draggable ="true" ondragstart = "dragStart (event)">
               <div class="card-body py-3">
                 <%#= image_tag "pivot/col-heatmap.png", size: '190x190', class: "w-100"%>
                 <% if (name = JSON.parse(r.content)['rendererName'].downcase) && name.include?('table') %>
@@ -45,6 +48,7 @@
       </div>
     </div>
 <% end %>
+
 <script>
   var pivotReportIDs = []
   $(document).ready(function() {
@@ -73,5 +77,16 @@
       $(`#report_${id}`).removeClass("card-opacity-7");
       document.getElementById("pivotReportIDs").value = JSON.stringify(pivotReportIDs);
     }
+  }
+  function allowDrop (ev) {
+    ev.preventDefault();
+  }
+  function dragStart (ev) {
+    ev.dataTransfer.setData ("text",  ev.target.id);
+  }
+  function dragDrop (ev) {
+    ev.preventDefault ();
+    var data =  ev.dataTransfer.getData ("text");
+    ev.target.appendChild (document.getElementById(data));
   }
 </script>
