@@ -14,6 +14,8 @@ class Report < ApplicationRecord
 
   validates_presence_of :name
 
+  scope :by_frequently, -> { order('frequently_count desc') }
+
   # mount_uploader :document, ReportUploader
 
   before_create do
@@ -22,6 +24,18 @@ class Report < ApplicationRecord
 
   before_save do
     self.updated_by_id = User.current.id
+  end
+
+  def is_public_report?
+    self.channel.is_public?
+  end
+
+  def is_personal_report?
+    self.channel.is_personal?
+  end
+
+  def is_group_report?
+    self.channel.is_group?
   end
 
   after_create do

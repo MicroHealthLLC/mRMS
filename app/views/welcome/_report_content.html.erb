@@ -12,7 +12,7 @@
     <% end %>
   <% end %>
   <div class="text-center">
-    <p> Data Set: <%= report.name  %> </p>
-    <p> Channel: <%= report.channel.name  %></p>
+    <p> Data Set: <%= report.name.truncate(15)  %> </p>
+    <p> Channel: <%= report.channel.name.truncate(15)  %></p>
   </div>
 </div>

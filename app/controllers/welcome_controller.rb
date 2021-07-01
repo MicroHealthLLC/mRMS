@@ -5,25 +5,28 @@ class WelcomeController < ApplicationController
     display_all_personal = JSON.parse(params[:display_all_personal]) rescue nil
     display_all_group = JSON.parse(params[:display_all_group]) rescue nil
     redirect_to new_user_session_path unless user_signed_in?
-    @personal_channels = Channel.my_personal_channel.includes(:reports).order(created_at: :desc).limit(3)
-    @public_channels = Channel.is_public.includes(:reports).order(created_at: :desc).limit(3)
-    @group_channels = Channel.for_user
-
-
-    @public_channel_reports = channels_reports(@public_channels)
-    @group_channel_reports = channels_reports(@group_channels)
-    @personal_channel_reports = channels_reports(@personal_channels)
-
-    @public_reports = @public_channel_reports.first(3)
-    @group_reports = @group_channel_reports.first(3)
-    @personal_reports = @personal_channel_reports.first(3)
-
+    reports = Report.by_frequently
+    public_reports = []
+    personal_reports = []
+    group_reports = []
+    reports.each do |report|
+      if report.is_public_report?
+        public_reports.push(report)
+      elsif report.is_personal_report?
+        personal_reports.push(report)
+      elsif report.is_group_report?
+        group_reports.push(report)
+      end
+    end
+    @public_reports     = public_reports.first(3)
+    @personal_reports   = personal_reports.first(3)
+    @group_reports      = group_reports.first(3)
     if display_all_public
-      @public_reports = @public_channel_reports
+      @public_reports   =  public_reports
     elsif display_all_personal
-      @personal_reports = @personal_channel_reports
+      @personal_reports = personal_reports
     elsif display_all_group
-      @group_reports = @group_channel_reports
+      @group_reports    =    group_reports
     end
 
     session[:appointment_store_id] = nil if User.current_user.can?(:manage_roles)
@@ -40,15 +43,5 @@ class WelcomeController < ApplicationController
   def onedriveredirect
   end
 
-  private
-
-  def channels_reports(channels)
-    reports = []
-    channels.each do |c|
-      c.reports.each do |r|
-        reports.push(r)
-      end
-    end
-    reports
-  end
 end
+# by_frequently
