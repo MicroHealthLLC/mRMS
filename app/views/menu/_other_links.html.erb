@@ -25,7 +25,6 @@
     <i class="menu-arrow"></i>
   </a>
   <div class="menu-submenu">
-    <i class="menu-arrow"></i>
     <ul class="menu-subnav" style="list-style-type: none;">
       <% Channel.is_public.each do |channel|  %>
         <li class="menu-item" data-toggle="tooltip" data-placement="right" data-container="body" data-boundary="window" data-reorder-url="<%= reorder_handle_channels_path(channel_id: channel.id) %>" data-reorder-param="<%= 'channel' %>" title ="<%= channel.name %>" >
@@ -50,7 +49,6 @@
     <i class="menu-arrow"></i>
   </a>
   <div class="menu-submenu">
-    <i class="menu-arrow"></i>
     <ul class="menu-subnav" style="list-style-type: none;">
       <% Channel.my_personal_channel.each do |channel|  %>
         <li class="menu-item sort-handle" data-toggle="tooltip" data-placement="right" data-container="body" data-boundary="window" data-reorder-url="<%= reorder_handle_channels_path(channel_id: channel.id) %>" data-reorder-param="<%= 'channel' %>" title ="<%= channel.name %>">
@@ -75,7 +73,6 @@
     <i class="menu-arrow"></i>
   </a>
   <div class="menu-submenu">
-    <i class="menu-arrow"></i>
     <ul class="menu-subnav" style="list-style-type: none;">
       <% Channel.for_user.each do |channel|  %>
         <li class="menu-item sort-handle" data-toggle="tooltip" data-placement="right" data-container="body" data-boundary="window" data-reorder-url="<%= reorder_handle_channels_path(channel_id: channel.id) %>" data-reorder-param="<%= 'channel' %>" title ="<%= channel.name %>">

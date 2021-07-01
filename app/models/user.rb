@@ -60,7 +60,8 @@ class User < ApplicationRecord
     self.save
   end
 
-  after_update :check_status
+  after_create :create_shared_report_channel
+  after_update :check_status, :create_shared_report_channel
 
   validates_uniqueness_of :login, :email
   validates_presence_of :login, :email
@@ -75,6 +76,11 @@ class User < ApplicationRecord
   def check_status
     return if self.anonyme_user?
     UserMailer.account_activated(self).deliver_later if self.account_active? and self.state_was == false
+  end
+
+  def create_shared_report_channel
+    return unless self.state == 'active'
+    Channel.personal.where(user_id: id, name: 'Shared Report', option: 3, description: 'Display shared reports').first_or_create
   end
 
   def self.user_deleted?(auth)
