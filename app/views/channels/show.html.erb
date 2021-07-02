@@ -2,14 +2,14 @@
  <div class="card-body">
   <%= render partial: 'action_menu' %>
    <div class="row mt-5">
-      <div class="col-6" title="<%= @channel.name %>" id="name_title">
+      <div class="col-6 data_title" title="<%= @channel.name %>">
         <strong>Channel :</strong>
         <%= @channel.name.truncate(35) %>
       </div>
 
       <div class="col-6 d-flex ">
         <strong style="width:88px !important;">Description :</strong>
-        <div class="w-75 " title ="<%= @channel.description.html_safe %>" id="description_title" >
+        <div class="w-75 data_title" title ="<%= @channel.description.html_safe %>">
           <%= @channel.description.truncate(50).html_safe%>
         </div>
       </div>
@@ -41,19 +41,3 @@
 </section>
 
 <%= will_paginate @reports, renderer: BootstrapPagination::Rails, class: 'pull-right'%>
-
-<script>
-  $('#description_title').tooltip({
-    content: function(){
-      var element = $( this );
-      return element.attr('title');
-    }
-  });
-  $('#name_title').tooltip({
-    content: function(){
-      var element = $( this );
-      return element.attr('title');
-    }
-  });
-</script>
-

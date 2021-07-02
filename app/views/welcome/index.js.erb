@@ -1,0 +1,1 @@
+$(".col-md-9").html("<%= escape_javascript(render partial: 'welcome/reports', locals: { pr: @personal_channels ,pb: @public_channels ,  gr: @group_channels } ) %>");

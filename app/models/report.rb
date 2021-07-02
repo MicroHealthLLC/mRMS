@@ -14,6 +14,11 @@ class Report < ApplicationRecord
 
   validates_presence_of :name
 
+  scope :by_frequently, -> { order('frequently_count desc') }
+  scope :group_channel_reports, -> { by_frequently.joins(:channel).where(channels: {option: 1}) }
+  scope :public_channel_reports, -> { by_frequently.joins(:channel).where(channels: {option: 2}) }
+  scope :personal_channel_reports, -> { by_frequently.joins(:channel).where(channels: {option: 3}) }
+
   # mount_uploader :document, ReportUploader
 
   before_create do

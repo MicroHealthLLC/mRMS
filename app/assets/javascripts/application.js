@@ -24,6 +24,7 @@
 //= require toastr
 //= require turbolinks
 //= require settings
+//= require custom
 //= require devise_authy.js
 //= require assets/theme/js/scripts.bundle.js
 //= require assets/theme/plugins/custom/datatables/datatables.bundle.js

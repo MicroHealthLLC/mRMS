@@ -343,6 +343,7 @@ ActiveRecord::Schema.define(version: 2021_07_01_095750) do
     t.text "description"
     t.integer "created_by_id"
     t.integer "updated_by_id"
+    t.integer "frequently_count", default: 0
     t.index ["category_id"], name: "index_reports_on_category_id"
     t.index ["category_type_id"], name: "index_reports_on_category_type_id"
     t.index ["user_id"], name: "index_reports_on_user_id"
