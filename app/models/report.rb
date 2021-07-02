@@ -15,6 +15,9 @@ class Report < ApplicationRecord
   validates_presence_of :name
 
   scope :by_frequently, -> { order('frequently_count desc') }
+  scope :group_channel_reports, -> { by_frequently.joins(:channel).where(channels: {option: 1}) }
+  scope :public_channel_reports, -> { by_frequently.joins(:channel).where(channels: {option: 2}) }
+  scope :personal_channel_reports, -> { by_frequently.joins(:channel).where(channels: {option: 3}) }
 
   # mount_uploader :document, ReportUploader
 
@@ -24,18 +27,6 @@ class Report < ApplicationRecord
 
   before_save do
     self.updated_by_id = User.current.id
-  end
-
-  def is_public_report?
-    self.channel.is_public?
-  end
-
-  def is_personal_report?
-    self.channel.is_personal?
-  end
-
-  def is_group_report?
-    self.channel.is_group?
   end
 
   after_create do

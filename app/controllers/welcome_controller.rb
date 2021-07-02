@@ -1,33 +1,11 @@
 class WelcomeController < ApplicationController
 
   def index
-    display_all_public = JSON.parse(params[:display_all_public]) rescue nil
-    display_all_personal = JSON.parse(params[:display_all_personal]) rescue nil
-    display_all_group = JSON.parse(params[:display_all_group]) rescue nil
     redirect_to new_user_session_path unless user_signed_in?
-    reports = Report.by_frequently
-    public_reports = []
-    personal_reports = []
-    group_reports = []
-    reports.each do |report|
-      if report.is_public_report?
-        public_reports.push(report)
-      elsif report.is_personal_report?
-        personal_reports.push(report)
-      elsif report.is_group_report?
-        group_reports.push(report)
-      end
-    end
-    @public_reports     = public_reports.first(3)
-    @personal_reports   = personal_reports.first(3)
-    @group_reports      = group_reports.first(3)
-    if display_all_public
-      @public_reports   =  public_reports
-    elsif display_all_personal
-      @personal_reports = personal_reports
-    elsif display_all_group
-      @group_reports    =    group_reports
-    end
+
+    @public_reports = params[:display_all_public].present? ? Report.public_channel_reports : Report.public_channel_reports.limit(3)
+    @personal_reports = params[:display_all_personal].present? ? Report.personal_channel_reports : Report.personal_channel_reports.limit(3)
+    @group_reports = params[:display_all_group].present? ? Report.group_channel_reports : Report.group_channel_reports.limit(3)
 
     session[:appointment_store_id] = nil if User.current_user.can?(:manage_roles)
     if session[:employee_id]
@@ -42,6 +20,4 @@ class WelcomeController < ApplicationController
 
   def onedriveredirect
   end
-
 end
-# by_frequently
