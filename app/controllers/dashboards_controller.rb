@@ -5,8 +5,6 @@ class DashboardsController < ApplicationController
   before_action :authorize, except: [:index, :show]
   before_action :set_dashboard, only: [:show, :edit, :update, :destroy]
 
-
-
   # GET /dashboards
   # GET /dashboards.json
   def index
@@ -38,6 +36,8 @@ class DashboardsController < ApplicationController
     end
     respond_to do |format|
       if @dashboard.save
+        @save_pivot_tables = @dashboard.save_pivot_tables
+        set_order_index_pivot_table(pivot_table_ids)
         format.html { redirect_to [@channel, @report, @dashboard], notice: 'Dashboard was successfully created.' }
         format.json { render :show, status: :created, location: @dashboard }
       else
@@ -51,7 +51,13 @@ class DashboardsController < ApplicationController
   # PATCH/PUT /dashboards/1.json
   def update
     respond_to do |format|
-      @dashboard.save_pivot_tables = SavePivotTable.where(id: JSON.parse(params[:pivot_table_ids]))
+      pivot_table_ids =  JSON.parse(params[:pivot_table_ids])
+      # @dashboard.save_pivot_tables.destroy_all
+      @dashboard.save_pivot_tables = SavePivotTable.where(id: pivot_table_ids)
+      @save_pivot_tables = @dashboard.save_pivot_tables
+      if @save_pivot_tables
+        set_order_index_pivot_table(pivot_table_ids)
+      end
       if @dashboard.update(dashboard_params)
         format.html { redirect_to [@channel, @report, @dashboard], notice: 'Dashboard was successfully updated.' }
         format.json { render :show, status: :ok, location: @dashboard }
@@ -112,6 +118,15 @@ class DashboardsController < ApplicationController
     params.require(:dashboard).permit(:report_id, :name )
   end
 
+  def set_order_index_pivot_table(pivot_table_ids)
+    pivot_table_ids.each_with_index do |pivot, index_id|
+      pivot_table = @save_pivot_tables.find_by_id(pivot)
+      if pivot_table
+        pivot_table.order_index = index_id
+        pivot_table.save
+      end
+    end
+  end
 
   def authorize
     can_access = case params[:action]

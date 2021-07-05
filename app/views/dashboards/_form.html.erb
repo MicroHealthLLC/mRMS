@@ -11,73 +11,84 @@
     <% end %>
     <%= form.hidden_field :report_id , id: 'report_id'%>
     <div class="form-group">
-      <%= form.label 'Dashboard Name:', class: 'col-md-3 control-label' %>
-      <div class="col-md-9">
+      <%= form.label 'Dashboard Name:', class: 'col-md-2 control-label' %>
+      <div class="col-md-10">
         <%= form.text_field :name , class: 'form-control' , id: 'dashboard_name'%>
       </div>
     </div>
-    <div class="col-md-12 d-flex" ondrop = "dragDrop(event)" ondragover = "allowDrop(event)" style="min-height: 100px; background-color: gray ;">
+    <div id="dragDropDataSet" class="rounded col-md-10 offset-2 p-3 my-3 d-flex card-min-hight border" ondrop="dragDrop(event)" ondragover="allowDrop(event)">
 
     </div>
     <div class="form-group" id='tasks'>
-      <%= form.label 'Reports:', class: 'col-md-3 control-label' %>
-      <div class="col-md-9 d-flex pl-1" id="report">
+      <%= form.label 'Reports:', class: 'col-md-2 control-label' %>
+      <div class="rounded p-3 my-2 col-md-10 d-flex pl-1 card-min-hight" id="form_report">
         <% SavePivotTable.where(report_id: @report.id).each do |r| %>
-            <div id="report_<%=r.id%>" class="card text-right mx-2 card-opacity-7" style="width: 18rem;" onclick="reportCard(<%= r.id %>)" draggable ="true" ondragstart = "dragStart (event)">
-              <div class="card-body py-3">
-                <%#= image_tag "pivot/col-heatmap.png", size: '190x190', class: "w-100"%>
-                <% if (name = JSON.parse(r.content)['rendererName'].downcase) && name.include?('table') %>
-                    <%= image_tag "pivot/table.png", size: '180x180', class: "w-100" %>
-                <% elsif (name = JSON.parse(r.content)['rendererName'].downcase) && name.include?('heatmap') %>
-                    <%= image_tag "pivot/heatmap.png", size: '180x180', class: "w-100" %>
-                <% else %>
-                    <%= image_tag "pivot/#{name.gsub(' ', '-')}.png", class: "w-100", size: '180x180'%>
-                <% end %>
-
-                <h5 class="card-title text-center mb-0"><%= r.name %></h5>
-              </div>
+          <div id="report_<%=r.id%>" class="card text-right mx-2" style="width: 18rem;" draggable="true" ondragstart="dragStart(event)">
+            <div onclick="removedCard('<%=r.id%>')" class="disp_icon mouse-hover">
+              <span><i class="fa fa-times d-none m-2 cursor-pointer"></i></span>
             </div>
+            <div class="card-body py-3">
+              <%#= image_tag "pivot/col-heatmap.png", size: '190x190', class: "w-100"%>
+              <% if (name = JSON.parse(r.content)['rendererName'].downcase) && name.include?('table') %>
+                  <%= image_tag "pivot/table.png", size: '180x180', class: "pointer-events-none w-100" %>
+              <% elsif (name = JSON.parse(r.content)['rendererName'].downcase) && name.include?('heatmap') %>
+                  <%= image_tag "pivot/heatmap.png", size: '180x180', class: "pointer-events-none w-100" %>
+              <% else %>
+                  <%= image_tag "pivot/#{name.gsub(' ', '-')}.png", class: "pointer-events-none w-100", size: '180x180'%>
+              <% end %>
+
+              <h5 class="card-title text-center mb-0"><%= r.name %></h5>
+            </div>
+          </div>
         <% end %>
       </div>
     </div>
+
     <input type="hidden" name="pivot_table_ids" id="pivotReportIDs">
+    <input type="hidden" name="pivot_table_indexs" id="pivotReportIndexs">
     <div class="form-group" >
       <div class="col-md-11">
         <%= link_to t('button_cancel'), channel_report_path(@channel, @report), class: 'btn btn-warning pull-right' %>
-        <%= form.submit t('button_save'), class: 'btn btn-success pull-right' %>
+        <%= form.submit t('button_save'), class: 'btn btn-success pull-right' ,:onclick => "return validateform()"%>
       </div>
     </div>
 <% end %>
 
 <script>
-  var pivotReportIDs = []
+  var pivotReportIDs      = [];
+  var pivotReportIndexIds = [];
+  function validateform(){
+    pivotReportIDs      = [];
+    pivotReportIndexIds = [];
+    $('#dragDropDataSet div').each(function() {
+      reportId = this.id.split("_")[1];
+      if(reportId != null){
+        pivotReportIDs.push(parseInt(reportId));
+        pivotReportIndexIds.push($(this).index());
+      }
+    });
+    pivotReportIdsField = document.getElementById("pivotReportIDs");
+    pivotReportIndexsField = document.getElementById("pivotReportIndexs");
+    pivotReportIdsField.value = '';
+    pivotReportIndexsField.value = '';
+    pivotReportIdsField.value = JSON.stringify([...new Set(pivotReportIDs)]);
+    pivotReportIndexsField.value = JSON.stringify([...new Set(pivotReportIndexIds)]);
+  }
+  function removedCard(id){
+    let el = $(`div#report_${id}`)
+    el.removeClass('disp_i');
+    $("div#form_report").append(el);
+  }
   $(document).ready(function() {
-    pivotReportIDs = <%= @dashboard.save_pivot_tables.pluck(:id) %>
+    pivotReportIDs = <%= @dashboard.save_pivot_tables.order(order_index: :asc).pluck(:id) %>
     if(pivotReportIDs.length > 0 ){
       pivotReportIDs.forEach(function (id, index) {
-        $(`#report_${id}`).addClass("bg-light")
-        $(`#report_${id}`).removeClass("card-opacity-7")
-        $(`#report_${id} > div.header`).addClass("d-block")
+        el = $(`#report_${id}`);
+        el.addClass('disp_i');
+        $("#dragDropDataSet").append(el);
       });
     }
   });
-  reportCards = document.getElementById("report");
-  function reportCard(id){
-    if(pivotReportIDs.length > 0 && pivotReportIDs.includes(id)){
-      indexId = pivotReportIDs.indexOf(id)
-      pivotReportIDs.splice(indexId, 1);
-      $(`#report_${id}`).toggleClass("bg-light");
-      $(`#report_${id}`).addClass("card-opacity-7");
-      document.getElementById("pivotReportIDs").value = JSON.stringify(pivotReportIDs);
-    }else
-    {
-      pivotReportIDs.push(id)
-      $(`#report_${id}`).addClass("bg-light")
-      $(`#report_${id} > div.header`).addClass("d-block")
-      $(`#report_${id}`).removeClass("card-opacity-7");
-      document.getElementById("pivotReportIDs").value = JSON.stringify(pivotReportIDs);
-    }
-  }
   function allowDrop (ev) {
     ev.preventDefault();
   }
@@ -88,5 +99,9 @@
     ev.preventDefault ();
     var data =  ev.dataTransfer.getData ("text");
     ev.target.appendChild (document.getElementById(data));
+    $('#dragDropDataSet div').each(function() {
+      pivotTableCard = this.id;
+      $(this).addClass('disp_i');
+    });
   }
 </script>
