@@ -12,16 +12,17 @@
     <%= form.hidden_field :report_id , id: 'report_id'%>
     <div class="form-group">
       <%= form.label 'Dashboard Name:', class: 'col-md-2 control-label' %>
-      <div class="col-md-10">
+      <div class="col-md-10 p-0">
         <%= form.text_field :name , class: 'form-control' , id: 'dashboard_name'%>
       </div>
     </div>
-    <div id="dragDropDataSet" class="rounded col-md-10 offset-2 p-3 my-3 d-flex card-min-hight border" ondrop="dragDrop(event)" ondragover="allowDrop(event)">
-
+    <div class="form-group">
+      <%= form.label 'Reports:', class: 'col-md-2 control-label' %>
+      <div id="dragDropDataSet" class="rounded col-md-10 p-3 my-3 d-flex card-min-hight border" ondrop="dragDrop(event)" ondragover="allowDrop(event)">
+      </div>
     </div>
     <div class="form-group" id='tasks'>
-      <%= form.label 'Reports:', class: 'col-md-2 control-label' %>
-      <div class="rounded p-3 my-2 col-md-10 d-flex pl-1 card-min-hight" id="form_report">
+      <div class="rounded p-3 my-2 offset-2 col-md-10 d-flex pl-1 card-min-hight" id="form_report">
         <% SavePivotTable.where(report_id: @report.id).each do |r| %>
           <div id="report_<%=r.id%>" class="card text-right mx-2" style="width: 18rem;" draggable="true" ondragstart="dragStart(event)">
             <div onclick="removedCard('<%=r.id%>')" class="disp_icon mouse-hover">
