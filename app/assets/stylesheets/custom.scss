@@ -5,3 +5,11 @@
 .display-contents{
  display: contents;
 }
+.disp_i {
+  .disp_icon > span > i{
+    display: block !important;
+  }
+}
+.pointer-events-none {
+    pointer-events: none !important;
+}

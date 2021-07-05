@@ -284,3 +284,8 @@ fieldset{
 .card-opacity-7{
   opacity: 0.7 !important;
 }
+
+.card-min-hight{
+  min-height: 100px;
+}
+
