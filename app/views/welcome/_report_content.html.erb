@@ -1,4 +1,4 @@
-<div class="bg-white w-100 text-center pb-1">
+<div class="bg-white w-100 text-center pt-3">
   <%= link_to channel_report_path(report.channel, report) do %>
     <% name = JSON.parse(report&.save_pivot_tables&.first&.content)["rendererName"].downcase rescue nil %>
     <% if (name && name.include?('table')) %>

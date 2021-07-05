@@ -1,47 +1,74 @@
 <div class="col-md-12">
   <h2><b>Public Reports</b></h2>
 </div>
-<% @public_reports.each do |report| %>
-  <div class="col-md-4 my-3">
-    <%= render partial: 'report_content' , locals: { report: report  }  %>
+<% if @public_reports.present? %>
+  <% @public_reports.each do |report| %>
+    <div class="col-md-4 my-3">
+      <%= render partial: 'report_content' , locals: { report: report  }  %>
+    </div>
+  <% end %>
+  <div class="col-md-12 py-2">
+    <% if @public_reports.count == 3 %>
+      <%= link_to 'Show More...', welcome_index_path(display_all_public: true), remote: true , class: 'pull-right' %>
+    <% elsif @public_reports.count > 3 %>
+      <%= link_to 'Show Less...', root_path, remote: true, class: 'pull-right' %>
+    <% end %>
+  </div>
+<% else %>
+  <div class="col-md-12">
+    <div class="alert alert-custom alert-notice alert-light-primary show d-flex" role="alert">
+      <div class="alert-icon"><i class="flaticon-warning"></i></div>
+      <div class="alert-text">No Public Report to display!</div>
+    </div>
   </div>
 <% end %>
-<div class="col-md-12 py-2">
-  <% if @public_reports.count == 3 %>
-    <%= link_to 'Show More...', welcome_index_path(display_all_public: true), remote: true , class: 'pull-right' %>
-  <% elsif @public_reports.count > 3 %>
-    <%= link_to 'Show Less...', root_path, remote: true, class: 'pull-right' %>
-  <% end %>
-</div>
 
 <div class="col-md-12">
   <h2><b>Personal Reports</b></h2>
 </div>
+<% if @personal_reports.present? %>
 <% @personal_reports.each do |report| %>
   <div class="col-md-4 my-3">
     <%= render partial: 'report_content' , locals: { report: report  }  %>
   </div>
 <% end %>
-<div class="col-md-12 py-2">
-  <% if @personal_reports.count == 3 %>
-    <%= link_to 'Show More...', welcome_index_path(display_all_personal: true) , remote: true ,class: 'pull-right'  %>
-  <% elsif @personal_reports.count > 3 %>
-    <%= link_to 'Show Less...', root_path, remote: true, class: 'pull-right' %>
-  <%end%>
-</div>
+  <div class="col-md-12 py-2">
+    <% if @personal_reports.count == 3 %>
+      <%= link_to 'Show More...', welcome_index_path(display_all_personal: true) , remote: true ,class: 'pull-right'  %>
+    <% elsif @personal_reports.count > 3 %>
+      <%= link_to 'Show Less...', root_path, remote: true, class: 'pull-right' %>
+    <%end%>
+  </div>
+<% else %>
+  <div class="col-md-12">
+    <div class="alert alert-custom alert-notice alert-light-primary show d-flex" role="alert">
+      <div class="alert-icon"><i class="flaticon-warning"></i></div>
+      <div class="alert-text">No Personal Report to display!</div>
+    </div>
+  </div>
+<% end %>
 
 <div class="col-md-12">
   <h2><b>Group Reports</b></h2>
 </div>
-<% @group_reports.each do |report| %>
-  <div class="col-md-4 my-3">
-    <%= render partial: 'report_content' , locals: { report: report  }  %>
+<% if @group_reports.present? %>
+  <% @group_reports.each do |report| %>
+    <div class="col-md-4 my-3">
+      <%= render partial: 'report_content' , locals: { report: report  }  %>
+    </div>
+  <% end %>
+  <div class="col-md-12 py-2">
+    <% if @group_reports.count == 3 %>
+      <%= link_to 'Show More...', welcome_index_path(display_all_group: true) , remote: true, class: 'pull-right'  %>
+    <% elsif  @group_reports.count > 3 %>
+      <%= link_to 'Show Less...', root_path, remote: true, class: 'pull-right' %>
+    <% end %>
+  </div>
+<% else %>
+  <div class="col-md-12">
+    <div class="alert alert-custom alert-notice alert-light-primary show d-flex" role="alert">
+      <div class="alert-icon"><i class="flaticon-warning"></i></div>
+      <div class="alert-text">No Group Report to display!</div>
+    </div>
   </div>
 <% end %>
-<div class="col-md-12 py-2">
-  <% if @group_reports.count == 3 %>
-    <%= link_to 'Show More...', welcome_index_path(display_all_group: true) , remote: true, class: 'pull-right'  %>
-  <% elsif  @group_reports.count > 3 %>
-    <%= link_to 'Show Less...', root_path, remote: true, class: 'pull-right' %>
-  <% end %>
-</div>
