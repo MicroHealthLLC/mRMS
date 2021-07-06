@@ -1,59 +1,65 @@
 <div class="row d-flex">
   <% @reports.each do |report| %>
-    <div class="col-3">
-      <!--begin::Card-->
-      <div class="bg-color-lighten card card-custom card-stretch gutter-b">
-        <!--begin::Body-->
-        <div class="card-body py-4">
-          <!--begin::User-->
-          <div class="d-flex align-items-center">
-            <!--begin::Pic-->
-            <div class="flex-shrink-0 mr-4">
-              <div class="symbol symbol-circle symbol-lg-75">
-                <% name = JSON.parse(report&.save_pivot_tables&.first&.content)["rendererName"].downcase rescue nil %>
-                <% if (name && name.include?('table')) %>
-                    <%= image_tag "pivot/table.png", size: '220x220'%>
-                <% elsif (name && name.include?('heatmap')) %>
-                    <%= image_tag "pivot/heatmap.png", size: '220x220'%>
-                <% elsif name%>
-                    <%= image_tag "pivot/#{name.gsub(' ', '-')}.png" , size: '220x220'%>
-                <% else %>
-                  <%= image_tag "dashboard.png", size: '220x220'%>
-                <% end %>
+      <div class="col-3">
+        <a href="<%= channel_report_path(@channel, report )%>">
+        <!--begin::Card-->
+        <div class="box-shadow bg-color-lighten card card-custom card-stretch gutter-b">
+          <!--begin::Body-->
+          <div class="card-body py-4">
+            <!--begin::User-->
+            <div class="row">
+              <!--begin::Pic-->
+              <div class="col-6 p-0">
+                <div class="symbol symbol-lg-75">
+                  <% name = JSON.parse(report&.save_pivot_tables&.first&.content)["rendererName"].downcase rescue nil %>
+                  <% if (name && name.include?('table')) %>
+                      <%= image_tag "pivot/table.png", size: '220x220'%>
+                  <% elsif (name && name.include?('heatmap')) %>
+                      <%= image_tag "pivot/heatmap.png", size: '220x220'%>
+                  <% elsif name%>
+                      <%= image_tag "pivot/#{name.gsub(' ', '-')}.png" , size: '220x220'%>
+                  <% else %>
+                    <%= image_tag "dashboard.png", size: '220x220'%>
+                  <% end %>
+                </div>
+              </div>
+              <!--end::Pic-->
+              <!--begin::Title-->
+              <div class="col-6 p-0 d-flex align-items-center">
+                <span class="text-dark font-weight-bold font-size-h4 mb-0 text-truncate" title="<%= report.name %>"><%= report.name %> </span>
+              </div>
+              <!--end::Title-->
+            </div>
+            <!--end::User-->
+            <!--begin::Desc-->
+            <div class="row">
+              <div class="col-12 p-0 small text-dark" title="<%= report.description.html_safe %>">
+                <%= report.description.present? ? report.description.truncate(50).html_safe : '<p>No Description</p>'.html_safe %>
               </div>
             </div>
-            <!--end::Pic-->
-            <!--begin::Title-->
-            <div class="d-flex flex-column">
-              <a href="#" class="text-dark font-weight-bold text-hover-primary font-size-h4 mb-0"><%= ( @channel.is_public? or @channel.is_creator? or @channel.my_permission.can_view_report?) ? link_to( report.name, channel_report_path(@channel, report )) : report.name %></a>
-            </div>
-            <!--end::Title-->
-          </div>
-          <!--end::User-->
-          <!--begin::Desc-->
-          <div class="mb-7 data_title" title="<%= report.description.html_safe %>"><%= report.description.present? ? report.description.truncate(50).html_safe : 'No Description' %></div>
-          <!--end::Desc-->
-          <!--begin::Info-->
-          <div class="mb-7">
-            <div class="d-flex justify-content-between align-items-center">
-              <span class="text-dark-75 font-weight-bolder mr-2">Updated By: </span>
-              <a href="#" class="text-muted text-hover-primary"><%= report.updated_by %></a>
-            </div>
-            <div class="d-flex justify-content-between align-items-center">
-              <span class="text-dark-75 font-weight-bolder mr-2">Updated At:</span>
-              <span class="text-muted font-weight-bold"><%= format_date_time report.updated_at %></span>
-            </div>
-            <% if @channel.is_personal? %>
-              <div class="d-flex justify-content-between align-items-center">
-                  <span class="text-dark-75 font-weight-bolder mr-2">Shared: </span>
-                  <a href="#" class="text-muted text-hover-primary"><%= report.shared_reports.where.not(user_id: User.current.id).present? %></a>
+            <!--end::Desc-->
+            <!--begin::Info-->
+            <div class="mb-2">
+              <div class="row">
+                <span class="col-6 p-0 text-dark-75 font-weight-bolder">Updated By: </span>
+                <span class="col-6 p-0 text-dark"><%= report.updated_by %></span>
               </div>
-            <% end %>
+              <div class="row">
+                <span class="col-6 p-0 text-dark-75 font-weight-bolder">Updated At:</span>
+                <span class="col-6 p-0 text-dark"><%= format_date_time report.updated_at %></span>
+              </div>
+              <% if @channel.is_personal? %>
+                <div class="row">
+                    <span class="col-6 p-0 text-dark-75 font-weight-bolder">Shared: </span>
+                    <span class="col-6 p-0"><p class="text-dark mb-0"><%= report.shared_reports.where.not(user_id: User.current.id).present? %></p></span>
+                </div>
+              <% end %>
+            </div>
+          <!--end::Body-->
           </div>
-        <!--end::Body-->
+        <!--end:: Card-->
         </div>
-      <!--end:: Card-->
+        </a>
       </div>
-    </div>
   <% end %>
 </div>
