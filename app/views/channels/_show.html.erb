@@ -26,14 +26,14 @@
               <!--end::Pic-->
               <!--begin::Title-->
               <div class="col-6 p-0 d-flex align-items-center">
-                <span class="text-dark font-weight-bold font-size-h4 mb-0 text-truncate"><%= report.name %> </span>
+                <span class="text-dark font-weight-bold font-size-h4 mb-0 text-truncate" title="<%= report.name %>"><%= report.name %> </span>
               </div>
               <!--end::Title-->
             </div>
             <!--end::User-->
             <!--begin::Desc-->
             <div class="row">
-              <div class="col-12 p-0 small text-dark">
+              <div class="col-12 p-0 small text-dark" title="<%= report.description.html_safe %>">
                 <%= report.description.present? ? report.description.truncate(50).html_safe : '<p>No Description</p>'.html_safe %>
               </div>
             </div>
