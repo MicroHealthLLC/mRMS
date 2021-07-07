@@ -3,8 +3,8 @@
     <%= hidden_field_tag :query_id, @query_id %>
 
     <div class="form-group row">
-      <label class="col-form-label text-right col-lg-2 col-sm-12">Dashboards:</label>
-      <div class="col-lg-8 col-md-9 col-sm-12">
+      <label class="col-form-label text-right col-md-2">Dashboards:</label>
+      <div class="col-md-9">
         <select class="form-control select2" id="kt_select2_3" name="dashboards[]" multiple="multiple">
           <% @dashboards.each do |dashboard| %>
             <option value="<%= dashboard.id%>" <%=  @shared_dashboards.include?(dashboard.id) ? 'selected' : ''%>> <%= dashboard.name %> </option>
