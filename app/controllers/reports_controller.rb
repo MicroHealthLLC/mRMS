@@ -10,6 +10,7 @@ class ReportsController < ApplicationController
   # GET /reports/1.json
   def show
     @query_id = params[:query_id] rescue nil
+    @dashboard_count = ReportDashboard.where(pivot_table_id: @query_id).count if @query_id.present?
     render_403 unless  @channel.is_public? or @channel.is_creator? or @channel.my_permission.can_view_report?
     # if @report.document_url
     #   if params[:query_id] or params[:new_query]
