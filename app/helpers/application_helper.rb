@@ -159,8 +159,8 @@ module ApplicationHelper
     show_theme_button(url, 'Edit', 'fas fa-edit', 'success')
   end
 
-  def show_button(url, text, icon, btn_style, data_options = {})
-    link_to  url, class: "noprint btn btn-#{btn_style} mr-2", data: data_options do
+  def show_button(url, text, icon, btn_style, data_options = {}, disb = false)
+    link_to  url, {class: "noprint btn btn-#{btn_style} mr-2", disabled: disb}, data: data_options do
       "<i class='fas fa-#{icon}' aria-hidden='true'></i>#{text}".html_safe
     end
   end
