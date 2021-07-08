@@ -8,7 +8,7 @@
     </div>
   <% end %>
   <div class="col-md-12 py-2">
-    <% if @public_reports.count == 3 %>
+    <% if @public_reports_count > 3 && @public_reports.count == 3 %>
       <%= link_to 'Show More...', welcome_index_path(display_all_public: true), remote: true , class: 'pull-right' %>
     <% elsif @public_reports.count > 3 %>
       <%= link_to 'Show Less...', root_path, remote: true, class: 'pull-right' %>
@@ -33,7 +33,7 @@
   </div>
 <% end %>
   <div class="col-md-12 py-2">
-    <% if @personal_reports.count == 3 %>
+    <% if @personal_reports_count > 3 && @personal_reports.count == 3 %>
       <%= link_to 'Show More...', welcome_index_path(display_all_personal: true) , remote: true ,class: 'pull-right'  %>
     <% elsif @personal_reports.count > 3 %>
       <%= link_to 'Show Less...', root_path, remote: true, class: 'pull-right' %>
@@ -58,7 +58,7 @@
     </div>
   <% end %>
   <div class="col-md-12 py-2">
-    <% if @group_reports.count == 3 %>
+    <% if @group_reports_count > 3 && @group_reports.count == 3 %>
       <%= link_to 'Show More...', welcome_index_path(display_all_group: true) , remote: true, class: 'pull-right'  %>
     <% elsif  @group_reports.count > 3 %>
       <%= link_to 'Show Less...', root_path, remote: true, class: 'pull-right' %>
