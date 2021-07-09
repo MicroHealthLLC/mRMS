@@ -6,8 +6,14 @@
  display: contents;
 }
 .disp_i {
+  .card-body{
+    padding-top: 0px !important;
+  }
   .disp_icon > span > i{
     display: block !important;
+  }
+  img {
+    height: 160px !important;
   }
 }
 .pointer-events-none {
