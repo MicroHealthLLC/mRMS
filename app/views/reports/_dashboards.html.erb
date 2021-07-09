@@ -6,9 +6,13 @@
       <%= link_to  [@channel, @report, dashboard]  do %>
         <%= image_tag "dashboard.png", size: '220x220' %>
       <% end %>
-      <h2 style=" width: 100%;  align-content: center; text-align: center; position: absolute; bottom: 0px; left: 0;">
-        <%= dashboard.name  %>
-      </h2>
+      <div class="text-center">
+        <% report_count = dashboard.save_pivot_tables.count%>
+        <p><%= report_count > 0 ? 'Total reports:' + report_count.to_s : '' %></p>
+        <h2 style=" width: 100%;  align-content: center; text-align: center; position: absolute; bottom: 0px; left: 0;">
+           <%= dashboard.name  %>
+        </h2>
+      </div>
     </div>
   <% end %>
 <% else %>
