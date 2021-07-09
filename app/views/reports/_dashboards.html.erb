@@ -13,6 +13,10 @@
            <%= dashboard.name  %>
         </h2>
       </div>
+      <div class="float-right">
+        <%= link_to('<i class="fa fa-times"></i>'.html_safe, channel_report_dashboard_path(@channel, @report, dashboard),
+          method: :delete, data: {confirm: "Are you sure to delete this dashboard?"}, style: "position: absolute; top: 0; color: #9e2b2b;") if (dashboard.user_id == User.current.id) or User.current.admin?  %>
+      </div>
     </div>
   <% end %>
 <% else %>
