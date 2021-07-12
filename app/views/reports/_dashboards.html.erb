@@ -9,8 +9,8 @@
       <div class="text-center">
         <% report_count = dashboard.save_pivot_tables.count%>
         <p>Total Reports: <%= report_count.to_s %></p>
-        <h2 style=" width: 100%;  align-content: center; text-align: center; position: absolute; bottom: 0px; left: 0;">
-           <%= dashboard.name  %>
+        <h2 class="text-truncate cursor-pointer" title="<%= dashboard.name %>" style=" width: 100%;  align-content: center; text-align: center; position: absolute; bottom: 0px; left: 0;">
+           <%= dashboard.name.truncate(20) %>
         </h2>
       </div>
       <div class="float-right">

@@ -10,8 +10,8 @@
           <%= image_tag "pivot/#{name.gsub(' ', '-')}.png" , size: '220x220'%>
       <% end %>
   <% end %>
-  <h2 style=" width: 100%;  align-content: center; text-align: center; position: absolute; bottom: 0px; left: 0; font-size: 21px">
-    <%= pivot_table.name  %>
+  <h2 class="text-truncate cursor-pointer" title="<%= pivot_table.name %>" style=" width: 100%;  align-content: center; text-align: center; position: absolute; bottom: 0px; left: 0; font-size: 21px">
+    <%= pivot_table.name.truncate(20)  %>
   </h2>
   <%= link_to( '<i class="fa fa-times"></i>'.html_safe, delete_pivottable_channel_report_path(@channel, @report, query_id: pivot_table.id),
                :method => :delete,
