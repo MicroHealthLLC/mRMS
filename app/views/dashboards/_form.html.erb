@@ -36,9 +36,9 @@
         <label class="col-md-2 pt-5 text-align-right">Draggable Items:</label>
         <div class="rounded p-3 col-md-10 my-2 pl-1" id="form_report">
         <% SavePivotTable.where(report_id: @report.id).each do |r| %>
-          <div id="report_<%=r.id%>" class="card text-right m-2 col-lg-3" style="width: 18rem;" draggable="true" ondragstart="dragStart(event)">
+          <div id="report_<%=r.id%>" class="card text-right m-2 col-lg-3 py-2" style="width: 18rem;" draggable="true" ondragstart="dragStart(event)">
             <div onclick="removedCard('<%=r.id%>')" class="disp_icon mouse-hover">
-              <span><i class="fa fa-times d-none m-2 cursor-pointer"></i></span>
+              <span><i class="fa fa-times d-none cursor-pointer"></i></span>
             </div>
             <div class="card-body py-3">
               <%#= image_tag "pivot/col-heatmap.png", size: '190x190', class: "w-100"%>
@@ -102,7 +102,7 @@
   }
   function dragDrop (ev) {
     var t = ev.target;
-    if(t.classList.contains("card-body")){
+    if(t.classList.contains("card") || t.classList.contains("fa") || t.classList.contains("card-body") || t.classList.contains("card-title")){
       return false;
     }
     ev.preventDefault ();
