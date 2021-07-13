@@ -1,24 +1,31 @@
 <% dashboards = @report.dashboards %>
 <% if dashboards.present? %>
-  <% dashboards.each do |dashboard| %>
-    <div style="width: 260px; height: 300px; position: relative; float: left; display: inline-block; margin: 10px;
-    padding: 15px; border: 1px #f9dcd4 solid;  border-radius: 7px">
-      <%= link_to  [@channel, @report, dashboard]  do %>
-        <%= image_tag "dashboard.png", size: '220x220' %>
-      <% end %>
-      <div class="text-center">
-        <% report_count = dashboard.save_pivot_tables.count%>
-        <p>Total Reports: <%= report_count.to_s %></p>
-        <h2 class="text-truncate cursor-pointer" title="<%= dashboard.name %>" style=" width: 100%;  align-content: center; text-align: center; position: absolute; bottom: 0px; left: 0;">
-           <%= dashboard.name.truncate(20) %>
-        </h2>
+  <div class="row">
+    <% dashboards.each do |dashboard| %>
+      <div class="card border-0 p-0" style="width: 18rem">
+        <div class="border m-2 text-center h-100">
+          <div class="card-header p-0 pr-2 pt-2 border-0">
+            <%= link_to('<i class="fa fa-times float-right"></i>'.html_safe, channel_report_dashboard_path(@channel, @report, dashboard),
+              method: :delete, data: {confirm: "Are you sure to delete this dashboard?"}) if (dashboard.user_id == User.current.id) or User.current.admin?  %>
+          </div>
+          <div class="card-body pt-0 pb-2">
+            <%= link_to  [@channel, @report, dashboard]  do %>
+              <%= image_tag "dashboard.png", style: 'width: 13rem' %>
+            <% end %>
+            <div class="cursor-pointer text-center">
+              <p class="mb-0 px-3">
+                <% report_count = dashboard.save_pivot_tables.count%>
+                Total Reports: <%= report_count.to_s %>
+              </p>
+              <p title="<%= dashboard.name %>" class="px-3 mb-0 mt-2">
+                <%= dashboard.name %>
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="float-right">
-        <%= link_to('<i class="fa fa-times"></i>'.html_safe, channel_report_dashboard_path(@channel, @report, dashboard),
-          method: :delete, data: {confirm: "Are you sure to delete this dashboard?"}, style: "position: absolute; top: 0; color: #9e2b2b;") if (dashboard.user_id == User.current.id) or User.current.admin?  %>
-      </div>
-    </div>
-  <% end %>
+    <% end %>
+  </div>
 <% else %>
   <div class="alert alert-custom alert-notice alert-light-primary show d-flex" role="alert">
     <div class="alert-icon"><i class="fas fa-exclamation-triangle"></i></div>
