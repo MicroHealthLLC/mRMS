@@ -1,4 +1,4 @@
-<div class="card m-2 p-2 cursor-pointer" style="width: 18rem;">
+<div class="card m-2 p-2 cursor-pointer" style="width: 21rem;">
   <div class="text-center">
     <%= link_to channel_report_path(report.channel, report) do %>
       <% name = JSON.parse(report&.save_pivot_tables&.first&.content)["rendererName"].downcase rescue nil %>
