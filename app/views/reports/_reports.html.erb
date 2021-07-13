@@ -1,7 +1,9 @@
 <% if @pivot_tables.present? %>
-  <% @pivot_tables.each do |pivot_table| %>
-    <%= render partial: 'grid', locals: {pivot_table: pivot_table} %>
-  <% end %>
+  <div class="row">
+    <% @pivot_tables.each do |pivot_table| %>
+      <%= render partial: 'grid', locals: {pivot_table: pivot_table} %>
+    <% end %>
+  </div>
 <% else %>
   <div class="alert alert-custom alert-notice alert-light-primary show d-flex" role="alert">
     <div class="alert-icon"><i class="fas fa-exclamation-triangle"></i></div>
