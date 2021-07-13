@@ -34,23 +34,26 @@
     <div class="form-group" id='tasks'>
       <div class="row">
         <label class="col-md-2 pt-5 text-align-right">Draggable Items:</label>
-        <div class="rounded p-3 col-md-10 my-2 pl-1" id="form_report">
-        <% SavePivotTable.where(report_id: @report.id).each do |r| %>
-          <div id="report_<%=r.id%>" class="card text-right m-2 col-lg-3 py-2" style="max-width: 18rem;" draggable="true" ondragstart="dragStart(event)">
-            <div onclick="removedCard('<%=r.id%>')" class="disp_icon mouse-hover">
-              <span><i class="fa fa-times d-none cursor-pointer"></i></span>
-            </div>
-            <div class="card-body py-3 pl-0 pr-0 px-4">
-              <%#= image_tag "pivot/col-heatmap.png", size: '190x190', class: "w-100"%>
-              <% if (name = JSON.parse(r.content)['rendererName'].downcase) && name.include?('table') %>
-                  <%= image_tag "pivot/table.png", size: '180x180', class: "pointer-events-none w-100" %>
-              <% elsif (name = JSON.parse(r.content)['rendererName'].downcase) && name.include?('heatmap') %>
-                  <%= image_tag "pivot/heatmap.png", size: '180x180', class: "pointer-events-none w-100" %>
-              <% else %>
-                  <%= image_tag "pivot/#{name.gsub(' ', '-')}.png", class: "pointer-events-none w-100", size: '180x180'%>
-              <% end %>
-
-                <h5 class="card-title text-center mb-0 data_title" title="<%= r.name %>"><%= r.name.truncate(18) %></h5>
+        <div class="rounded p-3 row col-md-10 my-2 pl-1" id="form_report">
+          <% SavePivotTable.where(report_id: @report.id).each do |r| %>
+            <div id="report_<%=r.id%>" class="card p-2 m-2" style="width: 18rem" draggable="true" ondragstart="dragStart(event)">
+              <div onclick="removedCard('<%=r.id%>')" class="disp_icon mouse-hover">
+                <span><i class="fa fa-times d-none cursor-pointer float-right"></i></span>
+              </div>
+              <div class="card-body py-3 pl-0 pr-0 px-4 text-center">
+                <%#= image_tag "pivot/col-heatmap.png", size: '190x190', class: "w-100"%>
+                <% if (name = JSON.parse(r.content)['rendererName'].downcase) && name.include?('table') %>
+                    <%= image_tag "pivot/table.png", class: "pointer-events-none", style: "width: 13rem;" %>
+                <% elsif (name = JSON.parse(r.content)['rendererName'].downcase) && name.include?('heatmap') %>
+                    <%= image_tag "pivot/heatmap.png", class: "pointer-events-none", style: "width: 13rem;" %>
+                <% else %>
+                    <%= image_tag "pivot/#{name.gsub(' ', '-')}.png", class: "pointer-events-none", style: "width: 13rem;"%>
+                <% end %>
+                <div class="cursor-pointer card-text">
+                  <span class="px-3">
+                    <%= r.name %>
+                  </span>
+                </div>
               </div>
             </div>
           <% end %>
