@@ -8,5 +8,5 @@ class SavePivotTable < ApplicationRecord
   belongs_to :user, optional: true
   belongs_to :report, optional: true
   delegate :channel, to: :report
-
+  default_scope { order('frequently_count desc') }
 end
