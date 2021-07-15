@@ -212,6 +212,45 @@
         barmode: 'relative'
       }),
       "Line Chart": makePlotlyChart(),
+      "Point Cloud": makePlotlyChart({
+        type: 'pointcloud',
+        mode: "markers",
+        marker: {
+            sizemin: 0.5,
+            sizemax: 100,
+            arearatio: 0,
+            color: "rgba(0, 0, 255, 0.9)",
+            opacity: 0.8,
+            blend: true
+          },
+        opacity: 0.7
+      }),
+      "Filled Area Plots Chart": makePlotlyChart({
+        fill: 'tonexty',
+        type: 'scatter'
+      }),
+      "Dot Plots Chart": makePlotlyChart({
+        type: 'scatter',
+        mode: 'markers',
+        marker: {
+          color: 'rgba(156, 165, 196, 0.95)',
+          line: {
+            color: 'rgba(156, 165, 196, 1.0)',
+            width: 1,
+          },
+          symbol: 'circle',
+          size: 16
+        }
+      }),
+      "Bubble Chart": makePlotlyChart({
+        type: "scatter",
+        mode: "markers",
+        marker: {
+          size: 40,
+          opacity: 0.7,
+          sizemode: 'area'
+        }
+      }),
       "Area Chart": makePlotlyChart({
         stackgroup: 1
       }),
