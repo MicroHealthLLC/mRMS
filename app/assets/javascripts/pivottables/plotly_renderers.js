@@ -212,9 +212,6 @@
         barmode: 'relative'
       }),
       "Line Chart": makePlotlyChart(),
-      "Multiple Chart Types": makePlotlyChart({
-        type: 'scatter'
-      }),
       "Point Cloud": makePlotlyChart({
         type: 'pointcloud',
         mode: "markers",
@@ -227,10 +224,6 @@
             blend: true
           },
         opacity: 0.7
-      }),
-      "Sunburst Charts": makePlotlyChart({
-        type: "sunburst",
-        maxdepth: 3
       }),
       "Filled Area Plots Chart": makePlotlyChart({
         fill: 'tonexty',
