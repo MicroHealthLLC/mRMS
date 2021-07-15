@@ -119,7 +119,7 @@
               },
               onRefresh: saveState
           }
-          <% if params[:query_id] and query = SavePivotTable.find_by_id(params[:query_id]) %>
+          <% if params[:query_id] and query = load_pivot_report(params[:query_id]) %>
           $("#output_<%= time %>").pivotUI(json,  Object.assign(default_query, <%=  JSON.parse(query.content).to_json.html_safe %>) );
           <% else %>
           $("#output_<%= time %>").pivotUI(json, default_query);
