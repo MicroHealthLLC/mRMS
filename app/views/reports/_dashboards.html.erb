@@ -8,9 +8,9 @@
             <%= link_to('<i class="fa fa-times float-right"></i>'.html_safe, channel_report_dashboard_path(@channel, @report, dashboard),
               method: :delete, data: {confirm: "Are you sure to delete this dashboard?"}) if (dashboard.user_id == User.current.id) or User.current.admin?  %>
           </div>
-          <div class="card-body pt-0 pb-2">
+          <div class="card-body pt-0 pb-2 px-0">
             <%= link_to  [@channel, @report, dashboard]  do %>
-              <%= image_tag "dashboard.png", style: 'width: 13rem' %>
+              <%= image_tag "dashboard.png", style: 'width: 13rem; height: 13rem;' %>
             <% end %>
             <div class="cursor-pointer text-center">
               <p class="mb-0 px-3">
@@ -18,7 +18,7 @@
                 Total Reports: <%= report_count.to_s %>
               </p>
               <p title="<%= dashboard.name %>" class="px-3 mb-0 mt-2">
-                <%= dashboard.name %>
+                <%= dashboard.name.truncate(70) %>
               </p>
             </div>
           </div>

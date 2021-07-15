@@ -6,20 +6,20 @@
                  :data => {:confirm => "Are you sure to delete this report?"}) if (pivot_table.user_id == User.current.id) or User.current.admin?  %>
     </div>
     <div class="card-body pt-0 pb-2 px-3">
-      <div>
+      <div class="py-2">
         <%= link_to channel_report_path(@channel, @report, query_id: pivot_table.id) do %>
           <% if (name = JSON.parse(pivot_table.content)['rendererName'].downcase) && name.include?('table') %>
-              <%= image_tag "pivot/table.png", style: "width: 13rem;"%>
+              <%= image_tag "pivot/table.png", style: "width: 13rem; height: 13rem;"%>
           <% elsif (name = JSON.parse(pivot_table.content)['rendererName'].downcase) && name.include?('heatmap') %>
-              <%= image_tag "pivot/heatmap.png", style: "width: 13rem;"%>
+              <%= image_tag "pivot/heatmap.png", style: "width: 13rem; height: 13rem;"%>
           <% else %>
-              <%= image_tag "pivot/#{name.gsub(' ', '-')}.png" , style: "width: 13rem;"%>
+              <%= image_tag "pivot/#{name.gsub(' ', '-')}.png" , style: "width: 13rem; height: 13rem;"%>
           <% end %>
         <% end %>
       </div>
-      <div class="cursor-pointer card-text">
+      <div class="cursor-pointer text-center">
         <span title="<%= pivot_table.name %>" class="px-3">
-          <%= pivot_table.name %>
+          <%= pivot_table.name.truncate(70) %>
         </span>
       </div>
     </div>
