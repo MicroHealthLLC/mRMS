@@ -47,4 +47,16 @@ module ReportsHelper
     # Rollbar.critical("Read DOC: #{e.message}, file: #{file} ")
     @invalid_file_parse = "Error on parsing document"
   end
+
+  def load_pivot_report(pivot_table_id)
+    pivot_table = pivot_table_id ? update_pivot_table(pivot_table_id) : nil
+    return pivot_table
+  end
+
+  def update_pivot_table(id)
+    pivot_table = SavePivotTable.find_by_id(id)
+    pivot_table.frequently_count += 1
+    pivot_table.save
+    return pivot_table
+  end
 end
