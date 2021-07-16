@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_05_073659) do
+ActiveRecord::Schema.define(version: 2021_07_16_120915) do
 
   create_table "addresses", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "address_type_id"
@@ -97,6 +97,7 @@ ActiveRecord::Schema.define(version: 2021_07_05_073659) do
     t.datetime "updated_at", null: false
     t.boolean "can_download", default: false
     t.boolean "can_view_report", default: false
+    t.boolean "can_shared_report_with_dashboard", default: false
     t.index ["channel_id"], name: "index_channel_permissions_on_channel_id"
     t.index ["user_id"], name: "index_channel_permissions_on_user_id"
   end
@@ -160,6 +161,7 @@ ActiveRecord::Schema.define(version: 2021_07_05_073659) do
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "frequently_count", default: 0
   end
 
   create_table "email_notifications", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -369,6 +371,7 @@ ActiveRecord::Schema.define(version: 2021_07_05_073659) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "order_index"
+    t.integer "frequently_count", default: 0
     t.index ["report_id"], name: "index_save_pivot_tables_on_report_id"
     t.index ["user_id"], name: "index_save_pivot_tables_on_user_id"
   end
