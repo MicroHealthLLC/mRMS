@@ -24,34 +24,39 @@
                     <i data-swchon-text="ON" data-swchoff-text="OFF"></i> Can View Channel
                   </label>
 
-                   <label class="toggle">
+                  <label class="toggle">
                     <%= f.check_box :can_edit %>
                     <i data-swchon-text="ON" data-swchoff-text="OFF"></i> Can Edit Channel
                   </label>
 
-                   <label class="toggle">
+                  <label class="toggle">
                     <%= f.check_box :can_add_report %>
                     <i data-swchon-text="ON" data-swchoff-text="OFF"></i> Can Add/Edit Report
-                   </label>
+                  </label>
 
-                   <label class="toggle">
+                  <label class="toggle">
                     <%= f.check_box :can_view_report %>
                     <i data-swchon-text="ON" data-swchoff-text="OFF"></i> Can View Report
                   </label>
 
-                   <label class="toggle">
+                  <label class="toggle">
                     <%= f.check_box :can_delete_report %>
                     <i data-swchon-text="ON" data-swchoff-text="OFF"></i> Can Delete Data Set
                   </label>
 
-                   <label class="toggle">
+                  <label class="toggle">
                     <%= f.check_box :can_add_users %>
                     <i data-swchon-text="ON" data-swchoff-text="OFF"></i>  Can Add/Change permission
                   </label>
 
-                      <label class="toggle">
+                  <label class="toggle">
                     <%= f.check_box :can_download %>
                     <i data-swchon-text="ON" data-swchoff-text="OFF"></i> Can Download File
+                  </label>
+
+                  <label class="toggle">
+                    <%= f.check_box :can_shared_report_with_dashboard %>
+                    <i data-swchon-text="ON" data-swchoff-text="OFF"></i> Can Shared Report with Dashboard
                   </label>
                 </div>
               </div>

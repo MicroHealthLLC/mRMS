@@ -11,7 +11,7 @@ class ReportsController < ApplicationController
   def show
     @query_id = params[:query_id] rescue nil
     @pivot_tables = @report.save_pivot_tables
-    @dashboard_count = ReportDashboard.where(pivot_table_id: @query_id).count if @query_id.present?
+    @dashboard_count = @report.dashboards.count
     render_403 unless  @channel.is_public? or @channel.is_creator? or @channel.my_permission.can_view_report?
     # if @report.document_url
     #   if params[:query_id] or params[:new_query]
@@ -182,7 +182,7 @@ class ReportsController < ApplicationController
                    when 'destroy'
                      @report.channel.my_permission.can_delete_report? or @report.channel.is_public?
                    else
-                     @channel.my_permission.can_add_users?
+                    params[:shared_report_with_dashboard].present? ? @channel.my_permission.can_shared_report_with_dashboard? : @channel.my_permission.can_add_users?
                  end
 
     render_403 unless (can_access or (@report && @report.channel.is_creator?) or (@report.nil? and  @channel.is_creator?) )

@@ -9,6 +9,7 @@
     <th> Can Delete Data Set </th>
     <th> Can Add/Change Permission </th>
     <th> Can Download File </th>
+    <th> Can Shared Report with Dashboard </th>
     <th> Edit </th>
     <th> Delete </th>
   </tr>
@@ -25,6 +26,7 @@
         <td><i class="fa fa-<%=  permission.can_delete_report? ? 'check' : 'times' %>"></i></td>
         <td><i class="fa fa-<%=  permission.can_add_users? ? 'check' : 'times' %>"></i></td>
         <td><i class="fa fa-<%=  permission.can_download? ? 'check' : 'times' %>"></i></td>
+        <td><i class="fa fa-<%=  permission.can_shared_report_with_dashboard? ? 'check' : 'times' %>"></i></td>
         <td>
           <%= link_to  '#', data: {toggle:"modal", target:"#AddPermission#{idx}Modal" } do
             "<i class='fa fa-edit' aria-hidden='true'>  </i>".html_safe

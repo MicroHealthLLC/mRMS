@@ -2,8 +2,8 @@ class DashboardsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_channel
   before_action :set_report
-  before_action :authorize, except: [:index, :show]
   before_action :set_dashboard, only: [:show, :edit, :update, :destroy]
+  before_action :authorize, except: [:index, :show]
 
   # GET /dashboards
   # GET /dashboards.json
@@ -133,9 +133,9 @@ class DashboardsController < ApplicationController
                    when 'edit', 'update',
                        'new',  'create' then  @channel.is_public? or @channel.my_permission.can_add_report? or @channel.my_permission.can_view?
                    when 'destroy'
-                     @report.channel.my_permission.can_delete_report? or @report.channel.is_public?
+                     @report.channel.my_permission.can_delete_report? or @report.channel.is_public? or current_user.id == @dashboard.user_id
                    else
-                     @channel.my_permission.can_add_users?
+                     @channel.my_permission.can_shared_report_with_dashboard?
                  end
 
     render_403 unless (can_access or (@report && @report.channel.is_creator?) or (@report.nil? and  @channel.is_creator?) )
