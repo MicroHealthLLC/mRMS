@@ -1,5 +1,6 @@
 <div class="row d-flex">
-  <% @reports.each do |report| %>
+  <% if @reports.count > 0 %>
+    <% @reports.each do |report| %>
       <div class="col-3">
         <a href="<%= channel_report_path(@channel, report )%>">
         <!--begin::Card-->
@@ -61,5 +62,11 @@
         </div>
         </a>
       </div>
+    <% end %>
+  <% else %>
+    <div class="mx-3 w-100 alert alert-custom alert-notice alert-light-primary show d-flex" role="alert">
+      <div class="alert-icon"><i class="fas fa-exclamation-triangle"></i></div>
+      <div class="alert-text">No data set to display!</div>
+    </div>
   <% end %>
 </div>

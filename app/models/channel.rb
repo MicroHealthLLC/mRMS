@@ -4,6 +4,7 @@ class Channel < ApplicationRecord
   audited except: [:created_at, :updated_at]
 
   has_many :reports, dependent: :destroy
+  has_many :multi_data_set_dashboards, dependent: :destroy
   has_many :channel_permissions, dependent: :destroy
   has_many :channel_orders, dependent: :destroy
   has_many :channel_notifications, dependent: :destroy

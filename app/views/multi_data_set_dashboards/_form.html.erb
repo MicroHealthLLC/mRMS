@@ -1,9 +1,9 @@
-<%= form_with(model: [@channel, @report, dashboard], local: true, html: { class: 'form-horizontal', id: 'reportForm' }) do |form| %>
-    <% if dashboard.errors.any? %>
+<%= form_with(model: [@channel, multi_dashboard], local: true, html: { class: 'form-horizontal', id: 'reportForm' }) do |form| %>
+    <% if multi_dashboard.errors.any? %>
         <div id="error_explanation">
-          <h2><%= pluralize(dashboard.errors.count, "error") %> prohibited this dashboard from being saved:</h2>
+          <h2><%= pluralize(multi_dashboard.errors.count, "error") %> prohibited this dashboard from being saved:</h2>
           <ul>
-            <% dashboard.errors.full_messages.each do |message| %>
+            <% multi_dashboard.errors.full_messages.each do |message| %>
                 <li><%= message %></li>
             <% end %>
           </ul>
@@ -11,7 +11,7 @@
     <% end %>
     <%= form.hidden_field :report_id , id: 'report_id'%>
     <div class="form-group">
-      <%= form.label 'Dashboard Name:', class: 'col-md-2 control-label' %>
+      <%= form.label 'Multi Data Set Dashboard Name:', class: 'col-md-2 control-label' %>
       <div class="col-md-10 p-0">
         <%= form.text_field :name , class: 'form-control' , id: 'dashboard_name'%>
       </div>
@@ -26,7 +26,7 @@
     <input type="hidden" name="pivot_table_indexs" id="pivotReportIndexs">
     <div class="form-group" >
       <div class="col-md-12 pr-0">
-        <%= link_to t('button_cancel'), channel_report_path(@channel, @report), class: 'btn btn-warning pull-right' %>
+        <%= link_to t('button_cancel'), channel_path(@channel), class: 'btn btn-warning pull-right' %>
         <%= form.submit t('button_save'), class: 'btn btn-success pull-right' ,:onclick => "return validateform()"%>
       </div>
     </div>
@@ -35,27 +35,29 @@
       <div class="row">
         <label class="col-md-2 pt-5 text-align-right">Draggable Items:</label>
         <div class="rounded p-3 row col-md-10 my-2 pl-1" id="form_report">
-          <% SavePivotTable.where(report_id: @report.id).each do |r| %>
-            <div id="report_<%=r.id%>" class="card p-2 m-2" style="width: 18rem" draggable="true" ondragstart="dragStart(event)">
-              <div onclick="removedCard('<%=r.id%>')" class="disp_icon mouse-hover">
-                <span><i class="fa fa-times d-none cursor-pointer float-right"></i></span>
-              </div>
-              <div class="card-body py-3 pl-0 pr-0 px-4 text-center">
-                <%#= image_tag "pivot/col-heatmap.png", size: '190x190', class: "w-100"%>
-                <% if (name = JSON.parse(r.content)['rendererName'].downcase) && name.include?('table') %>
-                    <%= image_tag "pivot/table.png", class: "pointer-events-none", style: "width: 13rem; height: 13rem;" %>
-                <% elsif (name = JSON.parse(r.content)['rendererName'].downcase) && name.include?('heatmap') %>
-                    <%= image_tag "pivot/heatmap.png", class: "pointer-events-none", style: "width: 13rem; height: 13rem;" %>
-                <% else %>
-                    <%= image_tag "pivot/#{name.gsub(' ', '-')}.png", class: "pointer-events-none", style: "width: 13rem; height: 13rem;"%>
-                <% end %>
-                <div class="cursor-pointer card-text">
-                  <span class="px-3" title="<%= r.name %>">
+          <% if @save_pivot_tables %>
+            <% @save_pivot_tables.each do |r| %>
+              <div id="report_<%=r.id%>" class="card p-2 m-2" style="width: 18rem" draggable="true" ondragstart="dragStart(event)">
+                <div onclick="removedCard('<%=r.id%>')" class="disp_icon mouse-hover">
+                  <span><i class="fa fa-times d-none cursor-pointer float-right"></i></span>
+                </div>
+                <div class="card-body py-3 pl-0 pr-0 px-4 text-center">
+                  <%#= image_tag "pivot/col-heatmap.png", size: '190x190', class: "w-100"%>
+                  <% if (name = JSON.parse(r.content)['rendererName'].downcase) && name.include?('table') %>
+                      <%= image_tag "pivot/table.png", class: "pointer-events-none", style: "width: 13rem; height: 13rem" %>
+                  <% elsif (name = JSON.parse(r.content)['rendererName'].downcase) && name.include?('heatmap') %>
+                      <%= image_tag "pivot/heatmap.png", class: "pointer-events-none", style: "width: 13rem; height: 13rem" %>
+                  <% else %>
+                      <%= image_tag "pivot/#{name.gsub(' ', '-')}.png", class: "pointer-events-none", style: "width: 13rem; height: 13rem"%>
+                  <% end %>
+                  <div class="cursor-pointer card-text">
+                    <span class="px-3" title="<%= r.name %>">
                       <%= r.name.truncate(70) %>
                     </span>
+                  </div>
                 </div>
               </div>
-            </div>
+            <% end %>
           <% end %>
         </div>
       </div>
@@ -88,7 +90,7 @@
     $("div#form_report").append(el);
   }
   $(document).ready(function() {
-    pivotReportIDs = <%= @dashboard.save_pivot_tables.order(order_index: :asc).pluck(:id) %>
+    pivotReportIDs = <%= multi_dashboard.save_pivot_tables.order(order_index: :asc).pluck(:id) %>
     if(pivotReportIDs.length > 0 ){
       pivotReportIDs.forEach(function (id, index) {
         el = $(`#report_${id}`);
