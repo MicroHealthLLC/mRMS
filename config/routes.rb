@@ -16,6 +16,8 @@ Rails.application.routes.draw do
       end
     end
 
+    resources :multi_data_set_dashboards
+
     resources :reports, except: [:index] do
       resources :dashboards do
         collection  do

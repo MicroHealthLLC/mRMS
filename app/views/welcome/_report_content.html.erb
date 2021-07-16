@@ -3,13 +3,13 @@
     <%= link_to channel_report_path(report.channel, report) do %>
       <% name = JSON.parse(report&.save_pivot_tables&.first&.content)["rendererName"].downcase rescue nil %>
       <% if (name && name.include?('table')) %>
-          <%= image_tag "pivot/table.png", style: 'width: 13rem'%>
+          <%= image_tag "pivot/table.png", style: 'width: 13rem; height: 13rem;'%>
       <% elsif (name && name.include?('heatmap')) %>
-          <%= image_tag "pivot/heatmap.png", style: 'width: 13rem'%>
+          <%= image_tag "pivot/heatmap.png", style: 'width: 13rem; height: 13rem;'%>
       <% elsif name%>
-          <%= image_tag "pivot/#{name.gsub(' ', '-')}.png" , style: 'width: 13rem'%>
+          <%= image_tag "pivot/#{name.gsub(' ', '-')}.png" , style: 'width: 13rem; height: 13rem;'%>
       <% else %>
-        <%= image_tag "dashboard.png", style: 'width: 13rem'%>
+        <%= image_tag "dashboard.png", style: 'width: 13rem; height: 13rem;'%>
       <% end %>
     <% end %>
   </div>

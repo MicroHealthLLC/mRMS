@@ -32,7 +32,7 @@ class User < ApplicationRecord
   has_many :user_attachments, foreign_key: :owner_id, dependent: :destroy
   accepts_nested_attributes_for :user_attachments, reject_if: :all_blank, allow_destroy: true
 
-
+  has_many :multi_data_set_dashboards, dependent: :destroy
   has_many :channels
   has_many :channel_orders
   has_many :shared_reports

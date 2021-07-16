@@ -9,4 +9,7 @@ class SavePivotTable < ApplicationRecord
   belongs_to :report, optional: true
   delegate :channel, to: :report
 
+  has_many :shared_multi_report_dashboards, dependent: :destroy, foreign_key: 'pivot_table_id'
+  has_many :multi_data_set_dashboards, through: :shared_multi_report_dashboards, dependent: :destroy
+
 end

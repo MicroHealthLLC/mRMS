@@ -1,0 +1,61 @@
+
+<%= stylesheet_link_tag 'pivot_style' %>
+<%= stylesheet_link_tag 'c3.min' %>
+<%= stylesheet_link_tag 'subtotal.min' %>
+<%= stylesheet_link_tag 'handsontable.full.min' %>
+<%= stylesheet_link_tag 'pivot.min' %>
+
+<%= javascript_include_tag 'pivottables/highstock' %>
+<%= javascript_include_tag 'pivottables/highcharts-more' %>
+<%= javascript_include_tag 'pivottables/treemap' %>
+
+<%= javascript_include_tag 'pivottables/pivot' %>
+<%= javascript_include_tag 'pivottables/d3.min' %>
+<%= javascript_include_tag 'pivottables/jquery.ui.touch-punch.min' %>
+<%= javascript_include_tag 'pivottables/c3.min' %>
+<%= javascript_include_tag 'pivottables/c3_renderers.min' %>
+<%= javascript_include_tag 'pivottables/plotly-basic-latest.min' %>
+<%= javascript_include_tag 'pivottables/plotly_renderers' %>
+<!-- subtotal.js libs from ../dist -->
+<%= javascript_include_tag 'pivottables/subtotal.min' %>
+
+<%= javascript_include_tag 'pivottables/handsontable.full.min' %>
+
+<div>
+
+  <!-- <%#= render partial: 'action_menu' %> -->
+
+  <div class="noprint row">
+    <div class="col-md-12 ">
+      <div class="pull-right" style="margin-bottom: 10px">
+        <% if current_user.id == @multi_dashboard.user_id %>
+          <%= edit_button edit_channel_multi_data_set_dashboard_path(@channel, @multi_dashboard) %>
+          <%= delete_button channel_multi_data_set_dashboard_path(@channel, @multi_dashboard), 'Dashboard' %>
+        <% end %>
+          <%= cancel_button channel_path(@channel) %>
+      </div>
+    </div>
+  </div>
+  <p>
+    <strong>Name:</strong>
+    <%= @multi_dashboard.name %>
+  </p>
+</div>
+<section id="widget-grid" class="channel">
+  <div class="row">
+    <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      <% @multi_dashboard.save_pivot_tables.order(order_index: :asc).each_with_index do |pivot_table, idx| %>
+        <div class=" card col-md-6 p-0" style="max-height: auto; overflow: hidden;">
+          <% params[:query_id] = pivot_table.id %>
+          <% params[:number] = idx %>
+          <%= render  partial: 'pivot_table',
+                      locals: {
+                        wid_id: 'Multi Data Set Dashboards',
+                        wid_title: '',
+                        pivot_table: pivot_table
+                      } %>
+        </div>
+      <% end %>
+    </article>
+  </div>
+</section>
