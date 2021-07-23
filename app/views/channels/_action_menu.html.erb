@@ -62,6 +62,10 @@
               <%= show_theme_button(channel_channel_permissions_path(@channel), ' Permissions', 'fas fa-cog', 'warning')  %>
           <% end %>
 
+          <% if @channel.is_public? or @channel.is_creator? %>
+              <%= show_button(new_channel_multi_data_set_dashboard_url(@channel), 'Add multi Data Set Dashboard', 'fa fa-plus', 'success', '',pivot_table_reports?(@channel))  %>
+          <% end %>
+
           <% if @channel.is_public? or @channel.is_creator? or (@channel.my_permission.can_add_report?) %>
               <%= show_theme_button(new_channel_report_url(@channel), ' Add Data set', 'fas fa-clipboard-check', 'info')  %>
           <% end %>

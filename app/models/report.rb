@@ -6,7 +6,7 @@ class Report < ApplicationRecord
   belongs_to :created_by, class_name: 'User', optional: true
   belongs_to :updated_by, class_name: 'User', optional: true
 
-  has_many :save_pivot_tables
+  has_many :save_pivot_tables, dependent: :destroy
   has_many :report_documents
   has_many :shared_reports
   has_many :dashboards
