@@ -115,16 +115,19 @@ class ReportsController < ApplicationController
   end
 
   def save_pivottable
-    p = SavePivotTable.where(id: params[:query_id]).first_or_initialize
-    p.attributes = params[:save_pivot_table].permit!
-    p.save
-    if params[:query_id]
-      flash[:notice] = 'Report was successfully updated'
+    pivot_table = SavePivotTable.where(id: params[:query_id]).first_or_initialize
+    pivot_table.attributes = params[:save_pivot_table].permit!
+    if pivot_table.save
+      if params[:query_id]
+        flash[:notice] = 'Report was successfully updated'
+      else
+        flash[:notice] = 'Report was successfully created'
+      end
+      redirect_to channel_report_path(@channel, @report, query_id: pivot_table.id)
     else
-      flash[:notice] = 'Report was successfully created'
+      flash[:alert] = pivot_table.errors.messages
+      redirect_to channel_report_path(@channel, @report, new_query: true)
     end
-
-    redirect_to channel_report_path(@channel, @report, query_id: p.id)
   end
 
   def delete_pivottable
