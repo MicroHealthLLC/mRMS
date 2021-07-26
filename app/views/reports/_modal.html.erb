@@ -14,7 +14,7 @@
                   <div class="form-group">
                     <%= f.label 'Name', class: 'col-md-2 control-label' %>
                     <div class="col-md-9">
-                      <%= f.text_field :name , class: 'form-control' %>
+                      <%= f.text_field :name , class: 'form-control', required: true %>
                       <%= f.hidden_field :user_id  %>
                       <%= f.hidden_field :report_id  %>
                       <span style="display: none;">
@@ -50,7 +50,7 @@
                   <div class="form-group">
                     <%= f.label 'Name', class: 'col-md-2 control-label' %>
                     <div class="col-md-9">
-                      <%= f.text_field :name , class: 'form-control' %>
+                      <%= f.text_field :name , class: 'form-control', required: true %>
                       <%= f.hidden_field :user_id  %>
                       <%= f.hidden_field :report_id  %>
                       <span style="display: none;">

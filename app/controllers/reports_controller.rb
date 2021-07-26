@@ -125,7 +125,7 @@ class ReportsController < ApplicationController
       end
       redirect_to channel_report_path(@channel, @report, query_id: pivot_table.id)
     else
-      flash[:notice] = pivot_table.errors.messages
+      flash[:alert] = pivot_table.errors.messages
       redirect_to channel_report_path(@channel, @report, new_query: true)
     end
   end
