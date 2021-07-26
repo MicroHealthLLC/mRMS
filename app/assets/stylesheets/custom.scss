@@ -23,3 +23,8 @@
    box-shadow: 0px 20px 40px rgba(0,0,0,0.2);
    transform: scale(1.02,1.02);
  }
+.pvtAxisContainer {
+  li:first-child {
+    margin-left: 30px !important;
+  }
+}
