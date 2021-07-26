@@ -1,14 +1,27 @@
-<div class="card m-2 p-2 cursor-pointer" style="width: 21rem">
-  <div class="text-center h-100">
-    <div class="card-body pt-0 pb-2">
-      <%= link_to [dashboard.report.channel, dashboard.report , dashboard ] do%>
-        <%= image_tag "dashboard.png", style: 'width: 13rem' %>
-      <% end %>
-      <div class="cursor-pointer text-center">
-          <p title="<%= dashboard.name %>" class="px-3 mb-0 mt-2">
-          <%= dashboard.name %>
-        </p>
+<% if dashboards.present? %>
+  <div class="row">
+    <% dashboards.each do |dashboard| %>
+      <div class="card m-2 p-2 cursor-pointer" style="width: 20rem">
+        <div class="text-center h-100">
+          <div class="card-body pt-0 pb-2">
+            <%= link_to [dashboard.report.channel, dashboard.report , dashboard ] do%>
+              <%= image_tag "dashboard.png", style: 'width: 13rem' %>
+            <% end %>
+            <div class="cursor-pointer text-center">
+                <p title="<%= dashboard.name %>" class="px-3 mb-0 mt-2">
+                <%= dashboard.name %>
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
+    <% end %>
+  </div>
+<% else %>
+  <div class="col-md-12">
+    <div class="alert alert-custom alert-notice alert-light-primary show d-flex" role="alert">
+      <div class="alert-icon"><i class="fas fa-exclamation-triangle"></i></div>
+      <div class="alert-text">No Dashboard to display!</div>
     </div>
   </div>
-</div>
+<% end %>

@@ -1,149 +1,127 @@
-<div class="col-md-12">
-  <h2><b>Public Reports</b></h2>
-</div>
-<% if @public_reports.present? %>
-  <div class="row">
-    <% @public_reports.each do |pivot_table| %>
-      <%= render partial: 'report_content' , locals: { pivot_table: pivot_table  }  %>
-    <% end %>
-  </div>
-  <div class="col-md-12 py-2">
-    <% if @public_reports_count > 3 && @public_reports.count == 3 %>
-      <%= link_to 'Show More...', welcome_index_path(display_all_public: true), remote: true , class: 'pull-right' %>
-    <% elsif @public_reports.count > 3 %>
-      <%= link_to 'Show Less...', root_path, remote: true, class: 'pull-right' %>
-    <% end %>
-  </div>
-<% else %>
-  <div class="col-md-12">
-    <div class="alert alert-custom alert-notice alert-light-primary show d-flex" role="alert">
-      <div class="alert-icon"><i class="fas fa-exclamation-triangle"></i></div>
-      <div class="alert-text">No Public Report to display!</div>
+<div id="widget-grid">
+  <section class="public_reports">
+    <div class="row">
+      <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <%= render  partial: 'report_content',
+                    layout: 'shared/smart_widget_wrapper',
+                    locals: {
+                      wid_id: 'public_reports',
+                      wid_title: 'Public Reports',
+                      reports: @public_reports
+                    } %>
+      </article>
+      <div class="col-md-12 py-2 pb-5">
+        <% if @public_reports_count > 3 && @public_reports.count == 3 %>
+          <%= link_to 'Show More...', welcome_index_path(display_all_public: true), class: 'pull-right' %>
+        <% elsif @public_reports.count > 3 %>
+          <%= link_to 'Show Less...', root_path, class: 'pull-right' %>
+        <% end %>
+      </div>
     </div>
-  </div>
-<% end %>
+  </section>
 
-<div class="col-md-12">
-  <h2><b>Public Dashboard</b></h2>
-</div>
-<% if @public_dashboard.present? %>
-  <div class="row">
-    <% @public_dashboard.each do |dashboard| %>
-      <%= render partial: 'dashboard_content' , locals: { dashboard: dashboard  }  %>
-    <% end %>
-  </div>
-  <div class="col-md-12 py-2">
-    <% if @public_dashboard_count > 3 && @public_dashboard.count == 3 %>
-      <%= link_to 'Show More...', welcome_index_path(display_all_public_dashboard: true), remote: true , class: 'pull-right' %>
-    <% elsif @public_dashboard.count > 3 %>
-      <%= link_to 'Show Less...', root_path, remote: true, class: 'pull-right' %>
-    <% end %>
-  </div>
-<% else %>
-  <div class="col-md-12">
-    <div class="alert alert-custom alert-notice alert-light-primary show d-flex" role="alert">
-      <div class="alert-icon"><i class="fas fa-exclamation-triangle"></i></div>
-      <div class="alert-text">No Public Dashboard to display!</div>
+  <section class="public_dashboard">
+    <div class="row">
+      <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <%= render  partial: 'dashboard_content',
+                    layout: 'shared/smart_widget_wrapper',
+                    locals: {
+                      wid_id: 'public_dashboard',
+                      wid_title: 'Public Dashboard',
+                      dashboards: @public_dashboard
+                    } %>
+      </article>
     </div>
-  </div>
-<% end %>
-
-<div class="col-md-12">
-  <h2><b>Personal Reports</b></h2>
-</div>
-<% if @personal_reports.present? %>
-  <div class="row">
-    <% @personal_reports.each do |pivot_table| %>
-      <%= render partial: 'report_content' , locals: { pivot_table: pivot_table  }  %>
-    <% end %>
-  </div>
-  <div class="col-md-12 py-2">
-    <% if @personal_dashboard_count > 3 && @personal_reports.count == 3 %>
-      <%= link_to 'Show More...', welcome_index_path(display_all_personal: true) , remote: true ,class: 'pull-right'  %>
-    <% elsif @personal_reports.count > 3 %>
-      <%= link_to 'Show Less...', root_path, remote: true, class: 'pull-right' %>
-    <%end%>
-  </div>
-<% else %>
-  <div class="col-md-12">
-    <div class="alert alert-custom alert-notice alert-light-primary show d-flex" role="alert">
-      <div class="alert-icon"><i class="fas fa-exclamation-triangle"></i></div>
-      <div class="alert-text">No Personal Report to display!</div>
-    </div>
-  </div>
-<% end %>
-
-<div class="col-md-12">
-  <h2><b>Personal Dashboard</b></h2>
-</div>
-<% if @personal_dashboard.present? %>
-  <div class="row">
-    <% @personal_dashboard.each do |dashboard| %>
-      <%= render partial: 'dashboard_content' , locals: { dashboard: dashboard  }  %>
-    <% end %>
-  </div>
-  <div class="col-md-12 py-2">
-    <% if @personal_reports_count > 3 && @personal_dashboard.count == 3 %>
-      <%= link_to 'Show More...', welcome_index_path(display_all_personal_dashboard: true), remote: true , class: 'pull-right' %>
-    <% elsif @personal_dashboard.count > 3 %>
-      <%= link_to 'Show Less...', root_path, remote: true, class: 'pull-right' %>
-    <% end %>
-  </div>
-<% else %>
-  <div class="col-md-12">
-    <div class="alert alert-custom alert-notice alert-light-primary show d-flex" role="alert">
-      <div class="alert-icon"><i class="fas fa-exclamation-triangle"></i></div>
-      <div class="alert-text">No Personal Dashboard to display!</div>
-    </div>
-  </div>
-<% end %>
-
-<div class="col-md-12">
-  <h2><b>Group Reports</b></h2>
-</div>
-<% if @group_reports.present? %>
-  <div class="row">
-    <% @group_reports.each do |pivot_table| %>
-      <%= render partial: 'report_content' , locals: { pivot_table: pivot_table  }  %>
-    <% end %>
-  </div>
-  <div class="col-md-12 py-2">
-    <% if @group_reports_count > 3 && @group_reports.count == 3 %>
-      <%= link_to 'Show More...', welcome_index_path(display_all_group: true) , remote: true, class: 'pull-right'  %>
-    <% elsif  @group_reports.count > 3 %>
-      <%= link_to 'Show Less...', root_path, remote: true, class: 'pull-right' %>
-    <% end %>
-  </div>
-<% else %>
-  <div class="col-md-12">
-    <div class="alert alert-custom alert-notice alert-light-primary show d-flex" role="alert">
-      <div class="alert-icon"><i class="fas fa-exclamation-triangle"></i></div>
-      <div class="alert-text">No Group Report to display!</div>
-    </div>
-  </div>
-<% end %>
-
-<div class="col-md-12">
-  <h2><b>Group Dashboard</b></h2>
-</div>
-<% if @group_dashboard.present? %>
-  <div class="row">
-    <% @group_dashboard.each do |dashboard| %>
-        <%= render partial: 'dashboard_content' , locals: { dashboard: dashboard  }  %>
+    <div class="col-md-12 py-2 pb-5">
+      <% if @public_dashboard_count > 3 && @public_dashboard.count == 3 %>
+        <%= link_to 'Show More...', welcome_index_path(display_all_public_dashboard: true), class: 'pull-right' %>
+      <% elsif @public_dashboard.count > 3 %>
+        <%= link_to 'Show Less...', root_path, class: 'pull-right' %>
       <% end %>
-  </div>
-  <div class="col-md-12 py-2">
-    <% if @group_dashboard_count > 3 && @group_dashboard.count == 3 %>
-      <%= link_to 'Show More...', welcome_index_path(display_all_group_dashboard: true), remote: true , class: 'pull-right' %>
-    <% elsif @group_dashboard.count > 3 %>
-      <%= link_to 'Show Less...', root_path, remote: true, class: 'pull-right' %>
-    <% end %>
-  </div>
-<% else %>
-  <div class="col-md-12">
-    <div class="alert alert-custom alert-notice alert-light-primary show d-flex" role="alert">
-      <div class="alert-icon"><i class="fas fa-exclamation-triangle"></i></div>
-      <div class="alert-text">No Group Dashboard to display!</div>
     </div>
-  </div>
-<% end %>
+  </section>
+
+  <section class="personal_reports">
+    <div class="row">
+      <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <%= render  partial: 'report_content',
+                    layout: 'shared/smart_widget_wrapper',
+                    locals: {
+                      wid_id: 'personal_reports',
+                      wid_title: 'Personal Reports',
+                      reports: @personal_reports
+                    } %>
+      </article>
+    </div>
+    <div class="col-md-12 py-2 pb-5">
+      <% if @personal_dashboard_count > 3 && @personal_reports.count == 3 %>
+        <%= link_to 'Show More...', welcome_index_path(display_all_personal: true) ,class: 'pull-right'  %>
+      <% elsif @personal_reports.count > 3 %>
+        <%= link_to 'Show Less...', root_path, class: 'pull-right' %>
+      <%end%>
+    </div>
+  </section>
+
+  <section class="personal_dashboard">
+    <div class="row">
+      <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <%= render  partial: 'dashboard_content',
+                    layout: 'shared/smart_widget_wrapper',
+                    locals: {
+                      wid_id: 'personal_dashboard',
+                      wid_title: 'Personal Dashboard',
+                      dashboards: @personal_dashboard
+                    } %>
+      </article>
+    </div>
+    <div class="col-md-12 py-2 pb-5">
+      <% if @personal_reports_count > 3 && @personal_dashboard.count == 3 %>
+        <%= link_to 'Show More...', welcome_index_path(display_all_personal_dashboard: true), class: 'pull-right' %>
+      <% elsif @personal_dashboard.count > 3 %>
+        <%= link_to 'Show Less...', root_path, class: 'pull-right' %>
+      <% end %>
+    </div>
+  </section>
+
+  <section class="group_reports">
+    <div class="row">
+      <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <%= render  partial: 'report_content',
+                    layout: 'shared/smart_widget_wrapper',
+                    locals: {
+                      wid_id: 'group_reports',
+                      wid_title: 'Group Reports',
+                      reports: @group_reports
+                    } %>
+      </article>
+    </div>
+    <div class="col-md-12 py-2 pb-5">
+      <% if @group_reports_count > 3 && @group_reports.count == 3 %>
+        <%= link_to 'Show More...', welcome_index_path(display_all_group: true) , class: 'pull-right'  %>
+      <% elsif  @group_reports.count > 3 %>
+        <%= link_to 'Show Less...', root_path, class: 'pull-right' %>
+      <% end %>
+    </div>
+  </section>
+
+  <section class="group_dashboard">
+    <div class="row">
+      <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <%= render  partial: 'dashboard_content',
+                    layout: 'shared/smart_widget_wrapper',
+                    locals: {
+                      wid_id: 'group_dashboard',
+                      wid_title: 'Group Dashboard',
+                      dashboards: @group_dashboard
+                    } %>
+      </article>
+      <div class="col-md-12 py-2 pb-5">
+        <% if @group_dashboard_count > 3 && @group_dashboard.count == 3 %>
+          <%= link_to 'Show More...', welcome_index_path(display_all_group_dashboard: true), class: 'pull-right' %>
+        <% elsif @group_dashboard.count > 3 %>
+          <%= link_to 'Show Less...', root_path, class: 'pull-right' %>
+        <% end %>
+      </div>
+    </div>
+  </section>
+</div>

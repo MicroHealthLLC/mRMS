@@ -1,26 +1,39 @@
-<div class="card m-2 p-2 cursor-pointer" style="width: 21rem;">
-  <div class="text-center">
-    <%= link_to channel_report_path(pivot_table.channel, pivot_table.report, query_id: pivot_table.id) do %>
-      <% name = JSON.parse(pivot_table.content)["rendererName"].downcase rescue nil %>
-      <% if (name && name.include?('table')) %>
-          <%= image_tag "pivot/table.png", style: 'width: 13rem; height: 13rem;'%>
-      <% elsif (name && name.include?('heatmap')) %>
-          <%= image_tag "pivot/heatmap.png", style: 'width: 13rem; height: 13rem;'%>
-      <% elsif name%>
-          <%= image_tag "pivot/#{name.gsub(' ', '-')}.png" , style: 'width: 13rem; height: 13rem;'%>
-      <% else %>
-        <%= image_tag "dashboard.png", style: 'width: 13rem; height: 13rem;'%>
-      <% end %>
+<% if reports.present? %>
+  <div class="row">
+    <% reports.each do |pivot_table| %>
+      <div class="card m-2 p-2 cursor-pointer" style="width: 20rem;">
+        <div class="text-center">
+          <%= link_to channel_report_path(pivot_table.channel, pivot_table.report, query_id: pivot_table.id) do %>
+            <% name = JSON.parse(pivot_table.content)["rendererName"].downcase rescue nil %>
+            <% if (name && name.include?('table')) %>
+                <%= image_tag "pivot/table.png", style: 'width: 13rem; height: 13rem;'%>
+            <% elsif (name && name.include?('heatmap')) %>
+                <%= image_tag "pivot/heatmap.png", style: 'width: 13rem; height: 13rem;'%>
+            <% elsif name%>
+                <%= image_tag "pivot/#{name.gsub(' ', '-')}.png" , style: 'width: 13rem; height: 13rem;'%>
+            <% else %>
+              <%= image_tag "dashboard.png", style: style: 'width: 13rem; height: 13rem;'%>
+            <% end %>
+          <% end %>
+        </div>
+        <div class="text-center pb-3">
+          <div class="row pt-3">
+            <b class="col-5 text-align-right">Data Set:</b>
+            <p class="col-7 text-align-left data_title text-truncate w-100" title="<%= pivot_table.name %>"> <%= pivot_table.name.truncate(25) %> </p>
+          </div>
+          <div class="row">
+            <b class="col-5 text-align-right">Channel:</b>
+            <p class="col-7 text-align-left data_title" title="<%= pivot_table.channel.name %>"> <%= pivot_table.channel.name.truncate(25) %> </p>
+          </div>
+        </div>
+      </div>
     <% end %>
   </div>
-  <div class="text-center pb-3">
-    <div class="row pt-3">
-      <b class="col-5 text-align-right">Data Set:</b>
-      <p class="col-7 text-align-left data_title text-truncate w-100" title="<%= pivot_table.name %>"> <%= pivot_table.name.truncate(25) %> </p>
-    </div>
-    <div class="row">
-      <b class="col-5 text-align-right">Channel:</b>
-      <p class="col-7 text-align-left data_title" title="<%= pivot_table.channel.name %>"> <%= pivot_table.channel.name.truncate(25) %> </p>
+<% else %>
+  <div class="col-md-12">
+    <div class="alert alert-custom alert-notice alert-light-primary show d-flex" role="alert">
+      <div class="alert-icon"><i class="fas fa-exclamation-triangle"></i></div>
+      <div class="alert-text">No Report to display!</div>
     </div>
   </div>
-</div>
+<% end %>
