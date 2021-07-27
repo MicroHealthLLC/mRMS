@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_16_120915) do
+ActiveRecord::Schema.define(version: 2021_07_27_070157) do
 
   create_table "addresses", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
     t.integer "address_type_id"
@@ -380,6 +380,7 @@ ActiveRecord::Schema.define(version: 2021_07_16_120915) do
     t.datetime "updated_at", null: false
     t.integer "order_index"
     t.integer "frequently_count", default: 0
+    t.integer "category_type"
     t.index ["report_id"], name: "index_save_pivot_tables_on_report_id"
     t.index ["user_id"], name: "index_save_pivot_tables_on_user_id"
   end
