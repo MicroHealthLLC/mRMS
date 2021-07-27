@@ -1,127 +1,107 @@
 <div id="widget-grid">
-  <section class="public_reports">
-    <div class="row">
-      <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-        <%= render  partial: 'report_content',
-                    layout: 'shared/smart_widget_wrapper',
-                    locals: {
-                      wid_id: 'public_reports',
-                      wid_title: 'Public Reports',
-                      reports: @public_reports
-                    } %>
-      </article>
-      <div class="col-md-12 py-2 pb-5">
-        <% if @public_reports_count > 3 && @public_reports.count == 3 %>
-          <%= link_to 'Show More...', welcome_index_path(display_all_public: true), class: 'pull-right' %>
-        <% elsif @public_reports.count > 3 %>
-          <%= link_to 'Show Less...', root_path, class: 'pull-right' %>
-        <% end %>
-      </div>
+  <div class="row">
+    <div class="col-md-12 px-0">
+      <h1 class="font-weight-bold">Reports</h1>
     </div>
-  </section>
+    <div class="col-md-12 px-0">
+      <section class="public_reports">
+        <div class="row mb-5">
+          <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <%= render  partial: 'report_content',
+                        layout: 'shared/smart_widget_wrapper',
+                        locals: {
+                          wid_id: 'public_reports',
+                          wid_title: 'Public Reports',
+                          reports: @public_reports,
+                          report_count: @public_reports_count,
+                          display_more_report: 'display_all_public'
+                        } %>
+          </article>
+        </div>
+      </section>
+      <section class="personal_reports">
+        <div class="row mb-5">
+          <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <%= render  partial: 'report_content',
+                        layout: 'shared/smart_widget_wrapper',
+                        locals: {
+                          wid_id: 'personal_reports',
+                          wid_title: 'Personal Reports',
+                          reports: @personal_reports,
+                          report_count: @personal_dashboard_count,
+                          display_more_report: 'display_all_personal'
+                        } %>
+          </article>
+        </div>
+      </section>
+      <section class="group_reports">
+        <div class="row mb-5">
+          <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <%= render  partial: 'report_content',
+                        layout: 'shared/smart_widget_wrapper',
+                        locals: {
+                          wid_id: 'group_reports',
+                          wid_title: 'Group Reports',
+                          reports: @group_reports,
+                          report_count: @group_reports_count,
+                          display_more_report: 'display_all_group'
+                        } %>
+          </article>
+        </div>
+      </section>
+    </div>
+  </div>
 
-  <section class="public_dashboard">
-    <div class="row">
-      <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-        <%= render  partial: 'dashboard_content',
-                    layout: 'shared/smart_widget_wrapper',
-                    locals: {
-                      wid_id: 'public_dashboard',
-                      wid_title: 'Public Dashboard',
-                      dashboards: @public_dashboard
-                    } %>
-      </article>
+  <div class="row">
+    <div class="col-md-12 px-0">
+      <h1 class="font-weight-bold">Dashboards</h1>
     </div>
-    <div class="col-md-12 py-2 pb-5">
-      <% if @public_dashboard_count > 3 && @public_dashboard.count == 3 %>
-        <%= link_to 'Show More...', welcome_index_path(display_all_public_dashboard: true), class: 'pull-right' %>
-      <% elsif @public_dashboard.count > 3 %>
-        <%= link_to 'Show Less...', root_path, class: 'pull-right' %>
-      <% end %>
+    <div class="col-md-12 px-0">
+      <section class="public_dashboard">
+        <div class="row mb-5">
+          <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <%= render  partial: 'dashboard_content',
+                        layout: 'shared/smart_widget_wrapper',
+                        locals: {
+                          wid_id: 'public_dashboard',
+                          wid_title: 'Public Dashboard',
+                          dashboards: @public_dashboard,
+                          dashboard_count: @public_dashboard_count,
+                          display_more_dashboard: 'display_all_public_dashboard'
+                        } %>
+          </article>
+        </div>
+      </section>
+      <section class="personal_dashboard">
+        <div class="row mb-5">
+          <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <%= render  partial: 'dashboard_content',
+                        layout: 'shared/smart_widget_wrapper',
+                        locals: {
+                          wid_id: 'personal_dashboard',
+                          wid_title: 'Personal Dashboard',
+                          dashboards: @personal_dashboard,
+                          dashboard_count: @personal_dashboard_count,
+                          display_more_dashboard: 'display_all_personal_dashboard'
+                        } %>
+          </article>
+        </div>
+      </section>
+      <section class="group_dashboard">
+        <div class="row mb-5">
+          <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <%= render  partial: 'dashboard_content',
+                        layout: 'shared/smart_widget_wrapper',
+                        locals: {
+                          wid_id: 'group_dashboard',
+                          wid_title: 'Group Dashboard',
+                          dashboards: @group_dashboard,
+                          dashboard_count: @group_reports_count,
+                          display_more_dashboard: 'group_dashboard_count'
+                        } %>
+          </article>
+        </div>
+      </section>
     </div>
-  </section>
-
-  <section class="personal_reports">
-    <div class="row">
-      <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-        <%= render  partial: 'report_content',
-                    layout: 'shared/smart_widget_wrapper',
-                    locals: {
-                      wid_id: 'personal_reports',
-                      wid_title: 'Personal Reports',
-                      reports: @personal_reports
-                    } %>
-      </article>
-    </div>
-    <div class="col-md-12 py-2 pb-5">
-      <% if @personal_dashboard_count > 3 && @personal_reports.count == 3 %>
-        <%= link_to 'Show More...', welcome_index_path(display_all_personal: true) ,class: 'pull-right'  %>
-      <% elsif @personal_reports.count > 3 %>
-        <%= link_to 'Show Less...', root_path, class: 'pull-right' %>
-      <%end%>
-    </div>
-  </section>
-
-  <section class="personal_dashboard">
-    <div class="row">
-      <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-        <%= render  partial: 'dashboard_content',
-                    layout: 'shared/smart_widget_wrapper',
-                    locals: {
-                      wid_id: 'personal_dashboard',
-                      wid_title: 'Personal Dashboard',
-                      dashboards: @personal_dashboard
-                    } %>
-      </article>
-    </div>
-    <div class="col-md-12 py-2 pb-5">
-      <% if @personal_reports_count > 3 && @personal_dashboard.count == 3 %>
-        <%= link_to 'Show More...', welcome_index_path(display_all_personal_dashboard: true), class: 'pull-right' %>
-      <% elsif @personal_dashboard.count > 3 %>
-        <%= link_to 'Show Less...', root_path, class: 'pull-right' %>
-      <% end %>
-    </div>
-  </section>
-
-  <section class="group_reports">
-    <div class="row">
-      <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-        <%= render  partial: 'report_content',
-                    layout: 'shared/smart_widget_wrapper',
-                    locals: {
-                      wid_id: 'group_reports',
-                      wid_title: 'Group Reports',
-                      reports: @group_reports
-                    } %>
-      </article>
-    </div>
-    <div class="col-md-12 py-2 pb-5">
-      <% if @group_reports_count > 3 && @group_reports.count == 3 %>
-        <%= link_to 'Show More...', welcome_index_path(display_all_group: true) , class: 'pull-right'  %>
-      <% elsif  @group_reports.count > 3 %>
-        <%= link_to 'Show Less...', root_path, class: 'pull-right' %>
-      <% end %>
-    </div>
-  </section>
-
-  <section class="group_dashboard">
-    <div class="row">
-      <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-        <%= render  partial: 'dashboard_content',
-                    layout: 'shared/smart_widget_wrapper',
-                    locals: {
-                      wid_id: 'group_dashboard',
-                      wid_title: 'Group Dashboard',
-                      dashboards: @group_dashboard
-                    } %>
-      </article>
-      <div class="col-md-12 py-2 pb-5">
-        <% if @group_dashboard_count > 3 && @group_dashboard.count == 3 %>
-          <%= link_to 'Show More...', welcome_index_path(display_all_group_dashboard: true), class: 'pull-right' %>
-        <% elsif @group_dashboard.count > 3 %>
-          <%= link_to 'Show Less...', root_path, class: 'pull-right' %>
-        <% end %>
-      </div>
-    </div>
-  </section>
+  </div>
 </div>

@@ -16,6 +16,13 @@
         </div>
       </div>
     <% end %>
+    <div class="col-md-12 py-2 pb-5">
+      <% if dashboard_count > 3 && dashboards.count == 3 %>
+        <%= link_to 'Show More...', welcome_index_path("#{display_more_dashboard}": true), class: 'pull-right' %>
+      <% elsif dashboards.count > 3 %>
+        <%= link_to 'Show Less...', root_path, class: 'pull-right' %>
+      <% end %>
+    </div>
   </div>
 <% else %>
   <div class="col-md-12">
