@@ -131,7 +131,7 @@ class DashboardsController < ApplicationController
   def authorize
     can_access = case params[:action]
                    when 'edit', 'update',
-                       'new',  'create' then  @channel.is_public? or @channel.my_permission.can_add_report? or @channel.my_permission.can_view?
+                       'new',  'create' then  @channel.is_public? or @channel.my_permission.can_shared_report_with_dashboard? or current_user.id == @dashboard.user_id
                    when 'destroy'
                      @report.channel.my_permission.can_delete_report? or @report.channel.is_public? or current_user.id == @dashboard.user_id
                    else
