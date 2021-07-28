@@ -1,0 +1,34 @@
+<% if dashboards.present? %>
+  <div class="row">
+    <% dashboards.each do |dashboard| %>
+      <div class="card m-2 p-2 cursor-pointer" style="width: 20rem">
+        <div class="text-center h-100">
+          <div class="card-body pt-0 pb-2">
+            <%= link_to [dashboard.report.channel, dashboard.report , dashboard ] do%>
+              <%= image_tag "dashboard.png", style: 'width: 13rem' %>
+            <% end %>
+            <div class="cursor-pointer text-center">
+                <p title="<%= dashboard.name %>" class="px-3 mb-0 mt-2">
+                <%= dashboard.name %>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+    <div class="col-md-12 py-2 pb-5">
+      <% if dashboard_count > 3 && dashboards.count == 3 %>
+        <%= link_to 'Show More...', welcome_index_path("#{display_more_dashboard}": true), class: 'pull-right' %>
+      <% elsif dashboards.count > 3 %>
+        <%= link_to 'Show Less...', root_path, class: 'pull-right' %>
+      <% end %>
+    </div>
+  </div>
+<% else %>
+  <div class="col-md-12">
+    <div class="alert alert-custom alert-notice alert-light-primary show d-flex" role="alert">
+      <div class="alert-icon"><i class="fas fa-exclamation-triangle"></i></div>
+      <div class="alert-text">No Dashboard to display!</div>
+    </div>
+  </div>
+<% end %>
