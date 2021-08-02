@@ -52,25 +52,10 @@ class WelcomeController < ApplicationController
     personal_multi_dashboards        = MultiDataSetDashboard.personal_channel_multi_dashboard
     group_multi_dashboards           = MultiDataSetDashboard.group_channel_multi_dashboard
 
-    public_shared_multi              = SharedMultiReportDashboard.where(multi_data_set_dashboard_id: public_multi_dashboards.pluck(:id)).pluck(:pivot_table_id)
-    personal_shared_multi            = SharedMultiReportDashboard.where(multi_data_set_dashboard_id: personal_multi_dashboards.pluck(:id)).pluck(:pivot_table_id)
-    group_shared_multi               = SharedMultiReportDashboard.where(multi_data_set_dashboard_id: group_multi_dashboards.pluck(:id)).pluck(:pivot_table_id)
-
-    public_shared_pivot_tables       = SavePivotTable.where(id: public_shared_multi)
-    personal_shared_pivot_tables     = SavePivotTable.where(id: personal_shared_multi)
-    group_shared_pivot_tables        = SavePivotTable.where(id: group_shared_multi)
-
-    @public_shared_reports           = params[:display_all_public_shared].present? ? public_shared_pivot_tables : public_shared_pivot_tables.first(3)
-    @personal_shared_reports         = params[:display_all_personal_shared].present? ? personal_shared_pivot_tables : personal_shared_pivot_tables.first(3)
-    @group_shared_reports            = params[:display_all_group_shared].present? ? group_shared_pivot_tables : group_shared_pivot_tables.first(3)
 
     @public_shared_dashboard         = params[:display_all_public_shared_dashboard].present? ? public_multi_dashboards : public_multi_dashboards.first(3)
     @personal_shared_dashboard       = params[:display_all_personal_shared_dashboard].present? ? personal_multi_dashboards : personal_multi_dashboards.first(3)
     @group_shared_dashboard          = params[:display_all_group_shared_dashboard].present? ? group_multi_dashboards : group_multi_dashboards.first(3)
-
-    @public_shared_reports_count     = public_shared_pivot_tables.count
-    @personal_shared_reports_count   = personal_shared_pivot_tables.count
-    @group_shared_reports_count      = group_shared_pivot_tables.count
 
     @public_shared_dashboard_count   = public_multi_dashboards.count
     @personal_shared_dashboard_count = personal_multi_dashboards.count
