@@ -31,6 +31,7 @@ class WelcomeController < ApplicationController
     @personal_dashboard_count = personal_dashboard.count
     @group_dashboard_count = group_dashboard_reports.count
 
+    load_multi_shared_dashboard_data
     session[:appointment_store_id] = nil if User.current_user.can?(:manage_roles)
     if session[:employee_id]
       session[:appointment_store_id] = nil
@@ -43,5 +44,22 @@ class WelcomeController < ApplicationController
   end
 
   def onedriveredirect
+  end
+
+  private
+  def load_multi_shared_dashboard_data
+    public_multi_dashboards          = MultiDataSetDashboard.public_channel_multi_dashboard
+    personal_multi_dashboards        = MultiDataSetDashboard.personal_channel_multi_dashboard
+    group_multi_dashboards           = MultiDataSetDashboard.group_channel_multi_dashboard
+
+
+    @public_shared_dashboard         = params[:display_all_public_shared_dashboard].present? ? public_multi_dashboards : public_multi_dashboards.first(3)
+    @personal_shared_dashboard       = params[:display_all_personal_shared_dashboard].present? ? personal_multi_dashboards : personal_multi_dashboards.first(3)
+    @group_shared_dashboard          = params[:display_all_group_shared_dashboard].present? ? group_multi_dashboards : group_multi_dashboards.first(3)
+
+    @public_shared_dashboard_count   = public_multi_dashboards.count
+    @personal_shared_dashboard_count = personal_multi_dashboards.count
+    @group_dashboard_shared_count    = group_multi_dashboards.count
+
   end
 end
