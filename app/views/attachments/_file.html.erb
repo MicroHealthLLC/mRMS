@@ -1,18 +1,20 @@
 <% if attachment.file_url %>
     <%  extension = attachment.file.file.extension.downcase %>
     <% if extension =~ /(pdf|swf)$/i  %>
-
         <%= link_to attachment.read_attribute(:file), attachment.file_url,
                     :id => 'attachment', :filename => attachment.read_attribute(:file) ,
                     :class => "icon-only icon-magnifier lightbox_preview #{extension}",
                     :data  => {:fancybox_type => 'iframe'}   %>
 
     <% elsif %w{jpg png jpg gif bmp}.include?(extension) %>
-
         <%= link_to attachment.read_attribute(:file), attachment.file_url,
                     :id => 'attachment', :filename => attachment.read_attribute(:file) ,
                     :class => "icon-only icon-magnifier lightbox_preview #{extension}"  %>
 
+    <% elsif %w{txt}.include?(extension) %>
+      <a href="<%= attachment.file_url %>" download class="icon-only icon-magnifier lightbox_preview <%= extension %>">
+        <%= attachment.read_attribute(:file) %>
+      </a>
     <% else %>
         <%= link_to attachment.read_attribute(:file), attachment.file_url,
                     :id => 'attachment', :filename => attachment.read_attribute(:file) ,
