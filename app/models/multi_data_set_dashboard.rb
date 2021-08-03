@@ -8,7 +8,7 @@ class MultiDataSetDashboard < ApplicationRecord
 
   scope :public_channel_multi_dashboard, -> { where(channel_id: Channel.is_public.pluck(:id)) }
   scope :personal_channel_multi_dashboard, -> { where(channel_id: Channel.my_personal_channel.pluck(:id)) }
-  scope :group_channel_multi_dashboard, -> { where(channel_id: Channel.for_shared_users.pluck(:id)) }
+  scope :group_channel_multi_dashboard, -> { where(channel_id: Channel.for_user.pluck(:id)) }
 
   validates_presence_of :user_id
   validates_presence_of :channel_id
