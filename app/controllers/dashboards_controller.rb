@@ -3,7 +3,7 @@ class DashboardsController < ApplicationController
   before_action :set_channel
   before_action :set_report
   before_action :set_dashboard, only: [:show, :edit, :update, :destroy]
-  before_action :authorize, except: [:index, :show]
+  before_action :authorize, except: [:index, :show, :new,:create]
 
   # GET /dashboards
   # GET /dashboards.json

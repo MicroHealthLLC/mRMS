@@ -19,6 +19,7 @@
     <div class="form-group">
       <%= form.label 'Reports:', class: 'col-md-2 control-label' %>
       <div id="dragDropDataSet" class="rounded row my-3 card-min-hight border px-3 pt-3 pb-10" ondrop="dragDrop(event)" ondragover="allowDrop(event)">
+
       </div>
     </div>
 
@@ -41,7 +42,7 @@
             <% save_pivot_tables.each do |r| %>
               <div id="report_<%=r.id%>" class="card p-2 m-2" style="width: 18rem" draggable="true" ondragstart="dragStart(event)">
                 <div onclick="removedCard('<%=r.id%>')" class="disp_icon mouse-hover">
-                  <span><i class="fa fa-times d-none cursor-pointer float-right"></i></span>
+                  <span><i class="fa fa-times d-none cursor-pointer float-right px-5"></i></span>
                 </div>
                 <div class="card-body py-3 pl-0 pr-0 px-4 text-center">
                   <%#= image_tag "pivot/col-heatmap.png", size: '190x190', class: "w-100"%>
@@ -90,6 +91,9 @@
     let el = $(`div#report_${id}`)
     el.removeClass('disp_i');
     $("div#form_report").append(el);
+    if($('#dragDropDataSet > div').length == 0){
+      $("#dragDropDataSet").append("<div id='placeholedReport' class='w-100 mx-auto'> <p class='text-center mt-5'>Draggable Items Drop here</p> </div>");
+    }
   }
   $(document).ready(function() {
     pivotReportIDs = <%= pluck_pivot_table_ids(multi_dashboard, params) %>
@@ -99,6 +103,10 @@
         el.addClass('disp_i');
         $("#dragDropDataSet").append(el);
       });
+    }
+    else
+    {
+      $("#dragDropDataSet").append("<div id='placeholedReport' class='w-100 mx-auto'> <p class='text-center mt-5'>Draggable Items Drop here</p> </div>");
     }
   });
   function allowDrop (ev) {
@@ -118,6 +126,11 @@
     $('#dragDropDataSet div').each(function() {
       pivotTableCard = this.id;
       $(this).addClass('disp_i');
+
     });
+    $('#dragDropDataSet > #placeholedReport').remove()
+    if(t.classList.contains("report-placeholder") || t.classList.contains("text-center")){
+      return false;
+    }
   }
 </script>
