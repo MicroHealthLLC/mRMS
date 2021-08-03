@@ -5,8 +5,19 @@
 .display-contents{
  display: contents;
 }
+#dragDropDataSet.placeholder-custom::after{
+  content: 'Drop here';
+  width: 100%;
+  color: #3F4254;
+  text-align: center;
+  margin-top: 30px;
+}
+#dragDropDataSet {
+ .card{
+  width: 30rem !important;
+ }
+}
 .disp_i {
-  width: 25rem !important;
   .card-body{
     padding-top: 0px !important;
   }

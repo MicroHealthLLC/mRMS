@@ -11,15 +11,14 @@
     <% end %>
     <%= form.hidden_field :report_id , id: 'report_id'%>
     <div class="form-group">
-      <%= form.label 'Multi Data Set Dashboard Name:', class: 'col-md-2 control-label' %>
+      <%= form.label 'Name:', class: 'col-md-2 control-label' %>
       <div class="col-md-10 p-0">
         <%= form.text_field :name, class: 'form-control', id: 'dashboard_name', required: true %>
       </div>
     </div>
     <div class="form-group">
-      <%= form.label 'Reports:', class: 'col-md-2 control-label' %>
+      <%= form.label 'Reports:', class: 'col-md-2 control-label pt-4' %>
       <div id="dragDropDataSet" class="rounded row my-3 card-min-hight border px-3 pt-3 pb-10" ondrop="dragDrop(event)" ondragover="allowDrop(event)">
-
       </div>
     </div>
 
@@ -92,7 +91,7 @@
     el.removeClass('disp_i');
     $("div#form_report").append(el);
     if($('#dragDropDataSet > div').length == 0){
-      $("#dragDropDataSet").append("<div id='placeholedReport' class='w-100 mx-auto'> <p class='text-center mt-5'>Draggable Items Drop here</p> </div>");
+      $("#dragDropDataSet").addClass('placeholder-custom')
     }
   }
   $(document).ready(function() {
@@ -106,7 +105,7 @@
     }
     else
     {
-      $("#dragDropDataSet").append("<div id='placeholedReport' class='w-100 mx-auto'> <p class='text-center mt-5'>Draggable Items Drop here</p> </div>");
+      $("#dragDropDataSet").addClass('placeholder-custom')
     }
   });
   function allowDrop (ev) {
@@ -124,13 +123,9 @@
     var data =  ev.dataTransfer.getData ("text");
     ev.target.appendChild (document.getElementById(data));
     $('#dragDropDataSet div').each(function() {
+      $("#dragDropDataSet").removeClass('placeholder-custom')
       pivotTableCard = this.id;
       $(this).addClass('disp_i');
-
     });
-    $('#dragDropDataSet > #placeholedReport').remove()
-    if(t.classList.contains("report-placeholder") || t.classList.contains("text-center")){
-      return false;
-    }
   }
 </script>
