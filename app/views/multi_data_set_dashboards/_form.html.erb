@@ -35,8 +35,10 @@
       <div class="row">
         <label class="col-md-2 pt-5 text-align-right">Draggable Items:</label>
         <div class="rounded p-3 row col-md-10 my-2 pl-1" id="form_report">
-          <% if @save_pivot_tables %>
-            <% @save_pivot_tables.each do |r| %>
+          <% report_ids = @channel.reports.pluck(:id) %>
+          <% save_pivot_tables = SavePivotTable.where(report_id: report_ids) %>
+          <% if save_pivot_tables %>
+            <% save_pivot_tables.each do |r| %>
               <div id="report_<%=r.id%>" class="card p-2 m-2" style="width: 18rem" draggable="true" ondragstart="dragStart(event)">
                 <div onclick="removedCard('<%=r.id%>')" class="disp_icon mouse-hover">
                   <span><i class="fa fa-times d-none cursor-pointer float-right"></i></span>
@@ -90,7 +92,7 @@
     $("div#form_report").append(el);
   }
   $(document).ready(function() {
-    pivotReportIDs = <%= multi_dashboard.save_pivot_tables.order(order_index: :asc).pluck(:id) %>
+    pivotReportIDs = <%= pluck_pivot_table(multi_dashboard)%>
     if(pivotReportIDs.length > 0 ){
       pivotReportIDs.forEach(function (id, index) {
         el = $(`#report_${id}`);

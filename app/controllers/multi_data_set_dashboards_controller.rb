@@ -4,11 +4,6 @@ class MultiDataSetDashboardsController < ApplicationController
   before_action :set_multi_dashboard, only: [:show, :edit, :update, :destroy]
 
   def new
-    report_ids = @channel.reports.pluck(:id)
-    @save_pivot_tables = nil
-    if report_ids.present?
-      @save_pivot_tables = SavePivotTable.where(report_id: report_ids)
-    end
     @multi_dashboard = MultiDataSetDashboard.new(channel_id: @channel.id)
   end
 
