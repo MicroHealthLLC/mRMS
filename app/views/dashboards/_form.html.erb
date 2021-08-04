@@ -88,7 +88,7 @@
     $("div#form_report").append(el);
   }
   $(document).ready(function() {
-    pivotReportIDs = <%= pluck_pivot_table(dashboard)%>
+    pivotReportIDs = <%= pluck_pivot_table(dashboard, params)%>
     if(pivotReportIDs.length > 0 ){
       pivotReportIDs.forEach(function (id, index) {
         el = $(`#report_${id}`);

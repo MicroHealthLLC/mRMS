@@ -17,6 +17,7 @@ class MultiDataSetDashboardsController < ApplicationController
     pivot_table_ids = JSON.parse(params[:pivot_table_ids]) rescue nil
     if pivot_table_ids.present?
       @multi_dashboard.save_pivot_tables = SavePivotTable.where(id: pivot_table_ids)
+      set_order_index_pivot_table(pivot_table_ids)
     end
     respond_to do |format|
       if @multi_dashboard.save
@@ -34,7 +35,7 @@ class MultiDataSetDashboardsController < ApplicationController
     report_ids = @channel.reports.pluck(:id)
     @save_pivot_tables = nil
     if report_ids.present?
-      @save_pivot_tables = SavePivotTable.where(report_id: report_ids)
+      @save_pivot_tables = @multi_dashboard.save_pivot_tables
     end
   end
 
@@ -44,7 +45,7 @@ class MultiDataSetDashboardsController < ApplicationController
       @multi_dashboard.save_pivot_tables = SavePivotTable.where(id: pivot_table_ids)
       @save_pivot_tables = @multi_dashboard.save_pivot_tables
       if @save_pivot_tables
-        set_order_index_pivot_table(pivot_table_ids)
+        update_order_index_pivot_table(pivot_table_ids)
       end
       if @multi_dashboard.update(multi_data_set_dashboard_params)
         format.html { redirect_to [@channel, @multi_dashboard], notice: 'Muti data set dashboard was successfully updated.' }
@@ -82,10 +83,20 @@ class MultiDataSetDashboardsController < ApplicationController
 
   def set_order_index_pivot_table(pivot_table_ids)
     pivot_table_ids.each_with_index do |pivot, index_id|
-      pivot_table = @save_pivot_tables.find_by_id(pivot)
-      if pivot_table
-        pivot_table.order_index = index_id
-        pivot_table.save
+      @multi_dashboard.shared_multi_report_dashboards.each do |dash|
+        if dash.pivot_table_id == pivot
+          dash.order_index = index_id
+        end
+      end
+    end
+  end
+
+  def update_order_index_pivot_table(pivot_table_ids)
+    pivot_table_ids.each_with_index do |pivot, index_id|
+      @multi_dashboard.shared_multi_report_dashboards.each do |dash|
+        if dash.pivot_table_id == pivot
+          dash.update(order_index: index_id)
+        end
       end
     end
   end

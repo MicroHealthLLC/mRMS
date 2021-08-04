@@ -3,4 +3,6 @@ class SharedMultiReportDashboard < ApplicationRecord
   belongs_to :save_pivot_table, foreign_key: 'pivot_table_id'
 
   validates_presence_of :pivot_table_id
+
+  default_scope { order(order_index: :asc) }
 end
