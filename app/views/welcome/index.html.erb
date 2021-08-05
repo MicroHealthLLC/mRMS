@@ -1,7 +1,10 @@
 <div id="content" class="container">
   <div class="row">
-    <div class="col-md-9" >
-      <%= render partial: 'reports' %>
+    <div class="col-md-9" id="pivotTable">
+      <%= render partial: 'reports', locals: {
+                          public_reports: @public_reports,
+                          public_reports_count: @public_reports_count,
+                        } %>
     </div>
     <div class="col-md-3" style="margin-top: 35px;">
       <% if module_enabled?('news') %>

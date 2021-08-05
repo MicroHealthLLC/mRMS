@@ -1,1 +1,43 @@
-$(".col-md-9").html("<%= escape_javascript(render partial: 'welcome/reports', locals: { pr: @personal_channels ,pb: @public_channels ,  gr: @group_channels } ) %>");
+
+displayAllPublic                  = <%= params[:display_all_public].present? %>
+displayAllPersonal                = <%= params[:display_all_personal].present? %>
+displayAllGroup                   = <%= params[:display_all_group].present? %>
+displayAllPublicDashboard         = <%= params[:display_all_public_dashboard].present? %>
+displayAllPersonal_dashboard      = <%= params[:display_all_personal_dashboard].present? %>
+displayAllGroupDashboard          = <%= params[:display_all_group_dashboard].present? %>
+displayAllPublicSharedDashboard   = <%= params[:display_all_public_shared_dashboard].present? %>
+displayAllPersonalSharedDashboard = <%= params[:display_all_personal_shared_dashboard].present? %>
+displayAllGroupSharedDashboard    = <%= params[:display_all_group_shared_dashboard].present? %>
+
+
+switch(true) {
+  case displayAllPublic:
+    $("#display_all_public").html("<%= escape_javascript(render partial: 'report_content', locals: {reports: @public_reports, report_count: @public_reports_count,display_more_report: 'display_all_public'}) %>");
+    break;
+  case displayAllPersonal:
+    $("#display_all_personal").html("<%= escape_javascript(render partial: 'report_content', locals: {reports: @personal_reports, report_count: @personal_dashboard_count,display_more_report: 'display_all_personal'}) %>");
+    break;
+  case displayAllGroup:
+    $("#display_all_group").html("<%= escape_javascript(render partial: 'report_content', locals: {reports: @group_reports, report_count: @group_reports_count,display_more_report: 'display_all_group'}) %>");
+    break;
+  case displayAllPublicDashboard:
+    $("#display_all_public_dashboard").html("<%= escape_javascript(render partial: 'dashboard_content', locals: {dashboards: @public_dashboard, dashboard_count: @public_dashboard_count,display_more_dashboard: 'display_all_public_dashboard'}) %>");
+    break;
+  case displayAllPersonal_dashboard:
+    $("#display_all_personal_dashboard").html("<%= escape_javascript(render partial: 'dashboard_content', locals: {dashboards: @personal_dashboard, dashboard_count: @personal_dashboard_count,display_more_dashboard: 'display_all_personal_dashboard'}) %>");
+    break;
+  case displayAllGroupDashboard:
+    $("#display_all_group_dashboard").html("<%= escape_javascript(render partial: 'dashboard_content', locals: {dashboards: @group_dashboard, dashboard_count: @group_reports_count,display_more_dashboard: 'display_all_group_dashboard'}) %>");
+    break;
+  case displayAllPublicSharedDashboard:
+    $("#display_all_public_shared_dashboard").html("<%= escape_javascript(render partial: 'shared_dashboard_content', locals: {dashboards: @public_shared_dashboard, dashboard_count: @public_shared_dashboard_count,display_more_dashboard: 'display_all_public_shared_dashboard'}) %>");
+    break;
+  case displayAllPersonalSharedDashboard:
+    $("#display_all_personal_shared_dashboard").html("<%= escape_javascript(render partial: 'shared_dashboard_content', locals: {dashboards: @personal_shared_dashboard, dashboard_count: @personal_shared_dashboard_count,display_more_dashboard: 'display_all_personal_shared_dashboard'}) %>");
+    break;
+  case displayAllGroupSharedDashboard:
+    $("#display_all_group_shared_dashboard").html("<%= escape_javascript(render partial: 'shared_dashboard_content', locals: {dashboards: @group_shared_dashboard, dashboard_count: @group_dashboard_shared_count,display_more_dashboard: 'display_all_group_shared_dashboard'}) %>");
+    break;
+  default:
+}
+
