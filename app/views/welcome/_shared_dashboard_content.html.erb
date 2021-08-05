@@ -20,7 +20,7 @@
       <% if dashboard_count > 3 && dashboards.count == 3 %>
         <%= link_to 'Show More...', welcome_index_path("#{display_more_dashboard}": true), remote: true, class: 'pull-right' %>
       <% elsif dashboards.count > 3 %>
-        <a onclick="window.location.reload()" role="button" class='pull-right'>Show less...</a>
+        <a onclick="window.location.reload()" role="button" class='link-color pull-right'>Show less...</a>
       <% end %>
     </div>
   </div>
