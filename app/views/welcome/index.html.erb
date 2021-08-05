@@ -6,7 +6,7 @@
                           public_reports_count: @public_reports_count,
                         } %>
     </div>
-    <div class="col-md-3" style="margin-top: 35px;">
+    <div class="col-md-3">
       <% if module_enabled?('news') %>
         <div class="hidden-xs">
           <% News.includes(:user).order("id DESC").first(Setting['news_limit'].to_i).each do |news| %>
@@ -17,3 +17,4 @@
     </div>
   </div>
 </div>
+

@@ -1,62 +1,16 @@
-<div id="widget-grid">
-  <div class="row">
-    <div class="col-md-12 px-0">
-      <h1 class="font-weight-bold">Reports</h1>
+<div id="widget-grid" class="faq-section">
+  <div class="card card-custom mb-3" data-card="true" id="kt_card_1">
+    <div class="card-header">
+      <div class="card-title">
+        <h3 class="card-label">Reports</h3>
+      </div>
+      <div class="card-toolbar">
+        <a href="#" class="btn btn-icon btn-sm btn-hover-light-primary mr-1" data-card-tool="toggle" data-toggle="tooltip" data-placement="top" title="Toggle Card">
+          <i class="ki ki-arrow-down icon-nm"></i>
+        </a>
+      </div>
     </div>
-    <div class="col-md-12 px-0">
-      <section class="public_reports">
-        <div class="row mb-5">
-          <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-            <%= render  partial: 'report_content',
-                        layout: 'shared/smart_widget_wrapper',
-                        locals: {
-                          wid_id: 'public_reports',
-                          wid_title: 'Public Reports',
-                          reports: @public_reports,
-                          report_count: @public_reports_count,
-                          display_more_report: 'display_all_public'
-                        } %>
-          </article>
-        </div>
-      </section>
-      <section class="personal_reports">
-        <div class="row mb-5">
-          <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-            <%= render  partial: 'report_content',
-                        layout: 'shared/smart_widget_wrapper',
-                        locals: {
-                          wid_id: 'personal_reports',
-                          wid_title: 'Personal Reports',
-                          reports: @personal_reports,
-                          report_count: @personal_dashboard_count,
-                          display_more_report: 'display_all_personal'
-                        } %>
-          </article>
-        </div>
-      </section>
-      <section class="group_reports">
-        <div class="row mb-5">
-          <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-            <%= render  partial: 'report_content',
-                        layout: 'shared/smart_widget_wrapper',
-                        locals: {
-                          wid_id: 'group_reports',
-                          wid_title: 'Group Reports',
-                          reports: @group_reports,
-                          report_count: @group_reports_count,
-                          display_more_report: 'display_all_group'
-                        } %>
-          </article>
-        </div>
-      </section>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-md-12 px-0">
-      <h1 class="font-weight-bold">Dashboards</h1>
-    </div>
-    <div class="col-md-12 px-0">
+    <div class="card-body">
       <section class="public_dashboard">
         <div class="row mb-5">
           <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -105,12 +59,79 @@
     </div>
   </div>
 
-  <div class="row">
-    <div class="col-md-12 px-0">
-      <h1 class="font-weight-bold">Multi Data Set Dashboards</h1>
+  <div class="card card-custom mb-3" data-card="true" id="kt_card_1">
+    <div class="card-header">
+      <div class="card-title">
+        <h3 class="card-label">Dashboards</h3>
+      </div>
+      <div class="card-toolbar">
+        <a href="#" class="btn btn-icon btn-sm btn-hover-light-primary mr-1" data-card-tool="toggle" data-toggle="tooltip" data-placement="top" title="Toggle Card">
+          <i class="ki ki-arrow-down icon-nm"></i>
+        </a>
+      </div>
     </div>
-    <div class="col-md-12 px-0">
-      <section class="public_dashboard_shared">
+    <div class="card-body">
+      <section class="public_dashboard">
+        <div class="row mb-5">
+          <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <%= render  partial: 'dashboard_content',
+                        layout: 'shared/smart_widget_wrapper',
+                        locals: {
+                          wid_id: 'public_dashboard',
+                          wid_title: 'Public Dashboards',
+                          dashboards: @public_dashboard,
+                          dashboard_count: @public_dashboard_count,
+                          display_more_dashboard: 'display_all_public_dashboard'
+                        } %>
+          </article>
+        </div>
+      </section>
+      <section class="personal_dashboard">
+        <div class="row mb-5">
+          <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <%= render  partial: 'dashboard_content',
+                        layout: 'shared/smart_widget_wrapper',
+                        locals: {
+                          wid_id: 'personal_dashboard',
+                          wid_title: 'Personal Dashboards',
+                          dashboards: @personal_dashboard,
+                          dashboard_count: @personal_dashboard_count,
+                          display_more_dashboard: 'display_all_personal_dashboard'
+                        } %>
+          </article>
+        </div>
+      </section>
+      <section class="group_dashboard">
+        <div class="row mb-5">
+          <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <%= render  partial: 'dashboard_content',
+                        layout: 'shared/smart_widget_wrapper',
+                        locals: {
+                          wid_id: 'group_dashboard',
+                          wid_title: 'Group Dashboards',
+                          dashboards: @group_dashboard,
+                          dashboard_count: @group_reports_count,
+                          display_more_dashboard: 'display_all_group_dashboard'
+                        } %>
+          </article>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <div class="card card-custom mb-3" data-card="true" id="kt_card_1">
+    <div class="card-header">
+      <div class="card-title">
+        <h3 class="card-label">Multi Data Set Dashboards</h3>
+      </div>
+      <div class="card-toolbar">
+        <a href="#" class="btn btn-icon btn-sm btn-hover-light-primary mr-1" data-card-tool="toggle" data-toggle="tooltip" data-placement="top" title="Toggle Card">
+          <i class="ki ki-arrow-down icon-nm"></i>
+        </a>
+      </div>
+    </div>
+    <div class="card-body">
+     <section class="public_dashboard_shared">
         <div class="row mb-5">
           <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
             <%= render  partial: 'shared_dashboard_content',
@@ -157,5 +178,4 @@
       </section>
     </div>
   </div>
-
 </div>
