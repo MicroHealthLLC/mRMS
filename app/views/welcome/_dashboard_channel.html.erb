@@ -1,0 +1,49 @@
+<div class="row">
+  <div class="col-md-12 px-0">
+      <section class="public_dashboard">
+        <div class="row mb-5">
+          <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <%= render  partial: 'dashboard_content',
+                        layout: 'shared/smart_widget_wrapper',
+                        locals: {
+                          wid_id: 'public_dashboard',
+                          wid_title: 'Public Dashboards',
+                          dashboards: @public_dashboard,
+                          dashboard_count: @public_dashboard_count,
+                          display_more_dashboard: 'display_all_public_dashboard'
+                        } %>
+          </article>
+        </div>
+      </section>
+      <section class="personal_dashboard">
+        <div class="row mb-5">
+          <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <%= render  partial: 'dashboard_content',
+                        layout: 'shared/smart_widget_wrapper',
+                        locals: {
+                          wid_id: 'personal_dashboard',
+                          wid_title: 'Personal Dashboards',
+                          dashboards: @personal_dashboard,
+                          dashboard_count: @personal_dashboard_count,
+                          display_more_dashboard: 'display_all_personal_dashboard'
+                        } %>
+          </article>
+        </div>
+      </section>
+      <section class="group_dashboard">
+        <div class="row mb-5">
+          <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <%= render  partial: 'dashboard_content',
+                        layout: 'shared/smart_widget_wrapper',
+                        locals: {
+                          wid_id: 'group_dashboard',
+                          wid_title: 'Group Dashboards',
+                          dashboards: @group_dashboard,
+                          dashboard_count: @group_reports_count,
+                          display_more_dashboard: 'group_dashboard_count'
+                        } %>
+          </article>
+        </div>
+      </section>
+    </div>
+  </div>

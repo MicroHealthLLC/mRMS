@@ -1,0 +1,50 @@
+<div class="row">
+
+    <div class="col-md-12 px-0">
+      <section class="public_dashboard_shared">
+        <div class="row mb-5">
+          <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <%= render  partial: 'shared_dashboard_content',
+                        layout: 'shared/smart_widget_wrapper',
+                        locals: {
+                          wid_id: 'public_dashboards',
+                          wid_title: 'Public Dashboards',
+                          dashboards: @public_shared_dashboard,
+                          dashboard_count: @public_shared_dashboard_count,
+                          display_more_dashboard: 'display_all_public_shared_dashboard'
+                        } %>
+          </article>
+        </div>
+      </section>
+      <section class="personal_dashboard_shared">
+        <div class="row mb-5">
+          <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <%= render  partial: 'shared_dashboard_content',
+                        layout: 'shared/smart_widget_wrapper',
+                        locals: {
+                          wid_id: 'personal_dashboards',
+                          wid_title: 'Personal Dashboards',
+                          dashboards: @personal_shared_dashboard,
+                          dashboard_count: @personal_shared_dashboard_count,
+                          display_more_dashboard: 'display_all_personal_shared_dashboard'
+                        } %>
+          </article>
+        </div>
+      </section>
+      <section class="group_dashboard_shared">
+        <div class="row mb-5">
+          <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <%= render  partial: 'shared_dashboard_content',
+                        layout: 'shared/smart_widget_wrapper',
+                        locals: {
+                          wid_id: 'group_dashboards',
+                          wid_title: 'group Dashboards',
+                          dashboards: @group_shared_dashboard,
+                          dashboard_count: @group_dashboard_shared_count,
+                          display_more_dashboard: 'display_all_group_shared_dashboard'
+                        } %>
+          </article>
+        </div>
+      </section>
+    </div>
+  </div>

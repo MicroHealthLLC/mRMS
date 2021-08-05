@@ -1,0 +1,49 @@
+<div class="row">
+    <div class="col-md-12 px-0">
+      <section class="public_reports">
+        <div class="row mb-5">
+          <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <%= render  partial: 'report_content',
+                        layout: 'shared/smart_widget_wrapper',
+                        locals: {
+                          wid_id: 'public_reports',
+                          wid_title: 'Public Reports',
+                          reports: @public_reports,
+                          report_count: @public_reports_count,
+                          display_more_report: 'display_all_public'
+                        } %>
+          </article>
+        </div>
+      </section>
+      <section class="personal_reports">
+        <div class="row mb-5">
+          <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <%= render  partial: 'report_content',
+                        layout: 'shared/smart_widget_wrapper',
+                        locals: {
+                          wid_id: 'personal_reports',
+                          wid_title: 'Personal Reports',
+                          reports: @personal_reports,
+                          report_count: @personal_dashboard_count,
+                          display_more_report: 'display_all_personal'
+                        } %>
+          </article>
+        </div>
+      </section>
+      <section class="group_reports">
+        <div class="row mb-5">
+          <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <%= render  partial: 'report_content',
+                        layout: 'shared/smart_widget_wrapper',
+                        locals: {
+                          wid_id: 'group_reports',
+                          wid_title: 'Group Reports',
+                          reports: @group_reports,
+                          report_count: @group_reports_count,
+                          display_more_report: 'display_all_group'
+                        } %>
+          </article>
+        </div>
+      </section>
+    </div>
+  </div>
