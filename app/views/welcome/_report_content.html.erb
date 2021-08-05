@@ -32,7 +32,7 @@
         <% if report_count > 3 && reports.count == 3 %>
           <%= link_to 'Show More...', welcome_index_path("#{display_more_report}": true), remote: true , class: 'pull-right'  %>
         <% elsif reports.count > 3 %>
-          <%= link_to 'Show Less...', root_path, remote: true, class: 'pull-right' %>
+          <a onclick="window.location.reload()" role="button" class='pull-right'>Show less...</a>
         <% end %>
       </div>
   </div>
@@ -44,3 +44,4 @@
     </div>
   </div>
 <% end %>
+
