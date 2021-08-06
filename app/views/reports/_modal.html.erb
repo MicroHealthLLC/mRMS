@@ -76,10 +76,12 @@
   $("#new_save_pivot_table, [id^='edit_save_pivot_table_']").on("submit", function(e) {
     e.preventDefault();
     e.stopPropagation();
-    if($("#save_pivot_table_name").val().trim() === "") {
+    var name = $("#save_pivot_table_name").val().trim();
+    if(name === "") {
       $("#name_error").text("Name can't be blank");
     }
     else {
+      $("#save_pivot_table_name").val(name);
       e.target.submit();
     }
   });
