@@ -10,9 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_27_070157) do
+ActiveRecord::Schema.define(version: 2021_08_03_153060) do
 
-  create_table "addresses", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "addresses", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "address_type_id"
     t.string "address"
     t.string "city"
@@ -29,7 +29,7 @@ ActiveRecord::Schema.define(version: 2021_07_27_070157) do
     t.float "location_long"
   end
 
-  create_table "attachments", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "attachments", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "type"
     t.string "file"
     t.string "description"
@@ -42,7 +42,7 @@ ActiveRecord::Schema.define(version: 2021_07_27_070157) do
     t.index ["user_id"], name: "index_attachments_on_user_id"
   end
 
-  create_table "audits", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "audits", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "auditable_id"
     t.string "auditable_type"
     t.integer "associated_id"
@@ -64,7 +64,7 @@ ActiveRecord::Schema.define(version: 2021_07_27_070157) do
     t.index ["user_id", "user_type"], name: "user_index"
   end
 
-  create_table "channel_notifications", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "channel_notifications", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "user_id"
     t.integer "channel_id"
     t.integer "notification_type"
@@ -75,7 +75,7 @@ ActiveRecord::Schema.define(version: 2021_07_27_070157) do
     t.index ["user_id"], name: "index_channel_notifications_on_user_id"
   end
 
-  create_table "channel_orders", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "channel_orders", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "channel_id"
     t.integer "user_id"
     t.integer "position", default: 0
@@ -85,7 +85,7 @@ ActiveRecord::Schema.define(version: 2021_07_27_070157) do
     t.index ["user_id"], name: "index_channel_orders_on_user_id"
   end
 
-  create_table "channel_permissions", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "channel_permissions", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "user_id"
     t.integer "channel_id"
     t.boolean "can_view", default: false
@@ -102,7 +102,7 @@ ActiveRecord::Schema.define(version: 2021_07_27_070157) do
     t.index ["user_id"], name: "index_channel_permissions_on_user_id"
   end
 
-  create_table "channel_users", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "channel_users", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "channel_id"
     t.integer "user_id"
     t.datetime "created_at", null: false
@@ -111,7 +111,7 @@ ActiveRecord::Schema.define(version: 2021_07_27_070157) do
     t.index ["user_id"], name: "index_channel_users_on_user_id"
   end
 
-  create_table "channels", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "channels", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.boolean "is_public", default: false
     t.integer "user_id"
@@ -129,7 +129,7 @@ ActiveRecord::Schema.define(version: 2021_07_27_070157) do
     t.index ["user_id"], name: "index_channels_on_user_id"
   end
 
-  create_table "core_demographics", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "core_demographics", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "user_id"
     t.string "first_name"
     t.string "last_name"
@@ -155,7 +155,7 @@ ActiveRecord::Schema.define(version: 2021_07_27_070157) do
     t.integer "organization_id"
   end
 
-  create_table "dashboards", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "dashboards", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "report_id"
     t.string "name"
     t.integer "user_id"
@@ -164,7 +164,7 @@ ActiveRecord::Schema.define(version: 2021_07_27_070157) do
     t.integer "frequently_count", default: 0
   end
 
-  create_table "email_notifications", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "email_notifications", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.string "email_type"
     t.boolean "status", default: true
@@ -174,7 +174,7 @@ ActiveRecord::Schema.define(version: 2021_07_27_070157) do
     t.index ["name"], name: "index_email_notifications_on_name"
   end
 
-  create_table "email_templates", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "email_templates", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.text "header"
     t.text "body"
     t.text "footer"
@@ -184,7 +184,7 @@ ActiveRecord::Schema.define(version: 2021_07_27_070157) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "emails", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "emails", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "email_address"
     t.integer "email_type_id"
     t.integer "extend_demography_id"
@@ -193,14 +193,14 @@ ActiveRecord::Schema.define(version: 2021_07_27_070157) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "enabled_modules", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "enabled_modules", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.boolean "status", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "enumerations", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "enumerations", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", limit: 100, default: "", null: false
     t.integer "position"
     t.boolean "is_default", default: false, null: false
@@ -211,7 +211,7 @@ ActiveRecord::Schema.define(version: 2021_07_27_070157) do
     t.boolean "is_closed", default: false
   end
 
-  create_table "extend_demographies", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "extend_demographies", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -221,7 +221,7 @@ ActiveRecord::Schema.define(version: 2021_07_27_070157) do
     t.index ["user_id"], name: "index_extend_demographies_on_user_id"
   end
 
-  create_table "faxes", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "faxes", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "fax_number"
     t.integer "fax_type_id"
     t.integer "extend_demography_id"
@@ -230,7 +230,7 @@ ActiveRecord::Schema.define(version: 2021_07_27_070157) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "identifications", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "identifications", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "identification_number"
     t.boolean "status"
     t.date "date_expired"
@@ -244,7 +244,7 @@ ActiveRecord::Schema.define(version: 2021_07_27_070157) do
     t.integer "identification_status_id"
   end
 
-  create_table "multi_data_set_dashboards", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "multi_data_set_dashboards", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "channel_id"
     t.integer "user_id"
     t.string "name"
@@ -252,7 +252,7 @@ ActiveRecord::Schema.define(version: 2021_07_27_070157) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "news", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "news", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "title"
     t.string "summary"
     t.text "description"
@@ -264,7 +264,7 @@ ActiveRecord::Schema.define(version: 2021_07_27_070157) do
     t.integer "created_by_id"
   end
 
-  create_table "note_templates", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "note_templates", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "title"
     t.text "note"
     t.datetime "created_at", null: false
@@ -275,7 +275,7 @@ ActiveRecord::Schema.define(version: 2021_07_27_070157) do
     t.index ["organization_id"], name: "index_note_templates_on_organization_id"
   end
 
-  create_table "notes", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "notes", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "type"
     t.integer "owner_id"
     t.text "note"
@@ -291,7 +291,7 @@ ActiveRecord::Schema.define(version: 2021_07_27_070157) do
     t.index ["user_id"], name: "index_notes_on_user_id"
   end
 
-  create_table "old_passwords", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "old_passwords", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "encrypted_password", null: false
     t.string "password_archivable_type", null: false
     t.string "password_salt"
@@ -300,7 +300,7 @@ ActiveRecord::Schema.define(version: 2021_07_27_070157) do
     t.index ["password_archivable_type", "password_archivable_id"], name: "index_password_archivable"
   end
 
-  create_table "phones", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "phones", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "phone_number"
     t.integer "phone_type_id"
     t.integer "extend_demography_id"
@@ -309,14 +309,15 @@ ActiveRecord::Schema.define(version: 2021_07_27_070157) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "report_dashboards", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "report_dashboards", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "pivot_table_id"
     t.integer "dashboard_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "order_index"
   end
 
-  create_table "report_documents", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "report_documents", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "user_id"
     t.string "file"
     t.text "original_content", limit: 16777215
@@ -328,7 +329,7 @@ ActiveRecord::Schema.define(version: 2021_07_27_070157) do
     t.index ["user_id"], name: "index_report_documents_on_user_id"
   end
 
-  create_table "report_permissions", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "report_permissions", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "report_id"
     t.integer "channel_id"
     t.integer "user_id"
@@ -341,7 +342,7 @@ ActiveRecord::Schema.define(version: 2021_07_27_070157) do
     t.index ["user_id"], name: "index_report_permissions_on_user_id"
   end
 
-  create_table "reports", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "reports", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.integer "category_id"
     t.integer "category_type_id"
@@ -359,7 +360,7 @@ ActiveRecord::Schema.define(version: 2021_07_27_070157) do
     t.index ["user_id"], name: "index_reports_on_user_id"
   end
 
-  create_table "roles", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "roles", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.boolean "state"
     t.text "note"
     t.datetime "created_at", null: false
@@ -371,21 +372,20 @@ ActiveRecord::Schema.define(version: 2021_07_27_070157) do
     t.integer "created_by_id"
   end
 
-  create_table "save_pivot_tables", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "save_pivot_tables", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "report_id"
     t.integer "user_id"
     t.text "content"
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "order_index"
     t.integer "frequently_count", default: 0
     t.integer "category_type"
     t.index ["report_id"], name: "index_save_pivot_tables_on_report_id"
     t.index ["user_id"], name: "index_save_pivot_tables_on_user_id"
   end
 
-  create_table "settings", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "settings", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.text "home_page_content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -393,14 +393,15 @@ ActiveRecord::Schema.define(version: 2021_07_27_070157) do
     t.text "value"
   end
 
-  create_table "shared_multi_report_dashboards", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "shared_multi_report_dashboards", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "pivot_table_id"
     t.integer "multi_data_set_dashboard_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "order_index"
   end
 
-  create_table "shared_reports", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "shared_reports", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "user_id"
     t.integer "report_id"
     t.datetime "created_at", null: false
@@ -411,7 +412,7 @@ ActiveRecord::Schema.define(version: 2021_07_27_070157) do
     t.index ["user_id"], name: "index_shared_reports_on_user_id"
   end
 
-  create_table "social_media", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "social_media", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "social_media_type_id"
     t.text "note"
     t.string "social_media_handle"
@@ -420,7 +421,7 @@ ActiveRecord::Schema.define(version: 2021_07_27_070157) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "users", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "users", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "login", default: "", null: false
     t.text "note"
