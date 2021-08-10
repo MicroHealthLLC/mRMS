@@ -44,7 +44,7 @@
 <section id="widget-grid" class="channel">
   <div class="row">
     <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-      <% @multi_dashboard.save_pivot_tables.order(order_index: :asc).each_with_index do |pivot_table, idx| %>
+      <% @multi_dashboard.save_pivot_tables.each_with_index do |pivot_table, idx| %>
         <div class=" card col-md-6 p-0" style="max-height: auto; overflow: hidden;">
           <% params[:query_id] = pivot_table.id %>
           <% params[:number] = idx %>

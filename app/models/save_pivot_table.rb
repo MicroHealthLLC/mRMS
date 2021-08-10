@@ -13,4 +13,5 @@ class SavePivotTable < ApplicationRecord
   has_many :shared_multi_report_dashboards, dependent: :destroy, foreign_key: 'pivot_table_id'
   has_many :multi_data_set_dashboards, through: :shared_multi_report_dashboards, dependent: :destroy
 
+  default_scope { order('frequently_count desc') }
 end

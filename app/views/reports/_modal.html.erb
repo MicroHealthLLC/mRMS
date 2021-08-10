@@ -7,7 +7,7 @@
             <h4 class="modal-title" id="myModalLabel">Save Pivot Table changes</h4>
           </div>
           <div id="files" class="files col-xs-12" ></div>
-          <div id="errors" style="color: red;" class="files col-xs-12" ></div>
+          <div id="name_error" style="color: red;" class="files col-xs-12" ></div>
           <%= form_for(SavePivotTable.new(user_id: User.current.id, report_id: @report.id), url: save_pivottable_channel_report_path(@channel, @report), method: :post, html: { class: 'form-horizontal' , method: :post}) do |f| %>
               <div data-toggle="modal" class="modal-body">
                 <fieldset>
@@ -48,7 +48,7 @@
             <h4 class="modal-title" id="myModalLabel">Save Pivot Table changes</h4>
           </div>
           <div id="files" class="files col-xs-12" ></div>
-          <div id="errors" style="color: red;" class="files col-xs-12" ></div>
+          <div id="name_error" style="color: red;" class="files col-xs-12" ></div>
           <%= form_for(@p, url: save_pivottable_channel_report_path(@channel, @report, query_id: params[:query_id]), method: :post, html: { class: 'form-horizontal' , method: :post}) do |f| %>
               <div data-toggle="modal" class="modal-body">
                 <fieldset>
@@ -82,3 +82,23 @@
           </div>
     </div>
 <% end %>
+
+<script type="text/javascript">
+  $("#new_save_pivot_table, [id^='edit_save_pivot_table_']").on("submit", function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    var name = $("#save_pivot_table_name").val().trim();
+    if(name === "") {
+      $("#name_error").text("Name can't be blank");
+    }
+    else {
+      $("#save_pivot_table_name").val(name);
+      e.target.submit();
+    }
+  });
+
+  $('#mySaveModal, #myRenameModal').on('hidden.bs.modal', function (e) {
+    $("#save_pivot_table_name").val("<%= @p ? @p.name : '' %>");
+    $("#name_error").text("");
+  });
+</script>

@@ -33,11 +33,11 @@ class DashboardsController < ApplicationController
     pivot_table_ids = JSON.parse(params[:pivot_table_ids]) rescue nil
     if pivot_table_ids.present?
       @dashboard.save_pivot_tables = SavePivotTable.where(id: pivot_table_ids)
+      set_order_index_pivot_table(pivot_table_ids)
     end
     respond_to do |format|
       if @dashboard.save
         @save_pivot_tables = @dashboard.save_pivot_tables
-        # set_order_index_pivot_table(pivot_table_ids)
         format.html { redirect_to [@channel, @report, @dashboard], notice: 'Dashboard was successfully created.' }
         format.json { render :show, status: :created, location: @dashboard }
       else
@@ -55,9 +55,6 @@ class DashboardsController < ApplicationController
       # @dashboard.save_pivot_tables.destroy_all
       @dashboard.save_pivot_tables = SavePivotTable.where(id: pivot_table_ids)
       @save_pivot_tables = @dashboard.save_pivot_tables
-      if @save_pivot_tables
-        # set_order_index_pivot_table(pivot_table_ids)
-      end
       if @dashboard.update(dashboard_params)
         format.html { redirect_to [@channel, @report, @dashboard], notice: 'Dashboard was successfully updated.' }
         format.json { render :show, status: :ok, location: @dashboard }
@@ -111,6 +108,10 @@ class DashboardsController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_dashboard
     @dashboard = Dashboard.find(params[:id])
+    @dashboard.frequently_count += 1
+    @dashboard.save!
+  rescue ActiveRecord::RecordNotFound
+    render_404
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
@@ -120,10 +121,10 @@ class DashboardsController < ApplicationController
 
   def set_order_index_pivot_table(pivot_table_ids)
     pivot_table_ids.each_with_index do |pivot, index_id|
-      pivot_table = @save_pivot_tables.find_by_id(pivot)
-      if pivot_table
-        pivot_table.order_index = index_id
-        pivot_table.save
+      @dashboard.report_dashboards.each do |dash|
+        if dash.pivot_table_id == pivot
+          dash.order_index = index_id
+        end
       end
     end
   end
@@ -131,7 +132,7 @@ class DashboardsController < ApplicationController
   def authorize
     can_access = case params[:action]
                    when 'edit', 'update',
-                       'new',  'create' then  @channel.is_public? or @channel.my_permission.can_add_report? or @channel.my_permission.can_view?
+                       'new',  'create' then  @channel.is_public? or @channel.my_permission.can_shared_report_with_dashboard? or @channel.is_creator?
                    when 'destroy'
                      @report.channel.my_permission.can_delete_report? or @report.channel.is_public? or current_user.id == @dashboard.user_id
                    else
