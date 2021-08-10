@@ -1,28 +1,28 @@
-<% if @pivot_tables.present? %>
-  <div class="row">
-    <div class="col-md-12">
-      <div class="float-right" style="width: 150px;">
-        <select onChange="if(this.selectedIndex!=0) self.location=this.options[this.selectedIndex].dataset.path">
-          <option>Filter</option>
-          <% ReportEnum.all.each do |enum| %>
-            <% value = enum.id %>
-            <% path = channel_report_path(@report.channel.id, @report.id, report_enum_id: enum.id, dashboard_enum_id: params[:dashboard_enum_id]) %>
-            <% if "#{value}" == "#{params[:report_enum_id]}" %>
-              <option value="<%= value %>" selected data-path="<%= path %>"> <%= enum.name %></option>
-            <% else %>
-              <option value="<%= value %>" data-path="<%= path %>"> <%= enum.name %></option>
-            <% end %>
+<div class="row">
+  <div class="col-md-12">
+    <div class="float-right" style="width: 150px;">
+      <select onChange="if(this.selectedIndex!=0) self.location=this.options[this.selectedIndex].dataset.path">
+        <option>Filter</option>
+        <% ReportEnum.all.each do |enum| %>
+          <% value = enum.id %>
+          <% path = channel_report_path(@report.channel.id, @report.id, report_enum_id: enum.id, dashboard_enum_id: params[:dashboard_enum_id]) %>
+          <% if "#{value}" == "#{params[:report_enum_id]}" || value == default_report_enum %>
+            <option value="<%= value %>" selected data-path="<%= path %>"> <%= enum.name %></option>
+          <% else %>
+            <option value="<%= value %>" data-path="<%= path %>"> <%= enum.name %></option>
           <% end %>
-        </select>
-      </div>
+        <% end %>
+      </select>
     </div>
+  </div>
+  <% if @pivot_tables.present? %>
     <% @pivot_tables.each do |pivot_table| %>
       <%= render partial: 'grid', locals: {pivot_table: pivot_table} %>
     <% end %>
-  </div>
-<% else %>
-  <div class="alert alert-custom alert-notice alert-light-primary show d-flex" role="alert">
-    <div class="alert-icon"><i class="fas fa-exclamation-triangle"></i></div>
-    <div class="alert-text">No Report to display!</div>
-  </div>
-<% end %>
+  <% else %>
+    <div class="col-md-12 my-3 mx-4 alert alert-custom alert-notice alert-light-primary show d-flex" role="alert">
+      <div class="alert-icon"><i class="fas fa-exclamation-triangle"></i></div>
+      <div class="alert-text">No Report to display!</div>
+    </div>
+  <% end %>
+</div>
