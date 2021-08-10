@@ -37,7 +37,7 @@ class DashboardsController < ApplicationController
     respond_to do |format|
       if @dashboard.save
         @save_pivot_tables = @dashboard.save_pivot_tables
-        set_order_index_pivot_table(pivot_table_ids)
+        # set_order_index_pivot_table(pivot_table_ids)
         format.html { redirect_to [@channel, @report, @dashboard], notice: 'Dashboard was successfully created.' }
         format.json { render :show, status: :created, location: @dashboard }
       else
@@ -56,7 +56,7 @@ class DashboardsController < ApplicationController
       @dashboard.save_pivot_tables = SavePivotTable.where(id: pivot_table_ids)
       @save_pivot_tables = @dashboard.save_pivot_tables
       if @save_pivot_tables
-        set_order_index_pivot_table(pivot_table_ids)
+        # set_order_index_pivot_table(pivot_table_ids)
       end
       if @dashboard.update(dashboard_params)
         format.html { redirect_to [@channel, @report, @dashboard], notice: 'Dashboard was successfully updated.' }
@@ -115,7 +115,7 @@ class DashboardsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def dashboard_params
-    params.require(:dashboard).permit(:report_id, :name )
+    params.require(:dashboard).permit(:report_id, :name, :dashboard_enum_id)
   end
 
   def set_order_index_pivot_table(pivot_table_ids)

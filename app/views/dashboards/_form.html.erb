@@ -17,6 +17,12 @@
       </div>
     </div>
     <div class="form-group">
+      <%= form.label 'Dashboard type', class: 'col-md-2 control-label' %>
+      <div class="col-md-10 p-0">
+        <%= form.select :dashboard_enum_id, options_for_select(DashboardEnum.pluck(:name, :id), :selected => @dashboard.dashboard_enum_id) , {},{class: 'form-control'} %>
+      </div>
+    </div>
+    <div class="form-group">
       <%= form.label 'Reports:', class: 'col-md-2 control-label' %>
       <div id="dragDropDataSet" class="rounded row my-3 card-min-hight border px-3 pt-3 pb-10" ondrop="dragDrop(event)" ondragover="allowDrop(event)">
       </div>

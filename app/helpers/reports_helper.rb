@@ -47,4 +47,22 @@ module ReportsHelper
     # Rollbar.critical("Read DOC: #{e.message}, file: #{file} ")
     @invalid_file_parse = "Error on parsing document"
   end
+
+  def filter_pivot_report
+    enum_name = ''
+    repor_enum_id = params[:report_enum_id]
+    if repor_enum_id
+      enum_name = ReportEnum.find_by_id(repor_enum_id).name
+    end
+    enum_name
+  end
+
+  def filter_report_dashbord
+    enum_name = ''
+    dashboard_enum_id = params[:dashboard_enum_id]
+    if dashboard_enum_id
+      enum_name = DashboardEnum.find_by_id(dashboard_enum_id).name
+    end
+    enum_name
+  end
 end

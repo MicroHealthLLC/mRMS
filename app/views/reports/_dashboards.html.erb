@@ -1,7 +1,23 @@
-<% dashboards = @report.dashboards %>
-<% if dashboards.present? %>
+<% if @report_dashboard.present? %>
   <div class="row">
-    <% dashboards.each do |dashboard| %>
+    <div class="col-md-12">
+      <div class="float-right" style="width: 150px;">
+        <select onChange="if(this.selectedIndex!=0) self.location=this.options[this.selectedIndex].dataset.path" >
+          <option>Filter</option>
+          <% DashboardEnum.all.each do |enum| %>
+            <% value = enum.id %>
+            <% path = channel_report_path(@report.channel.id, @report.id, dashboard_enum_id: enum.id, report_enum_id: params[:report_enum_id]) %>
+            <% if "#{value}" == "#{params[:dashboard_enum_id]}" %>
+              <option value="<%= value %>" selected data-path="<%= path %>"> <%= enum.name %></option>
+            <% else %>
+              <option value="<%= value %>" data-path="<%= path %>"> <%= enum.name %></option>
+            <% end %>
+          <% end %>
+          <option></option>
+        </select>
+      </div>
+    </div>
+    <% @report_dashboard.each do |dashboard| %>
       <div class="card border-0 p-0" style="width: 18rem">
         <div class="border m-2 text-center h-100">
           <div class="card-header p-0 pr-2 pt-2 border-0">

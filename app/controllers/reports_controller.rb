@@ -9,8 +9,9 @@ class ReportsController < ApplicationController
   # GET /reports/1
   # GET /reports/1.json
   def show
-    @query_id = params[:query_id] rescue nil
-    @pivot_tables = @report.save_pivot_tables
+    @query_id         = params[:query_id] rescue nil
+    @pivot_tables     = params[:report_enum_id] ? @report.save_pivot_tables.where(report_enum_id: params[:report_enum_id]) : @report.save_pivot_tables
+    @report_dashboard = params[:dashboard_enum_id] ? @report.dashboards.where(dashboard_enum_id: params[:dashboard_enum_id]) : @report.dashboards
     @dashboard_count = @report.dashboards.count
     render_403 unless  @channel.is_public? or @channel.is_creator? or @channel.my_permission.can_view_report?
     # if @report.document_url
@@ -117,6 +118,7 @@ class ReportsController < ApplicationController
   def save_pivottable
     pivot_table = SavePivotTable.where(id: params[:query_id]).first_or_initialize
     pivot_table.attributes = params[:save_pivot_table].permit!
+    pivot_table.report_enum_id = params[:save_pivot_table][:report_enum_id]
     if pivot_table.save
       if params[:query_id]
         flash[:notice] = 'Report was successfully updated'

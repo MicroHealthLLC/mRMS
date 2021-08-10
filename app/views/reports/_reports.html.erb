@@ -1,5 +1,21 @@
 <% if @pivot_tables.present? %>
   <div class="row">
+    <div class="col-md-12">
+      <div class="float-right" style="width: 150px;">
+        <select onChange="if(this.selectedIndex!=0) self.location=this.options[this.selectedIndex].dataset.path">
+          <option>Filter</option>
+          <% ReportEnum.all.each do |enum| %>
+            <% value = enum.id %>
+            <% path = channel_report_path(@report.channel.id, @report.id, report_enum_id: enum.id, dashboard_enum_id: params[:dashboard_enum_id]) %>
+            <% if "#{value}" == "#{params[:report_enum_id]}" %>
+              <option value="<%= value %>" selected data-path="<%= path %>"> <%= enum.name %></option>
+            <% else %>
+              <option value="<%= value %>" data-path="<%= path %>"> <%= enum.name %></option>
+            <% end %>
+          <% end %>
+        </select>
+      </div>
+    </div>
     <% @pivot_tables.each do |pivot_table| %>
       <%= render partial: 'grid', locals: {pivot_table: pivot_table} %>
     <% end %>
