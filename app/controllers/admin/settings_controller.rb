@@ -72,10 +72,11 @@ class SettingsController < ProtectForgeryApplication
   end
 
    def set_content
-     Setting['section_1'] = params['section_1']
-     Setting['section_2'] = params['section_2']
-     Setting['section_3'] = params['section_3']
-     Setting['section_4'] = params['section_4']
+     Setting['header_section'] = params['header_section']
+     Setting['section_1']      = params['section_1']
+     Setting['section_2']      = params['section_2']
+     Setting['section_3']      = params['section_3']
+     Setting['section_4']      = params['section_4']
      redirect_to settings_path
   end
 
