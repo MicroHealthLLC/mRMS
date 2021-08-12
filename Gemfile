@@ -35,7 +35,9 @@ gem 'redis'
 # gem 'capistrano-rails', group: :development
 
 group :development, :test do
+  gem 'rspec-rails', '~> 5.0.0'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
+  gem 'faker'
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   # Adds support for Capybara system testing and selenium driver
   gem 'letter_opener'
@@ -48,6 +50,7 @@ group :test do
   gem 'selenium-webdriver'
   gem 'chromedriver-helper', '~> 1.0'
   gem 'minitest-retry'
+  gem 'factory_bot_rails', '~> 4.11'
 end
 
 group :development do
