@@ -1,8 +1,10 @@
 <div class="row">
-  <div class="col-md-12">
-    <div class="float-right" style="width: 150px;">
-      <select onChange="if(this.selectedIndex!=0) self.location=this.options[this.selectedIndex].dataset.path">
-        <option>Filter</option>
+  <div class="col-md-12 d-flex justify-content-end pr-0">
+    <div class="col-md-1 d-flex justify-content-end pr-0">
+      <label class="pt-2 mb-0">Filter</label>
+    </div>
+    <div class="col-md-4" style="width: 300px;">
+      <select onChange="self.location=this.options[this.selectedIndex].dataset.path">
         <% ReportEnum.all.each do |enum| %>
           <% value = enum.id %>
           <% path = channel_report_path(@report.channel.id, @report.id, report_enum_id: enum.id, dashboard_enum_id: params[:dashboard_enum_id]) %>
