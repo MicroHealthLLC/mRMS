@@ -55,9 +55,6 @@ class DashboardsController < ApplicationController
       # @dashboard.save_pivot_tables.destroy_all
       @dashboard.save_pivot_tables = SavePivotTable.where(id: pivot_table_ids)
       @save_pivot_tables = @dashboard.save_pivot_tables
-      if @save_pivot_tables
-        update_order_index_pivot_table(pivot_table_ids)
-      end
       if @dashboard.update(dashboard_params)
         format.html { redirect_to [@channel, @report, @dashboard], notice: 'Dashboard was successfully updated.' }
         format.json { render :show, status: :ok, location: @dashboard }
@@ -119,7 +116,7 @@ class DashboardsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def dashboard_params
-    params.require(:dashboard).permit(:report_id, :name )
+    params.require(:dashboard).permit(:report_id, :name, :dashboard_enum_id)
   end
 
   def set_order_index_pivot_table(pivot_table_ids)
@@ -127,16 +124,6 @@ class DashboardsController < ApplicationController
       @dashboard.report_dashboards.each do |dash|
         if dash.pivot_table_id == pivot
           dash.order_index = index_id
-        end
-      end
-    end
-  end
-
-  def update_order_index_pivot_table(pivot_table_ids)
-    pivot_table_ids.each_with_index do |pivot, index_id|
-      @dashboard.report_dashboards.each do |dash|
-        if dash.pivot_table_id == pivot
-          dash.update(order_index: index_id)
         end
       end
     end

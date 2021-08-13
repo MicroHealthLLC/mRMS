@@ -45,6 +45,8 @@ en:
   enumeration_skill_status: Skills Status
   enumeration_religion_type: Religion type
   enumeration_role_type: Role
+  enumeration_report_type: Report Category
+  enumeration_dashboard_type: Dashboard Category
   enumeration_state_type: State
   enumeration_new_label: New value
   enumeration_case_type: Case type

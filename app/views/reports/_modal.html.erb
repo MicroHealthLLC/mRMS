@@ -12,15 +12,20 @@
               <div data-toggle="modal" class="modal-body">
                 <fieldset>
                   <div class="form-group">
-                    <%= f.label 'Name', class: 'col-md-2 control-label' %>
+                    <%= f.label 'Name', class: 'col-md-3 control-label' %>
                     <div class="col-md-9">
-                      <%= f.text_field :name , class: 'form-control', required: true %>
+                      <%= f.text_field :name , class: 'form-control mb-5', required: true %>
                       <%= f.hidden_field :user_id  %>
                       <%= f.hidden_field :report_id  %>
                       <span style="display: none;">
-                            <%= f.text_field :content  %>
-                          </span>
-
+                        <%= f.text_field :content  %>
+                      </span>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <%= f.label 'Report type', class: 'col-md-3 control-label' %>
+                    <div class="col-md-9">
+                      <%= f.select :report_enum_id, options_for_select(ReportEnum.pluck(:name, :id)) , {},{class: 'form-control'} %>
                     </div>
                   </div>
                 </fieldset>
@@ -48,7 +53,7 @@
               <div data-toggle="modal" class="modal-body">
                 <fieldset>
                   <div class="form-group">
-                    <%= f.label 'Name', class: 'col-md-2 control-label' %>
+                    <%= f.label 'Name', class: 'col-md-3 control-label' %>
                     <div class="col-md-9">
                       <%= f.text_field :name , class: 'form-control', required: true %>
                       <%= f.hidden_field :user_id  %>
@@ -57,6 +62,12 @@
                             <%= f.text_field :content  %>
                           </span>
 
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <%= f.label 'Report type', class: 'col-md-3 control-label' %>
+                    <div class="col-md-9">
+                      <%= f.select :report_enum_id, options_for_select(ReportEnum.pluck(:name, :id),:selected => @p.report_enum_id) , {},{class: 'form-control'} %>
                     </div>
                   </div>
                 </fieldset>

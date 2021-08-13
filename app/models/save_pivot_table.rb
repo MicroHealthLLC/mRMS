@@ -6,6 +6,7 @@ class SavePivotTable < ApplicationRecord
   validates_uniqueness_of  :name, scope: [:report_id]
 
   belongs_to :user, optional: true
+  belongs_to :report_enum, optional: true
   belongs_to :report, optional: true
   delegate :channel, to: :report
 
@@ -13,4 +14,5 @@ class SavePivotTable < ApplicationRecord
   has_many :multi_data_set_dashboards, through: :shared_multi_report_dashboards, dependent: :destroy
 
   default_scope { order('frequently_count desc') }
+  scope :default, -> { where(report_enum_id: ReportEnum.default.first.id)}
 end

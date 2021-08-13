@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_03_153060) do
+ActiveRecord::Schema.define(version: 2021_08_10_115343) do
 
   create_table "addresses", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "address_type_id"
@@ -162,6 +162,7 @@ ActiveRecord::Schema.define(version: 2021_08_03_153060) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "frequently_count", default: 0
+    t.integer "dashboard_enum_id"
   end
 
   create_table "email_notifications", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -380,6 +381,7 @@ ActiveRecord::Schema.define(version: 2021_08_03_153060) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "frequently_count", default: 0
+    t.integer "report_enum_id"
     t.index ["report_id"], name: "index_save_pivot_tables_on_report_id"
     t.index ["user_id"], name: "index_save_pivot_tables_on_user_id"
   end

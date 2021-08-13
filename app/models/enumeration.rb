@@ -130,3 +130,5 @@ end
 
 require_dependency 'role_type'
 require_dependency 'organization_enum'
+require_dependency 'report_enum'
+require_dependency 'dashboard_enum'
