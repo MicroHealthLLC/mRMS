@@ -12,7 +12,7 @@ FactoryBot.define do
 
   factory :user do
     email {"admin@gmail.com"}
-    password {Faker::Internet.password}
+    password {"Admin@2018"}
     admin = true
     state = :active
     login { Faker::Name.first_name }
