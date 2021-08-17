@@ -34,7 +34,7 @@ class EnumerationsController < ProtectForgeryApplication
           flash[:notice] = I18n.t "notice_successful_update"
           redirect_to enumerations_path
         }
-        format.js { render js: 'alert("Saved")' }
+        format.js { render :nothing => true }
       end
     else
       respond_to do |format|
@@ -85,9 +85,6 @@ class EnumerationsController < ProtectForgeryApplication
 
   def find_enumeration
     @enumeration = Enumeration.find(params[:id])
-    if @enumeration.name == "uncategorized"
-      redirect_to enumerations_path
-    end
   rescue ActiveRecord::RecordNotFound
     render_404
   end
