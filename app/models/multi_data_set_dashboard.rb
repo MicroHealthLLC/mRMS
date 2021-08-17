@@ -12,4 +12,7 @@ class MultiDataSetDashboard < ApplicationRecord
 
   validates_presence_of :user_id
   validates_presence_of :channel_id
+  before_save do
+    self.name = self.name.strip unless self.name.nil?
+  end
 end

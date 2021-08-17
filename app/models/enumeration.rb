@@ -23,6 +23,10 @@ class Enumeration < ActiveRecord::Base
 
   scope :named, lambda {|arg| where("LOWER(#{table_name}.name) = LOWER(?)", arg.to_s.strip)}
 
+  before_save do
+    self.name = self.name.strip unless self.name.nil?
+  end
+
   def self.safe_attributes
     [:name, :position, :is_default, :type, :active, :position_name, :is_flagged, :is_closed]
   end
