@@ -10,10 +10,10 @@ class SettingsController < ProtectForgeryApplication
   end
 
   def create
-    Setting['application_name'] = params['application_name']
+    Setting['application_name'] = params['application_name'].strip
     Setting['news_limit'] = params['news_limit']
     Setting['spreadsheet_limit'] = params['spreadsheet_limit'] if params[:spreadsheet_limit].to_i < 50
-    Setting['email_from'] = params['email_from']
+    Setting['email_from'] = params['email_from'].strip
     Setting['format_date'] = params['format_date']
     Setting['terms'] = params['terms']
     redirect_to settings_path
@@ -21,8 +21,8 @@ class SettingsController < ProtectForgeryApplication
 
   def set_key_providers
     ['OFFICE365', 'GOOGLE', 'FACEBOOK', 'GITHUB', 'TWITTER', 'AZURE'].each do |provider|
-      Setting["#{provider}_SECRET"] = params["#{provider.downcase}"]['secret']
-      Setting["#{provider}_KEY"] = params["#{provider.downcase}"]['key']
+      Setting["#{provider}_SECRET"] = params["#{provider.downcase}"]['secret'].strip
+      Setting["#{provider}_KEY"] = params["#{provider.downcase}"]['key'].strip
     end
     Devise.setup do |config|
       config.omniauth :github, Setting['GITHUB_KEY'], Setting['GITHUB_SECRET'], scope: 'user:email'
@@ -32,7 +32,7 @@ class SettingsController < ProtectForgeryApplication
       config.omniauth :google_oauth2, Setting['GOOGLE_KEY'],  Setting['GOOGLE_SECRET']
       config.omniauth :microsoft_graph_auth, Setting['AZURE_KEY'],  Setting['AZURE_SECRET'], scope: 'offline_access files.readwrite.all'
     end
-    Setting['CALLBACK_URL'] = params['callback_url']
+    Setting['CALLBACK_URL'] = params['callback_url'].strip
     redirect_to settings_path
   end
 

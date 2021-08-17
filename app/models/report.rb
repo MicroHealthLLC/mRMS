@@ -27,6 +27,7 @@ class Report < ApplicationRecord
   end
 
   before_save do
+    self.name = self.name.strip unless self.name.nil?
     self.updated_by_id = User.current.id
   end
 
