@@ -9,12 +9,13 @@
   </thead>
   <% enumerations.each do |enumeration| %>
       <tr>
-        <td class="name"><%= link_to enumeration, edit_enumeration_path(enumeration) %></td>
+        <td class="name"><%= is_uncategorized?(enumeration.name) ? 'uncategorized' : (link_to enumeration, edit_enumeration_path(enumeration)) %></td>
         <td class="tick"><%= enumeration.is_default? %></td>
         <td class="tick"><%= enumeration.active? %></td>
         <td class="buttons">
           <%= reorder_handle(enumeration, :url => enumeration_path(enumeration), :param => 'enumeration') %>
-          <%= delete_link enumeration_path(enumeration) %>
+
+          <%= is_uncategorized?(enumeration.name) ? '' : (delete_link enumeration_path(enumeration)) %>
         </td>
       </tr>
   <% end %>
