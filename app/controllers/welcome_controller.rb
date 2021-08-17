@@ -62,7 +62,6 @@ class WelcomeController < ApplicationController
     public_dashboard = Dashboard.where(report_id: @public_report_ids)
     personal_dashboard = Dashboard.where(report_id: @personal_report_ids)
     group_dashboard_reports = Dashboard.where(report_id: @group_report_ids)
-
     @public_dashboard = (disp_more == "display_all_public_dashboard") ? public_dashboard : public_dashboard.first(3)
     @personal_dashboard = (disp_more == "display_all_personal_dashboard") ? personal_dashboard : personal_dashboard.first(3)
     @group_dashboard = (disp_more == "display_all_group_dashboard") ? group_dashboard_reports : group_dashboard_reports.first(3)

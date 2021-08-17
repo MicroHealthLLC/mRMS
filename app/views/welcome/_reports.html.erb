@@ -17,7 +17,7 @@
             <%= render  partial: 'report_content',
                         layout: 'shared/smart_widget_wrapper',
                         locals: {
-                          wid_id: 'public_dashboard',
+                          wid_id: 'public_reports',
                           wid_title: 'Public Reports',
                           reports: @public_reports,
                           report_count: @public_reports_count,
@@ -110,7 +110,7 @@
                           wid_id: 'group_dashboard',
                           wid_title: 'Group Dashboards',
                           dashboards: @group_dashboard,
-                          dashboard_count: @group_reports_count,
+                          dashboard_count: @group_dashboard_count,
                           display_more_dashboard: 'display_all_group_dashboard'
                         } %>
           </article>
@@ -169,7 +169,7 @@
                         layout: 'shared/smart_widget_wrapper',
                         locals: {
                           wid_id: 'group_dashboards',
-                          wid_title: 'group Dashboards',
+                          wid_title: 'Group Dashboards',
                           dashboards: @group_shared_dashboard,
                           dashboard_count: @group_dashboard_shared_count,
                           display_more_dashboard: 'display_all_group_shared_dashboard'
