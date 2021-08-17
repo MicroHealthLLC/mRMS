@@ -11,7 +11,7 @@
     <% end %>
     <%= form.hidden_field :report_id , id: 'report_id'%>
     <div class="form-group">
-      <%= form.label 'Dashboard Name:', class: 'col-md-2 control-label' %>
+      <%= form.label 'Name:', class: 'col-md-2 control-label' %>
       <div class="col-md-10 p-0">
         <%= form.text_field :name , class: 'form-control' , id: 'dashboard_name', required: true %>
       </div>
@@ -44,7 +44,7 @@
           <% SavePivotTable.where(report_id: @report.id).each do |r| %>
             <div id="report_<%=r.id%>" class="card p-2 m-2" style="width: 18rem" draggable="true" ondragstart="dragStart(event)">
               <div onclick="removedCard('<%=r.id%>')" class="disp_icon mouse-hover">
-                <span><i class="fa fa-times d-none cursor-pointer float-right"></i></span>
+                <span><i class="fa fa-times d-none cursor-pointer float-right px-5"></i></span>
               </div>
               <div class="card-body py-3 pl-0 pr-0 px-4 text-center">
                 <%#= image_tag "pivot/col-heatmap.png", size: '190x190', class: "w-100"%>
@@ -92,6 +92,9 @@
     let el = $(`div#report_${id}`)
     el.removeClass('disp_i');
     $("div#form_report").append(el);
+    if($('#dragDropDataSet > div').length == 0){
+      $("#dragDropDataSet").addClass('placeholder-custom')
+    }
   }
   $(document).ready(function() {
     pivotReportIDs = <%= pluck_pivot_table(dashboard, params)%>
@@ -101,6 +104,10 @@
         el.addClass('disp_i');
         $("#dragDropDataSet").append(el);
       });
+    }
+    else
+    {
+       $("#dragDropDataSet").addClass('placeholder-custom')
     }
   });
   function allowDrop (ev) {
@@ -118,6 +125,7 @@
     var data =  ev.dataTransfer.getData ("text");
     ev.target.appendChild (document.getElementById(data));
     $('#dragDropDataSet div').each(function() {
+      $("#dragDropDataSet").removeClass('placeholder-custom')
       pivotTableCard = this.id;
       $(this).addClass('disp_i');
     });
