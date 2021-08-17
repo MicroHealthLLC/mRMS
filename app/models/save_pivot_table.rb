@@ -14,5 +14,4 @@ class SavePivotTable < ApplicationRecord
   has_many :multi_data_set_dashboards, through: :shared_multi_report_dashboards, dependent: :destroy
 
   default_scope { order('frequently_count desc') }
-  scope :default, -> { where(report_enum_id: ReportEnum.default.first.id)}
 end
