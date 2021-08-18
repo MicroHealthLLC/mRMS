@@ -17,9 +17,9 @@
       </div>
     </div>
     <div class="form-group">
-      <%= form.label 'Dashboard type', class: 'col-md-2 control-label' %>
+      <%= form.label 'Dashboard Category:', class: 'col-md-2 control-label' %>
       <div class="col-md-10 p-0">
-        <%= form.select :dashboard_enum_id, options_for_select(DashboardEnum.pluck(:name, :id).map { |data| [data[0].humanize, data[1]] }, selected: @dashboard.dashboard_enum_id) , {},{class: 'form-control'} %>
+        <%= form.select :dashboard_enum_id, options_for_select(DashboardEnum.pluck(:name, :id).map { |data| [data[0].humanize, data[1]] }, selected: @dashboard.dashboard_enum_id.present? ? @dashboard.dashboard_enum_id : DashboardEnum.find_by(name: 'Uncategorized').id) , {},{class: 'form-control'} %>
       </div>
     </div>
     <div class="form-group">
