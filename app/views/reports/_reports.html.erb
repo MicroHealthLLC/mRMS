@@ -5,10 +5,10 @@
     </div>
     <div class="col-md-3" style="width: 300px;">
       <select onChange="self.location=this.options[this.selectedIndex].dataset.path">
-        <option data-path="<%= channel_report_path(@report.channel.id, @report.id, dashboard_enum_id: params[:dashboard_enum_id]) %>">All</option>
+        <option data-path="<%= channel_report_path(@channel.id, @report.id, dashboard_enum_id: params[:dashboard_enum_id]) %>">All</option>
         <% ReportEnum.all.each do |enum| %>
           <% value = enum.id %>
-          <% path = channel_report_path(@report.channel.id, @report.id, report_enum_id: enum.id, dashboard_enum_id: params[:dashboard_enum_id]) %>
+          <% path = channel_report_path(@channel.id, @report.id, report_enum_id: enum.id, dashboard_enum_id: params[:dashboard_enum_id]) %>
           <% if "#{value}" == "#{params[:report_enum_id]}" || value == default_report_enum %>
             <option value="<%= value %>" selected data-path="<%= path %>"> <%= enum.name.capitalize %></option>
           <% else %>
