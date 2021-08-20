@@ -80,15 +80,21 @@
           <%  else   %>
             var json = <%= tab.to_json.to_s.gsub('/', '\/').html_safe %>
           <% end %>
+
           query_content = <%= JSON.parse(SavePivotTable.find_by_id(pivot_table.id).content).to_json.html_safe %>
           if(query_content)
           {
-            $("#output_<%= pivot_table.id %>").pivotUI(json, Object.assign(query_content));
+            $("#output_<%= pivot_table.id %>").pivotUI(json, Object.assign(default_query,query_content));
           }
           else
           {
             $("#output_<%= pivot_table.id %>").pivotUI(json, default_query);
           }
+          setTimeout(function(){
+            $("#output_<%= pivot_table.id %>").find('tr:first').remove();
+            $("#output_<%= pivot_table.id %>").find('tr:first').remove();
+            $("#output_<%= pivot_table.id %>").find('.pvtAxisContainer').remove();
+          }, 100)
       });
   </script>
 </div>
