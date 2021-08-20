@@ -7,10 +7,18 @@
             <%= link_to [dashboard.report.channel, dashboard.report , dashboard ] do%>
               <%= image_tag "dashboard.png", style: 'width: 13rem' %>
             <% end %>
-            <div class="cursor-pointer text-center">
-                <p title="<%= dashboard.name %>" class="text-black-50 px-3 mb-0 mt-2">
+            <div class="cursor-pointer text-center pb-3">
+              <div title="<%= dashboard.name %>" class="text-black-50 px-3 mb-0 mt-2">
                 <%= dashboard.name %>
-              </p>
+              </div>
+              <div class="row">
+                <b class="col-5  p-0">Data Set:</b>
+                <p class="text-black-50 col-7 text-align-left data_title text-truncate w-100 p-0" title="<%= dashboard.report.name %>"> <%= dashboard.report.name.truncate(25) %> </p>
+              </div>
+              <div class="row ">
+                <b class="col-5 p-0">Channel:</b>
+                <p class="col-7 text-black-50 text-align-left data_title p-0" title="<%= dashboard.report.channel.name %>"> <%= dashboard.report.channel.name.truncate(25) %> </p>
+              </div>
             </div>
           </div>
         </div>
