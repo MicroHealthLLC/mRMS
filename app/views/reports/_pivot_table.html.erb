@@ -7,7 +7,7 @@
   <% time = params[:number] %>
 
   <div class="row">
-    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 px-5" style="margin-bottom: 40px; overflow-x: auto;" >
+    <div id="addOverFlow" class="col-xs-12 col-sm-12 col-md-12 col-lg-12 px-5" style="margin-bottom: 40px;" >
       <div class="diagramWrapper" style="margin-top: 25px;">
         <div id="output_<%= time %>" class="pane" style="<%= "transform: scale(1);" if params[:controller] == 'dashboards' %>"></div>
       </div>
@@ -71,6 +71,14 @@
   <% end %>
 
   <script type="text/javascript">
+
+    setTimeout(function(){
+      $(".jarviswidget-ctrls > .jarviswidget-fullscreen-btn").click(function() {
+        var element = document.getElementById("addOverFlow");
+        element.classList.toggle("overflow-pivot");
+      });
+    }, 3000);
+
     $(document).ready(function(){
       setTimeout(function(){
         $("#output_ > .pvtUi").addClass('w-100');
