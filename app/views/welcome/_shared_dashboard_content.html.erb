@@ -1,22 +1,24 @@
 <% if dashboards.present? %>
   <div class="row" id="<%= display_more_dashboard %>">
     <% dashboards.each do |dashboard| %>
-      <%= link_to channel_multi_data_set_dashboard_path(dashboard.channel,dashboard) do%>
-        <div class="card m-2 p-2 cursor-pointer" style="width: 18rem">
-          <div class="text-center h-100">
-            <div class="card-body pt-0 pb-2">
-              <%= image_tag "dashboard.png", style: 'width: 13rem' %>
-              <div class="cursor-pointer text-center">
-                  <p title="<%= dashboard.name %>" class="text-black-50 px-3 mb-0 mt-2">
-                  <%= dashboard.name %>
-                </p>
+      <div class="card m-4 p-2 cursor-pointer" style="width: 18rem">
+        <div class="text-center">
+            <%= link_to channel_multi_data_set_dashboard_path(dashboard.channel,dashboard) do%>
+              <%= image_tag "dashboard.png", style: 'width: 13rem; height: 13rem' %>
+            <% end %>
+            <div class="text-center">
+              <p title="<%= dashboard.name %>" class="text-black-50 text-align-center data_title w-100 mb-5">
+                <%= dashboard.name.truncate(50) %>
+              </p>
+              <div class="row">
+                <b class="col-5 p-0">Channel:</b>
+                <p class="col-7 text-black-50 text-align-left data_title p-0 text-truncate mb-0" title="<%= dashboard.channel.name %>"> <%= dashboard.channel.name.truncate(25) %> </p>
               </div>
             </div>
-          </div>
         </div>
-      <% end %>
+      </div>
     <% end %>
-    <div class="col-md-12 py-2 pb-5">
+    <div class="col-md-12">
       <% if dashboard_count > 3 && dashboards.count == 3 %>
         <%= link_to 'Show More...', welcome_index_path(display_more: display_more_dashboard), remote: true, class: 'pull-right' %>
       <% elsif dashboards.count > 3 %>
