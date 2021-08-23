@@ -4,28 +4,21 @@
       <label class="pt-3 mb-0">Filter:</label>
     </div>
     <div class="col-md-3" style="width: 300px;">
-      <select onChange="self.location=this.options[this.selectedIndex].dataset.path">
-        <option data-path="<%= channel_report_path(@channel.id, @report.id, dashboard_enum_id: params[:dashboard_enum_id]) %>">All</option>
-        <% ReportEnum.all.each do |enum| %>
-          <% value = enum.id %>
-          <% path = channel_report_path(@channel.id, @report.id, report_enum_id: enum.id, dashboard_enum_id: params[:dashboard_enum_id]) %>
-          <% if "#{value}" == "#{params[:report_enum_id]}" || value == default_report_enum %>
-            <option value="<%= value %>" selected data-path="<%= path %>"> <%= enum.name.capitalize %></option>
-          <% else %>
-            <option value="<%= value %>" data-path="<%= path %>"> <%= enum.name.capitalize %></option>
-          <% end %>
-        <% end %>
-      </select>
+      <%= select_tag :report_enum_id, options_for_select(ReportEnum.all.collect{|x| [x.name,x.id]}),onchange: 'fetch_data(this.value)'  %>
     </div>
   </div>
-  <% if @pivot_tables.present? %>
-    <% @pivot_tables.each do |pivot_table| %>
-      <%= render partial: 'grid', locals: {pivot_table: pivot_table} %>
-    <% end %>
-  <% else %>
-    <div class="col-md-12 my-3 mx-4 alert alert-custom alert-notice alert-light-primary show d-flex" role="alert">
-      <div class="alert-icon"><i class="fas fa-exclamation-triangle"></i></div>
-      <div class="alert-text">No Report to display!</div>
-    </div>
-  <% end %>
 </div>
+<div class="row show_reports">
+  <%= render partial: 'report_content', locals: {pivot_tables: @pivot_tables} %>
+</div>
+
+<script type="text/javascript">
+
+  function fetch_data(value) {
+    $.ajax({
+      url:  window.location.pathname+"?report_enum_id="+value,
+      dataType: "script"
+    });
+  }
+</script>
+

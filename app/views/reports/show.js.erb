@@ -1,1 +1,1 @@
-$('.report_show').html('<%= escape_javascript(render partial: 'show_pivot') %>')
+$('.show_reports').html('<%= escape_javascript(render partial: 'report_content', locals: {pivot_tables: @pivot_tables}) %>')
