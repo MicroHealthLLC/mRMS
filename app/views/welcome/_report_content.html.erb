@@ -17,15 +17,7 @@
           <% end %>
         </div>
         <div class="text-center">
-          <p class="text-black-50 text-align-center data_title w-100 mb-2" title="<%= pivot_table.name %>"> <%= pivot_table.name.truncate(50) %> </p>
-          <div class="row pt-3">
-            <b class="col-5  p-0">Data Set:</b>
-            <p class="col-7 text-black-50 text-align-left data_title p-0 text-truncate" title="<%= pivot_table.report.name %>"> <%= pivot_table.report.name.truncate(25) %> </p>
-          </div>
-          <div class="row">
-            <b class="col-5  p-0">Channel:</b>
-            <p class="col-7 text-black-50 text-align-left data_title p-0 text-truncate" title="<%= pivot_table.channel.name %>"> <%= pivot_table.channel.name.truncate(25) %> </p>
-          </div>
+          <p class="text-black-50 text-align-center data_title w-100 mb-2 p-2" title="<%= pivot_table.name %>"> <%= pivot_table.name.truncate(50) %> </p>
         </div>
       </div>
     <% end %>
