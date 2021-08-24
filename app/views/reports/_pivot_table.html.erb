@@ -91,10 +91,12 @@
 
     $(document).ready(function(){
       setTimeout(function(){
-        $("#pivotTableWidth").removeClass("w-75");
+        $("#pivotTableWidth").removeClass("w-80");
         $("#pivotTableWidth").addClass("w-100");
         $("#output_ > .pvtUi").addClass('w-100');
-        $(".pvtTable").addClass("w-75");
+        $(".pvtTable").addClass("w-100");
+        $(".svg-container").addClass("w-100");
+        $(".pvtAxisContainer.pvtRows.ui-sortable").addClass("w-25");
        }, 1000);
     });
       var tableToExcel = (function() {
