@@ -8,9 +8,9 @@
             <% if (name && name.include?('table')) %>
                 <%= image_tag "pivot/table.png", style: 'width: 13rem; height: 13rem;'%>
             <% elsif (name && name.include?('heatmap')) %>
-                <%= image_tag "pivot/heatmap.png", style: 'width: 13rem; height: 13rem;'%>
+                <%= image_tag "pivot/heatmap.png", style: 'width: 13rem; height: 13rem;', class: 'pb-2'%>
             <% elsif name%>
-                <%= image_tag "pivot/#{name.gsub(' ', '-')}.png" , style: 'width: 13rem; height: 13rem;'%>
+                <%= image_tag "pivot/#{name.gsub(' ', '-')}.png" , style: 'width: 13rem; height: 13rem;', class: 'pb-2'%>
             <% else %>
               <%= image_tag "dashboard.png", style: 'width: 13rem; height: 13rem;'%>
             <% end %>
