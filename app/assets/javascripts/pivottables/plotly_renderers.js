@@ -1,6 +1,5 @@
 (function() {
   var callWithJQuery;
-
   callWithJQuery = function(pivotModule) {
     if (typeof exports === "object" && typeof module === "object") {
       return pivotModule(require("jquery"), require("plotly.js"));

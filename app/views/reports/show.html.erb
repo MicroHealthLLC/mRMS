@@ -5,14 +5,14 @@
       <%= render partial: 'modal' %>
       <% if params[:query_id] or params[:new_query] %>
         <div class="px-0">
-          <section id="widget-grid" class="channel col-12 px-0 ">
+          <section id="widget-grid" class="channel col-12 px-0">
             <div class="col-md-12 px-0">
-              <article class="col-xs-12 col-md-12 col-sm-12 col-12 px-0">
+              <article id="pivotTableWidth" class="w-80">
                 <%= render  partial: 'pivot_table',
                             layout: 'shared/smart_widget_wrapper',
                             locals: {
-                              wid_id: 'Report',
-                              wid_title: 'Data ',
+                              wid_id: 'pivot_table',
+                              wid_title: 'Data',
                             } %>
               </article>
             </div>
