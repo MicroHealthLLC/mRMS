@@ -1,52 +1,15 @@
 <div class="row">
-  <div class="col-md-12 d-flex justify-content-end mb-3">
+  <div class="col-md-12 d-flex justify-content-end mb-3 pr-0">
     <div class="col-md-1 d-flex justify-content-end pr-0">
       <label class="pt-3 mb-0">Filter:</label>
     </div>
     <div class="col-md-3" style="width: 300px;">
-      <select onChange="self.location=this.options[this.selectedIndex].dataset.path" >
-        <option data-path="<%= channel_report_path(@channel.id, @report.id, report_enum_id: params[:report_enum_id]) %>">All</option>
-        <% DashboardEnum.all.each do |enum| %>
-          <% value = enum.id %>
-          <% path = channel_report_path(@channel.id, @report.id, dashboard_enum_id: enum.id, report_enum_id: params[:report_enum_id]) %>
-          <% if "#{value}" == "#{params[:dashboard_enum_id]}" || value ==default_dashboard_enum %>
-            <option value="<%= value %>" selected data-path="<%= path %>"> <%= enum.name.capitalize %></option>
-          <% else %>
-            <option value="<%= value %>" data-path="<%= path %>"> <%= enum.name.capitalize %></option>
-          <% end %>
-        <% end %>
-      </select>
+      <%= select_tag :dashboard_enum_id,options_for_select(DashboardEnum.all.collect{|x| [x.name,x.id]}.prepend ['All', '']),onchange: 'fetch_dashboard_data(this.value)'  %>
     </div>
   </div>
-  <% if @report_dashboard.present? %>
-    <% @report_dashboard.each do |dashboard| %>
-      <div class="card border-0 p-0" style="width: 18rem">
-        <div class="border m-2 text-center h-100">
-          <div class="card-header p-0 pr-2 pt-2 border-0">
-            <%= link_to('<i class="fa fa-times float-right"></i>'.html_safe, channel_report_dashboard_path(@channel, @report, dashboard),
-              method: :delete, data: {confirm: "Are you sure to delete this dashboard?"}) if (dashboard.user_id == User.current.id) or User.current.admin?  %>
-          </div>
-          <div class="card-body pt-0 pb-2 px-0">
-            <%= link_to  [@channel, @report, dashboard]  do %>
-              <%= image_tag "dashboard.png", style: 'width: 13rem; height: 13rem;' %>
-            <% end %>
-            <div class="cursor-pointer text-center">
-              <p class="mb-0 px-3">
-                <% report_count = dashboard.save_pivot_tables.count%>
-                Total Reports: <%= report_count.to_s %>
-              </p>
-              <p title="<%= dashboard.name %>" class="px-3 mb-0 mt-2">
-                <%= dashboard.name.truncate(70) %>
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    <% end %>
-  <% else %>
-    <div class="col-md-12 my-3 mx-4 alert alert-custom alert-notice alert-light-primary show d-flex" role="alert">
-      <div class="alert-icon"><i class="fas fa-exclamation-triangle"></i></div>
-      <div class="alert-text">No Dashboard to display!</div>
-    </div>
-  <% end %>
 </div>
+<div class="row show_dashboards">
+  <%= render partial: 'dashboard_content', locals: { report_dashboard: report_dashboard, dashboard_enum_id:dashboard_enum_id, report_enum_id: report_enum_id } %>
+</div>
+
+

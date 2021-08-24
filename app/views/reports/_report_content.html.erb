@@ -1,0 +1,20 @@
+<% if pivot_tables.present? %>
+  <% pivot_tables.each do |pivot_table| %>
+    <%= render partial: 'grid', locals: {pivot_table: pivot_table} %>
+  <% end %>
+<% else %>
+  <div class="col-md-12 my-3 mx-4 alert alert-custom alert-notice alert-light-primary show d-flex" role="alert">
+    <div class="alert-icon"><i class="fas fa-exclamation-triangle"></i></div>
+    <div class="alert-text">No Report to display!</div>
+  </div>
+<% end %>
+
+<script type="text/javascript">
+  function fetch_report_data(report_value) {
+    $.ajax({
+      url:  window.location.pathname+"?report_enum_id="+report_value+"&dashboard_enum_id="+"<%= dashboard_enum_id %>",
+      dataType: "script",
+      cache: true
+    });
+  }
+</script>

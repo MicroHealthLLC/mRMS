@@ -1,1 +1,2 @@
-$('.report_show').html('<%= escape_javascript(render partial: 'show_pivot') %>')
+$('.show_reports').html('<%= escape_javascript(render partial: 'report_content', locals: {pivot_tables: @pivot_tables, report_enum_id: @report_enum_id, dashboard_enum_id: @dashboard_enum_id}) %>')
+$('.show_dashboards').html('<%= escape_javascript(render partial: 'dashboard_content', locals: {report_dashboard: @report_dashboard,report_enum_id: @report_enum_id, dashboard_enum_id: @dashboard_enum_id}) %>')
