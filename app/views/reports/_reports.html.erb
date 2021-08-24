@@ -4,7 +4,7 @@
       <label class="pt-3 mb-0">Filter:</label>
     </div>
     <div class="col-md-3" style="width: 300px;">
-      <%= select_tag :report_enum_id, options_for_select(ReportEnum.all.collect{|x| [x.name,x.id]}),onchange: 'fetch_report_data(this.value)'  %>
+      <%= select_tag :report_enum_id, options_for_select(ReportEnum.all.collect{|x| [x.name,x.id]}.prepend ['All', '']),onchange: 'fetch_report_data(this.value)'  %>
     </div>
   </div>
 </div>

@@ -9,10 +9,9 @@ class ReportsController < ApplicationController
   # GET /reports/1
   # GET /reports/1.json
   def show
-
     @query_id         = params[:query_id] rescue nil
-    @pivot_tables     = params[:report_enum_id] ? @report.save_pivot_tables.where(report_enum_id: params[:report_enum_id]) : @report.save_pivot_tables
-    @report_dashboard = params[:dashboard_enum_id] ? @report.dashboards.where(dashboard_enum_id: params[:dashboard_enum_id]) : @report.dashboards
+    @pivot_tables     = params[:report_enum_id].present? ? @report.save_pivot_tables.where(report_enum_id: params[:report_enum_id]) : @report.save_pivot_tables
+    @report_dashboard = params[:dashboard_enum_id].present? ? @report.dashboards.where(dashboard_enum_id: params[:dashboard_enum_id]) : @report.dashboards
     @report_enum_id   = params[:report_enum_id]
     @dashboard_enum_id = params[:dashboard_enum_id]
     @dashboard_count = @report.dashboards.count

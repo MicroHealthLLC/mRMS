@@ -28,9 +28,9 @@
                             locals: {
                               wid_id: 'reports',
                               pivot_tables: @pivot_tables,
-                              report_enum_id: @report_enum_id||=ReportEnum.first.id,
-                              dashboard_enum_id: @dashboard_enum_id||=DashboardEnum.first.id,
-                              wid_title: "Reports (#{filter_pivot_report})"
+                              report_enum_id: @report_enum_id,
+                              dashboard_enum_id: @dashboard_enum_id,
+                              wid_title: "Reports"
                             } %>
               </article>
             </div>
@@ -44,9 +44,9 @@
                             locals: {
                               wid_id: 'dashboards',
                               report_dashboard: @report_dashboard,
-                              report_enum_id: @report_enum_id||=ReportEnum.first.id,
-                              dashboard_enum_id: @dashboard_enum_id||=DashboardEnum.first.id,
-                              wid_title: "Dashboards (#{filter_report_dashbord})"
+                              report_enum_id: @report_enum_id,
+                              dashboard_enum_id: @dashboard_enum_id,
+                              wid_title: "Dashboards"
                             } %>
               </article>
             </div>

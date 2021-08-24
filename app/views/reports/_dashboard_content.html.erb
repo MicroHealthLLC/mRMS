@@ -32,11 +32,11 @@
 
 <script type="text/javascript">
   function fetch_dashboard_data(dashboard_value) {
-      var report_enum_id = "<%= report_enum_id%>";
-    $.ajax({
-      url:  `${window.location.pathname}?dashboard_enum_id=${dashboard_value}&report_enum_id=${report_enum_id}`,
-      dataType: "script",
-      cache: true
-    });
+        var report_enum_id = "<%= report_enum_id%>";
+      $.ajax({
+        url:  `${window.location.pathname}?dashboard_enum_id=${dashboard_value}&report_enum_id=${report_enum_id}`,
+        dataType: "script",
+        cache: true
+      });
   }
 </script>
