@@ -71,6 +71,16 @@
   <% end %>
 
   <script type="text/javascript">
+    el = $( "#pivotTableWidth" )
+    el.on('change', function() {
+      el.removeClass("w-100");
+      el.addClass("w-75");
+
+      setTimeout(function(){
+        el.removeClass("w-75");
+        el.addClass("w-100");
+      }, 1000);
+    });
 
     setTimeout(function(){
       $(".jarviswidget-ctrls > .jarviswidget-fullscreen-btn").click(function() {
@@ -81,8 +91,10 @@
 
     $(document).ready(function(){
       setTimeout(function(){
+        $("#pivotTableWidth").removeClass("w-75");
+        $("#pivotTableWidth").addClass("w-100");
         $("#output_ > .pvtUi").addClass('w-100');
-        $(".pvtTable").addClass("w-100");
+        $(".pvtTable").addClass("w-75");
        }, 1000);
     });
       var tableToExcel = (function() {
