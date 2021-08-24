@@ -22,11 +22,14 @@
         <div id="widget-grid">
           <section class="show_customer_account">
             <div class="row mb-5">
-              <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+              <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id="showReport">
                 <%= render  partial: 'reports',
                             layout: 'shared/smart_widget_wrapper',
                             locals: {
                               wid_id: 'reports',
+                              pivot_tables: @pivot_tables,
+                              report_enum_id: @report_enum_id||=ReportEnum.first.id,
+                              dashboard_enum_id: @dashboard_enum_id||=DashboardEnum.first.id,
                               wid_title: "Reports (#{filter_pivot_report})"
                             } %>
               </article>
@@ -35,11 +38,14 @@
 
           <section id="widget-grid"  class="show_customer_account">
             <div class="row">
-              <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+              <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id="showDashboard">
                 <%= render  partial: 'dashboards',
                             layout: 'shared/smart_widget_wrapper',
                             locals: {
                               wid_id: 'dashboards',
+                              report_dashboard: @report_dashboard,
+                              report_enum_id: @report_enum_id||=ReportEnum.first.id,
+                              dashboard_enum_id: @dashboard_enum_id||=DashboardEnum.first.id,
                               wid_title: "Dashboards (#{filter_report_dashbord})"
                             } %>
               </article>

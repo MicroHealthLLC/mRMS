@@ -8,3 +8,13 @@
     <div class="alert-text">No Report to display!</div>
   </div>
 <% end %>
+
+<script type="text/javascript">
+  function fetch_report_data(report_value) {
+    $.ajax({
+      url:  window.location.pathname+"?report_enum_id="+report_value+"&dashboard_enum_id="+"<%= dashboard_enum_id %>",
+      dataType: "script",
+      cache: true
+    });
+  }
+</script>

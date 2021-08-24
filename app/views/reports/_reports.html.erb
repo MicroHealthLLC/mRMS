@@ -4,21 +4,11 @@
       <label class="pt-3 mb-0">Filter:</label>
     </div>
     <div class="col-md-3" style="width: 300px;">
-      <%= select_tag :report_enum_id, options_for_select(ReportEnum.all.collect{|x| [x.name,x.id]}),onchange: 'fetch_data(this.value)'  %>
+      <%= select_tag :report_enum_id, options_for_select(ReportEnum.all.collect{|x| [x.name,x.id]}),onchange: 'fetch_report_data(this.value)'  %>
     </div>
   </div>
 </div>
 <div class="row show_reports">
-  <%= render partial: 'report_content', locals: {pivot_tables: @pivot_tables} %>
+  <%= render partial: 'report_content', locals: { pivot_tables: pivot_tables, dashboard_enum_id:dashboard_enum_id, report_enum_id: report_enum_id } %>
 </div>
-
-<script type="text/javascript">
-
-  function fetch_data(value) {
-    $.ajax({
-      url:  window.location.pathname+"?report_enum_id="+value,
-      dataType: "script"
-    });
-  }
-</script>
 
