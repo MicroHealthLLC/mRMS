@@ -10,28 +10,28 @@
   <div class="row mx-auto">
     <div class="col-md-12">
       <h2>Section 1</h2>
-      <%= text_area_tag :section_1, Setting['section_1'], class: 'ck-editor'%>
+      <%= text_area_tag :section_1, Setting['section_1'], id: 'ckEditorFileManager1'%>
     </div>
   </div>
 
   <div class="row mx-auto">
     <div class="col-md-12">
       <h2>Section 2</h2>
-      <%= text_area_tag :section_2, Setting['section_2'], class: 'ck-editor' %>
+      <%= text_area_tag :section_2, Setting['section_2'], id: 'ckEditorFileManager2' %>
     </div>
   </div>
 
   <div class="row mx-auto">
     <div class="col-md-12">
       <h2>Section 3</h2>
-      <%= text_area_tag :section_3, Setting['section_3'], class: 'ck-editor' %>
+      <%= text_area_tag :section_3, Setting['section_3'], id: 'ckEditorFileManager3' %>
     </div>
   </div>
 
   <div class="row mx-auto">
     <div class="col-md-12">
       <h2>Section 4</h2>
-      <%= text_area_tag :section_4, Setting['section_4'], class: 'ck-editor' %>
+      <%= text_area_tag :section_4, Setting['section_4'], id: 'ckEditorFileManager4' %>
     </div>
   </div>
 
@@ -43,10 +43,11 @@
 <% end %>
 
 <script type="text/javascript">
-  CKEDITOR.replace('ckEditorFileManager', {
-    height: 300,
-
-    filebrowserUploadUrl: '/file_uploads',
-    filebrowserImageUploadUrl: '/file_uploads'
+  $("#ckEditorFileManager,#ckEditorFileManager1,#ckEditorFileManager3,#ckEditorFileManager4").each(function(){
+    CKEDITOR.replace(this,{
+      height: 300,
+      filebrowserUploadUrl: '/file_uploads',
+      filebrowserImageUploadUrl: '/file_uploads'
+    });
   });
 </script>
