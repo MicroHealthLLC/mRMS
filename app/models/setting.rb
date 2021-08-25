@@ -1,4 +1,5 @@
 class Setting < ApplicationRecord
+  mount_uploader :content, CkEditorManagerUploader
 
   DATE_FORMATS = [
       '%Y-%m-%d',

@@ -58,6 +58,7 @@ Rails.application.routes.draw do
       post 'set_key_providers'
     end
   end
+  post 'file_uploads',  to: 'ck_editor_manager#upload_file'
   get 'profile_record',  to: 'user_profiles#profile_record'
   resources :employees, path: :persons, except: [:edit] do
     member do
