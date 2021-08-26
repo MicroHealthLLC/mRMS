@@ -1,9 +1,9 @@
 <% if dashboards.present? %>
-  <div class="row" id="<%= display_more_dashboard %>">
+  <div class="row">
     <% dashboards.each do |dashboard| %>
       <div class="card m-4 p-2 cursor-pointer" style="width: 18rem">
         <div class="text-center">
-            <%= link_to [dashboard.report.channel, dashboard.report , dashboard ] do%>
+            <%= link_to [dashboard.report.channel, dashboard.report , dashboard] do %>
               <%= image_tag "dashboard.png", style: 'width: 13rem' %>
             <% end %>
             <div class="text-center">
@@ -14,14 +14,30 @@
         </div>
       </div>
     <% end %>
-    <div class="col-md-12">
-      <% if dashboard_count > 3 && dashboards.count == 3 %>
-        <%= link_to 'Show More...', welcome_index_path(display_more: display_more_dashboard), remote: true, class: 'pull-right' %>
-      <% elsif dashboards.count > 3 %>
-        <%= link_to 'Show less...', welcome_index_path(display_less: display_more_dashboard), remote: true, class: 'pull-right' %>
-      <% end %>
+<% else %>
+  <div class="col-md-12">
+    <div class="alert alert-custom alert-notice alert-light-primary show d-flex" role="alert">
+      <div class="alert-icon"><i class="fas fa-exclamation-triangle"></i></div>
+      <div class="alert-text">No Dashboard to display!</div>
     </div>
   </div>
+<% end %>
+
+<% if shared_dashboards.present? %>
+  <% shared_dashboards.each do |dashboard| %>
+    <div class="card m-4 p-2 cursor-pointer" style="width: 18rem">
+        <div class="text-center">
+            <%= link_to channel_multi_data_set_dashboard_path(dashboard.channel,dashboard) do%>
+              <%= image_tag "dashboard.png", style: 'width: 13rem; height: 13rem' %>
+            <% end %>
+            <div class="text-center">
+              <p title="<%= dashboard.name %>" class="text-black-50 text-align-center data_title w-100 mb-5 p-2">
+                <%= dashboard.name.truncate(50) %>
+              </p>
+            </div>
+        </div>
+    </div>
+  <% end %>
 <% else %>
   <div class="col-md-12">
     <div class="alert alert-custom alert-notice alert-light-primary show d-flex" role="alert">

@@ -1,182 +1,37 @@
 <div id="widget-grid">
-  <div class="card card-custom mb-3" data-card="true" id="kt_card_1">
-    <div class="card-header">
-      <div class="card-title">
-        <h3 class="card-label">Reports</h3>
+  <div class="card-body py-2">
+    <section class="dashboard_all">
+      <div class="row mb-5">
+        <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12 pb-2">
+          <%= render  partial: 'dashboard_content',
+                      layout: 'shared/smart_widget_wrapper',
+                      locals: {
+                        wid_id:"",
+                        wid_title:"Dashboard",
+                        dashboards: @dashboard_all,
+                        dashboard_count: @dashboard_all_count,
+                        shared_dashboard_count: @shared_dashboard_all_count,
+                        shared_dashboards: @shared_dashboard_all,
+                      } %>
+        </article>
       </div>
-      <div class="card-toolbar">
-        <a href="#" class="btn btn-icon btn-sm btn-hover-light-primary mr-1" data-card-tool="toggle" data-toggle="tooltip" data-placement="top" title="Collapse">
-          <i class="fas fa-chevron-up"></i>
-        </a>
-      </div>
-    </div>
-    <div class="card-body">
-      <section class="public_report">
-        <div class="row mb-5">
-          <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-            <%= render  partial: 'report_content',
-                        layout: 'shared/smart_widget_wrapper',
-                        locals: {
-                          wid_id: 'public_reports',
-                          wid_title: 'Public Reports',
-                          reports: @public_reports,
-                          report_count: @public_reports_count,
-                          display_more_report: 'display_all_public'
-                        } %>
-          </article>
-        </div>
-      </section>
-      <section class="personal_report">
-        <div class="row mb-5">
-          <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-            <%= render  partial: 'report_content',
-                        layout: 'shared/smart_widget_wrapper',
-                        locals: {
-                          wid_id: 'personal_reports',
-                          wid_title: 'Personal Reports',
-                          reports: @personal_reports,
-                          report_count: @personal_reports_count,
-                          display_more_report: 'display_all_personal'
-                        } %>
-          </article>
-        </div>
-      </section>
-      <section class="group_report">
-        <div class="row mb-5">
-          <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-            <%= render  partial: 'report_content',
-                        layout: 'shared/smart_widget_wrapper',
-                        locals: {
-                          wid_id: 'group_reports',
-                          wid_title: 'Group reports',
-                          reports: @group_reports,
-                          report_count: @group_reports_count,
-                          display_more_report: 'display_all_group'
-                        } %>
-          </article>
-        </div>
-      </section>
-    </div>
+    </section>
   </div>
-
-  <div class="card card-custom mb-3" data-card="true" id="kt_card_1">
-    <div class="card-header">
-      <div class="card-title">
-        <h3 class="card-label">Dashboards</h3>
+  <div class="card-body py-2">
+    <section class="all_pivot_tables">
+      <div class="row mb-5">
+        <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <%= render  partial: 'report_content',
+                      layout: 'shared/smart_widget_wrapper',
+                      locals: {
+                        wid_id: "",
+                        wid_title: 'Reports',
+                        reports: @all_reports,
+                        report_count: @all_reports_count,
+                        display_more_report: 'display_all_reports'
+                      } %>
+        </article>
       </div>
-      <div class="card-toolbar">
-        <a href="#" class="btn btn-icon btn-sm btn-hover-light-primary mr-1" data-card-tool="toggle" data-toggle="tooltip" data-placement="top" title="Collapse">
-          <i class="fas fa-chevron-up"></i>
-        </a>
-      </div>
-    </div>
-    <div class="card-body">
-      <section class="public_dashboard">
-        <div class="row mb-5">
-          <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-            <%= render  partial: 'dashboard_content',
-                        layout: 'shared/smart_widget_wrapper',
-                        locals: {
-                          wid_id: 'public_dashboard',
-                          wid_title: 'Public Dashboards',
-                          dashboards: @public_dashboard,
-                          dashboard_count: @public_dashboard_count,
-                          display_more_dashboard: 'display_all_public_dashboard'
-                        } %>
-          </article>
-        </div>
-      </section>
-      <section class="personal_dashboard">
-        <div class="row mb-5">
-          <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-            <%= render  partial: 'dashboard_content',
-                        layout: 'shared/smart_widget_wrapper',
-                        locals: {
-                          wid_id: 'personal_dashboard',
-                          wid_title: 'Personal Dashboards',
-                          dashboards: @personal_dashboard,
-                          dashboard_count: @personal_dashboard_count,
-                          display_more_dashboard: 'display_all_personal_dashboard'
-                        } %>
-          </article>
-        </div>
-      </section>
-      <section class="group_dashboard">
-        <div class="row mb-5">
-          <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-            <%= render  partial: 'dashboard_content',
-                        layout: 'shared/smart_widget_wrapper',
-                        locals: {
-                          wid_id: 'group_dashboard',
-                          wid_title: 'Group Dashboards',
-                          dashboards: @group_dashboard,
-                          dashboard_count: @group_dashboard_count,
-                          display_more_dashboard: 'display_all_group_dashboard'
-                        } %>
-          </article>
-        </div>
-      </section>
-    </div>
-  </div>
-  </section>
-
-  <div class="card card-custom mb-3" data-card="true" id="kt_card_1">
-    <div class="card-header">
-      <div class="card-title">
-        <h3 class="card-label">Multi Data Set Dashboards</h3>
-      </div>
-      <div class="card-toolbar">
-        <a href="#" class="btn btn-icon btn-sm btn-hover-light-primary mr-1" data-card-tool="toggle" data-toggle="tooltip" data-placement="top" title="Collapse">
-          <i class="fas fa-chevron-up"></i>
-        </a>
-      </div>
-    </div>
-    <div class="card-body">
-     <section class="public_dashboard_shared">
-        <div class="row mb-5">
-          <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-            <%= render  partial: 'shared_dashboard_content',
-                        layout: 'shared/smart_widget_wrapper',
-                        locals: {
-                          wid_id: 'public_dashboards',
-                          wid_title: 'Public Dashboards',
-                          dashboards: @public_shared_dashboard,
-                          dashboard_count: @public_shared_dashboard_count,
-                          display_more_dashboard: 'display_all_public_shared_dashboard'
-                        } %>
-          </article>
-        </div>
-      </section>
-      <section class="personal_dashboard_shared">
-        <div class="row mb-5">
-          <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-            <%= render  partial: 'shared_dashboard_content',
-                        layout: 'shared/smart_widget_wrapper',
-                        locals: {
-                          wid_id: 'personal_dashboards',
-                          wid_title: 'Personal Dashboards',
-                          dashboards: @personal_shared_dashboard,
-                          dashboard_count: @personal_shared_dashboard_count,
-                          display_more_dashboard: 'display_all_personal_shared_dashboard'
-                        } %>
-          </article>
-        </div>
-      </section>
-      <section class="group_dashboard_shared">
-        <div class="row mb-5">
-          <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-            <%= render  partial: 'shared_dashboard_content',
-                        layout: 'shared/smart_widget_wrapper',
-                        locals: {
-                          wid_id: 'group_dashboards',
-                          wid_title: 'Group Dashboards',
-                          dashboards: @group_shared_dashboard,
-                          dashboard_count: @group_dashboard_shared_count,
-                          display_more_dashboard: 'display_all_group_shared_dashboard'
-                        } %>
-          </article>
-        </div>
-      </section>
-    </div>
+    </section>
   </div>
 </div>

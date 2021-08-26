@@ -15,7 +15,7 @@
                     <!--begin::Logo-->
                     <%= link_to "#{image_tag( "logo.png", alt: '')}".html_safe, root_path, data: {container: 'body', toggle: 'tooltip', placement: "right"}  %>
                     <!--end::Logo-->
-                    <span class="menu-text ml-3"><%=link_to Setting['application_name']%></span>
+                    <span class="menu-text ml-3"><%= Setting['application_name'].upcase %></span>
                   </div>
                 </li>
                 <% if user_signed_in? %>
