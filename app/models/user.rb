@@ -236,8 +236,11 @@ class User < ApplicationRecord
 
   def name
     cd = core_demographic
-    return login if cd.nil?
-    "#{cd.first_name} #{cd.last_name}"
+    if cd&.first_name.present? || cd&.last_name.present?
+      "#{cd.first_name} #{cd.last_name}"
+    else
+      login.humanize
+    end
   end
 
   def profile
