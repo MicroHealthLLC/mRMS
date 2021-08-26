@@ -130,14 +130,14 @@ class DashboardsController < ApplicationController
   end
 
   def authorize
-    can_access = case params[:action]
-                   when 'edit', 'update',
-                       'new',  'create' then  @channel.is_public? or @channel.my_permission.can_shared_report_with_dashboard? or @channel.is_creator?
-                   when 'destroy'
-                     @report.channel.my_permission.can_delete_report? or @report.channel.is_public? or current_user.id == @dashboard.user_id
-                   else
-                     @channel.my_permission.can_shared_report_with_dashboard?
-                 end
+    can_access =  case params[:action]
+                    when 'edit', 'update',
+                         'new',  'create' then  @channel.is_public? or @channel.my_permission.can_shared_report_with_dashboard? or @channel.is_creator?
+                    when 'destroy'
+                      @report.channel.my_permission.can_delete_report? or @report.channel.is_public? or current_user.id == @dashboard.user_id
+                    else
+                      @channel.my_permission.can_shared_report_with_dashboard? or @channel.is_public?
+                  end
 
     render_403 unless (can_access or (@report && @report.channel.is_creator?) or (@report.nil? and  @channel.is_creator?) )
   end

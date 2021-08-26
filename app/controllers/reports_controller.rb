@@ -189,7 +189,7 @@ class ReportsController < ApplicationController
                    when 'destroy'
                      @report.channel.my_permission.can_delete_report? or @report.channel.is_public?
                    else
-                    params[:shared_report_with_dashboard].present? ? @channel.my_permission.can_shared_report_with_dashboard? : @channel.my_permission.can_add_users?
+                    @channel.is_public? or params[:shared_report_with_dashboard].present? ? @channel.my_permission.can_shared_report_with_dashboard? : @channel.my_permission.can_add_users?
                  end
 
     render_403 unless (can_access or (@report && @report.channel.is_creator?) or (@report.nil? and  @channel.is_creator?) )
