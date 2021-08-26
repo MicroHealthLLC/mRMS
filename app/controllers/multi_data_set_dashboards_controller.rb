@@ -75,6 +75,10 @@ class MultiDataSetDashboardsController < ApplicationController
 
   def set_multi_dashboard
     @multi_dashboard = MultiDataSetDashboard.find(params[:id])
+    @multi_dashboard.frequently_count += 1
+    @multi_dashboard.save!
+  rescue ActiveRecord::RecordNotFound
+    render_404
   end
 
   def multi_data_set_dashboard_params

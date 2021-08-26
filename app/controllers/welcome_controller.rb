@@ -30,8 +30,8 @@ class WelcomeController < ApplicationController
     public_multi_dashboards = MultiDataSetDashboard.public_channel_multi_dashboard
     personal_multi_dashboards = MultiDataSetDashboard.personal_channel_multi_dashboard
     group_multi_dashboards = MultiDataSetDashboard.group_channel_multi_dashboard
-    shared_dashboard_all = public_multi_dashboards + personal_multi_dashboards + group_multi_dashboards
-    @shared_dashboard_all = shared_dashboard_all.first(3)
+    shared_dashboard_all = public_multi_dashboards.merge(personal_multi_dashboards.merge(group_multi_dashboards))
+    @shared_dashboard_all = shared_dashboard_all.order('frequently_count desc').first(3)
   end
 
   def load_pivot_tables
