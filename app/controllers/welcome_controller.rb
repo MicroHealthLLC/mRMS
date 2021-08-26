@@ -30,7 +30,7 @@ class WelcomeController < ApplicationController
     public_multi_dashboards = MultiDataSetDashboard.public_channel_multi_dashboard
     personal_multi_dashboards = MultiDataSetDashboard.personal_channel_multi_dashboard
     group_multi_dashboards = MultiDataSetDashboard.group_channel_multi_dashboard
-    shared_dashboard_all = public_multi_dashboards.merge(personal_multi_dashboards.merge(group_multi_dashboards))
+    shared_dashboard_all = public_multi_dashboards.or(personal_multi_dashboards.or(group_multi_dashboards))
     @shared_dashboard_all = shared_dashboard_all.order('frequently_count desc').first(3)
   end
 
@@ -38,7 +38,7 @@ class WelcomeController < ApplicationController
     public_pivot_tables = SavePivotTable.where(report_id: @public_report_ids)
     personal_pivot_tables = SavePivotTable.where(report_id: @personal_report_ids)
     group_pivot_tables = SavePivotTable.where(report_id: @group_report_ids)
-    all_pivot_tables = public_pivot_tables.merge(personal_pivot_tables.merge(group_pivot_tables))
+    all_pivot_tables = public_pivot_tables.or(personal_pivot_tables.or(group_pivot_tables))
     @all_reports = all_pivot_tables.order('frequently_count desc').first(6)
   end
 
@@ -46,7 +46,7 @@ class WelcomeController < ApplicationController
     public_dashboard = Dashboard.where(report_id: @public_report_ids)
     personal_dashboard = Dashboard.where(report_id: @personal_report_ids)
     group_dashboard = Dashboard.where(report_id: @group_report_ids)
-    dashboard_all = public_dashboard.merge(personal_dashboard.merge(group_dashboard))
+    dashboard_all = public_dashboard.or(personal_dashboard.or(group_dashboard))
     @dashboard_all = dashboard_all.order('frequently_count desc').first(3)
   end
 
