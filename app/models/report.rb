@@ -17,7 +17,7 @@ class Report < ApplicationRecord
   scope :by_frequently, -> { order('frequently_count desc') }
   scope :group_channel_reports, -> { by_frequently.joins(:channel).where(channels: {id: Channel.for_user}) }
   scope :public_channel_reports, -> { by_frequently.joins(:channel).where(channels: {option: 2}) }
-  scope :personal_channel_reports, -> { by_frequently.joins(:channel).where(channels: {id: Channel.my_personal_channel}) }
+  scope :personal_channel_reports, -> { by_frequently.joins(:channel).where(channels: {id: Channel.where(id: Channel.for_user.map(&:id))}) }
   scope :current_user_shared_reports, -> { joins(:shared_reports).group(:id).having("count(*) > 1") }
 
   # mount_uploader :document, ReportUploader
