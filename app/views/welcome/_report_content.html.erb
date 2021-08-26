@@ -21,13 +21,6 @@
         </div>
       </div>
     <% end %>
-      <div class="col-md-12">
-        <% if report_count > 3 && reports.count == 3 %>
-          <%= link_to 'Show More...', welcome_index_path(display_more: display_more_report), remote: true , class: 'pull-right'  %>
-        <% elsif reports.count > 3 %>
-        <%= link_to 'Show less...', welcome_index_path(display_less: display_more_report), remote: true , class: 'pull-right'  %>
-        <% end %>
-      </div>
   </div>
 <% else %>
   <div class="col-md-12">
