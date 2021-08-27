@@ -39,21 +39,21 @@
           <% save_pivot_tables = SavePivotTable.where(report_id: report_ids) %>
           <% if save_pivot_tables %>
             <% save_pivot_tables.each do |r| %>
-              <div id="report_<%=r.id%>" class="card p-2 m-2" style="width: 18rem" draggable="true" ondragstart="dragStart(event)">
-                <div onclick="removedCard('<%=r.id%>')" class="disp_icon mouse-hover">
-                  <span><i class="fa fa-times d-none cursor-pointer float-right px-5"></i></span>
+              <div id="report_<%=r.id%>" class="drop-none card p-2 col-md-5 m-2" draggable="true" ondragstart="dragStart(event)">
+                <div onclick="removedCard('<%=r.id%>')" class="drop-none disp_icon mouse-hover">
+                  <span><i class="drop-none fa fa-times d-none cursor-pointer float-right px-5"></i></span>
                 </div>
-                <div class="card-body py-3 pl-0 pr-0 px-4 text-center">
+                <div class="drop-none card-body py-3 pl-0 pr-0 px-4 text-center">
                   <%#= image_tag "pivot/col-heatmap.png", size: '190x190', class: "w-100"%>
                   <% if (name = JSON.parse(r.content)['rendererName'].downcase) && name.include?('table') %>
-                      <%= image_tag "pivot/table.png", class: "pointer-events-none", style: "width: 13rem; height: 13rem" %>
+                      <%= image_tag "pivot/table.png", class: "drop-none pointer-events-none", style: "width: 13rem; height: 13rem" %>
                   <% elsif (name = JSON.parse(r.content)['rendererName'].downcase) && name.include?('heatmap') %>
-                      <%= image_tag "pivot/heatmap.png", class: "pointer-events-none", style: "width: 13rem; height: 13rem" %>
+                      <%= image_tag "pivot/heatmap.png", class: "drop-none pointer-events-none", style: "width: 13rem; height: 13rem" %>
                   <% else %>
-                      <%= image_tag "pivot/#{name.gsub(' ', '-')}.png", class: "pointer-events-none", style: "width: 13rem; height: 13rem"%>
+                      <%= image_tag "pivot/#{name.gsub(' ', '-')}.png", class: "drop-none pointer-events-none", style: "width: 13rem; height: 13rem"%>
                   <% end %>
-                  <div class="cursor-pointer card-text">
-                    <span class="px-3" title="<%= r.name %>">
+                  <div class="drop-none cursor-pointer card-text">
+                    <span class="drop-none px-3" title="<%= r.name %>">
                       <%= r.name.truncate(70) %>
                     </span>
                   </div>
@@ -67,6 +67,11 @@
 <% end %>
 
 <script>
+  $( function() {
+    $( "#dragDropDataSet" ).sortable();
+    $( "#dragDropDataSet" ).disableSelection();
+  } );
+
   var pivotReportIDs      = [];
   var pivotReportIndexIds = [];
   function validateform(){
@@ -116,12 +121,12 @@
   }
   function dragDrop (ev) {
     var t = ev.target;
-    if(t.classList.contains("card") || t.classList.contains("fa") || t.classList.contains("card-body") || t.classList.contains("card-title")){
+    if(t.classList.contains("drop-none")){
       return false;
     }
     ev.preventDefault ();
     var data =  ev.dataTransfer.getData ("text");
-    ev.target.appendChild (document.getElementById(data));
+    ev.target.appendChild(document.getElementById(data));
     $('#dragDropDataSet div').each(function() {
       $("#dragDropDataSet").removeClass('placeholder-custom')
       pivotTableCard = this.id;
