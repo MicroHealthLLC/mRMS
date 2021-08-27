@@ -134,4 +134,14 @@ class Channel < ApplicationRecord
   def to_s
     name
   end
+
+  def option_type
+    if option == GROUPS
+      'Group'
+    elsif option == PUBLIC
+      'Public'
+    elsif option == PERSONAL
+      'Personal'
+    end
+  end
 end
