@@ -17,11 +17,11 @@ class MultiDataSetDashboardsController < ApplicationController
     pivot_table_ids = JSON.parse(params[:pivot_table_ids]) rescue nil
     if pivot_table_ids.present?
       @multi_dashboard.save_pivot_tables = SavePivotTable.where(id: pivot_table_ids)
-      set_order_index_pivot_table(pivot_table_ids)
     end
     respond_to do |format|
       if @multi_dashboard.save
         @save_pivot_tables = @multi_dashboard.save_pivot_tables
+        set_order_index_pivot_table(pivot_table_ids)
         format.html { redirect_to [@channel, @multi_dashboard], notice: 'Muti data set dashboard was successfully created.' }
         format.json { render :show, status: :created, location: @multi_dashboard }
       else
@@ -44,10 +44,8 @@ class MultiDataSetDashboardsController < ApplicationController
       pivot_table_ids =  JSON.parse(params[:pivot_table_ids])
       @multi_dashboard.save_pivot_tables = SavePivotTable.where(id: pivot_table_ids)
       @save_pivot_tables = @multi_dashboard.save_pivot_tables
-      if @save_pivot_tables
-        update_order_index_pivot_table(pivot_table_ids)
-      end
       if @multi_dashboard.update(multi_data_set_dashboard_params)
+        set_order_index_pivot_table(pivot_table_ids)
         format.html { redirect_to [@channel, @multi_dashboard], notice: 'Muti data set dashboard was successfully updated.' }
         format.json { render :show, status: :ok, location: @multi_dashboard }
       else
@@ -90,16 +88,7 @@ class MultiDataSetDashboardsController < ApplicationController
       @multi_dashboard.shared_multi_report_dashboards.each do |dash|
         if dash.pivot_table_id == pivot
           dash.order_index = index_id
-        end
-      end
-    end
-  end
-
-  def update_order_index_pivot_table(pivot_table_ids)
-    pivot_table_ids.each_with_index do |pivot, index_id|
-      @multi_dashboard.shared_multi_report_dashboards.each do |dash|
-        if dash.pivot_table_id == pivot
-          dash.update(order_index: index_id)
+          dash.save
         end
       end
     end

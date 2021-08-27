@@ -11,4 +11,22 @@ module DashboardsHelper
     end
     return pluckIds
   end
+
+  def load_pivot_tables_dashboards(dashboard)
+    pivot_tables = []
+    report_dashboards = dashboard.report_dashboards.includes(:save_pivot_table).order("order_index")
+    report_dashboards.each do |report_dash|
+      pivot_tables << report_dash.save_pivot_table
+    end
+    pivot_tables
+  end
+
+  def load_pivot_tables_shared_dashboards(dashboard)
+    pivot_tables = []
+    shared_multi_report_dashboards = dashboard.shared_multi_report_dashboards.includes(:save_pivot_table).order("order_index")
+    shared_multi_report_dashboards.each do |shared_dash|
+      pivot_tables << shared_dash.save_pivot_table
+    end
+    pivot_tables
+  end
 end
