@@ -122,6 +122,10 @@
     ev.dataTransfer.setData ("text",  ev.target.id);
   }
   function dragDrop(ev) {
+    var t = ev.target;
+    if(t.classList.contains("drop-none")){
+      return false;
+    }
     ev.preventDefault ();
     var data =  ev.dataTransfer.getData("text");
     ev.target.appendChild(document.getElementById(data));
