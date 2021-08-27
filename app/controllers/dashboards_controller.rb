@@ -33,11 +33,11 @@ class DashboardsController < ApplicationController
     pivot_table_ids = JSON.parse(params[:pivot_table_ids]) rescue nil
     if pivot_table_ids.present?
       @dashboard.save_pivot_tables = SavePivotTable.where(id: pivot_table_ids)
-      set_order_index_pivot_table(pivot_table_ids)
     end
     respond_to do |format|
       if @dashboard.save
         @save_pivot_tables = @dashboard.save_pivot_tables
+        set_order_index_pivot_table(pivot_table_ids)
         format.html { redirect_to [@channel, @report, @dashboard], notice: 'Dashboard was successfully created.' }
         format.json { render :show, status: :created, location: @dashboard }
       else
@@ -56,6 +56,7 @@ class DashboardsController < ApplicationController
       @dashboard.save_pivot_tables = SavePivotTable.where(id: pivot_table_ids)
       @save_pivot_tables = @dashboard.save_pivot_tables
       if @dashboard.update(dashboard_params)
+        set_order_index_pivot_table(pivot_table_ids)
         format.html { redirect_to [@channel, @report, @dashboard], notice: 'Dashboard was successfully updated.' }
         format.json { render :show, status: :ok, location: @dashboard }
       else
@@ -124,6 +125,7 @@ class DashboardsController < ApplicationController
       @dashboard.report_dashboards.each do |dash|
         if dash.pivot_table_id == pivot
           dash.order_index = index_id
+          dash.save
         end
       end
     end

@@ -44,7 +44,7 @@
 <section id="widget-grid" class="channel">
   <div class="row">
     <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-      <% @multi_dashboard.save_pivot_tables.each_with_index do |pivot_table, idx| %>
+      <% load_pivot_tables_shared_dashboards(@multi_dashboard).each do |pivot_table| %>
         <div class="card col-md-6 p-0" style="max-height: auto; overflow: hidden;">
           <%= render  partial: 'pivot_table', locals: { pivot_table: pivot_table } %>
         </div>
