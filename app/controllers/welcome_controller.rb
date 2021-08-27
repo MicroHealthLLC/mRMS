@@ -27,11 +27,6 @@ class WelcomeController < ApplicationController
   private
 
   def load_multi_shared_dashboard_data
-    public_multi_dashboards = MultiDataSetDashboard.public_channel_multi_dashboard
-    personal_multi_dashboards = MultiDataSetDashboard.personal_channel_multi_dashboard
-    group_multi_dashboards = MultiDataSetDashboard.group_channel_multi_dashboard
-    shared_dashboard_all = public_multi_dashboards.or(personal_multi_dashboards.or(group_multi_dashboards))
-    @shared_dashboard_all = shared_dashboard_all.order('frequently_count desc').first(3)
   end
 
   def load_pivot_tables
@@ -46,8 +41,17 @@ class WelcomeController < ApplicationController
     public_dashboard = Dashboard.where(report_id: @public_report_ids)
     personal_dashboard = Dashboard.where(report_id: @personal_report_ids)
     group_dashboard = Dashboard.where(report_id: @group_report_ids)
-    dashboard_all = public_dashboard.or(personal_dashboard.or(group_dashboard))
-    @dashboard_all = dashboard_all.order('frequently_count desc').first(3)
+
+
+    public_multi_dashboards = MultiDataSetDashboard.public_channel_multi_dashboard
+    personal_multi_dashboards = MultiDataSetDashboard.personal_channel_multi_dashboard
+    group_multi_dashboards = MultiDataSetDashboard.group_channel_multi_dashboard
+
+    shared_dashboard_all = public_multi_dashboards.or(personal_multi_dashboards.or(group_multi_dashboards))
+
+    dashboard_all = public_dashboard + personal_dashboard + group_dashboard + shared_dashboard_all
+    dashboard_all = dashboard_all.uniq
+    @dashboard_all = dashboard_all.sort_by(&:frequently_count).reverse.first(6)
   end
 
 end
