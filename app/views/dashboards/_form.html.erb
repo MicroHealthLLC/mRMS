@@ -42,7 +42,7 @@
         <label class="col-md-2 pt-5 text-align-right">Draggable Items:</label>
         <div class="rounded p-3 row col-md-10 my-2 pl-1" id="form_report">
           <% SavePivotTable.where(report_id: @report.id).each do |r| %>
-            <div id="report_<%=r.id%>" class="drop-none card p-2 m-2" style="width: 18rem" draggable="true" ondragstart="dragStart(event)">
+            <div id="report_<%=r.id%>" class="drop-none card col-md-5 p-2 m-2" draggable="true" ondragstart="dragStart(event)">
               <div onclick="removedCard('<%=r.id%>')" class="drop-none disp_icon mouse-hover">
                 <span class="drop-none"><i class="drop-none fa fa-times d-none cursor-pointer float-right px-5"></i></span>
               </div>
@@ -69,6 +69,11 @@
 <% end %>
 
 <script>
+  $( function() {
+    $( "#dragDropDataSet" ).sortable();
+    $( "#dragDropDataSet" ).disableSelection();
+  });
+
   var pivotReportIDs      = [];
   var pivotReportIndexIds = [];
   function validateform(){
@@ -91,7 +96,6 @@
   function removedCard(id){
     let el = $(`div#report_${id}`)
     el.removeClass('disp_i');
-    el.removeClass('col-md-5');
     $("div#form_report").append(el);
     if($('#dragDropDataSet > div').length == 0){
       $("#dragDropDataSet").addClass('placeholder-custom')
@@ -104,7 +108,6 @@
         el = $(`#report_${id}`);
         el.addClass('disp_i');
         $("#dragDropDataSet").append(el);
-        $("#dragDropDataSet > .card").addClass("col-md-5");
       });
     }
     else
@@ -118,19 +121,14 @@
   function dragStart (ev) {
     ev.dataTransfer.setData ("text",  ev.target.id);
   }
-  function dragDrop (ev) {
-    var t = ev.target;
-    if(t.classList.contains("drop-none") ){
-      return false;
-    }
+  function dragDrop(ev) {
     ev.preventDefault ();
-    var data =  ev.dataTransfer.getData ("text");
-    ev.target.appendChild (document.getElementById(data));
+    var data =  ev.dataTransfer.getData("text");
+    ev.target.appendChild(document.getElementById(data));
     $('#dragDropDataSet div').each(function() {
       $("#dragDropDataSet").removeClass('placeholder-custom')
       pivotTableCard = this.id;
       $(this).addClass('disp_i');
     });
-    $("#dragDropDataSet > .card").addClass("col-md-5");
   }
 </script>

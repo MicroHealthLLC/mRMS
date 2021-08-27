@@ -39,7 +39,7 @@
           <% save_pivot_tables = SavePivotTable.where(report_id: report_ids) %>
           <% if save_pivot_tables %>
             <% save_pivot_tables.each do |r| %>
-              <div id="report_<%=r.id%>" class="drop-none card p-2 m-2" style="width: 18rem" draggable="true" ondragstart="dragStart(event)">
+              <div id="report_<%=r.id%>" class="drop-none card p-2 col-md-5 m-2" draggable="true" ondragstart="dragStart(event)">
                 <div onclick="removedCard('<%=r.id%>')" class="drop-none disp_icon mouse-hover">
                   <span><i class="drop-none fa fa-times d-none cursor-pointer float-right px-5"></i></span>
                 </div>
@@ -67,6 +67,11 @@
 <% end %>
 
 <script>
+  $( function() {
+    $( "#dragDropDataSet" ).sortable();
+    $( "#dragDropDataSet" ).disableSelection();
+  } );
+
   var pivotReportIDs      = [];
   var pivotReportIndexIds = [];
   function validateform(){
@@ -89,7 +94,6 @@
   function removedCard(id){
     let el = $(`div#report_${id}`)
     el.removeClass('disp_i');
-    el.removeClass('col-md-5');
     $("div#form_report").append(el);
     if($('#dragDropDataSet > div').length == 0){
       $("#dragDropDataSet").addClass('placeholder-custom')
@@ -102,7 +106,6 @@
         el = $(`#report_${id}`);
         el.addClass('disp_i');
         $("#dragDropDataSet").append(el);
-        $("#dragDropDataSet > .card").addClass("col-md-5");
       });
     }
     else
@@ -123,12 +126,11 @@
     }
     ev.preventDefault ();
     var data =  ev.dataTransfer.getData ("text");
-    ev.target.appendChild (document.getElementById(data));
+    ev.target.appendChild(document.getElementById(data));
     $('#dragDropDataSet div').each(function() {
       $("#dragDropDataSet").removeClass('placeholder-custom')
       pivotTableCard = this.id;
       $(this).addClass('disp_i');
     });
-    $("#dragDropDataSet > .card").addClass("col-md-5");
   }
 </script>
