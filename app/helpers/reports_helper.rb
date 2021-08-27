@@ -95,4 +95,8 @@ module ReportsHelper
     end
     dashboard_enum
   end
+
+  def display_dashboard?
+    @report.document_url && (@report.channel.my_permission.can_shared_report_with_dashboard? || @report.channel.is_creator? || @report.channel.is_public?)
+  end
 end
