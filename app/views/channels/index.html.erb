@@ -4,7 +4,8 @@
       <thead>
         <tr>
           <th>Channel</th>
-          <th>Owner/ </th>
+          <th>Type</th>
+          <th>Owner</th>
           <th>Change Owner</th>
           <th></th>
           <th>Delete</th>
@@ -15,6 +16,7 @@
         <% Channel.order('name ASC').each do |channel| %>
           <tr>
             <td><%= channel.name %></td>
+            <td><%= channel.option_type %></td>
             <td><%= channel.user&.to_s || channel.user&.email %></td>
               <%= form_for channel, remote: true do |form| %>
                 <td>
