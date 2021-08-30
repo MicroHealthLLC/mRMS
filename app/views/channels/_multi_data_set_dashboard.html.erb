@@ -5,7 +5,7 @@
         <div class="border m-2 text-center h-100">
           <div class="card-header p-0 pr-2 pt-2 border-0">
             <%= link_to('<i class="fa fa-times float-right"></i>'.html_safe, channel_multi_data_set_dashboard_path(channel, dashboard),
-              method: :delete, data: {confirm: "Are you sure to delete this dashboard?"}) if (dashboard.user_id == User.current.id) or User.current.admin?  %>
+              method: :delete, data: {confirm: "Are you sure to delete Dashboard: #{dashboard.name}?"}) if (dashboard.user_id == User.current.id) or User.current.admin?  %>
           </div>
           <div class="card-body pt-0 pb-2 px-0">
             <%= link_to channel_multi_data_set_dashboard_path(channel,dashboard) do%>

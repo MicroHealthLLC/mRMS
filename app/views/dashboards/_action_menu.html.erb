@@ -3,7 +3,7 @@
     <div class="pull-right" style="margin-bottom: 10px">
       <%= edit_button edit_channel_report_dashboard_path(@report.channel, @report, @dashboard) %>
 
-      <%= delete_button channel_report_dashboard_path(@report.channel, @report, @dashboard), 'Dashboard' %>
+      <%= delete_button channel_report_dashboard_path(@report.channel, @report, @dashboard), 'Dashboard', @dashboard.name %>
       <%= cancel_button channel_report_path(@channel, @report) %>
     </div>
   </div>

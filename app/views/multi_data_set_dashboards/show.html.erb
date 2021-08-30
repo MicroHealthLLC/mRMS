@@ -30,7 +30,7 @@
       <div class="pull-right" style="margin-bottom: 10px">
         <% if current_user.id == @multi_dashboard.user_id %>
           <%= edit_button edit_channel_multi_data_set_dashboard_path(@channel, @multi_dashboard) %>
-          <%= delete_button channel_multi_data_set_dashboard_path(@channel, @multi_dashboard), 'Dashboard' %>
+          <%= delete_button channel_multi_data_set_dashboard_path(@channel, @multi_dashboard), 'Dashboard', @multi_dashboard.name %>
         <% end %>
           <%= cancel_button channel_path(@channel) %>
       </div>
