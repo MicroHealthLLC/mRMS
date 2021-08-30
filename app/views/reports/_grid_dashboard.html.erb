@@ -13,6 +13,6 @@
   </h2>
   <%= link_to( '<i class="fa fa-times"></i>'.html_safe, delete_pivottable_channel_report_path(@channel, @report, query_id: pivot_table.id),
                :method => :delete,
-               :data => {:confirm => "Are you sure to delete this report?"}, style: "position: absolute; top: 0; float: right;color: #9e2b2b;") if (pivot_table.user_id == User.current.id) or User.current.admin?  %>
+               :data => {:confirm => "Are you sure to delete Report: #{pivot_table.name}?"}, style: "position: absolute; top: 0; float: right;color: #9e2b2b;") if (pivot_table.user_id == User.current.id) or User.current.admin?  %>
 
 </div>
