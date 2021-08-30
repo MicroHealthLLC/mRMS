@@ -2,7 +2,7 @@
   <div class="col-md-12 ">
     <div class="pull-right">
       <% if can?(:manage_roles) %>
-          <%= delete_button(role_path(@role), "Role", @role ) %>
+          <%= delete_button(role_path(@role), "Role", @role.name) %>
       <% end %>
       <%= show_button(roles_path, 'Cancel', 'arrow-left', 'primary') %>
     </div>

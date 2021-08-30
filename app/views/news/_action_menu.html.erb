@@ -2,7 +2,7 @@
   <div class="col-md-12 ">
     <div class="pull-right">
       <% if @news.user_id == User.current.id or  @news.can?(:manage_roles) %>
-          <%= delete_button(news_path(@news)) %>
+          <%= delete_button(news_path(@news), 'News', @news.title) %>
       <% end %>
       <% if @news.user_id == User.current.id or  @news.can?(:manage_roles) %>
           <%= edit_button(edit_news_path(@news)) %>
