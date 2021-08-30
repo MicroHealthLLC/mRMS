@@ -120,7 +120,7 @@
           };
         }
         result = $("<div>").appendTo($(".responsivePlotly"));
-        Plotly.newPlot(result[0], data, {responsive: true}, $.extend(layout, layoutOptions, opts.plotly), opts.plotlyConfig);
+        Plotly.newPlot(result[0], data, $.extend(layout, layoutOptions, opts.plotly), opts.plotlyConfig);
         return result.detach();
       };
     };
