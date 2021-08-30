@@ -34,19 +34,24 @@
                  locals: {
                      wid_id: 'channel',
                      wid_title: 'Data sets',
-                     channel: @channel
+                     report_enum_id: @report_enum_id,
+                     dashboard_enum_id: @dashboard_enum_id,
+                     channel: @channel,
                  } %>
     </article>
   </div>
 
   <div class="row">
-    <article class="col-xs-12">
+    <article class="col-xs-12" >
       <%= render partial: 'multi_data_set_dashboard',
                  layout: 'shared/smart_widget_wrapper',
                  locals: {
                      wid_id: 'channel_dashboard',
                      wid_title: 'Multi Data Set Dashboards',
-                     channel: @channel
+                     report_enum_id: @report_enum_id,
+                     dashboard_enum_id: @dashboard_enum_id,
+                     multi_data_set_dashboards: @multi_data_set_dashboards,
+                     channel:@channel
                  } %>
     </article>
   </div>

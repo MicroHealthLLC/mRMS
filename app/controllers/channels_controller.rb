@@ -25,6 +25,10 @@ class ChannelsController < ApplicationController
   def show
     reports = @channel.shared_report? ? User.current.reports.current_user_shared_reports : @channel.visible_reports
     @reports = reports.where(channel_id: Channel.pluck(:id)).paginate(page: params[:page], per_page: 10)
+    @report_enum_id   = params[:report_enum_id]
+    @dashboard_enum_id = params[:dashboard_enum_id]
+    @multi_data_set_dashboards = params[:dashboard_enum_id].present? ? @channel.multi_data_set_dashboards.where(dashboard_enum_id: params[:dashboard_enum_id]) : @channel.multi_data_set_dashboards
+    @report_category = params[:report_enum_id].present? ? @reports.where(report_enum_id: params[:report_enum_id]) : @reports
   end
 
   # GET /channels/new

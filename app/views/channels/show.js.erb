@@ -1,0 +1,2 @@
+$('.show_datasets').html('<%= escape_javascript(render partial: 'data_set_content', locals: {channel: @channel, report_enum_id: @report_enum_id, dashboard_enum_id: @dashboard_enum_id}) %>')
+$('.show_multi_data_set_dashboards').html('<%= escape_javascript(render partial: 'multi_data_set_dashboard_content', locals: {channel: @channel,report_enum_id: @report_enum_id, multi_data_set_dashboards: @multi_data_set_dashboards,dashboard_enum_id: @dashboard_enum_id}) %>')
