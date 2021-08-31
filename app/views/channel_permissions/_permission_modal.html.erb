@@ -2,72 +2,76 @@
   <div data-toggle="modal" class="modal-dialog" role="document">
     <div data-toggle="modal" class="modal-content">
       <div data-toggle="modal" class="modal-header">
-        <h4 class="modal-title text-center" id="myModalLabel">Add Permission</h4>
+        <h4 class="modal-title text-center" id="userPermissionModalLabel">Add Permission</h4>
       </div>
       <div data-toggle="modal" class="modal-body">
-        <%= form_for([channel, permission], method: :post, remote: true, html: { class: 'smart-form form-horizontal ', method: :post}) do |f| %>
-
-            <fieldset>
-              <div class="form-group">
-                <%= f.label 'User', class: 'col-md-2 control-label' %>
-                <div class="col-md-9">
-                  <%= f.select :user_id , options_for_select(User.where.not(id: [channel.user_id] + channel.channel_permissions.pluck(:user_id)).map{|u| [u.name, u.id]},selected:user_id),{:include_blank=>"Select User"},{class: 'form-control'}%>
-                </div>
+        <%= form_for([channel, permission], method: :post, remote: true, html: { class: 'smart-form form-horizontal', id: 'userPermissionModal', method: :post}) do |f| %>
+          <fieldset>
+            <div class="form-group">
+              <%= f.label 'User', class: 'col-md-2 control-label' %>
+              <div class="col-md-9">
+                <%= f.select :user_id , options_for_select(User.where.not(id: [channel.user_id] + channel.channel_permissions.pluck(:user_id)).map{|u| [u.name, u.id]},selected:user_id),{include_blank: "Select User"},{class: 'form-control', id: 'userSelect2'}%>
               </div>
-
-              <div class="form-group">
-                <%= f.label 'Permission', class: 'col-md-2 control-label' %>
-                <div class="col-md-9">
-                  <label class="toggle">
-                    <%= f.check_box :can_view %>
-                    <i data-swchon-text="ON" data-swchoff-text="OFF"></i> Can View Channel
-                  </label>
-
-                  <label class="toggle">
-                    <%= f.check_box :can_edit %>
-                    <i data-swchon-text="ON" data-swchoff-text="OFF"></i> Can Edit Channel
-                  </label>
-
-                  <label class="toggle">
-                    <%= f.check_box :can_add_report %>
-                    <i data-swchon-text="ON" data-swchoff-text="OFF"></i> Can Add/Edit Report
-                  </label>
-
-                  <label class="toggle">
-                    <%= f.check_box :can_view_report %>
-                    <i data-swchon-text="ON" data-swchoff-text="OFF"></i> Can View Report
-                  </label>
-
-                  <label class="toggle">
-                    <%= f.check_box :can_delete_report %>
-                    <i data-swchon-text="ON" data-swchoff-text="OFF"></i> Can Delete Data Set
-                  </label>
-
-                  <label class="toggle">
-                    <%= f.check_box :can_add_users %>
-                    <i data-swchon-text="ON" data-swchoff-text="OFF"></i>  Can Add/Change permission
-                  </label>
-
-                  <label class="toggle">
-                    <%= f.check_box :can_download %>
-                    <i data-swchon-text="ON" data-swchoff-text="OFF"></i> Can Download File
-                  </label>
-
-                  <label class="toggle">
-                    <%= f.check_box :can_shared_report_with_dashboard %>
-                    <i data-swchon-text="ON" data-swchoff-text="OFF"></i> Can Share Report with Dashboard
-                  </label>
-                </div>
-              </div>
-            </fieldset>
-            <div data-toggle="modal" class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <%= f.submit 'Save', class: 'btn btn-primary' %>
             </div>
 
+            <div class="form-group">
+              <%= f.label 'Permission', class: 'col-md-2 control-label' %>
+              <div class="col-md-9">
+                <label class="toggle">
+                  <%= f.check_box :can_view %>
+                  <i data-swchon-text="ON" data-swchoff-text="OFF"></i> Can View Channel
+                </label>
 
+                <label class="toggle">
+                  <%= f.check_box :can_edit %>
+                  <i data-swchon-text="ON" data-swchoff-text="OFF"></i> Can Edit Channel
+                </label>
+
+                <label class="toggle">
+                  <%= f.check_box :can_add_report %>
+                  <i data-swchon-text="ON" data-swchoff-text="OFF"></i> Can Add/Edit Report
+                </label>
+
+                <label class="toggle">
+                  <%= f.check_box :can_view_report %>
+                  <i data-swchon-text="ON" data-swchoff-text="OFF"></i> Can View Report
+                </label>
+
+                <label class="toggle">
+                  <%= f.check_box :can_delete_report %>
+                  <i data-swchon-text="ON" data-swchoff-text="OFF"></i> Can Delete Data Set
+                </label>
+
+                <label class="toggle">
+                  <%= f.check_box :can_add_users %>
+                  <i data-swchon-text="ON" data-swchoff-text="OFF"></i>  Can Add/Change permission
+                </label>
+
+                <label class="toggle">
+                  <%= f.check_box :can_download %>
+                  <i data-swchon-text="ON" data-swchoff-text="OFF"></i> Can Download File
+                </label>
+
+                <label class="toggle">
+                  <%= f.check_box :can_shared_report_with_dashboard %>
+                  <i data-swchon-text="ON" data-swchoff-text="OFF"></i> Can Share Report with Dashboard
+                </label>
+              </div>
+            </div>
+          </fieldset>
+          <div data-toggle="modal" class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <%= f.submit 'Save', class: 'btn btn-primary' %>
+          </div>
         <% end %>
       </div>
     </div>
   </div>
 </div>
+<script>
+  $(document).on('turbolinks:load', () => {
+    $('#userSelect2').select2({
+      dropdownParent: $('#userPermissionModal')
+    });
+  });
+</script>
