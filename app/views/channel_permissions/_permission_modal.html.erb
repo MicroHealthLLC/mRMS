@@ -5,13 +5,13 @@
         <h4 class="modal-title text-center" id="myModalLabel">Add Permission</h4>
       </div>
       <div data-toggle="modal" class="modal-body">
-        <%= form_for([channel, permission], method: :post, remote: true, html: { class: 'smart-form form-horizontal ', method: :post}) do |f| %>
+        <%= form_for([channel, permission], method: :post, remote: true, html: { class: 'smart-form form-horizontal',id: 'myModal', method: :post}) do |f| %>
 
             <fieldset>
               <div class="form-group">
                 <%= f.label 'User', class: 'col-md-2 control-label' %>
                 <div class="col-md-9">
-                  <%= f.select :user_id , options_for_select(User.where.not(id: [channel.user_id] + channel.channel_permissions.pluck(:user_id)).map{|u| [u.name, u.id]},selected:user_id),{:include_blank=>"Select User"},{class: 'form-control'}%>
+                  <%= f.select :user_id , options_for_select(User.where.not(id: [channel.user_id] + channel.channel_permissions.pluck(:user_id)).map{|u| [u.name, u.id]},selected:user_id),{:include_blank=>"Select User"},{class: 'form-control', id: 'mySelect2'}%>
                 </div>
               </div>
 
@@ -71,3 +71,12 @@
     </div>
   </div>
 </div>
+<script>
+  $(document).ready(()=>{
+    setTimeout(()=>{
+      $('#mySelect2').select2({
+          dropdownParent: $('#myModal')
+      });
+    }, 100);
+  });
+</script>
