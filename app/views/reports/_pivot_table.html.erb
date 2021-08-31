@@ -154,11 +154,14 @@
           <% end %>
           function saveState(config) {
               <% if params[:controller] == 'dashboards' %>
-              console.log("loading")
-              console.log("#output_<%= time %>");
-              $("#output_<%= time %>").find('tr:first').remove();
-              $("#output_<%= time %>").find('tr:first').remove();
-              $("#output_<%= time %>").find('.pvtAxisContainer').remove();
+                $("#output_<%= time %>").find('tr:first').remove();
+                $("#output_<%= time %>").find('tr:first').remove();
+                $("#output_<%= time %>").find('.pvtAxisContainer').remove();
+                $(".modebar-container").addClass('position-relative');
+                $(".modebar.modebar--hover.ease-bg").addClass("d-flex flex-wrap w-100 position-relative");
+                $(".modebar").each(function(){
+                  $(this).css("left", "50%");
+                });
               <% else %>
 
               var config_copy = JSON.parse(JSON.stringify(config));
