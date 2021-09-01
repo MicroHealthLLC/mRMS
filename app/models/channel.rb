@@ -93,7 +93,7 @@ class Channel < ApplicationRecord
    end
 
   def shared_report?
-    name == 'Shared Report'
+    name == 'Shared Report' && option == PERSONAL
   end
 
   def self.segmented_market
