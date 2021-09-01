@@ -19,7 +19,6 @@ class ChannelNotificationsController < ApplicationController
       format.js do
         @channel_notification.seen = true
         @channel_notification.save
-        render js: "$('#channel_notification_#{@channel_notification.id}').hide();$('.buttons').find('.fa-bell').text('Notification (#{@channel.channel_notifications.where(seen: false).count})')"
       end
     end
   end
@@ -45,7 +44,7 @@ class ChannelNotificationsController < ApplicationController
 
   def authorize
     access =  if @channel
-                (!@channel.is_public? && @channel.is_creator?)
+                (!@channel.is_public? && (@channel.is_creator? || @channel.channel_permissions.where(channel_permissions: {user_id: User.current.id, can_add_users: true}).present?))
               else
                 false
               end

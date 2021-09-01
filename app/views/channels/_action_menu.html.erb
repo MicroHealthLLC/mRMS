@@ -2,12 +2,12 @@
   <div class="col-md-12 ">
     <div class="pull-right buttons">
       <% unless @channel.shared_report? %>
-          <% if @channel.is_group? && @channel.user_id != User.current.id %>
+          <% if @channel.is_group? && !@channel.is_creator? %>
               <%= show_theme_button(leave_channel_channel_channel_permissions_path(@channel), ' Leave Channel', 'fas fa-sign-out-alt', 'danger', {confirm: "Do you want to leave the Channel: #{@channel.name} ?"})  %>
           <% end %>
 
-          <% if !@channel.is_public? && !@channel.is_personal? && @channel.is_creator?  %>
-              <%= show_theme_button('#', "Notifications (#{@channel.channel_notifications.where(seen: false).count})", 'far fa-bell', 'info',  {toggle:"modal", target:"#ChannelNotification" })  %>
+          <% if @channel.is_group? && (@channel.is_creator? || @channel.channel_permissions.where(channel_permissions: {user_id: User.current.id, can_add_users: true}).present?) %>
+              <%= show_theme_button('#', "Notifications (#{@channel.channel_notifications.where(seen: false).count})", 'far fa-bell', 'info',  {toggle:"modal", target:"#ChannelNotification", id: "notification_btn"}) %>
 
               <div data-toggle="modal" class="modal fade" id="ChannelNotification" tabindex="-1" role="dialog" aria-labelledby="ChannelNotification">
                 <div data-toggle="modal" class="modal-dialog" role="document">
@@ -24,7 +24,7 @@
                         <tr><th>User</th><th>Notification Type</th><th></th></tr>
                         </thead>
                         <tbody>
-                        <% @channel.channel_notifications.each do |cn|%>
+                        <% @channel.channel_notifications.where(seen: false).each do |cn|%>
                             <tr id="channel_notification_<%= cn.id %>">
                               <td> <%= cn.user.to_s %>   </td>
                               <td>

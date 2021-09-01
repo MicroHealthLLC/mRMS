@@ -1,0 +1,2 @@
+$('#channel_notification_'+'<%= @channel_notification.id %>').hide();
+$("a:contains('Notifications (')").html("<i class='far fa-bell' aria-hidden='true'></i> Notifications ("+'<%= @channel.channel_notifications.where(seen: false).count %>'+")");
