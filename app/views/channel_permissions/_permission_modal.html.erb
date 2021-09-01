@@ -18,7 +18,7 @@
               <%= f.label 'Permission', class: 'col-md-2 control-label' %>
               <div class="col-md-9">
                 <label class="toggle">
-                  <%= f.check_box :can_view %>
+                  <%= f.check_box :can_view, id:"can_view" %>
                   <i data-swchon-text="ON" data-swchoff-text="OFF"></i> Can View Channel
                 </label>
 
@@ -61,7 +61,7 @@
           </fieldset>
           <div data-toggle="modal" class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <%= f.submit 'Save', class: 'btn btn-primary' %>
+            <%= f.submit 'Save', class: 'btn btn-primary',:onclick => "return validateform()" %>
           </div>
         <% end %>
       </div>
@@ -74,4 +74,11 @@
       dropdownParent: $('#userPermissionModal')
     });
   });
+  function validateform(){
+    var can_view = $("#can_view").is(":checked");
+    if(!can_view){
+      var proceed_flow = confirm("Proceed with can view channel premission 'OFF'?");
+      if (!proceed_flow) return false;
+    }
+  }
 </script>
