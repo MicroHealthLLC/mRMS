@@ -26,7 +26,7 @@
   </a>
   <div class="menu-submenu">
     <ul class="menu-subnav" style="list-style-type: none;">
-      <% Channel.for_user.each do |channel| %>
+      <% Channel.for_user.uniq.each do |channel| %>
         <li class="menu-item sort-handle" data-toggle="tooltip" data-placement="right" data-container="body" data-boundary="window" data-reorder-url="<%= reorder_handle_channels_path(channel_id: channel.id) %>" data-reorder-param="<%= 'channel' %>" title ="<%= channel.name %>">
           <a href="/channels/<%= channel.id %>" class="menu-link btn btn-clean shadow-none <%= channel_active?(channel) %>">
             <span class="svg-icon menu-icon">
