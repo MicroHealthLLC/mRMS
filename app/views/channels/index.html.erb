@@ -14,22 +14,24 @@
 
       <tbody>
         <% Channel.order('name ASC').each do |channel| %>
-          <tr>
-            <td><%=link_to channel.name, channel_path(channel) %></td>
-            <td><%= channel.option_type %></td>
-            <td><%= channel.user&.to_s || channel.user&.email %></td>
-              <%= form_for channel, remote: true do |form| %>
-                <td>
-                  <%= form.select(:user_id, options_for_select(User.all.map{|user| [user.name, user.id]}, selected: channel.user_id), class: 'form_control') %>
-                </td>
-                <td>
-                  <%= form.submit 'Change Owner', class: 'btn btn-success' %>
-                </td>
-              <% end %>
-            <td>
-              <%= delete_button channel_path(channel), 'Channel', channel.name %>
-            </td>
-          </tr>
+          <% if !channel.shared_report?%>
+            <tr>
+              <td><%=link_to channel.name, channel_path(channel) %></td>
+              <td><%= channel.option_type %></td>
+              <td><%= channel.user&.to_s || channel.user&.email %></td>
+                <%= form_for channel, remote: true do |form| %>
+                  <td>
+                    <%= form.select(:user_id, options_for_select(User.all.map{|user| [user.name, user.id]}, selected: channel.user_id), class: 'form_control') %>
+                  </td>
+                  <td>
+                    <%= form.submit 'Change Owner', class: 'btn btn-success' %>
+                  </td>
+                <% end %>
+              <td>
+                <%= delete_button channel_path(channel), 'Channel', channel.name %>
+              </td>
+            </tr>
+          <% end %>
         <% end %>
       </tbody>
     </table>
@@ -37,12 +39,16 @@
 </div>
 
 <script type="text/javascript">
-$("#channel_table").DataTable({
-  "columnDefs":[
-            {"targets": [1,2,3,4,5], "searchable": false}
-        ],
-  "iDisplayLength": 10,
-  "display": [[0, 'desc']],
-  "bDestroy": true,
-})
+  $(document).on('turbolinks:load', function() {
+    $("#channel_table").DataTable({
+      "columnDefs":[
+      {"targets": [1,2,3,4,5], "searchable": false},
+      {"targets": [3,4,5], "orderable": false},
+      ],
+      "bDestroy": true,
+      "drawCallback": function() {
+        $('select:not(".custom-select")').select2({width: '100%'});
+      }
+    });
+  });
 </script>
