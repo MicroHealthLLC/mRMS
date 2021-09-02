@@ -37,6 +37,8 @@ class Channel < ApplicationRecord
   validates_presence_of :name, :option
   validates_uniqueness_of :name, scope: [:user_id, :is_active, :option]
 
+  after_save :load_permission
+
   before_update do
     if valid?
       if option_changed? and option_was == PERSONAL
@@ -81,6 +83,21 @@ class Channel < ApplicationRecord
   after_update do
     active_users.each do |user|
       NotificationMailer.channel_updated(user, self).deliver_later
+    end
+  end
+
+  def load_permission
+    if self.is_group? && saved_change_to_attribute?(:user_id)
+      permission = ChannelPermission.where(user_id: self.user_id, channel_id: self.id).first_or_initialize
+      permission.can_view = true
+      permission.can_edit = true
+      permission.can_add_report = true
+      permission.can_delete_report = true
+      permission.can_add_users = true
+      permission.can_download = true
+      permission.can_view_report = true
+      permission.can_shared_report_with_dashboard = true
+      permission.save!
     end
   end
 

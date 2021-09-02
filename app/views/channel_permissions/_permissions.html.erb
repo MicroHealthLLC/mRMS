@@ -30,10 +30,10 @@
         <td>
           <%= link_to  '#', data: {toggle:"modal", target:"#AddPermission#{idx}Modal" } do
             "<i class='fa fa-edit' aria-hidden='true'>  </i>".html_safe
-          end%>
+          end unless @channel.user_id == permission.user_id %>
           <%= render partial: 'edit_permission', locals: {permission: permission, idx: idx} %>
         </td>
-        <td><%= delete_link(channel_channel_permission_url(@channel, permission)) %></td>
+        <td><%= delete_link(channel_channel_permission_url(@channel, permission)) unless @channel.user_id == permission.user_id %></td>
 
       </tr>
   <% end %>
@@ -41,7 +41,11 @@
 </table>
 
 <script>
-    $(document).ready(function(){
-        initDataTable('permissions_table')
-    })
+  $(document).on('turbolinks:load', function(){
+    $('#permissions_table').dataTable( {
+      "order": [],"columnDefs":[
+      {"targets": [9,10], "orderable": false}
+      ]
+    });
+  });
 </script>
