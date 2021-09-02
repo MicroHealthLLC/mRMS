@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_26_122229) do
+ActiveRecord::Schema.define(version: 2021_09_02_153316) do
 
   create_table "addresses", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "address_type_id"
@@ -252,6 +252,7 @@ ActiveRecord::Schema.define(version: 2021_08_26_122229) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "frequently_count", default: 0
+    t.integer "dashboard_enum_id"
   end
 
   create_table "news", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -357,6 +358,7 @@ ActiveRecord::Schema.define(version: 2021_08_26_122229) do
     t.integer "created_by_id"
     t.integer "updated_by_id"
     t.integer "frequently_count", default: 0
+    t.integer "report_enum_id"
     t.index ["category_id"], name: "index_reports_on_category_id"
     t.index ["category_type_id"], name: "index_reports_on_category_type_id"
     t.index ["user_id"], name: "index_reports_on_user_id"
