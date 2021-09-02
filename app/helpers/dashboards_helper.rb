@@ -31,10 +31,12 @@ module DashboardsHelper
   end
 
   def load_odd_record(array_record)
-    return array_record.select{|n| n.id.odd?}
+    data = array_record.each_with_index.map { |record, index| index.odd? ? record :  '' }
+    data.reject { |d| d.blank? }
   end
 
   def load_even_record(array_record)
-    return array_record.select{|n| n.id.even?}
+    data = array_record.each_with_index.map { |record, index| index.even? ? record :  '' }
+    data.reject { |d| d.blank? }
   end
 end
