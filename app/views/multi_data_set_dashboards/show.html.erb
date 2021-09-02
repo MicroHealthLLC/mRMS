@@ -43,12 +43,22 @@
 </div>
 <section id="widget-grid" class="channel">
   <div class="row">
-    <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-      <% load_pivot_tables_shared_dashboards(@multi_dashboard).each do |pivot_table| %>
-        <div class="card col-md-6 p-0" style="max-height: auto; overflow: hidden;">
-          <%= render  partial: 'pivot_table', locals: { pivot_table: pivot_table } %>
-        </div>
-      <% end %>
+    <article class="col-md-12 row">
+      <% pivot_tables = load_pivot_tables_shared_dashboards(@multi_dashboard) %>
+      <div class="col-md-6 px-0">
+        <% load_even_record(pivot_tables).each do |pivot_table| %>
+          <div class="card" style="max-height: auto; overflow: hidden;">
+            <%= render  partial: 'pivot_table', locals: { pivot_table: pivot_table } %>
+          </div>
+        <% end %>
+      </div>
+      <div class="col-md-6 px-0">
+        <% load_odd_record(pivot_tables).each do |pivot_table| %>
+          <div class="card" style="max-height: auto; overflow: hidden;">
+            <%= render  partial: 'pivot_table', locals: { pivot_table: pivot_table } %>
+          </div>
+        <% end %>
+      </div>
     </article>
   </div>
 </section>

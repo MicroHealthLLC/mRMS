@@ -29,4 +29,12 @@ module DashboardsHelper
     end
     pivot_tables
   end
+
+  def load_odd_record(array_record)
+    return array_record.select{|n| n.id.odd?}
+  end
+
+  def load_even_record(array_record)
+    return array_record.select{|n| n.id.even?}
+  end
 end

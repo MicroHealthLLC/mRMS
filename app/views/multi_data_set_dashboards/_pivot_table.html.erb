@@ -91,6 +91,8 @@
             $("#output_<%= pivot_table.id %>").pivotUI(json, default_query);
           }
           setTimeout(function(){
+            $(".pvtUi").addClass("w-100");
+            $(".pvtTable").addClass("w-100");
             $("#output_<%= pivot_table.id %>").find('tr:first').remove();
             $("#output_<%= pivot_table.id %>").find('tr:first').remove();
             $("#output_<%= pivot_table.id %>").find('.pvtAxisContainer').remove();
