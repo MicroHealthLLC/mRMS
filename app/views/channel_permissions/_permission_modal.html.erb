@@ -18,7 +18,7 @@
               <%= f.label 'Permission', class: 'col-md-2 control-label' %>
               <div class="col-md-9">
                 <label class="toggle">
-                  <%= f.check_box :can_view, id:"can_view" %>
+                  <%= f.check_box :can_view, id: 'can_view_permission' %>
                   <i data-swchon-text="ON" data-swchoff-text="OFF"></i> Can View Channel
                 </label>
 
@@ -74,11 +74,4 @@
       dropdownParent: $('#userPermissionModal')
     });
   });
-  function validateform(){
-    var can_view = $("#can_view").is(":checked");
-    if(!can_view){
-      var proceed_flow = confirm("Proceed with can view channel premission 'OFF'?");
-      if (!proceed_flow) return false;
-    }
-  }
 </script>
