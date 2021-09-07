@@ -86,8 +86,9 @@
         layout = {
           title: titleText,
           hovermode: 'closest',
-          width: window.innerWidth / 1.6,
-          height: window.innerHeight / 1.4 - 50
+          responsive: true
+          // width: window.innerWidth / 1.6,
+          // height: window.innerHeight / 1.4 - 50
         };
         if (traceOptions.type === 'pie') {
           columns = Math.ceil(Math.sqrt(data.length));

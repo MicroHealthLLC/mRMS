@@ -8,11 +8,12 @@
           <section id="widget-grid" class="channel col-12 px-0">
             <div class="col-md-12 px-0">
               <article id="pivotTableWidth" class="w-80">
-                <%= render  partial: 'pivot_table',
+                <%= render  partial: 'shared/pivot_table',
                             layout: 'shared/smart_widget_wrapper',
                             locals: {
                               wid_id: 'pivot_table',
                               wid_title: 'Data',
+                              report: @report
                             } %>
               </article>
             </div>

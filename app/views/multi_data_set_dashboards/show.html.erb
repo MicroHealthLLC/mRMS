@@ -1,30 +1,5 @@
-
-<%= stylesheet_link_tag 'pivot_style' %>
-<%= stylesheet_link_tag 'c3.min' %>
-<%= stylesheet_link_tag 'subtotal.min' %>
-<%= stylesheet_link_tag 'handsontable.full.min' %>
-<%= stylesheet_link_tag 'pivot.min' %>
-
-<%= javascript_include_tag 'pivottables/highstock' %>
-<%= javascript_include_tag 'pivottables/highcharts-more' %>
-<%= javascript_include_tag 'pivottables/treemap' %>
-
-<%= javascript_include_tag 'pivottables/pivot' %>
-<%= javascript_include_tag 'pivottables/d3.min' %>
-<%= javascript_include_tag 'pivottables/jquery.ui.touch-punch.min' %>
-<%= javascript_include_tag 'pivottables/c3.min' %>
-<%= javascript_include_tag 'pivottables/c3_renderers.min' %>
-<%= javascript_include_tag 'pivottables/plotly-basic-latest.min' %>
-<%= javascript_include_tag 'pivottables/plotly_renderers' %>
-<!-- subtotal.js libs from ../dist -->
-<%= javascript_include_tag 'pivottables/subtotal.min' %>
-
-<%= javascript_include_tag 'pivottables/handsontable.full.min' %>
-
 <div>
-
   <!-- <%#= render partial: 'action_menu' %> -->
-
   <div class="noprint row">
     <div class="col-md-12 ">
       <div class="pull-right" style="margin-bottom: 10px">
@@ -48,14 +23,21 @@
       <div class="col-md-6 px-0">
         <% load_even_record(pivot_tables).each do |pivot_table| %>
           <div class="card" style="max-height: auto; overflow: hidden;">
-            <%= render  partial: 'pivot_table', locals: { pivot_table: pivot_table } %>
+            <% params[:number] = pivot_table.id %>
+            <% params[:query_id] = pivot_table.id %>
+            <%= render  partial: 'shared/pivot_table',
+                        locals: {
+                                  pivot_table: pivot_table, report: pivot_table.report
+                                } %>
           </div>
         <% end %>
       </div>
       <div class="col-md-6 px-0">
         <% load_odd_record(pivot_tables).each do |pivot_table| %>
           <div class="card" style="max-height: auto; overflow: hidden;">
-            <%= render  partial: 'pivot_table', locals: { pivot_table: pivot_table } %>
+            <% params[:number] = pivot_table.id %>
+            <% params[:query_id] = pivot_table.id %>
+            <%= render  partial: 'shared/pivot_table', locals: { pivot_table: pivot_table, report: pivot_table.report } %>
           </div>
         <% end %>
       </div>
