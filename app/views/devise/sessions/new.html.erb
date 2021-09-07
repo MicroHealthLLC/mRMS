@@ -54,9 +54,10 @@
 </div>
 
 <script>
-  $(document).ready(function(){
-    $(".section img").addClass("w-100 h-100")
-    $(".content_section img").addClass("w-100 h-100")
+  $(document).on('turbolinks:load', function(){
+    $(".section img").addClass("w-100 h-100");
+    $(".content_section img").addClass("w-100 h-100");
+    $(".content_section p").addClass("mb-0");
   })
 </script>
 
