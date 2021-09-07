@@ -29,4 +29,14 @@ module DashboardsHelper
     end
     pivot_tables
   end
+
+  def load_odd_record(array_record)
+    data = array_record.each_with_index.map { |record, index| index.odd? ? record :  '' }
+    data.reject { |d| d.blank? }
+  end
+
+  def load_even_record(array_record)
+    data = array_record.each_with_index.map { |record, index| index.even? ? record :  '' }
+    data.reject { |d| d.blank? }
+  end
 end
