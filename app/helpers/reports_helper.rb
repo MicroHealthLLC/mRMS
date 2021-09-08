@@ -97,6 +97,6 @@ module ReportsHelper
   end
 
   def display_dashboard?
-    @report.document_url && (@report.channel.my_permission.can_shared_report_with_dashboard? || @report.channel.is_creator? || @report.channel.is_public?)
+    @report.document_url && (@channel.is_group? && @channel.my_permission.can_manage_dashboard?) or @channel.is_public? or (@channel.is_personal? && @channel.is_creator?)
   end
 end

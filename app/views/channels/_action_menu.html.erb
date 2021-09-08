@@ -63,7 +63,7 @@
           <% end %>
 
           <% if @channel.is_public? or @channel.is_creator? || (!@channel.is_public? && !@channel.is_personal? && @channel.my_permission.can_shared_report_with_dashboard?) %>
-              <%= show_button(new_channel_multi_data_set_dashboard_url(@channel), 'Add multi Data Set Dashboard', 'fa fa-plus', 'success', '',pivot_table_reports?(@channel))  %>
+              <%= show_button(new_channel_multi_data_set_dashboard_url(@channel), 'Add multi Data Set Dashboard', 'fa fa-plus', 'success', '',pivot_table_reports?(@channel)) if display_multi_data_set_dashboard? %>
           <% end %>
 
           <% if @channel.is_public? or @channel.is_creator? or (@channel.my_permission.can_add_report?) %>

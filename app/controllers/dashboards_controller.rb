@@ -3,7 +3,7 @@ class DashboardsController < ApplicationController
   before_action :set_channel
   before_action :set_report
   before_action :set_dashboard, only: [:show, :edit, :update, :destroy]
-  before_action :authorize, except: [:index, :show, :new,:create]
+  before_action :authorize, except: [:index, :show]
 
   # GET /dashboards
   # GET /dashboards.json
@@ -133,10 +133,8 @@ class DashboardsController < ApplicationController
 
   def authorize
     can_access =  case params[:action]
-                    when 'edit', 'update',
-                         'new',  'create' then  @channel.is_public? or @channel.my_permission.can_shared_report_with_dashboard? or @channel.is_creator?
-                    when 'destroy'
-                      @report.channel.my_permission.can_delete_report? or @report.channel.is_public? or current_user.id == @dashboard.user_id
+                    when 'new', 'create', 'edit', 'update', 'destroy'
+                      then (@channel.is_group? && @channel.my_permission.can_manage_dashboard?) or @channel.is_public? or (@channel.is_personal? && @channel.is_creator?)
                     else
                       @channel.my_permission.can_shared_report_with_dashboard? or @channel.is_public?
                   end

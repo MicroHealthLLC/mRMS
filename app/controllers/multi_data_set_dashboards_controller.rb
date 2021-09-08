@@ -2,7 +2,7 @@ class MultiDataSetDashboardsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_channel
   before_action :set_multi_dashboard, only: [:show, :edit, :update, :destroy]
-
+  before_action :authorize, except: :show
   def new
     @multi_dashboard = MultiDataSetDashboard.new(channel_id: @channel.id)
   end
@@ -92,5 +92,15 @@ class MultiDataSetDashboardsController < ApplicationController
         end
       end
     end
+  end
+  def authorize
+    can_access =  case params[:action]
+                    when 'new', 'create', 'edit', 'update', 'destroy'
+                      then (@channel.is_group? && @channel.my_permission.can_manage_multi_dataset_dashboard?) or @channel.is_public? or (@channel.is_personal? && @channel.is_creator?)
+                    else
+                      @channel.my_permission.can_shared_report_with_multi_dataset_dashboard? or @channel.is_public?
+                  end
+
+    render_403 unless (can_access or (@report && @report.channel.is_creator?) or (@report.nil? and  @channel.is_creator?) )
   end
 end
