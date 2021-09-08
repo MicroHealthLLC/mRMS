@@ -7,7 +7,7 @@
           <% end %>
 
           <% if @channel.is_group? && (@channel.is_creator? || @channel.channel_permissions.where(channel_permissions: {user_id: User.current.id, can_add_users: true}).present?) %>
-              <%= show_theme_button('#', "Notifications (#{@channel.channel_notifications.where(seen: false).count})", 'far fa-bell', 'info',  {toggle:"modal", target:"#ChannelNotification", id: "notification_btn"}) %>
+              <%= show_theme_button('#', "Notifications (#{@channel.channel_notifications.where(seen: false).count})", 'far fa-bell', 'info', {toggle:"modal", target:"#ChannelNotification", id: "notification_btn"}) %>
 
               <div data-toggle="modal" class="modal fade" id="ChannelNotification" tabindex="-1" role="dialog" aria-labelledby="ChannelNotification">
                 <div data-toggle="modal" class="modal-dialog" role="document">
@@ -63,7 +63,7 @@
           <% end %>
 
           <% if @channel.is_public? or @channel.is_creator? || (!@channel.is_public? && !@channel.is_personal? && @channel.my_permission.can_shared_report_with_dashboard?) %>
-              <%= show_button(new_channel_multi_data_set_dashboard_url(@channel), 'Add multi Data Set Dashboard', 'fa fa-plus', 'success', '',pivot_table_reports?(@channel))  %>
+              <%= show_button(new_channel_multi_data_set_dashboard_url(@channel), 'Add multi Data Set Dashboard', 'fa fa-plus', 'success', '', pivot_table_reports?(@channel)) if display_multi_data_set_dashboard? %>
           <% end %>
 
           <% if @channel.is_public? or @channel.is_creator? or (@channel.my_permission.can_add_report?) %>

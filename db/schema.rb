@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_02_153316) do
+ActiveRecord::Schema.define(version: 2021_09_08_110109) do
 
   create_table "addresses", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "address_type_id"
@@ -98,6 +98,8 @@ ActiveRecord::Schema.define(version: 2021_09_02_153316) do
     t.boolean "can_download", default: false
     t.boolean "can_view_report", default: false
     t.boolean "can_shared_report_with_dashboard", default: false
+    t.boolean "can_manage_multi_dataset_dashboard", default: false
+    t.boolean "can_manage_dashboard", default: false
     t.index ["channel_id"], name: "index_channel_permissions_on_channel_id"
     t.index ["user_id"], name: "index_channel_permissions_on_user_id"
   end

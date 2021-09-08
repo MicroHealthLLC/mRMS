@@ -3,7 +3,7 @@
   <div class="noprint row">
     <div class="col-md-12">
       <div class="pull-right" style="margin-bottom: 10px">
-        <% if current_user.id == @dashboard.user_id || current_user.id == @report.channel.user_id %>
+        <% if can_manage_dashboard?(@report.channel) %>
           <%= edit_button edit_channel_report_dashboard_path(@report.channel, @report, @dashboard) %>
           <%= delete_button channel_report_dashboard_path(@report.channel, @report, @dashboard), 'Dashboard', @dashboard.name %>
         <% end %>

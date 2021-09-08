@@ -97,6 +97,8 @@ class Channel < ApplicationRecord
       permission.can_download = true
       permission.can_view_report = true
       permission.can_shared_report_with_dashboard = true
+      permission.can_manage_multi_dataset_dashboard = true
+      permission.can_manage_dashboard = true
       permission.save!
     end
   end
