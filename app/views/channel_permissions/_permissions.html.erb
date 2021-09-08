@@ -48,11 +48,4 @@
       ]
     });
   });
-  function validateform(){
-    var can_view = $("#can_view_permission, #can_view_permission_edit").is(":checked");
-    if(!can_view){
-      var proceed_flow = confirm("Proceed with can view channel premission 'OFF'?");
-      if (!proceed_flow) return false;
-    }
-  }
 </script>
