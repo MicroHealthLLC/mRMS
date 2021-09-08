@@ -7,6 +7,6 @@ module ChannelsHelper
 	end
 
 	def display_multi_data_set_dashboard?
-    (@channel.is_group? && @channel.my_permission.can_manage_multi_dataset_dashboard?) or @channel.is_public? or (@channel.is_personal? && @channel.is_creator?)
+    (@channel.is_group? && @channel.my_permission.can_manage_multi_dataset_dashboard?) || @channel.is_public? || (@channel.is_personal? && @channel.is_creator?)
   end
 end
