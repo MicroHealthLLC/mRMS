@@ -19,3 +19,13 @@
     </div>
   </div>
 <% end %>
+<script type="text/javascript">
+    function myhandler(event){
+      if(event.which == 8 && event.target.value.length == 0)
+        {
+          event.stopPropagation();
+        }
+      }
+
+    document.addEventListener('keydown', myhandler, true);
+</script>
