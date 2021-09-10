@@ -1,5 +1,5 @@
 <div class="card border-0 p-0" style="width: 18rem">
-  <div class="border m-2 text-center h-100">
+  <div class="border m-2 text-center h-100" id= "card-body" draggable=true ondragstart="dragevent(ev)">
     <div class="card-header p-0 pr-2 pt-2 border-0">
       <%= link_to( '<i class="fa fa-times float-right"></i>'.html_safe, delete_pivottable_channel_report_path(@channel, @report, query_id: pivot_table.id),
                  :method => :delete,
@@ -25,3 +25,8 @@
     </div>
   </div>
 </div>
+<script>
+    function drag(ev) {
+      ev.dataTransfer.setData("text", ev.target.id);
+    }
+</script>
