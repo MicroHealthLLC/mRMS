@@ -1,15 +1,60 @@
-<div class="row">
-  <div class="col-md-12 d-flex justify-content-end mb-3 pr-0">
-    <div class="col-md-1 d-flex justify-content-end pr-0">
-      <label class="pt-3 mb-0">Filter:</label>
+
+<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+  <li class="nav-item">
+    <a class="nav-link active" id="pills-All-tab" data-toggle="pill" href="#All_Dashboards" role="tab" aria-controls="pills-All" aria-selected="true">All</a>
+  </li>
+    <%DashboardEnum.all.each do |dashboardEnum|%>
+    <li class="nav-item">
+      <a class="nav-link" id="pills-<%=dashboardEnum.id%>-tab" data-toggle="pill" href="#<%=dashboardEnum.id%>" role="tab" aria-controls="pills-<%=dashboardEnum.id%>" aria-selected="true" ondrop = "drop_dashboard(event,<%=dashboardEnum.id%>)" ondragover="allowDrop_dashboard(event)"><%=dashboardEnum.name%></a>
+    </li>
+    <% end %>
+</ul>
+
+<div class="tab-content" id="pills-tabContent" >
+
+    <div class="tab-pane active" id="All_Dashboards" role="tabpanel" aria-labelledby="pills-All-tab" >
+      <%= render partial: 'dashboard_content', locals: { report_dashboard: report_dashboard} %>
     </div>
-    <div class="col-md-3" style="width: 300px;">
-      <%= select_tag :dashboard_enum_id,options_for_select(DashboardEnum.all.collect{|x| [x.name,x.id]}.prepend ['All', '']),onchange: 'fetch_dashboard_data(this.value)'  %>
+    <%DashboardEnum.all.each do |dashboardEnum|%>
+    <div class="tab-pane" id="<%=dashboardEnum.id%>" role="tabpanel" aria-labelledby="pills-<%=dashboardEnum.id%>-tab">
+      <%= render partial: 'dashboard_content', locals: { report_dashboard: report_dashboard.where(dashboard_enum_id:dashboardEnum.id)} %>
     </div>
-  </div>
+    <%end%>
+
 </div>
-<div class="row show_dashboards">
-  <%= render partial: 'dashboard_content', locals: { report_dashboard: report_dashboard, dashboard_enum_id:dashboard_enum_id, report_enum_id: report_enum_id } %>
-</div>
+<script type="text/javascript">
+function allowDrop_dashboard(ev) {
+  ev.preventDefault();
+}
+
+document.addEventListener("dragenter", function(event) {
+  if ( event.target.className == "nav-link" ) {
+    event.target.style.backgroundColor = "#1BC5BD";
+    event.target.style.color = "white"
+  }
+});
+document.addEventListener("dragleave", function(event) {
+  if ( event.target.className == "nav-link" ) {
+    event.target.style.backgroundColor = "white";
+    event.target.style.color = "#B5B5C3"
+  }
+});
+function drop_dashboard(ev,newPos) {
+  event.target.style.backgroundColor = "#1BC5BD";
+  event.target.style.color = "white"
+  $("a[class='nav-link active']").css("color","#B5B5C3")
+  $("a[class='nav-link active']").css("backgroundColor","white");
+
+  var previousPos = ev.dataTransfer.getData("text");
+  console.log(previousPos)
+  $.ajax({
+      url:  window.location.pathname+"?previous_dashboard_position="+previousPos+"&new_dashboard_position="+newPos+"&filter_dashboard="+"Dashboard",
+      dataType: "script",
+      cache: true
+    });
+  location.reload()
+}
+</script>
+
 
 

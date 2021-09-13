@@ -4,15 +4,16 @@ class ReportsController < ApplicationController
   before_action :set_report, only: [:refresh_onedrive_file, :save_pivottable, :delete_pivottable, :share_report, :show, :edit, :update, :destroy]
   before_action :authorize, except: [:index]
   before_action :set_repot_document, only: :create
-
+  before_action :change_positions, only: :show
   include ReportsHelper
   # GET /reports/1
   # GET /reports/1.json
   def show
     @query_id         = params[:query_id] rescue nil
-    @pivot_tables = @report.save_pivot_tables
+    @pivot_tables     = @report.save_pivot_tables
+    @report_dashboard = @report.dashboards
     #@pivot_tables     = params[:report_enum_id].present? ? @report.save_pivot_tables.where(report_enum_id: params[:report_enum_id]) : @report.save_pivot_tables
-    @report_dashboard = params[:dashboard_enum_id].present? ? @report.dashboards.where(dashboard_enum_id: params[:dashboard_enum_id]) : @report.dashboards
+    #@report_dashboard = params[:dashboard_enum_id].present? ? @report.dashboards.where(dashboard_enum_id: params[:dashboard_enum_id]) : @report.dashboards
     @report_enum_id   = params[:report_enum_id]
     @dashboard_enum_id = params[:dashboard_enum_id]
     @dashboard_count = @report.dashboards.count
@@ -187,7 +188,20 @@ class ReportsController < ApplicationController
   rescue ActiveRecord::RecordNotFound
     render_404
   end
+  def change_positions
 
+    if params[:filter_report]
+
+      change = @report.save_pivot_tables.find(params[:previous_report_position])
+      change.report_enum_id = params[:new_report_position]
+      change.save!
+    elsif  params[:filter_dashboard]
+
+      change = @report.dashboards.find(params[:previous_dashboard_position])
+      change.dashboard_enum_id = params[:new_dashboard_position]
+      change.save!
+    end
+  end
   # Never trust parameters from the scary internet, only allow the white list through.
   def report_params
     params.require(:report).permit(Report.safe_attributes)

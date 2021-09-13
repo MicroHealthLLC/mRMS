@@ -1,33 +1,53 @@
-<div class="row">
-  <% if channel.multi_data_set_dashboards.count > 0 %>
-    <% channel.multi_data_set_dashboards.each do |dashboard|%>
-      <div class="card border-0 p-0" style="width: 18rem">
-        <div class="border m-2 text-center h-100">
-          <div class="card-header p-0 pr-2 pt-2 border-0">
-            <%= link_to('<i class="fa fa-times float-right"></i>'.html_safe, channel_multi_data_set_dashboard_path(channel, dashboard),
-              method: :delete, data: {confirm: "Are you sure to delete Dashboard: #{dashboard.name}?"}) if can_manage_multi_dataset_dashboard?(channel)%>
-          </div>
-          <div class="card-body pt-0 pb-2 px-0">
-            <%= link_to channel_multi_data_set_dashboard_path(channel,dashboard) do%>
-              <%= image_tag "dashboard.png", style: 'width: 13rem; height: 13rem;' %>
-            <% end %>
-            <div class="cursor-pointer text-center">
-              <p class="mb-0 px-3">
-                <% report_count = dashboard.save_pivot_tables.count%>
-                Total Reports: <%= report_count.to_s %>
-              </p>
-              <p title="<%= dashboard.name %>" class="px-3 mb-0 mt-2">
-                <%= dashboard.name.truncate(70) %>
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
+<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+  <li class="nav-item">
+    <a class="nav-link active" id="pills-All-tab" data-toggle="pill" href="#All_Dashboards" role="tab" aria-controls="pills-All" aria-selected="true">All</a>
+  </li>
+    <%DashboardEnum.all.each do |dashboardEnum|%>
+    <li class="nav-item">
+      <a class="nav-link" id="pills-<%=dashboardEnum.id%>-tab" data-toggle="pill" href="#<%=dashboardEnum.id%>" role="tab" aria-controls="pills-<%=dashboardEnum.id%>" aria-selected="true" ondrop = "drop_dashboard(event,<%=dashboardEnum.id%>)" ondragover="allowDrop_dashboard(event)"><%=dashboardEnum.name%></a>
+    </li>
     <% end %>
-  <% else %>
-    <div class="mx-3 w-100 alert alert-custom alert-notice alert-light-primary show d-flex" role="alert">
-      <div class="alert-icon"><i class="fas fa-exclamation-triangle"></i></div>
-      <div class="alert-text">No Multi Data Set Dashboard to display!</div>
+</ul>
+<div class="tab-content" id="pills-tabContent" >
+  <div class="tab-pane active" id="All_Dashboards" role="tabpanel" aria-labelledby="pills-All-tab" >
+      <%= render partial: 'multi_data_set_dashboard_content', locals: { multi_data_set_dashboards: channel.multi_data_set_dashboards, channel:channel} %>
+  </div>
+  <%DashboardEnum.all.each do |dashboardEnum|%>
+    <div class="tab-pane" id="<%=dashboardEnum.id%>" role="tabpanel" aria-labelledby="pills-<%=dashboardEnum.id%>-tab">
+      <%= render partial: 'multi_data_set_dashboard_content', locals: {multi_data_set_dashboards: channel.multi_data_set_dashboards.where(dashboard_enum_id: dashboardEnum), channel:channel} %>
     </div>
-  <% end %>
+  <%end%>
 </div>
+<script type="text/javascript">
+function allowDrop_dashboard(ev) {
+  ev.preventDefault();
+}
+
+document.addEventListener("dragenter", function(event) {
+  if ( event.target.className == "nav-link" ) {
+    event.target.style.backgroundColor = "#1BC5BD";
+    event.target.style.color = "white"
+  }
+});
+document.addEventListener("dragleave", function(event) {
+  if ( event.target.className == "nav-link" ) {
+    event.target.style.backgroundColor = "white";
+    event.target.style.color = "#B5B5C3"
+  }
+});
+function drop_dashboard(ev,newPos) {
+  event.target.style.backgroundColor = "#1BC5BD";
+  event.target.style.color = "white"
+  $("a[class='nav-link active']").css("color","#B5B5C3")
+  $("a[class='nav-link active']").css("backgroundColor","white");
+
+  var previousPos = ev.dataTransfer.getData("text");
+  console.log(previousPos)
+  $.ajax({
+      url:  window.location.pathname+"?previous_dashboard_position="+previousPos+"&new_dashboard_position="+newPos+"&filter_dashboard="+"Dashboard",
+      dataType: "script",
+      cache: true
+    });
+  location.reload()
+}
+</script>

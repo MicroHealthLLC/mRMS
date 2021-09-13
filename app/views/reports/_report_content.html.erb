@@ -1,14 +1,14 @@
 <div class="row">
-<% if pivot_tables.present? %>
-  <% pivot_tables.each do |pivot_table| %>
-    <%= render partial: 'grid', locals: {pivot_table: pivot_table} %>
+  <% if pivot_tables.present? %>
+    <% pivot_tables.each do |pivot_table| %>
+      <%= render partial: 'grid', locals: {pivot_table: pivot_table} %>
+    <% end %>
+  <% else %>
+    <div class="col-md-12 my-3 mx-4 alert alert-custom alert-notice alert-light-primary show d-flex" role="alert">
+      <div class="alert-icon"><i class="fas fa-exclamation-triangle"></i></div>
+      <div class="alert-text ">No Report to display!</div>
+    </div>
   <% end %>
-<% else %>
-  <div class="col-md-12 my-3 mx-4 alert alert-custom alert-notice alert-light-primary show d-flex" role="alert">
-    <div class="alert-icon"><i class="fas fa-exclamation-triangle"></i></div>
-    <div class="alert-text ">No Report to display!</div>
-  </div>
-<% end %>
 </div>
 <script type="text/javascript">
 </script>

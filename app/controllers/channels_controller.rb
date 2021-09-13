@@ -4,7 +4,7 @@ class ChannelsController < ApplicationController
   before_action :set_channel, only: [:show, :edit, :update, :destroy]
   before_action :authorize, except: [:index]
   before_action :require_admin, only: [:index]
-
+  before_action :change_positions, only: :show
 
   def index
   end
@@ -93,6 +93,19 @@ class ChannelsController < ApplicationController
     render_404
   end
 
+  def change_positions
+
+    if params[:filter_report]
+      change = @channel.reports.find(params[:previous_report_position])
+      change.report_enum_id = params[:new_report_position]
+      change.save!
+    elsif  params[:filter_dashboard]
+
+      change = @channel.multi_data_set_dashboards.find(params[:previous_dashboard_position])
+      change.dashboard_enum_id = params[:new_dashboard_position]
+      change.save!
+    end
+  end
   # Never trust parameters from the scary internet, only allow the white list through.
   def channel_params
     params.require(:channel).permit(Channel.safe_attributes)
