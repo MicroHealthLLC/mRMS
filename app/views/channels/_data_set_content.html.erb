@@ -1,7 +1,11 @@
 <div class="row d-flex">
   <% if reports.present? %>
     <% reports.each do |report| %>
+    <%if is_all=='yes'%>
+      <div class="col-3" draggable=false ondragstart="dragevent(event,<%=report.id%>)" >
+    <%else%>
       <div class="col-3" draggable=true ondragstart="dragevent(event,<%=report.id%>)" >
+    <%end%>
         <a href="<%= channel_report_path(@channel, report )%>">
         <!--begin::Card-->
         <div class="box-shadow bg-color-lighten card card-custom card-stretch gutter-b">
@@ -14,13 +18,13 @@
                 <div class="symbol symbol-lg-75">
                   <% name = JSON.parse(report&.save_pivot_tables&.first&.content)["rendererName"].downcase rescue nil %>
                   <% if (name && name.include?('table')) %>
-                      <%= image_tag "pivot/table.png", size: '220x220'%>
+                      <%= image_tag "pivot/table.png", size: '220x220', draggable:false%>
                   <% elsif (name && name.include?('heatmap')) %>
-                      <%= image_tag "pivot/heatmap.png", size: '220x220'%>
+                      <%= image_tag "pivot/heatmap.png", size: '220x220', draggable:false%>
                   <% elsif name%>
                       <%= image_tag "pivot/#{name.gsub(' ', '-')}.png" , size: '220x220'%>
                   <% else %>
-                    <%= image_tag "dashboard.png", size: '220x220'%>
+                    <%= image_tag "dashboard.png", size: '220x220', draggable:false%>
                   <% end %>
                 </div>
               </div>

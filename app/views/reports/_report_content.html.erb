@@ -1,7 +1,7 @@
 <div class="row">
   <% if pivot_tables.present? %>
     <% pivot_tables.each do |pivot_table| %>
-      <%= render partial: 'grid', locals: {pivot_table: pivot_table} %>
+      <%= render partial: 'grid', locals: {pivot_table: pivot_table,is_all:is_all} %>
     <% end %>
   <% else %>
     <div class="col-md-12 my-3 mx-4 alert alert-custom alert-notice alert-light-primary show d-flex" role="alert">

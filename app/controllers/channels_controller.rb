@@ -25,6 +25,10 @@ class ChannelsController < ApplicationController
   def show
     reports = @channel.shared_report? ? User.current.reports.current_user_shared_reports : @channel.reports
     @reports = reports.where(channel_id: Channel.pluck(:id)).paginate(page: params[:page], per_page: 10)
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   # GET /channels/new
@@ -94,7 +98,6 @@ class ChannelsController < ApplicationController
   end
 
   def change_positions
-
     if params[:filter_report]
       change = @channel.reports.find(params[:previous_report_position])
       change.report_enum_id = params[:new_report_position]
