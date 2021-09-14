@@ -6,7 +6,7 @@
     <%else%>
       <div class="col-3" draggable=true ondragstart="dragevent(event,<%=report.id%>)" >
     <%end%>
-        <a href="<%= channel_report_path(@channel, report )%>">
+        <a href="<%=  channel_report_path(@channel, report)%>"  >
         <!--begin::Card-->
         <div class="box-shadow bg-color-lighten card card-custom card-stretch gutter-b">
           <!--begin::Body-->

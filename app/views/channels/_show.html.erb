@@ -43,7 +43,7 @@ function drop_report(ev,newPos) {
   var previousPos = ev.dataTransfer.getData("text");
   console.log(previousPos)
   $.ajax({
-      url:  window.location.pathname+"?previous_report_position="+previousPos+"&new_report_position="+newPos+"&filter_report="+"Report",
+      url:window.location.pathname+"?previous_report_position="+previousPos+"&new_report_position="+newPos+"&filter_report="+"Report",
       dataType: "script",
       cache: true
     });
