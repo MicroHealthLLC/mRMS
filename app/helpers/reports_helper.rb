@@ -48,6 +48,15 @@ module ReportsHelper
     @invalid_file_parse = "Error on parsing document"
   end
 
+  def can_refresh_one_drive?(report)
+    default = false
+    report_document = report.report_documents
+    if report_document != [] && current_user.onedrive_access_token
+      default = report_document.first.onedrive_item_id ? true : false
+    end
+    default
+  end
+
   def filter_pivot_report
     enum_name = 'All'
     repor_enum_id = params[:report_enum_id]

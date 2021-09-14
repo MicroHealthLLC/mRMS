@@ -150,7 +150,7 @@
     launchOneDrivePicker().then(function (result) {
       if (result) {
         const file = result.value
-        var params = { report: { document: file }, id: '<%= @report ? @report.id : ""%>', one_drive: true }
+        var params = { report: { document: file, onedrive_token: result.accessToken }, id: '<%= @report ? @report.id : ""%>', one_drive: true }
         $.ajax({
           type: "POST",
           url: '<%= upload_document_channel_reports_path(@channel) %>',

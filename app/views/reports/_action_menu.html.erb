@@ -13,6 +13,12 @@
           </span>
       <% end %>
 
+      <% if can_refresh_one_drive?(@report) %>
+          <span>
+            <%= show_button(refresh_onedrive_file_channel_report_path(@report.channel, @report), 'refresh onedrive', 'fas fa-refresh', 'info') %>
+          </span>
+      <% end %>
+
       <% if params[:new_query] &&  @report.document_url %>
           <% if @report.channel.is_public? or @report.channel.is_creator? or @report.channel.my_permission.can_add_report? %>
           <%= show_button('#', ' Save Report', 'arrow-down', 'info', {toggle:"modal", target:"#mySaveModal" }) if  @report.document_url %>
