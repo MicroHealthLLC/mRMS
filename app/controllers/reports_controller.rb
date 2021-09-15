@@ -33,10 +33,13 @@ class ReportsController < ApplicationController
   end
 
   def refresh_onedrive_file
-    if current_user.onedrive_access_token.present?
-       OneDriveRefreshService.new(current_user, @report.report_documents.first).call rescue nil
+    begin
+      OneDriveRefreshService.new(current_user, @report.report_documents.first).call
+      flash[:notice] = "Data Successfully updated!"
+    rescue StandardError => e
+      flash[:alert] = e.message
     end
-    redirect_to  channel_report_path(@channel, @report)
+    redirect_to channel_report_path(@channel, @report)
   end
 
   def upload_document
@@ -50,6 +53,7 @@ class ReportsController < ApplicationController
             time = Time.now.to_i
             `curl -L #{url} > /tmp/#{time}.xlsx`
             @report_document.file=  File.new("/tmp/#{time}.xlsx")
+            @report_document.onedrive_item_id = nil
             @report_document.save!
             `rm /tmp/#{time}.xlsx`
             # redirect_to channel_report_path(@channel, @report)
@@ -68,6 +72,7 @@ class ReportsController < ApplicationController
             `rm public/uploads/tmp/#{file_name}`
           else
             @report_document.file = params[:report][:document]
+            @report_document.onedrive_item_id = nil
             @report_document.save!
           end
           # render report_document: @report_document, status: :ok

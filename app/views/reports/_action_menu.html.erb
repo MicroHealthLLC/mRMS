@@ -13,18 +13,12 @@
           </span>
       <% end %>
 
-      <% if can_refresh_one_drive?(@report) %>
-          <span>
-            <%= show_button(refresh_onedrive_file_channel_report_path(@report.channel, @report), 'refresh onedrive', 'fas fa-refresh', 'info') %>
-          </span>
-      <% end %>
-
-      <% if params[:new_query] &&  @report.document_url %>
+      <% if params[:new_query] && @report.document_url %>
           <% if @report.channel.is_public? or @report.channel.is_creator? or @report.channel.my_permission.can_add_report? %>
           <%= show_button('#', ' Save Report', 'arrow-down', 'info', {toggle:"modal", target:"#mySaveModal" }) if  @report.document_url %>
           <% end %>
           <%= cancel_button channel_report_path(@channel, @report) %>
-      <% elsif params[:query_id] &&   @report.document_url %>
+      <% elsif params[:query_id] && @report.document_url %>
           <% if ((@report.channel.is_public? and @report.created_by_id == User.current.id) or (!@report.channel.is_public? and @report.channel.is_creator?) or @report.channel.my_permission.can_add_report?) %>
               <%= show_button('#', ' Update Report', 'arrow-down', 'info', {toggle:"modal", target:"#myRenameModal" }) if  @report.document_url %>
           <% end %>
@@ -34,6 +28,15 @@
             <!-- <input type="button" onclick="$('#output').find('.pvtRendererArea').attr('id', 'testTable'); tableToExcel('testTable', 'Pivot table export')" value="Export to Excel" class="btn btn-primary"> -->
            <%= cancel_button :back %>
       <% else %>
+        <% if can_refresh_one_drive?(@report) %>
+          <span>
+            <%= show_button(refresh_onedrive_file_channel_report_path(@report.channel, @report), 'Refresh Data Set', 'fas fa-refresh', 'linkedin') %>
+          </span>
+        <% elsif is_onedrive_dataset?(@report) && current_user.onedrive_access_token.blank? %>
+          <span>
+            <%= show_button(connect_with_onedrive_url, "Connect with One Drive", "plus", "linkedin") %>
+          </span>
+        <% end %>
           <% if @report.channel.is_public? or @report.channel.is_creator? or @report.channel.my_permission.can_add_report? %>
               <%= show_button(channel_report_path(@channel, @report, new_query: true), 'New Report', 'arrow-down', 'info' ) if  @report.document_url %>
               <%= show_button(new_channel_report_dashboard_path(@channel, @report), 'New Dashboard', 'arrow-down', 'primary', {}, @pivot_tables.count == 0 ) if  display_dashboard? %>

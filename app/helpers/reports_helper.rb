@@ -49,12 +49,11 @@ module ReportsHelper
   end
 
   def can_refresh_one_drive?(report)
-    default = false
-    report_document = report.report_documents
-    if report_document != [] && current_user.onedrive_access_token
-      default = report_document.first.onedrive_item_id ? true : false
-    end
-    default
+    is_onedrive_dataset?(report) && current_user.onedrive_access_token.present?
+  end
+
+  def is_onedrive_dataset?(report)
+    report.report_documents&.first&.onedrive_item_id&.present? rescue false
   end
 
   def filter_pivot_report
