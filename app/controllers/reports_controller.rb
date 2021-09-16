@@ -1,7 +1,7 @@
 class ReportsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_channel
-  before_action :set_report, only: [:save_pivottable, :delete_pivottable, :share_report, :show, :edit, :update, :destroy]
+  before_action :set_report, only: [:refresh_onedrive_file, :save_pivottable, :delete_pivottable, :share_report, :show, :edit, :update, :destroy]
   before_action :authorize, except: [:index, :show]
   before_action :set_repot_document, only: :create
 
@@ -32,6 +32,16 @@ class ReportsController < ApplicationController
   def edit
   end
 
+  def refresh_onedrive_file
+    begin
+      OneDriveRefreshService.new(current_user, @report.report_documents.first).call
+      flash[:notice] = "Data Successfully updated!"
+    rescue StandardError => e
+      flash[:alert] = e.message
+    end
+    redirect_to channel_report_path(@channel, @report)
+  end
+
   def upload_document
     if request.post?
       set_report if params[:id].present?
@@ -43,20 +53,26 @@ class ReportsController < ApplicationController
             time = Time.now.to_i
             `curl -L #{url} > /tmp/#{time}.xlsx`
             @report_document.file=  File.new("/tmp/#{time}.xlsx")
+            @report_document.onedrive_item_id = nil
             @report_document.save!
             `rm /tmp/#{time}.xlsx`
             # redirect_to channel_report_path(@channel, @report)
           elsif params[:one_drive].present?
+            current_user.onedrive_access_token = params[:report][:onedrive_token]
+            current_user.save!
             url = params[:report][:document]["0"]["@microsoft.graph.downloadUrl"]
+            item_id = params[:report][:document]["0"]["id"]
             file_name = params[:report][:document]["0"]["name"]
             File.open("public/uploads/tmp/#{file_name}", 'wb') do |file|
               file << open(url).read
+              @report_document.onedrive_item_id = item_id
               @report_document.file = file
             end
             @report_document.save!
             `rm public/uploads/tmp/#{file_name}`
           else
             @report_document.file = params[:report][:document]
+            @report_document.onedrive_item_id = nil
             @report_document.save!
           end
           # render report_document: @report_document, status: :ok

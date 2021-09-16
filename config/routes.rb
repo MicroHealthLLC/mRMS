@@ -29,6 +29,7 @@ Rails.application.routes.draw do
         match :save_pivottable, via: [:post]
         match :delete_pivottable, via: [:delete]
         match :share_report, via: [:get, :post]
+        match :refresh_onedrive_file, via: [:get]
       end
       collection do
         match :upload_document, via: [:get, :post]
