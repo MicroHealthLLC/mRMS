@@ -1,0 +1,42 @@
+<div class="tab-pane active" id="All_Dashboards" role="tabpanel" aria-labelledby="pills-All-tab" >
+      <%= render partial: 'multi_data_set_dashboard_content', locals: { multi_data_set_dashboards: channel.multi_data_set_dashboards, channel:channel,is_all:'yes'} %>
+</div>
+<%DashboardEnum.all.each do |dashboardEnum|%>
+  <div class="tab-pane" id="<%=dashboardEnum.id%>" role="tabpanel" aria-labelledby="pills-<%=dashboardEnum.id%>-tab" ondrop = "drop_dashboard(event,<%=dashboardEnum.id%>)" ondragover="allowDrop_dashboard(event)">
+    <%= render partial: 'multi_data_set_dashboard_content', locals: {multi_data_set_dashboards: channel.multi_data_set_dashboards.where(dashboard_enum_id: dashboardEnum), channel:channel,is_all:'no'} %>
+  </div>
+<%end%>
+
+
+
+<script type="text/javascript">
+
+  $('a.my_dashboards').on('dragenter', function (e) {
+    $('.dashboard_tab .nav-item.active').removeClass("active");
+    $('.dashboard_tab a.nav-link.active').removeClass("active");
+    $(this).tab('show');
+    $(this).addClass('active');
+    //$(this).addClass('active')
+  });
+
+ $('a.my_dashboards').on('dragleave', function (e) {
+    $(this).tab('hide');
+    $(this).removeClass('active')
+  });
+
+  function allowDrop_dashboard(ev) {
+    ev.preventDefault();
+  }
+
+ function drop_dashboard(ev,newPos) {
+  var previousPos = ev.dataTransfer.getData("dashboard");
+  var status = ev.dataTransfer.getData("status");
+  if (status=='dashboard'){
+    $.ajax({
+        url:  window.location.pathname+"?previous_dashboard_position="+previousPos+"&new_dashboard_position="+newPos+"&filter_dashboard="+"Dashboard",
+        dataType: "script",
+        cache: true
+      });
+  }
+}
+  </script>

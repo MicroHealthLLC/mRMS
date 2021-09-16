@@ -1,12 +1,8 @@
 <div class="row d-flex">
   <% if reports.present? %>
     <% reports.each do |report| %>
-    <%if is_all=='yes'%>
-      <div class="col-3" draggable=false ondragstart="dragevent(event,<%=report.id%>)" >
-    <%else%>
-      <div class="col-3" draggable=true ondragstart="dragevent(event,<%=report.id%>)" >
-    <%end%>
-        <a href="<%=  channel_report_path(@channel, report)%>"  >
+      <div class="col-3" draggable="<%= is_all == 'yes' ? "false" : "true"  %>" ondragstart="dragevent(event,<%=report.id%>)" >
+        <a href="<%=  channel_report_path(@channel, report)%>" id="report_check">
         <!--begin::Card-->
         <div class="box-shadow bg-color-lighten card card-custom card-stretch gutter-b">
           <!--begin::Body-->
@@ -78,5 +74,6 @@
 
     function dragevent(ev,id) {
       ev.dataTransfer.setData("text", id);
+      ev.dataTransfer.setData("status", 'report');
     }
 </script>

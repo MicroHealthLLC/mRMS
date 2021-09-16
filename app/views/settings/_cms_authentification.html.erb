@@ -74,7 +74,7 @@
 <%= javascript_include_tag 'jquery.tagsinput' %>
 <%= stylesheet_link_tag 'jquery.tagsinput' %>
 <script>
-  $(document).ready(function(){
+  $(document).on('turbolinks:load', () => {
     $('.tags').tagsInput({defaultText: 'Ip'});
     $('#btn_save_details_form').click(function(e){
       e.preventDefault();

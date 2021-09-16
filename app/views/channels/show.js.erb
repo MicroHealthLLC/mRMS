@@ -1,3 +1,23 @@
-$(".showreports").html("<%=escape_javascript (render partial: 'show', layout: 'shared/smart_widget_wrapper',locals: { wid_id: 'channel',wid_title: 'Data sets', channel: @channel}) %>")
-//$("#).html('<%= escape_javascript(render partial: 'menu/other_links',locals: { channel: @channel }) %>')
-//$(".showreports").load('<%= j render partial: 'show', layout: 'shared/smart_widget_wrapper',locals: { wid_id: 'channel',wid_title: 'Data sets', channel: @channel} %>')
+<%if params[:filter_report]%>
+{
+    $(".show_datasets").html('<%=escape_javascript (render partial: 'show_dataset', locals: {reports: @reports}) %>')
+    var active_reports = $('.myTab a.active').attr('href')
+    $('.my_reports div.active').removeClass('active')
+    $('.my_reports div'+active_reports+'').addClass('active')
+
+    $('a#report_check').click(function(e){
+        window.location.replace($(this).attr('href'))
+    })
+}
+<% elsif params[:filter_dashboard]%>
+{
+    $(".show_multidatasets").html('<%=escape_javascript (render partial: 'show_multi_dataset_dashboards', locals: {channel: @channel}) %>')
+    var active_dashboards = $('.dashboard_tab a.active').attr('href')
+    $('.show_multidatasets div.active').removeClass('active')
+    $('.show_multidatasets div'+active_dashboards+'').addClass('active')
+
+    $('a.dashboard_check').click(function(e){
+        window.location.replace($(this).attr('href'))
+    })
+}
+<%end%>

@@ -165,7 +165,7 @@ PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots 
 <%= javascript_include_tag 'pivottables/smart_admin' %>
 
 <script>
-    $(document).ready(function() {
+    $(document).on('turbolinks:load', () => {
         toastr.options = {
             "progressBar": true,
             "timeOut": "20000"

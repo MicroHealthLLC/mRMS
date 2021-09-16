@@ -71,7 +71,7 @@
 
 <script>
     // ajout de la classe JS à HTML
-  $(document).ready(function(){
+  $(document).on('turbolinks:load', () => {
     $(function () {
       'use strict';
       $('#fileupload').fileupload({

@@ -21,7 +21,7 @@
   <% end %>
 </table>
 <script>
-    $(document).ready(function(){
+    $(document).on('turbolinks:load', () => {
         initDataTable("<%= klass::OptionName %>_table")
     })
 </script>
