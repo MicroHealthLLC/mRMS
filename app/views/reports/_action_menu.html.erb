@@ -26,7 +26,7 @@
               <%= link_to "Export to Excel", "/uploads/#{@report.id}/#{File.basename(@report.document.file_url)}",  class: 'btn btn-primary', target: '_blank' %>
           <% end %>
             <!-- <input type="button" onclick="$('#output').find('.pvtRendererArea').attr('id', 'testTable'); tableToExcel('testTable', 'Pivot table export')" value="Export to Excel" class="btn btn-primary"> -->
-           <%= cancel_button :back %>
+           <%= cancel_button channel_report_path(@channel, @report) %>
       <% else %>
         <% if can_refresh_one_drive?(@report) %>
           <span>
