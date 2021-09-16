@@ -128,15 +128,6 @@ class Channel < ApplicationRecord
     [:user_id, :name, :is_public, :description, :is_personal, :icon, :option]
   end
 
-  def visible_reports
-    if is_personal?
-      User.current.reports.where(channel_id: self.id)
-    elsif is_public?
-      reports
-    else
-      reports
-    end
-  end
 
   def is_personal?
     option == PERSONAL

@@ -2,7 +2,7 @@ class ReportsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_channel
   before_action :set_report, only: [:refresh_onedrive_file, :save_pivottable, :delete_pivottable, :share_report, :show, :edit, :update, :destroy]
-  before_action :authorize, except: [:index, :show]
+  before_action :authorize, except: [:index]
   before_action :set_repot_document, only: :create
 
   include ReportsHelper
@@ -201,7 +201,7 @@ class ReportsController < ApplicationController
                    when 'edit', 'update',
                        'new', 'upload_document',
                        'create', 'save_pivottable',
-                       'delete_pivottable' then  @channel.is_public? or @channel.my_permission.can_add_report? or @channel.my_permission.can_view?
+                       'delete_pivottable','show' then  @channel.is_public? or (@channel.is_group? and @channel.my_permission.can_add_report? and @channel.my_permission.can_view?) or (@channel.is_personal? and @channel.is_creator?)
                    when 'destroy'
                      @report.channel.my_permission.can_delete_report? or @report.channel.is_public?
                    else

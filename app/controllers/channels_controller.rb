@@ -23,7 +23,7 @@ class ChannelsController < ApplicationController
   # GET /channels/1
   # GET /channels/1.json
   def show
-    reports = @channel.shared_report? ? User.current.reports.current_user_shared_reports : @channel.visible_reports
+    reports = @channel.shared_report? ? User.current.reports.current_user_shared_reports : @channel.reports
     @reports = reports.where(channel_id: Channel.pluck(:id)).paginate(page: params[:page], per_page: 10)
   end
 
@@ -99,8 +99,10 @@ class ChannelsController < ApplicationController
   end
 
   def authorize
-    access =  if @channel
-                User.current.admin? or @channel.is_public? or @channel.is_creator? or @channel.my_permission.can_view? or (@channel.my_permission.can_view? and @channel.my_permission.can_add_report? )
+    access =  if @channel and params[:action]!="update"
+               @channel.is_public? or (@channel.is_creator? and @channel.is_personal?) or  (@channel.is_group? and @channel.my_permission.can_view? and @channel.my_permission.can_add_report? )
+              elsif params[:action] == "update" and @channel
+                User.current.admin?
               else
                 true
               end
