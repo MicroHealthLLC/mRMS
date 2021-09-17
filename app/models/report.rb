@@ -55,7 +55,7 @@ class Report < ApplicationRecord
   end
 
   def self.safe_attributes
-    [:name, :category_id, :channel_id, :category_type_id, :user_id, :description ]
+    [:name, :category_id, :channel_id, :category_type_id, :user_id, :description, :report_enum_id ]
   end
 
 
