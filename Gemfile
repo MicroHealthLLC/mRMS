@@ -46,9 +46,10 @@ end
 
 group :test do
   gem 'database_cleaner'
-  gem 'capybara', '~> 2.13'
+  gem 'capybara', '~> 3.35', '>= 3.35.3'
   gem 'selenium-webdriver'
   gem 'chromedriver-helper', '~> 1.0'
+  gem 'webdrivers', '~> 4.6', '>= 4.6.1'
   gem 'minitest-retry'
   gem 'factory_bot_rails', '~> 4.11'
 end
