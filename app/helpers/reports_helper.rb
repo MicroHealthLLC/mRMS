@@ -58,18 +58,18 @@ module ReportsHelper
 
   def filter_pivot_report
     enum_name = 'All'
-    repor_enum_id = params[:report_enum_id]
-    if repor_enum_id
-      enum_name = ReportEnum.find_by_id(repor_enum_id).name
+    channel_enum_id = params[:channel_enum_id]
+    if channel_enum_id
+      enum_name = ChannelEnum.find_by_id(channel_enum_id).name
     end
     enum_name
   end
 
   def filter_report_dashbord
     enum_name = 'All'
-    dashboard_enum_id = params[:dashboard_enum_id]
-    if dashboard_enum_id
-      enum_name = DashboardEnum.find_by_id(dashboard_enum_id).name
+    channel_enum_id = params[:channel_enum_id]
+    if channel_enum_id
+      enum_name = ChannelEnum.find_by_id(channel_enum_id).name
     end
     enum_name
   end
@@ -87,21 +87,21 @@ module ReportsHelper
   end
 
   def default_report_enum
-    report_enum = 'All'
-    report_enum_id = params[:report_enum_id]
-    if report_enum_id
-      report_enum = ReportEnum.find_by_id(report_enum_id).name
+    channel_enum = 'All'
+    channel_enum_id = params[:channel_enum_id]
+    if channel_enum_id
+      channel_enum = ChannelEnum.find_by_id(channel_enum_id).name
     end
-    report_enum
+    channel_enum
   end
 
   def default_dashboard_enum
-    dashboard_enum = 'All'
-    dashboard_enum_id = params[:dashboard_enum_id]
-    if dashboard_enum_id
-      dashboard_enum = DashboardEnum.find_by_id(dashboard_enum_id).name
+    channel_enum = 'All'
+    channel_enum_id = params[:channel_enum_id]
+    if channel_enum_id
+      channel_enum = ChannelEnum.find_by_id(channel_enum_id).name
     end
-    dashboard_enum
+    channel_enum
   end
 
   def display_dashboard?

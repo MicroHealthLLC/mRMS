@@ -23,7 +23,7 @@
       <div class="form-group">
         <%= f.label 'Data Set Category:', class: 'col-md-2 control-label' %>
         <div class="col-md-9">
-          <%= f.select :report_enum_id, options_for_select(ReportEnum.pluck(:name, :id).map { |data| [data[0].humanize, data[1]] }, selected: ReportEnum.find_by(name: 'Uncategorized').id) , {},{class: 'form-control'} %>
+          <%= f.select :channel_enum_id, options_for_select(ChannelEnum.pluck(:name, :id).map { |data| [data[0].humanize, data[1]] }, selected: ChannelEnum.find_by(name: 'Uncategorized').id) , {},{class: 'form-control'} %>
         </div>
       </div>
 

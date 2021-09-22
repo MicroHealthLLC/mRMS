@@ -12,10 +12,6 @@ class ReportsController < ApplicationController
     @query_id         = params[:query_id] rescue nil
     @pivot_tables     = @report.save_pivot_tables
     @report_dashboard = @report.dashboards
-    #@pivot_tables     = params[:report_enum_id].present? ? @report.save_pivot_tables.where(report_enum_id: params[:report_enum_id]) : @report.save_pivot_tables
-    #@report_dashboard = params[:dashboard_enum_id].present? ? @report.dashboards.where(dashboard_enum_id: params[:dashboard_enum_id]) : @report.dashboards
-    @report_enum_id   = params[:report_enum_id]
-    @dashboard_enum_id = params[:dashboard_enum_id]
     @dashboard_count = @report.dashboards.count
     render_403 unless  @channel.is_public? or @channel.is_creator? or @channel.my_permission.can_view_report?
     # if @report.document_url
@@ -138,7 +134,7 @@ class ReportsController < ApplicationController
   def save_pivottable
     pivot_table = SavePivotTable.where(id: params[:query_id]).first_or_initialize
     pivot_table.attributes = params[:save_pivot_table].permit!
-    pivot_table.report_enum_id = params[:save_pivot_table][:report_enum_id]
+    pivot_table.channel_enum_id = params[:save_pivot_table][:channel_enum_id]
     if pivot_table.save
       if params[:query_id]
         flash[:notice] = 'Report was successfully updated'
@@ -193,12 +189,12 @@ class ReportsController < ApplicationController
     if params[:filter_report]
 
       change = @report.save_pivot_tables.find(params[:previous_report_position])
-      change.report_enum_id = params[:new_report_position]
+      change.channel_enum_id = params[:new_report_position]
       change.save!
     elsif  params[:filter_dashboard]
 
       change = @report.dashboards.find(params[:previous_dashboard_position])
-      change.dashboard_enum_id = params[:new_dashboard_position]
+      change.channel_enum_id = params[:new_dashboard_position]
       change.save!
     end
   end

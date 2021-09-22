@@ -80,7 +80,7 @@ class MultiDataSetDashboardsController < ApplicationController
   end
 
   def multi_data_set_dashboard_params
-    params.require(:multi_data_set_dashboard).permit(:channel_id, :name, :dashboard_enum_id )
+    params.require(:multi_data_set_dashboard).permit(:channel_id, :name, :channel_enum_id )
   end
 
   def set_order_index_pivot_table(pivot_table_ids)

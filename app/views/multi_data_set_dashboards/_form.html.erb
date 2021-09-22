@@ -19,7 +19,7 @@
     <div class="form-group">
       <%= form.label 'Multi Data Set Dashboard Category:', class: 'col-md-2 control-label' %>
       <div class="col-md-10 p-0">
-        <%= form.select :dashboard_enum_id, options_for_select(DashboardEnum.pluck(:name, :id).map { |data| [data[0].humanize, data[1]] }, selected: @multi_dashboard.dashboard_enum_id.present? ? @multi_dashboard.dashboard_enum_id : DashboardEnum.find_by(name: 'Uncategorized').id) , {},{class: 'form-control'} %>
+        <%= form.select :channel_enum_id, options_for_select(ChannelEnum.pluck(:name, :id).map { |data| [data[0].humanize, data[1]] }, selected: @multi_dashboard.channel_enum_id.present? ? @multi_dashboard.channel_enum_id : ChannelEnum.find_by(name: 'Uncategorized').id) , {},{class: 'form-control'} %>
       </div>
     </div>
     <div class="form-group">

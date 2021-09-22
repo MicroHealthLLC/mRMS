@@ -3,9 +3,9 @@
   <li class="nav-item active">
     <a class="nav-link active my_reports" id="pills-All-tab" data-toggle="tab" href="#All_Reports" role="tab" aria-controls="pills-All" aria-selected="true">All</a>
   </li>
-    <%ReportEnum.all.each do |reportEnum|%>
+    <%ChannelEnum.all.each do |channelEnum|%>
     <li class="nav-item">
-      <a class="nav-link my_reports" id="pills-<%=reportEnum.id%>-tab" data-toggle="tab" href="#<%=reportEnum.id%>" role="tab" aria-controls="pills-<%=reportEnum.id%>" aria-selected="true" ><%=reportEnum.name%></a>
+      <a class="nav-link my_reports" id="pills-<%=channelEnum.id%>-tab" data-toggle="tab" href="#reports<%=channelEnum.id%>" role="tab" aria-controls="pills-<%=channelEnum.id%>" aria-selected="true" ><%=channelEnum.name%></a>
     </li>
     <% end %>
 </ul>

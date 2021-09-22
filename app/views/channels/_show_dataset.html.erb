@@ -1,9 +1,9 @@
 <div class="tab-pane active" id="All_Reports" role="tabpanel" aria-labelledby="pills-All-tab" >
     <%= render partial: 'data_set_content', locals: {reports: reports, is_all:'yes'} %>
 </div>
-<%ReportEnum.all.each do |reportEnum|%>
-  <div class="tab-pane" id="<%=reportEnum.id%>" role="tabpanel" aria-labelledby="pills-<%=reportEnum.id%>-tab" ondrop="drop_report(event,<%=reportEnum.id%>)" ondragover="allowDrop_report(event)" >
-    <%= render partial: 'data_set_content', locals: { reports: reports.where(report_enum_id: reportEnum), is_all:'no'} %>
+<%ChannelEnum.all.each do |channelEnum|%>
+  <div class="tab-pane" id="datasets<%=channelEnum.id%>" role="tabpanel" aria-labelledby="pills-<%=channelEnum.id%>-tab" ondrop="drop_report(event,<%=channelEnum.id%>)" ondragover="allowDrop_report(event)" >
+    <%= render partial: 'data_set_content', locals: { reports: reports.where(channel_enum_id: channelEnum), is_all:'no'} %>
   </div>
 <%end%>
 <script type="text/javascript">

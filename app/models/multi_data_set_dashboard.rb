@@ -1,6 +1,8 @@
 class MultiDataSetDashboard < ApplicationRecord
   belongs_to :channel
   belongs_to :user
+  belongs_to :channel_enum
+
   validates_presence_of :name
 
   has_many :shared_multi_report_dashboards, dependent: :destroy
