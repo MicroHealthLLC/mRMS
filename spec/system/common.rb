@@ -4,11 +4,15 @@ def user_create
 end
 
 def admin_create
-  User.create(login: Faker::Name.name,email: Faker::Internet.email,password:Faker::Internet.password(mix_case: true), state: "active", admin: true)
+  User.create(login: Faker::Name.name,email: Faker::Internet.free_email,password:Faker::Internet.password(mix_case: true), state: "active", admin: true)
 end
 
 def content_values
   {header:Faker::Name.name,section_1:Faker::Name.name, section_2:Faker::Name.name,section_3:Faker::Name.name,section_4:Faker::Name.name}
+end
+
+def channel_create(user_id)
+  Channel.create(user_id: user_id, name: Faker::Name.name, option: 2, icon: "fab fa-500px",description:"This is the real topic")
 end
 
 def login_user(login_name, password)
@@ -18,4 +22,9 @@ def login_user(login_name, password)
     fill_in 'user_password', with: password
   end
   click_button 'Sign in'
+end
+
+def fill_in_ckeditor(locator, opts)
+  content = opts
+  page.execute_script(" $(#'#{locator}').html('#{content}') ")
 end
