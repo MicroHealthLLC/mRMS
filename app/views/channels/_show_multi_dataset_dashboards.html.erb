@@ -1,8 +1,8 @@
 <div class="tab-pane active" id="All_Dashboards" role="tabpanel" aria-labelledby="pills-All-tab" >
       <%= render partial: 'multi_data_set_dashboard_content', locals: { multi_data_set_dashboards: channel.multi_data_set_dashboards, channel:channel,is_all:'yes'} %>
 </div>
-<%ChannelEnum.all.each do |channelEnum|%>
-  <div class="tab-pane" id="<%=channelEnum.id%>" role="tabpanel" aria-labelledby="pills-<%=channelEnum.id%>-tab" ondrop = "drop_dashboard(event,<%=channelEnum.id%>)" ondragover="allowDrop_dashboard(event)">
+<% ChannelEnum.all.each do |channelEnum| %>
+  <div class="tab-pane" id="<%= channelEnum.id %>" role="tabpanel" aria-labelledby="pills-<%= channelEnum.id %>-tab" ondrop = "drop_dashboard(event,<%= channelEnum.id %>)" ondragover="allowDrop_dashboard(event)">
     <%= render partial: 'multi_data_set_dashboard_content', locals: {multi_data_set_dashboards: channel.multi_data_set_dashboards.where(channel_enum_id: channelEnum), channel:channel,is_all:'no'} %>
   </div>
 <%end%>

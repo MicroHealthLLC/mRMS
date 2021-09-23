@@ -1,6 +1,5 @@
 class Dashboard < ApplicationRecord
   belongs_to :user
-  belongs_to :dashboard_enum
   belongs_to :channel_enum
   belongs_to :report
 

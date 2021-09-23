@@ -12,13 +12,7 @@ class ReportsController < ApplicationController
     @query_id         = params[:query_id] rescue nil
     @pivot_tables     = @report.save_pivot_tables
     @report_dashboard = @report.dashboards
-    @dashboard_count = @report.dashboards.count
     render_403 unless  @channel.is_public? or @channel.is_creator? or @channel.my_permission.can_view_report?
-    # if @report.document_url
-    #   if params[:query_id] or params[:new_query]
-    #     @header, @tab, @error = render_pivot_information(@report.document.file)
-    #   end
-    # end
   end
 
   # GET /reports/new
@@ -187,12 +181,10 @@ class ReportsController < ApplicationController
   def change_positions
 
     if params[:filter_report]
-
       change = @report.save_pivot_tables.find(params[:previous_report_position])
       change.channel_enum_id = params[:new_report_position]
       change.save!
     elsif  params[:filter_dashboard]
-
       change = @report.dashboards.find(params[:previous_dashboard_position])
       change.channel_enum_id = params[:new_dashboard_position]
       change.save!

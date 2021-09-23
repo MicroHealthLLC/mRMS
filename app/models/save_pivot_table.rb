@@ -6,7 +6,6 @@ class SavePivotTable < ApplicationRecord
   validates_uniqueness_of  :name, scope: [:report_id]
 
   belongs_to :user, optional: true
-  belongs_to :report_enum, optional: true
   belongs_to :channel_enum
   belongs_to :report, optional: true
   delegate :channel, to: :report

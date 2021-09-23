@@ -99,7 +99,6 @@ class ChannelsController < ApplicationController
       change.channel_enum_id = params[:new_report_position]
       change.save!
     elsif  params[:filter_dashboard]
-
       change = @channel.multi_data_set_dashboards.find(params[:previous_dashboard_position])
       change.channel_enum_id = params[:new_dashboard_position]
       change.save!

@@ -3,19 +3,17 @@
   <li class="nav-item">
     <a class="nav-link my_dashboards active" id="pills-All-tab" data-toggle="tab" href="#All_Dashboards" role="tab" aria-controls="pills-All" aria-selected="true">All</a>
   </li>
-    <%ChannelEnum.all.each do |channelEnum|%>
+    <% ChannelEnum.all.each do |channelEnum| %>
     <li class="nav-item">
-      <a class="nav-link my_dashboards" id="pills-<%=channelEnum.id%>-tab" data-toggle="tab" href="#<%=channelEnum.id%>" role="tab" aria-controls="pills-<%=channelEnum.id%>" aria-selected="true" ><%=channelEnum.name%></a>
+      <a class="nav-link my_dashboards" id="pills-<%= channelEnum.id %>-tab" data-toggle="tab" href="#<%= channelEnum.id%>" role="tab" aria-controls="pills-<%= channelEnum.id %>" aria-selected="true" ><%= channelEnum.name%></a>
     </li>
     <% end %>
 </ul>
 
 <div class="tab-content show_dashboards" id="pills-tabContent" >
-  <%= render partial: 'dashboard_show', locals: { report_dashboard: report_dashboard} %>
+  <%= render partial: 'dashboard_show', locals: {report_dashboard: report_dashboard} %>
 </div>
-<script type="text/javascript">
 
-</script>
 
 
 

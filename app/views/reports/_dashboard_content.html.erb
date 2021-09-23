@@ -9,7 +9,7 @@
               method: :delete, data: {confirm: "Are you sure to delete Dashboard: #{dashboard.name}?"}) if can_manage_dashboard?(dashboard.report.channel) %>
           </div>
           <div class="card-body pt-0 pb-2 px-0">
-            <%= link_to  [dashboard.report.channel, dashboard.report, dashboard],draggable:false,class:'dashboard_check'  do %>
+            <%= link_to [dashboard.report.channel, dashboard.report, dashboard],draggable:false,class:'dashboard_check' do %>
               <%= image_tag "dashboard.png", style: 'width: 13rem; height: 13rem;',draggable:false %>
             <% end %>
             <div class="cursor-pointer text-center">
