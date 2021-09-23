@@ -28,3 +28,18 @@ def fill_in_ckeditor(locator, opts)
   content = opts
   page.execute_script(" $(#'#{locator}').html('#{content}') ")
 end
+
+def create_channel_spec(channel_name, admin)
+  visit (new_channel_path)
+  within('#new_channel_container') do
+    execute_script("$('input#channel_user_id').val('#{admin.id}'); ")
+    fill_in 'channel_name', with: channel_name
+    execute_script("$('input[value=1]').prop('checked', true)")
+    execute_script("$('#channelReportSelect').val('fab fa-accessible-icon').trigger('change')")
+    execute_script(" CKEDITOR.instances['channel_description'].setData('#{Faker::Name.name}');");
+    execute_script("$('textarea#channel_description').text('#{Faker::Name.name}');")
+  end
+  click_button 'Save'
+  expect(page).to have_content(channel_name, wait:10)
+  expect(page).to have_content('Permissions')
+end

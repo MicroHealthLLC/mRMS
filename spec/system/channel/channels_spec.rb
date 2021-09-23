@@ -25,18 +25,7 @@ RSpec.describe 'Channels', feature:true do
   it "of Group Type is created successfully by Admin" do
     Setting['whitelist_ip'] = ''
     login_user(admin.login, admin.password)
-    visit (new_channel_path)
-    within('#new_channel_container') do
-      execute_script("$('input#channel_user_id').val('#{admin.id}'); ")
-      fill_in 'channel_name', with: channel_name
-      execute_script("$('input[value=1]').prop('checked', true)")
-      execute_script("$('#channelReportSelect').val('fab fa-accessible-icon').trigger('change')")
-      execute_script(" CKEDITOR.instances['channel_description'].setData('#{Faker::Name.name}');");
-      execute_script("$('textarea#channel_description').text('#{Faker::Name.name}');")
-    end
-    click_button 'Save'
-    expect(page).to have_content(channel_name, wait:10)
-    expect(page).to have_content('Permissions')
+    create_channel_spec(channel_name, admin)
     expect(page).to have_content('Notifications')
     expect(page).to have_content('Add Data Set')
     expect(page).to have_no_content('Leave Channel')
@@ -46,19 +35,8 @@ RSpec.describe 'Channels', feature:true do
     update_channel_name = Faker::Name.name
     Setting['whitelist_ip'] = ''
     login_user(admin.login, admin.password)
-    visit (new_channel_path)
-    within('#new_channel_container') do
-      execute_script("$('input#channel_user_id').val('#{admin.id}'); ")
-      fill_in 'channel_name', with: channel_name
-      execute_script("$('input[value=1]').prop('checked', true)")
-      execute_script("$('#channelReportSelect').val('fab fa-accessible-icon').trigger('change')")
-      execute_script(" CKEDITOR.instances['channel_description'].setData('#{Faker::Name.name}');");
-      execute_script("$('textarea#channel_description').text('#{Faker::Name.name}');")
-    end
-    click_button 'Save'
-    expect(page).to have_content(channel_name, wait:10)
-    expect(page).to have_content('Permissions')
-    click_on("i", text:"Edit")
+    create_channel_spec(channel_name, admin)
+    click_on("i", text: "Edit")
     expect(page).to have_content("Edit Channel", wait: 10)
     within('#new_channel_container') do
       execute_script("$('input#channel_user_id').val('#{admin.id}'); ")
@@ -66,5 +44,17 @@ RSpec.describe 'Channels', feature:true do
     end
     click_button 'Save'
     expect(page).to have_content(update_channel_name, wait:10)
+  end
+
+  it "delete channel specs" do
+    update_channel_name = Faker::Name.name
+    Setting['whitelist_ip'] = ''
+    login_user(admin.login, admin.password)
+    create_channel_spec(channel_name, admin)
+    accept_confirm do
+      click_link_or_button "Delete"
+    end
+    page.evaluate_script('window.confirm = function() { return true; }')
+    expect(page).to have_current_path(root_path, wait: 10)
   end
 end
