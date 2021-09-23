@@ -15,17 +15,6 @@
   </div>
 </div>
 
-<% cache("#{report.id}--#{report.document.updated_at}") do %>
-  <script>
-    <% header, tab, error= render_pivot_information(report.document.file)
-     if error %>
-      alert('<%=  error %> ');
-    <% else %>
-      var json = <%= tab.to_json.to_s.gsub('/', '\/').html_safe %>
-    <% end %>
-  </script>
-<% end %>
-
 <style>
   .pvtAxisContainer { overflow: auto; } /*for IE11 and jQuery draggable scroll offset workaround*/
   .pvtHorizList li { float: left; }
@@ -117,6 +106,14 @@
       },
       onRefresh: saveState
     }
+
+    <% header, tab, error= render_pivot_information(report.document.file)
+    if error %>
+      alert('<%=  error %> ');
+    <% else %>
+      var json = <%= tab.to_json.to_s.gsub('/', '\/').html_safe %>
+    <% end %>
+
     <% if params[:query_id] and query = load_pivot_report(params[:query_id]) %>
       $("#output_<%= time %>").pivotUI(json,  Object.assign(default_query, <%=  JSON.parse(query.content).to_json.html_safe %>));
     <% else %>
