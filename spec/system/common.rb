@@ -15,6 +15,41 @@ def channel_create(user_id)
   Channel.create(user_id: user_id, name: Faker::Name.name, option: 2, icon: "fab fa-500px",description:"This is the real topic")
 end
 
+def create_dataset_spec
+ click_on("a",text:"Add Data Set")
+    within ('#new_report') do
+      fill_in "report_name", with: Faker::Name.first_name
+      execute_script(" CKEDITOR.instances['report_description'].setData('#{Faker::Name.name}');");
+      execute_script("$('textarea#report_description').text('#{Faker::Name.name}');")
+    end
+  click_button 'Save'
+  expect(page).to have_content("Upload Data")
+  expect(page).to have_content("Edit")
+  expect(page).to have_content("Delete")
+  expect(page).to have_content("Back")
+  expect(page).to have_no_content("New Report")
+  expect(page).to have_no_content("Dashboards")
+  expect(page).to have_no_content("Reports")
+end
+
+def create_dataset_with_file_spec
+  click_on("a",text:"Add Data Set")
+    within ('#new_report') do
+      fill_in "report_name", with: Faker::Name.first_name
+      click_on("Upload Data")
+      execute_script(" CKEDITOR.instances['report_description'].setData('#{Faker::Name.name}');");
+      execute_script("$('textarea#report_description').text('#{Faker::Name.name}');")
+    end
+  # attach_file('input#fileupload',"#{Rails.root}/spec/fixtures/business-financial-data-dec-2020-quarter-CSV.csv")
+  # page.attach_file('Upload a file', "#{Rails.root}/spec/fixtures/business-financial-data-dec-2020-quarter-CSV.csv")
+  page.attach_file("#{Rails.root}/spec/fixtures/business-financial-data-dec-2020-quarter-CSV.csv") do
+    execute_script("$('#fileupload').click()")
+  end
+
+  click_button 'Close'
+  click_button 'Save'
+end
+
 def login_user(login_name, password)
   visit '/users/sign_in'
   within("#login-form") do
