@@ -4,6 +4,7 @@ class ReportsController < ApplicationController
   before_action :set_report, only: [:refresh_onedrive_file, :save_pivottable, :delete_pivottable, :share_report, :show, :edit, :update, :destroy]
   before_action :authorize, except: [:index]
   before_action :set_repot_document, only: :create
+  before_action :check_one_drive_data, only: :refresh_onedrive_file
 
   include ReportsHelper
   # GET /reports/1
@@ -34,12 +35,18 @@ class ReportsController < ApplicationController
 
   def refresh_onedrive_file
     begin
-      OneDriveRefreshService.new(current_user, @report.report_documents.first).call
-      flash[:notice] = "Data Successfully updated!"
+      data = OneDriveRefreshService.new(current_user, @report.report_documents.first).call
+      data[:type] == 'notice' ? flash[:notice] = data[:message] : flash[:alert] = data[:message]
+      if data[:url].present?
+        session[:data] = {c_id: @channel.id, r_id: @report.id}
+        redirect_to data[:url]
+      else
+        redirect_to channel_report_path(@channel, @report)
+      end
     rescue StandardError => e
       flash[:alert] = e.message
+      redirect_to channel_report_path(@channel, @report)
     end
-    redirect_to channel_report_path(@channel, @report)
   end
 
   def upload_document
@@ -194,6 +201,13 @@ class ReportsController < ApplicationController
 
   def set_repot_document
     @report_document = ReportDocument.find_by_id(params['report']['report_document_ids'].to_i) rescue nil
+  end
+
+  def check_one_drive_data
+    unless @report&.report_documents&.first&.onedrive_item_id.present?
+      flash[:alert] = "Not a OneDrive File!"
+      redirect_to channel_report_path(@channel, @report)
+    end
   end
 
   def authorize
