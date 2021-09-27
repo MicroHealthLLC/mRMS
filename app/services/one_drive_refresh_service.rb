@@ -31,7 +31,8 @@ class OneDriveRefreshService
         get_new_access_token
       else
         url = "https://login.microsoftonline.com/common/oauth2/v2.0/authorize?client_id=#{Setting['AZURE_KEY']}&scope=#{ENV['AZURE_SCOPES']}&response_type=code&redirect_uri=#{Setting['CALLBACK_URL']}/auth/microsoft_graph_auth/callback"
-        message = "Re-Authenticated!"
+        type = 'alert'
+        message = "System Error contact to Admin!"
       end
     elsif items["@microsoft.graph.downloadUrl"].present?
       file_url = items["@microsoft.graph.downloadUrl"] || nil
