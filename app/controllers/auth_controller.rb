@@ -19,6 +19,7 @@ class AuthController < ApplicationController
 
     data = session[:data].deep_symbolize_keys
     session.delete(:data)
+    flash[:notice] = "Re-Authenticated! Now you can refresh data from One Drive."
     redirect_to channel_report_path(data[:c_id], data[:r_id])
   end
 end
