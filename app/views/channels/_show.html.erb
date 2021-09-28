@@ -2,16 +2,13 @@
   <li class="nav-item ">
     <a class="nav-link my_reports active" id="pills-All-tab" data-toggle="tab" href="#All_Reports" role="tab" aria-controls="pills-All" aria-selected="true">All</a>
   </li>
-    <% ChannelEnum.all.each do |channelEnum| %>
+  <% ChannelEnum.all.each do |channelEnum| %>
     <li class="nav-item">
       <a class="nav-link my_reports " id="pills-<%= channelEnum.id %>-tab" data-toggle="tab" href="#datasets<%= channelEnum.id %>" role="tab" aria-controls="pills-<%= channelEnum.id %>" aria-selected="true" > <%= channelEnum.name %> </a>
     </li>
-    <% end %>
+  <% end %>
 </ul>
 
 <div class="tab-content my_reports show_datasets" id="pills-tabContent" >
-      <%= render partial: 'show_dataset', locals: {reports: @reports}%>
+  <%= render partial: 'show_dataset', locals: {reports: @reports}%>
 </div>
-<script type="text/javascript">
-
-</script>

@@ -1,7 +1,6 @@
 <div class="row">
-<% if report_dashboard.present? %>
+  <% if report_dashboard.present? %>
     <% report_dashboard.each do |dashboard| %>
-
       <div class="card border-0 p-0" style="width: 18rem" draggable= '<%=is_all=='yes' ? 'false' : 'true'%>' ondragstart="dragevent(event,<%=dashboard.id%>)">
         <div class="border m-2 text-center h-100">
           <div class="card-header p-0 pr-2 pt-2 border-0">
@@ -9,8 +8,8 @@
               method: :delete, data: {confirm: "Are you sure to delete Dashboard: #{dashboard.name}?"}) if can_manage_dashboard?(dashboard.report.channel) %>
           </div>
           <div class="card-body pt-0 pb-2 px-0">
-            <%= link_to [dashboard.report.channel, dashboard.report, dashboard],draggable:false,class:'dashboard_check' do %>
-              <%= image_tag "dashboard.png", style: 'width: 13rem; height: 13rem;',draggable:false %>
+            <%= link_to [dashboard.report.channel, dashboard.report, dashboard], draggable: false, class: 'dashboard_check' do %>
+              <%= image_tag "dashboard.png", style: 'width: 13rem; height: 13rem;', draggable: false %>
             <% end %>
             <div class="cursor-pointer text-center">
               <p class="mb-0 px-3">
@@ -34,8 +33,8 @@
 </div>
 
 <script type="text/javascript">
-    function dragevent(ev,id) {
-      ev.dataTransfer.setData("dashboard", id);
-      ev.dataTransfer.setData("status", 'dashboard');
-    }
+  function dragevent(ev,id) {
+    ev.dataTransfer.setData("dashboard", id);
+    ev.dataTransfer.setData("status", 'dashboard');
+  }
 </script>

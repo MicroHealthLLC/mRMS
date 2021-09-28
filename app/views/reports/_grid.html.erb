@@ -9,11 +9,11 @@
       <div class="py-2">
         <%= link_to channel_report_path(@channel, @report, query_id: pivot_table.id) ,draggable: false, class:'report_check' do %>
           <% if (name = JSON.parse(pivot_table.content)['rendererName'].downcase) && name.include?('table') %>
-              <%= image_tag "pivot/table.png", style: "width: 13rem; height: 13rem;",draggable:false %>
+            <%= image_tag "pivot/table.png", style: "width: 13rem; height: 13rem;",draggable:false %>
           <% elsif (name = JSON.parse(pivot_table.content)['rendererName'].downcase) && name.include?('heatmap') %>
-              <%= image_tag "pivot/heatmap.png", style: "width: 13rem; height: 13rem;",draggable:false %>
+            <%= image_tag "pivot/heatmap.png", style: "width: 13rem; height: 13rem;",draggable:false %>
           <% else %>
-              <%= image_tag "pivot/#{name.gsub(' ', '-')}.png" , style: "width: 13rem; height: 13rem;",draggable:false %>
+            <%= image_tag "pivot/#{name.gsub(' ', '-')}.png" , style: "width: 13rem; height: 13rem;",draggable:false %>
           <% end %>
         <% end %>
       </div>
@@ -26,8 +26,8 @@
   </div>
 </div>
 <script>
-    function dragevent_report(ev,id) {
-      ev.dataTransfer.setData("report_id", id);
-      ev.dataTransfer.setData("status", 'report');
-    }
+  function dragevent_report(ev,id) {
+    ev.dataTransfer.setData("report_id", id);
+    ev.dataTransfer.setData("status", 'report');
+  }
 </script>

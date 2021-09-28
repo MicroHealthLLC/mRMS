@@ -52,24 +52,6 @@ module ReportsHelper
     report.report_documents&.first&.onedrive_item_id&.present? rescue false
   end
 
-  def filter_pivot_report
-    enum_name = 'All'
-    channel_enum_id = params[:channel_enum_id]
-    if channel_enum_id
-      enum_name = ChannelEnum.find_by_id(channel_enum_id).name
-    end
-    enum_name
-  end
-
-  def filter_report_dashbord
-    enum_name = 'All'
-    channel_enum_id = params[:channel_enum_id]
-    if channel_enum_id
-      enum_name = ChannelEnum.find_by_id(channel_enum_id).name
-    end
-    enum_name
-  end
-
   def load_pivot_report(pivot_table_id)
     pivot_table = pivot_table_id ? update_pivot_table(pivot_table_id) : nil
     return pivot_table
@@ -80,24 +62,6 @@ module ReportsHelper
     pivot_table.frequently_count += 1
     pivot_table.save
     return pivot_table
-  end
-
-  def default_report_enum
-    channel_enum = 'All'
-    channel_enum_id = params[:channel_enum_id]
-    if channel_enum_id
-      channel_enum = ChannelEnum.find_by_id(channel_enum_id).name
-    end
-    channel_enum
-  end
-
-  def default_dashboard_enum
-    channel_enum = 'All'
-    channel_enum_id = params[:channel_enum_id]
-    if channel_enum_id
-      channel_enum = ChannelEnum.find_by_id(channel_enum_id).name
-    end
-    channel_enum
   end
 
   def display_dashboard?

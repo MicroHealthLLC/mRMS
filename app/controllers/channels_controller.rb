@@ -95,13 +95,13 @@ class ChannelsController < ApplicationController
 
   def change_positions
     if params[:filter_report]
-      change = @channel.reports.find(params[:previous_report_position])
-      change.channel_enum_id = params[:new_report_position]
-      change.save!
+      report = @channel.reports.find(params[:previous_report_position])
+      report.channel_enum_id = params[:new_report_position]
+      report.save!
     elsif  params[:filter_dashboard]
-      change = @channel.multi_data_set_dashboards.find(params[:previous_dashboard_position])
-      change.channel_enum_id = params[:new_dashboard_position]
-      change.save!
+      multi_dashboard = @channel.multi_data_set_dashboards.find(params[:previous_dashboard_position])
+      multi_dashboard.channel_enum_id = params[:new_dashboard_position]
+      multi_dashboard.save!
     end
   end
   # Never trust parameters from the scary internet, only allow the white list through.

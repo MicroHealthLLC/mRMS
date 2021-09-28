@@ -1,71 +1,70 @@
 <%= form_with(model: [@channel, @report, dashboard], local: true, html: { class: 'form-horizontal', id: 'reportForm' }) do |form| %>
-    <% if dashboard.errors.any? %>
-        <div id="error_explanation">
-          <h2><%= pluralize(dashboard.errors.count, "error") %> prohibited this dashboard from being saved:</h2>
-          <ul>
-            <% dashboard.errors.full_messages.each do |message| %>
-                <li><%= message %></li>
-            <% end %>
-          </ul>
-        </div>
-    <% end %>
-    <%= form.hidden_field :report_id , id: 'report_id'%>
-    <div class="form-group">
-      <%= form.label 'Name:', class: 'col-md-2 control-label' %>
-      <div class="col-md-10 p-0">
-        <%= form.text_field :name , class: 'form-control' , id: 'dashboard_name', required: true %>
-      </div>
+  <% if dashboard.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(dashboard.errors.count, "error") %> prohibited this dashboard from being saved:</h2>
+      <ul>
+        <% dashboard.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
     </div>
-    <div class="form-group">
-      <%= form.label 'Dashboard Category:', class: 'col-md-2 control-label' %>
-      <div class="col-md-10 p-0">
-        <%= form.select :channel_enum_id, options_for_select(ChannelEnum.pluck(:name, :id).map {|data| [data[0].humanize, data[1]]}, selected: @dashboard.channel_enum_id.present? ? @dashboard.channel_enum_id : ChannelEnum.find_by(name: 'Uncategorized').id) , {},{class: 'form-control'} %>
-      </div>
+  <% end %>
+  <%= form.hidden_field :report_id , id: 'report_id'%>
+  <div class="form-group">
+    <%= form.label 'Name:', class: 'col-md-2 control-label' %>
+    <div class="col-md-10 p-0">
+      <%= form.text_field :name , class: 'form-control' , id: 'dashboard_name', required: true %>
     </div>
-    <div class="form-group">
-      <%= form.label 'Reports:', class: 'col-md-2 control-label' %>
-      <div id="dragDropDataSet" class="rounded row my-3 card-min-hight border px-3 pt-3 pb-10" ondrop="dragDrop(event)" ondragover="allowDrop(event)">
-      </div>
+  </div>
+  <div class="form-group">
+    <%= form.label 'Dashboard Category:', class: 'col-md-2 control-label' %>
+    <div class="col-md-10 p-0">
+      <%= form.select :channel_enum_id, options_for_select(ChannelEnum.pluck(:name, :id).map {|data| [data[0].humanize, data[1]]}, selected: @dashboard.channel_enum_id.present? ? @dashboard.channel_enum_id : ChannelEnum.find_by(name: 'Uncategorized').id) , {},{class: 'form-control', id: 'dashboard_category'} %>
     </div>
+  </div>
+  <div class="form-group">
+    <%= form.label 'Reports:', class: 'col-md-2 control-label' %>
+    <div id="dragDropDataSet" class="rounded row my-3 card-min-hight border px-3 pt-3 pb-10" ondrop="dragDrop(event)" ondragover="allowDrop(event)"></div>
+  </div>
 
-    <input type="hidden" name="pivot_table_ids" id="pivotReportIDs">
-    <input type="hidden" name="pivot_table_indexs" id="pivotReportIndexs">
-    <div class="form-group" >
-      <div class="col-md-12 pr-0">
-        <%= link_to t('button_cancel'), channel_report_path(@channel, @report), class: 'btn btn-warning pull-right' %>
-        <%= form.submit t('button_save'), class: 'btn btn-success pull-right' ,:onclick => "return validateform()"%>
-      </div>
+  <input type="hidden" name="pivot_table_ids" id="pivotReportIDs">
+  <input type="hidden" name="pivot_table_indexs" id="pivotReportIndexs">
+  <div class="form-group" >
+    <div class="col-md-12 pr-0">
+      <%= link_to t('button_cancel'), channel_report_path(@channel, @report), class: 'btn btn-warning pull-right' %>
+      <%= form.submit t('button_save'), class: 'btn btn-success pull-right' ,:onclick => "return validateform()"%>
     </div>
+  </div>
 
-    <div class="form-group" id='tasks'>
-      <div class="row">
-        <label class="col-md-2 pt-5 text-align-right">Draggable Items:</label>
-        <div class="rounded p-3 row col-md-10 my-2 pl-1" id="form_report">
-          <% SavePivotTable.where(report_id: @report.id).each do |r| %>
-            <div id="report_<%=r.id%>" class="drop-none card col-md-5 p-2 m-2" draggable="true" ondragstart="dragStart(event)">
-              <div onclick="removedCard('<%=r.id%>')" class="drop-none disp_icon mouse-hover">
-                <span class="drop-none"><i class="drop-none fa fa-times d-none cursor-pointer float-right px-5"></i></span>
-              </div>
-              <div class="drop-none card-body py-3 pl-0 pr-0 px-4 text-center">
-                <%#= image_tag "pivot/col-heatmap.png", size: '190x190', class: "w-100"%>
-                <% if (name = JSON.parse(r.content)['rendererName'].downcase) && name.include?('table') %>
-                    <%= image_tag "pivot/table.png", class: "drop-none pointer-events-none", style: "width: 13rem; height: 13rem;" %>
-                <% elsif (name = JSON.parse(r.content)['rendererName'].downcase) && name.include?('heatmap') %>
-                    <%= image_tag "pivot/heatmap.png", class: "drop-none pointer-events-none", style: "width: 13rem; height: 13rem;" %>
-                <% else %>
-                    <%= image_tag "pivot/#{name.gsub(' ', '-')}.png", class: "drop-none pointer-events-none", style: "width: 13rem; height: 13rem;"%>
-                <% end %>
-                <div class="drop-none cursor-pointer card-text">
-                  <span class="drop-none px-3" title="<%= r.name %>">
-                      <%= r.name.truncate(70) %>
-                    </span>
-                </div>
+  <div class="form-group" id='tasks'>
+    <div class="row">
+      <label class="col-md-2 pt-5 text-align-right">Draggable Items:</label>
+      <div class="rounded p-3 row col-md-10 my-2 pl-1" id="form_report">
+        <% SavePivotTable.where(report_id: @report.id).each do |r| %>
+          <div id="report_<%=r.id%>" class="drop-none card col-md-5 p-2 m-2" draggable="true" ondragstart="dragStart(event)">
+            <div onclick="removedCard('<%=r.id%>')" class="drop-none disp_icon mouse-hover">
+              <span class="drop-none"><i class="drop-none fa fa-times d-none cursor-pointer float-right px-5"></i></span>
+            </div>
+            <div class="drop-none card-body py-3 pl-0 pr-0 px-4 text-center">
+              <%#= image_tag "pivot/col-heatmap.png", size: '190x190', class: "w-100"%>
+              <% if (name = JSON.parse(r.content)['rendererName'].downcase) && name.include?('table') %>
+                <%= image_tag "pivot/table.png", class: "drop-none pointer-events-none", style: "width: 13rem; height: 13rem;" %>
+              <% elsif (name = JSON.parse(r.content)['rendererName'].downcase) && name.include?('heatmap') %>
+                <%= image_tag "pivot/heatmap.png", class: "drop-none pointer-events-none", style: "width: 13rem; height: 13rem;" %>
+              <% else %>
+                <%= image_tag "pivot/#{name.gsub(' ', '-')}.png", class: "drop-none pointer-events-none", style: "width: 13rem; height: 13rem;"%>
+              <% end %>
+              <div class="drop-none cursor-pointer card-text">
+                <span class="drop-none px-3" title="<%= r.name %>">
+                  <%= r.name.truncate(70) %>
+                </span>
               </div>
             </div>
-          <% end %>
-        </div>
+          </div>
+        <% end %>
       </div>
     </div>
+  </div>
 <% end %>
 
 <script>
@@ -112,7 +111,7 @@
     }
     else
     {
-       $("#dragDropDataSet").addClass('placeholder-custom')
+      $("#dragDropDataSet").addClass('placeholder-custom')
     }
   });
   function allowDrop (ev) {

@@ -1,23 +1,19 @@
-<%if params[:filter_report]%>
-{
-    $(".show_reports").html('<%= escape_javascript (render partial: 'report_show', locals: { pivot_tables: @pivot_tables} ) %>')
-    var active_reports = $('.myTab a.active').attr('href')
-    $('.show_reports div.active').removeClass('active')
-    $('.show_reports div'+active_reports+'').addClass('active')
+<% if params[:filter_report] %>
+  $(".show_reports").html('<%= escape_javascript (render partial: 'report_show', locals: { pivot_tables: @pivot_tables} ) %>');
+  var active_reports = $('.myTab a.active').attr('href');
+  $('.show_reports div.active').removeClass('active');
+  $('.show_reports div'+active_reports+'').addClass('active');
 
-    $('a.report_check').click(function(e){
-        window.location.replace($(this).attr('href'))
-    })
-}
+  $('a.report_check').click(function(e){
+      window.location.replace($(this).attr('href'))
+  });
 <% elsif params[:filter_dashboard]%>
-{
-    $(".show_dashboards").html('<%= escape_javascript (render partial: 'dashboard_show', locals: { report_dashboard: @report_dashboard} ) %>')
-    var active_dashboards = $('.dashboard_tab a.active').attr('href')
-    $('.show_dashboards div.active').removeClass('active')
-    $('.show_dashboards div'+active_dashboards+'').addClass('active')
+  $(".show_dashboards").html('<%= escape_javascript (render partial: 'dashboard_show', locals: { report_dashboard: @report_dashboard} ) %>');
+  var active_dashboards = $('.dashboard_tab a.active').attr('href');
+  $('.show_dashboards div.active').removeClass('active');
+  $('.show_dashboards div'+active_dashboards+'').addClass('active');
 
-    $('a.dashboard_check').click(function(e){
-        window.location.replace($(this).attr('href'))
-    })
-}
-<%end%>
+  $('a.dashboard_check').click(function(e){
+      window.location.replace($(this).attr('href'))
+  });
+<% end %>

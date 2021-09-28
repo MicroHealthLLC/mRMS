@@ -188,13 +188,13 @@ class ReportsController < ApplicationController
   def change_positions
 
     if params[:filter_report]
-      change = @report.save_pivot_tables.find(params[:previous_report_position])
-      change.channel_enum_id = params[:new_report_position]
-      change.save!
+      pivot_table = @report.save_pivot_tables.find(params[:previous_report_position])
+      pivot_table.channel_enum_id = params[:new_report_position]
+      pivot_table.save!
     elsif  params[:filter_dashboard]
-      change = @report.dashboards.find(params[:previous_dashboard_position])
-      change.channel_enum_id = params[:new_dashboard_position]
-      change.save!
+      dashboard = @report.dashboards.find(params[:previous_dashboard_position])
+      dashboard.channel_enum_id = params[:new_dashboard_position]
+      dashboard.save!
     end
   end
   # Never trust parameters from the scary internet, only allow the white list through.
