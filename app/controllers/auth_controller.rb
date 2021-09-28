@@ -17,6 +17,9 @@ class AuthController < ApplicationController
     results = HTTParty.post("https://login.microsoftonline.com/common/oauth2/v2.0/token", options)
     current_user.update!(onedrive_access_token: results.parsed_response["access_token"], onedrive_refresh_token: results.parsed_response["refresh_token"])
 
-    redirect_to one_drives_path
+    data = session[:data].deep_symbolize_keys
+    session.delete(:data)
+    flash[:notice] = "Re-Authenticated! Now you can refresh data from One Drive."
+    redirect_to channel_report_path(data[:c_id], data[:r_id])
   end
 end
