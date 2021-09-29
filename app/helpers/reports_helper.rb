@@ -52,24 +52,6 @@ module ReportsHelper
     report.report_documents&.first&.onedrive_item_id&.present? rescue false
   end
 
-  def filter_pivot_report
-    enum_name = 'All'
-    repor_enum_id = params[:report_enum_id]
-    if repor_enum_id
-      enum_name = ReportEnum.find_by_id(repor_enum_id).name
-    end
-    enum_name
-  end
-
-  def filter_report_dashbord
-    enum_name = 'All'
-    dashboard_enum_id = params[:dashboard_enum_id]
-    if dashboard_enum_id
-      enum_name = DashboardEnum.find_by_id(dashboard_enum_id).name
-    end
-    enum_name
-  end
-
   def load_pivot_report(pivot_table_id)
     pivot_table = pivot_table_id ? update_pivot_table(pivot_table_id) : nil
     return pivot_table
@@ -80,24 +62,6 @@ module ReportsHelper
     pivot_table.frequently_count += 1
     pivot_table.save
     return pivot_table
-  end
-
-  def default_report_enum
-    report_enum = 'All'
-    report_enum_id = params[:report_enum_id]
-    if report_enum_id
-      report_enum = ReportEnum.find_by_id(report_enum_id).name
-    end
-    report_enum
-  end
-
-  def default_dashboard_enum
-    dashboard_enum = 'All'
-    dashboard_enum_id = params[:dashboard_enum_id]
-    if dashboard_enum_id
-      dashboard_enum = DashboardEnum.find_by_id(dashboard_enum_id).name
-    end
-    dashboard_enum
   end
 
   def display_dashboard?

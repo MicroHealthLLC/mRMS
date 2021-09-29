@@ -104,7 +104,7 @@
 </style>
 
 <script>
-    $(document).ready(function(){
+    $(document).on('turbolinks:load', () => {
         $( ".sort-handle" ).hover(
             function() {
                 $(this).find('.fa-sort').show(20)

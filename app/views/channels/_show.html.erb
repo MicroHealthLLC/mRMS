@@ -1,72 +1,14 @@
-<div class="row d-flex">
-  <% if @reports.present? %>
-    <% @reports.each do |report| %>
-      <div class="col-3">
-        <a href="<%= channel_report_path(@channel, report )%>">
-        <!--begin::Card-->
-        <div class="box-shadow bg-color-lighten card card-custom card-stretch gutter-b">
-          <!--begin::Body-->
-          <div class="card-body py-4">
-            <!--begin::User-->
-            <div class="row">
-              <!--begin::Pic-->
-              <div class="col-6 p-0">
-                <div class="symbol symbol-lg-75">
-                  <% name = JSON.parse(report&.save_pivot_tables&.first&.content)["rendererName"].downcase rescue nil %>
-                  <% if (name && name.include?('table')) %>
-                      <%= image_tag "pivot/table.png", size: '220x220'%>
-                  <% elsif (name && name.include?('heatmap')) %>
-                      <%= image_tag "pivot/heatmap.png", size: '220x220'%>
-                  <% elsif name%>
-                      <%= image_tag "pivot/#{name.gsub(' ', '-')}.png" , size: '220x220'%>
-                  <% else %>
-                    <%= image_tag "dashboard.png", size: '220x220'%>
-                  <% end %>
-                </div>
-              </div>
-              <!--end::Pic-->
-              <!--begin::Title-->
-              <div class="col-6 p-0 d-flex align-items-center">
-                <span class="text-dark font-weight-bold font-size-h4 mb-0 text-truncate" title="<%= report.name %>"><%= report.name %> </span>
-              </div>
-              <!--end::Title-->
-            </div>
-            <!--end::User-->
-            <!--begin::Desc-->
-            <div class="row">
-              <div class="col-12 p-0 small text-dark" title="<%= report.description.html_safe %>">
-                <%= report.description.present? ? report.description.truncate(50).html_safe : '<p>No Description</p>'.html_safe %>
-              </div>
-            </div>
-            <!--end::Desc-->
-            <!--begin::Info-->
-            <div class="mb-2">
-              <div class="row">
-                <span class="col-6 p-0 text-dark-75 font-weight-bolder">Updated By: </span>
-                <span class="col-6 p-0 text-dark"><%= report.updated_by %></span>
-              </div>
-              <div class="row">
-                <span class="col-6 p-0 text-dark-75 font-weight-bolder">Updated At:</span>
-                <span class="col-6 p-0 text-dark"><%= format_date_time report.updated_at %></span>
-              </div>
-              <% if @channel.is_personal? %>
-                <div class="row">
-                    <span class="col-6 p-0 text-dark-75 font-weight-bolder">Shared: </span>
-                    <span class="col-6 p-0"><p class="text-dark mb-0"><%= report.shared_reports.where.not(user_id: User.current.id).present? %></p></span>
-                </div>
-              <% end %>
-            </div>
-          <!--end::Body-->
-          </div>
-        <!--end:: Card-->
-        </div>
-        </a>
-      </div>
-    <% end %>
-  <% else %>
-    <div class="mx-3 w-100 alert alert-custom alert-notice alert-light-primary show d-flex" role="alert">
-      <div class="alert-icon"><i class="fas fa-exclamation-triangle"></i></div>
-      <div class="alert-text">No data set to display!</div>
-    </div>
+<ul class="nav nav-pills mb-3 myTab" id="pills-tab" role="tablist">
+  <li class="nav-item ">
+    <a class="nav-link my_reports active" id="pills-All-tab" data-toggle="tab" href="#All_Reports" role="tab" aria-controls="pills-All" aria-selected="true">All</a>
+  </li>
+  <% ChannelEnum.all.each do |channelEnum| %>
+    <li class="nav-item">
+      <a class="nav-link my_reports " id="pills-<%= channelEnum.id %>-tab" data-toggle="tab" href="#datasets<%= channelEnum.id %>" role="tab" aria-controls="pills-<%= channelEnum.id %>" aria-selected="true" > <%= channelEnum.name %> </a>
+    </li>
   <% end %>
+</ul>
+
+<div class="tab-content my_reports show_datasets" id="pills-tabContent" >
+  <%= render partial: 'show_dataset', locals: {reports: @reports}%>
 </div>

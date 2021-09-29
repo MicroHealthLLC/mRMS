@@ -5,6 +5,7 @@ class Report < ApplicationRecord
   belongs_to :channel
   belongs_to :created_by, class_name: 'User', optional: true
   belongs_to :updated_by, class_name: 'User', optional: true
+  belongs_to :channel_enum
 
   has_many :save_pivot_tables, dependent: :destroy
   has_many :report_documents
@@ -55,7 +56,7 @@ class Report < ApplicationRecord
   end
 
   def self.safe_attributes
-    [:name, :category_id, :channel_id, :category_type_id, :user_id, :description ]
+    [:name, :category_id, :channel_id, :category_type_id, :user_id, :description, :channel_enum_id ]
   end
 
 

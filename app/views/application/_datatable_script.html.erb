@@ -3,7 +3,7 @@
         url2 = url + $.param(oParam);
         window.open(url2,'_blank');
     }
-    $(document).ready(function(){
+    $(document).on('turbolinks:load', () => {
         var table = $('#<%= model_table %>').DataTable({
             "ajax": "<%= ajax_url %>",
             processing: true,

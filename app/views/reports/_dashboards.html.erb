@@ -1,15 +1,18 @@
-<div class="row">
-  <div class="col-md-12 d-flex justify-content-end mb-3 pr-0">
-    <div class="col-md-1 d-flex justify-content-end pr-0">
-      <label class="pt-3 mb-0">Filter:</label>
-    </div>
-    <div class="col-md-3" style="width: 300px;">
-      <%= select_tag :dashboard_enum_id,options_for_select(DashboardEnum.all.collect{|x| [x.name,x.id]}.prepend ['All', '']),onchange: 'fetch_dashboard_data(this.value)'  %>
-    </div>
-  </div>
+<ul class="nav nav-pills mb-3 dashboard_tab" id="pills-tab" role="tablist">
+  <li class="nav-item">
+    <a class="nav-link my_dashboards active" id="pills-All-tab" data-toggle="tab" href="#All_Dashboards" role="tab" aria-controls="pills-All" aria-selected="true">All</a>
+  </li>
+  <% ChannelEnum.all.each do |channelEnum| %>
+    <li class="nav-item">
+      <a class="nav-link my_dashboards" id="pills-<%= channelEnum.id %>-tab" data-toggle="tab" href="#<%= channelEnum.id%>" role="tab" aria-controls="pills-<%= channelEnum.id %>" aria-selected="true" ><%= channelEnum.name%></a>
+    </li>
+  <% end %>
+</ul>
+
+<div class="tab-content show_dashboards" id="pills-tabContent" >
+  <%= render partial: 'dashboard_show', locals: {report_dashboard: report_dashboard} %>
 </div>
-<div class="row show_dashboards">
-  <%= render partial: 'dashboard_content', locals: { report_dashboard: report_dashboard, dashboard_enum_id:dashboard_enum_id, report_enum_id: report_enum_id } %>
-</div>
+
+
 
 

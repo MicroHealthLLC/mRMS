@@ -54,7 +54,7 @@
     });
   });
 
-  $(document).ready(function(){
+  $(document).on('turbolinks:load', () => {
     setTimeout(function(){
       $("#pivotTableWidth").removeClass("w-80");
       $("#pivotTableWidth").addClass("w-100");
@@ -77,7 +77,7 @@
   })()
 
   var renderers;
-  $(document).ready(function(){
+  $(document).on('turbolinks:load', () => {
     var derivers = $.pivotUtilities.derivers;
     var dataClass = $.pivotUtilities.SubtotalPivotData;
     var renderers = $.extend({},

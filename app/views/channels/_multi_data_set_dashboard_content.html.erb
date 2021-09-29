@@ -1,0 +1,40 @@
+<div class="row">
+  <% if multi_data_set_dashboards.count > 0 %>
+    <% multi_data_set_dashboards.each do |dashboard| %>
+      <div class="card border-0 p-0" style="width: 18rem" draggable="<%= is_all == 'yes' ? "false" : "true"  %>"ondragstart="dragevent_dashboard(event,<%= dashboard.id %>)">
+        <div class="border m-2 text-center h-100">
+          <div class="card-header p-0 pr-2 pt-2 border-0" >
+            <%= link_to('<i class="fa fa-times float-right"></i>'.html_safe, channel_multi_data_set_dashboard_path(channel, dashboard),
+              method: :delete,data: {confirm: "Are you sure to delete Dashboard: #{dashboard.name}?"}) if can_manage_multi_dataset_dashboard?(channel) %>
+          </div>
+          <div class="card-body pt-0 pb-2 px-0">
+            <%= link_to channel_multi_data_set_dashboard_path(channel,dashboard), {draggable: false,class:'dashboard_check'} do %>
+              <%= image_tag "dashboard.png", style: 'width: 13rem; height: 13rem;',draggable: false %>
+            <% end %>
+            <div class="cursor-pointer text-center">
+              <p class="mb-0 px-3">
+                <% report_count = dashboard.save_pivot_tables.count %>
+                Total Reports: <%= report_count.to_s %>
+              </p>
+              <p title="<%= dashboard.name %>" class="px-3 mb-0 mt-2">
+                <%= dashboard.name.truncate(70) %>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  <% else %>
+    <div class="mx-3 w-100 alert alert-custom alert-notice alert-light-primary show d-flex" role="alert">
+      <div class="alert-icon"><i class="fas fa-exclamation-triangle"></i></div>
+      <div class="alert-text">No Multi Data Set Dashboard to display!</div>
+    </div>
+  <% end %>
+</div>
+
+<script type="text/javascript">
+  function dragevent_dashboard(ev,id) {
+    ev.dataTransfer.setData("dashboard",id);
+    ev.dataTransfer.setData("status", 'dashboard');
+  }
+</script>

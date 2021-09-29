@@ -1,33 +1,14 @@
-<div class="row">
-  <% if channel.multi_data_set_dashboards.count > 0 %>
-    <% channel.multi_data_set_dashboards.each do |dashboard|%>
-      <div class="card border-0 p-0" style="width: 18rem">
-        <div class="border m-2 text-center h-100">
-          <div class="card-header p-0 pr-2 pt-2 border-0">
-            <%= link_to('<i class="fa fa-times float-right"></i>'.html_safe, channel_multi_data_set_dashboard_path(channel, dashboard),
-              method: :delete, data: {confirm: "Are you sure to delete Dashboard: #{dashboard.name}?"}) if can_manage_multi_dataset_dashboard?(channel)%>
-          </div>
-          <div class="card-body pt-0 pb-2 px-0">
-            <%= link_to channel_multi_data_set_dashboard_path(channel,dashboard) do%>
-              <%= image_tag "dashboard.png", style: 'width: 13rem; height: 13rem;' %>
-            <% end %>
-            <div class="cursor-pointer text-center">
-              <p class="mb-0 px-3">
-                <% report_count = dashboard.save_pivot_tables.count%>
-                Total Reports: <%= report_count.to_s %>
-              </p>
-              <p title="<%= dashboard.name %>" class="px-3 mb-0 mt-2">
-                <%= dashboard.name.truncate(70) %>
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
+<ul class="nav nav-pills mb-3 dashboard_tab" id="pills-tab" role="tablist">
+  <li class="nav-item">
+    <a class="nav-link my_dashboards active" id="pills-All-tab" data-toggle="tab" href="#All_Dashboards" role="tab" aria-controls="pills-All" aria-selected="true">All</a>
+  </li>
+    <% ChannelEnum.all.each do |channelEnum| %>
+    <li class="nav-item">
+      <a class="nav-link my_dashboards" id="pills-<%= channelEnum.id %>-tab" data-toggle="tab" href="#<%= channelEnum.id %>" role="tab" aria-controls="pills-<%= channelEnum.id %>" aria-selected="true" ><%= channelEnum.name %></a>
+    </li>
     <% end %>
-  <% else %>
-    <div class="mx-3 w-100 alert alert-custom alert-notice alert-light-primary show d-flex" role="alert">
-      <div class="alert-icon"><i class="fas fa-exclamation-triangle"></i></div>
-      <div class="alert-text">No Multi Data Set Dashboard to display!</div>
-    </div>
-  <% end %>
+</ul>
+
+<div class="tab-content show_multidatasets" id="pills-tabContent" >
+  <%= render partial: 'show_multi_dataset_dashboards', locals: {channel:channel} %>
 </div>

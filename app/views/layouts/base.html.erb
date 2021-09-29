@@ -60,7 +60,7 @@
 <%= javascript_include_tag 'smart_admin/smart_admin' %>
 
 <script>
-  $(document).ready(function() {
+  $(document).on('turbolinks:load', () => {
     toastr.options = {
       "progressBar": true,
       "timeOut": "20000"

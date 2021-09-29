@@ -16,7 +16,7 @@
     </li>
 
     <script>
-      $(document).ready(function(){
+      $(document).on('turbolinks:load', () => {
         <% unless Rails.env.development? %>
         var get_recently_connected = true;
         var get_recently_connected_person = function(){

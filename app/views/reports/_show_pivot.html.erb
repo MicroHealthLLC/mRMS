@@ -19,7 +19,7 @@
 
 <script>
     var renderers;
-    $(document).ready(function(){
+    $(document).on('turbolinks:load', () => {
         var dataClass = $.pivotUtilities.SubtotalPivotData;
         var renderers = $.extend({},
             $.pivotUtilities.renderers,

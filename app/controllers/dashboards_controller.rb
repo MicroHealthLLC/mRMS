@@ -117,7 +117,7 @@ class DashboardsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def dashboard_params
-    params.require(:dashboard).permit(:report_id, :name, :dashboard_enum_id)
+    params.require(:dashboard).permit(:report_id, :name, :channel_enum_id)
   end
 
   def set_order_index_pivot_table(pivot_table_ids)

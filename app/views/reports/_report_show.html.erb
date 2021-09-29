@@ -1,0 +1,38 @@
+<div class="tab-pane active" id="All_Reports" role="tabpanel" aria-labelledby="pills-All-tab" >
+  <%= render partial: 'report_content', locals: { pivot_tables: pivot_tables ,is_all:'yes'} %>
+</div>
+<%ChannelEnum.all.each do |channelEnum|%>
+  <div class="tab-pane" id="reports<%=channelEnum.id%>" role="tabpanel" aria-labelledby="pills-<%=channelEnum.id%>-tab" ondrop = "drop_reports(event,<%=channelEnum.id%>)" ondragover="allowDrop_report(event)">
+    <%= render partial: 'report_content', locals: { pivot_tables: pivot_tables.where(channel_enum_id:channelEnum.id),is_all:'no'} %>
+  </div>
+<% end %>
+
+<script type="text/javascript">
+ $('a.my_reports').on('dragenter', function (e) {
+    $('.myTab .nav-item.active').removeClass("active")
+    $('.myTab a.nav-link.active').removeClass("active")
+    $(this).tab('show');
+    $(this).addClass('active');
+  });
+ $('a.my_reports').on('dragleave',function (e) {
+    $(this).tab('hide');
+    $(this).removeClass('active')
+  });
+
+  function allowDrop_report(ev) {
+    ev.preventDefault();
+  }
+
+  function drop_reports(ev,newPos) {
+    var previousPos = ev.dataTransfer.getData("report_id");
+    console.log(previousPos)
+    var status = ev.dataTransfer.getData("status");
+    if (status=='report'){
+      $.ajax({
+        url:window.location.pathname+"?previous_report_position="+previousPos+"&new_report_position="+newPos+"&filter_report="+"Report",
+        dataType: "script",
+        cache: true
+      });
+    }
+  }
+</script>
