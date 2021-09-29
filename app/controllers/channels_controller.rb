@@ -111,7 +111,7 @@ class ChannelsController < ApplicationController
 
   def authorize
     access =  if @channel and params[:action]!="update"
-               @channel.is_public? or (@channel.is_creator? and @channel.is_personal?) or  (@channel.is_group? and @channel.my_permission.can_view? and @channel.my_permission.can_add_report? )
+               @channel.is_public? or (@channel.is_creator? and @channel.is_personal?) or  (@channel.is_group? and @channel.my_permission.can_view?)
               elsif params[:action] == "update" and @channel
                 User.current.admin?
               else
