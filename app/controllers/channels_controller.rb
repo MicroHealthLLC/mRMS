@@ -110,11 +110,11 @@ class ChannelsController < ApplicationController
   end
 
   def authorize
-    access =  if @channel and ["update", "edit", "destroy"].exclude?(params[:action])
-               @channel.is_public? or (@channel.is_creator? and @channel.is_personal?) or (@channel.is_group? and @channel.my_permission.can_view?)
-              elsif params[:action] == "update" or params[:action] == "edit" and @channel
-                User.current.admin? or @channel.is_public? or (@channel.is_creator? and @channel.is_personal?) or (@channel.is_group? and @channel.my_permission.can_view? and @channel.my_permission.can_edit?)
-              elsif params[:action] == "destroy" and @channel
+    access =  if @channel && ["update", "edit", "destroy"].exclude?(params[:action])
+               @channel.is_public? || (@channel.is_creator? && @channel.is_personal?) || (@channel.is_group? && @channel.my_permission.can_view?)
+              elsif params[:action] == "update" || params[:action] == "edit" && @channel
+                User.current.admin? || @channel.is_public? || (@channel.is_creator? && @channel.is_personal?) || (@channel.is_group? && @channel.my_permission.can_view? && @channel.my_permission.can_edit?)
+              elsif params[:action] == "destroy" && @channel
                 @channel.is_creator?
               else
                 true
