@@ -157,7 +157,11 @@ https://YourliveSiteDomain/users/auth/linkedin/callback
 https://YourliveSiteDomain/users/auth/google_oauth2/callback
 https://YourliveSiteDomain/users/auth/facebook/callback
 https://YourliveSiteDomain/users/auth/twitter/callback
+
+Microsoft will need these
+https://YourliveSiteDomain/welcome/onedriveredirect
 https://YourliveSiteDomain/users/auth/office365/callback
+https://YourLiveSiteDomain/auth/microsoft_graph_auth/callback
 
 For onedrive
 https://YourliveSiteDomain/welcome/onedriveredirect
