@@ -1,10 +1,10 @@
-<div class="row">
+<div class="row row_report">
   <% if pivot_tables.present? %>
     <% pivot_tables.each do |pivot_table| %>
       <%= render partial: 'grid', locals: {pivot_table: pivot_table,is_all:is_all} %>
     <% end %>
   <% else %>
-    <div class="col-md-12 my-3 mx-4 alert alert-custom alert-notice alert-light-primary show d-flex" role="alert">
+    <div class="mx-3 w-100 alert h-150 alert-custom alert-notice alert-light-primary show d-flex" role="alert">
       <div class="alert-icon"><i class="fas fa-exclamation-triangle"></i></div>
       <div class="alert-text ">No Report to display!</div>
     </div>

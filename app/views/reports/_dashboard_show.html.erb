@@ -9,10 +9,16 @@
 
 <script type="text/javascript">
   $('a.my_dashboards').on('dragenter', function (e) {
-    $('.dashboard_tab .nav-item.active').removeClass("active");
-    $('.dashboard_tab a.nav-link.active').removeClass("active");
-    $(this).tab('show');
-    $(this).addClass('active');
+    if (type == "dashboard")
+    {
+      $('.dashboard_tab .nav-item.active').removeClass("active");
+      $('.dashboard_tab a.nav-link.active').removeClass("active");
+      $(this).tab('show');
+      $(this).addClass('active');
+      $('.row_dashboard').addClass('border-shadow');
+      $('.row_dashboard').addClass('m-2');
+      $('.row_dashboard').addClass('pt-2');
+    }
   });
 
   $('a.my_dashboards').on('dragleave', function (e) {
@@ -23,6 +29,11 @@
   function allowDrop_dashboard(ev) {
     ev.preventDefault();
   }
+  document.addEventListener("dragend", function( event ) {
+    $('.row_dashboard').removeClass('border-shadow');
+    $('.row_dashboard').removeClass('m-2');
+    $('.row_dashboard').removeClass('pt-2');
+  }, false);
 
  function drop_dashboard(ev,newPos) {
   var previousPos = ev.dataTransfer.getData("dashboard");

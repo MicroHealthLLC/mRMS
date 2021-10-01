@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row row_dashboard">
   <% if report_dashboard.present? %>
     <% report_dashboard.each do |dashboard| %>
       <div class="card border-0 p-0" style="width: 18rem" draggable= '<%=is_all=='yes' ? 'false' : 'true'%>' ondragstart="dragevent(event,<%=dashboard.id%>)">
@@ -25,7 +25,7 @@
       </div>
     <% end %>
   <% else %>
-    <div class="col-md-12 my-3 mx-4 alert alert-custom alert-notice alert-light-primary show d-flex" role="alert">
+    <div class="mx-3 w-100 alert h-150 alert-custom alert-notice alert-light-primary show d-flex" role="alert">
       <div class="alert-icon"><i class="fas fa-exclamation-triangle"></i></div>
       <div class="alert-text">No Dashboard to display!</div>
     </div>
@@ -36,5 +36,6 @@
   function dragevent(ev,id) {
     ev.dataTransfer.setData("dashboard", id);
     ev.dataTransfer.setData("status", 'dashboard');
+    type = "dashboard"
   }
 </script>

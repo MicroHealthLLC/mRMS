@@ -9,16 +9,28 @@
 
 <script type="text/javascript">
   $('a.my_dashboards').on('dragenter', function (e) {
-    $('.dashboard_tab .nav-item.active').removeClass("active");
-    $('.dashboard_tab a.nav-link.active').removeClass("active");
-    $(this).tab('show');
-    $(this).addClass('active');
+    if (type == "multi_data_set")
+    {
+      $('.dashboard_tab .nav-item.active').removeClass("active");
+      $('.dashboard_tab a.nav-link.active').removeClass("active");
+      $(this).tab('show');
+      $(this).addClass('active');
+      $('.row_multi_dashboard').addClass('border-shadow');
+      $('.row_multi_dashboard').addClass('m-2');
+      $('.row_multi_dashboard').addClass('pt-2');
+    }
   });
 
   $('a.my_dashboards').on('dragleave', function (e) {
     $(this).tab('hide');
     $(this).removeClass('active')
   });
+
+  document.addEventListener("dragend", function( event ) {
+    $('.row_multi_dashboard').removeClass('border-shadow');
+    $('.row_multi_dashboard').removeClass('m-2');
+    $('.row_multi_dashboard').removeClass('pt-2');
+  }, false);
 
   function allowDrop_dashboard(ev) {
     ev.preventDefault();

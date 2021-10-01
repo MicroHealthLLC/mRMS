@@ -44,3 +44,11 @@
 .w-80 {
   width: 80%;
 }
+.border-shadow {
+  -webkit-box-shadow: 0px 0px 34px -2px rgba(46,148,90,1);
+  -moz-box-shadow: 0px 0px 34px -2px rgba(46,148,90,1);
+  box-shadow: 0px 0px 34px -2px rgba(46,148,90,1);
+}
+.h-150 {
+  height: 150px;
+}

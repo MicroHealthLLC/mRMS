@@ -8,13 +8,19 @@
 <% end %>
 
 <script type="text/javascript">
- $('a.my_reports').on('dragenter', function (e) {
-    $('.myTab .nav-item.active').removeClass("active")
-    $('.myTab a.nav-link.active').removeClass("active")
-    $(this).tab('show');
-    $(this).addClass('active');
+  $('a.my_reports').on('dragenter', function (e) {
+    if (type == "report")
+    {
+      $('.myTab .nav-item.active').removeClass("active")
+      $('.myTab a.nav-link.active').removeClass("active")
+      $(this).tab('show');
+      $(this).addClass('active');
+      $('.row_report').addClass('border-shadow');
+      $('.row_report').addClass('m-2');
+      $('.row_report').addClass('pt-2');
+    }
   });
- $('a.my_reports').on('dragleave',function (e) {
+  $('a.my_reports').on('dragleave',function (e) {
     $(this).tab('hide');
     $(this).removeClass('active')
   });
@@ -22,6 +28,13 @@
   function allowDrop_report(ev) {
     ev.preventDefault();
   }
+
+  document.addEventListener("dragend", function( event ) {
+    $('.row_report').removeClass('border-shadow');
+    $('.row_report').removeClass('m-2');
+    $('.row_report').removeClass('pt-2');
+  }, false);
+
 
   function drop_reports(ev,newPos) {
     var previousPos = ev.dataTransfer.getData("report_id");

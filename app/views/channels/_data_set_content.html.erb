@@ -1,4 +1,4 @@
-<div class="row d-flex">
+<div class="row d-flex row_dataset" >
   <% if reports.present? %>
     <% reports.each do |report| %>
       <div class="col-3" draggable="<%= is_all == 'yes' ? "false" : "true"  %>" ondragstart="dragevent(event,<%= report.id %>)" >
@@ -64,7 +64,7 @@
       </div>
     <% end %>
   <% else %>
-    <div class="mx-3 w-100 alert alert-custom alert-notice alert-light-primary show d-flex" role="alert">
+    <div class="mx-3 w-100 alert h-150 alert-custom alert-notice alert-light-primary show d-flex" role="alert">
       <div class="alert-icon"><i class="fas fa-exclamation-triangle"></i></div>
       <div class="alert-text">No data set to display!</div>
     </div>
@@ -75,5 +75,6 @@
   function dragevent(ev,id) {
     ev.dataTransfer.setData("text", id);
     ev.dataTransfer.setData("status", 'report');
+    type = "report"
   }
 </script>

@@ -9,16 +9,28 @@
 
 <script type="text/javascript">
   $('a.my_reports').on('dragenter', function (e) {
-    $('.myTab .nav-item.active').removeClass("active")
-    $('.myTab a.nav-link.active').removeClass("active")
-    $(this).tab('show');
-    $(this).addClass('active');
+    if (type == "report")
+    {
+      $('.myTab .nav-item.active').removeClass("active")
+      $('.myTab a.nav-link.active').removeClass("active")
+      $(this).tab('show');
+      $(this).addClass('active');
+      $('.row_dataset').addClass('border-shadow');
+      $('.row_dataset').addClass('m-2');
+      $('.row_dataset').addClass('pt-2');
+    }
   });
 
   $('a.my_reports').on('dragleave',function (e) {
     $(this).tab('hide');
     $(this).removeClass('active')
   });
+
+  document.addEventListener("dragend", function( event ) {
+    $('.row_dataset').removeClass('border-shadow');
+    $('.row_dataset').removeClass('m-2');
+    $('.row_dataset').removeClass('pt-2');
+  }, false);
 
   function allowDrop_report(ev) {
     ev.preventDefault();
