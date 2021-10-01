@@ -1,29 +1,29 @@
 <div class="card card-custom gutter-b mt-5">
- <div class="card-body">
-  <%= render partial: 'action_menu' %>
-   <div class="row mt-5">
+  <div class="card-body">
+    <%= render partial: 'action_menu' %>
+    <div class="row mt-5">
+
       <div class="col-6 data_title" title="<%= @channel.name %>">
-        <strong>Channel :</strong>
+        <strong> Channel: </strong>
         <%= @channel.name.truncate(35) %>
       </div>
 
-      <div class="col-6 d-flex ">
-        <strong style="width:88px !important;">Description :</strong>
-        <div class="w-75 data_title" title ="<%= @channel.description.html_safe %>">
+      <div class="col-6 d-flex data_title" title ="<%= @channel.description.html_safe %>">
+        <strong> Description: &nbsp; </strong>
           <%= @channel.description.truncate(50).html_safe%>
-        </div>
       </div>
 
       <div class="col-6">
-        <strong>Owned by:</strong>
+        <strong> Owned by: </strong>
         <%= @channel.user %> at <%= format_date_time @channel.created_at %>
       </div>
+
       <div class="col-6">
-        <strong>Last update :</strong>
+        <strong> Last update: </strong>
         <%= @channel.updated_by %> at <%= format_date_time @channel.updated_at %>
       </div>
-   </div>
- </div>
+    </div>
+  </div>
 </div>
 
 <section id="widget-grid" class="channel">

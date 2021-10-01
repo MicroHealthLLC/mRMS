@@ -218,13 +218,16 @@ class ReportsController < ApplicationController
                    when 'edit', 'update',
                        'new', 'upload_document',
                        'create', 'save_pivottable',
-                       'delete_pivottable','show' then  @channel.is_public? or (@channel.is_group? and @channel.my_permission.can_add_report? and @channel.my_permission.can_view?) or (@channel.is_personal? and @channel.is_creator?)
+                       'delete_pivottable'
+                    @channel.is_public? || (@channel.is_group? && @channel.my_permission.can_add_report? && @channel.my_permission.can_view?) || (@channel.is_personal? && @channel.is_creator?)
+                   when 'show'
+                    @channel.is_public? || (@channel.is_group? && @channel.my_permission.can_view_report? && @channel.my_permission.can_view?) || (@channel.is_personal? && @channel.is_creator?)
                    when 'destroy'
-                     @report.channel.my_permission.can_delete_report? or @report.channel.is_public?
+                    @report.channel.my_permission.can_delete_report? || @report.channel.is_public?
                    else
-                    @channel.is_public? or params[:shared_report_with_dashboard].present? ? @channel.my_permission.can_shared_report_with_dashboard? : @channel.my_permission.can_add_users?
+                    @channel.is_public? || params[:shared_report_with_dashboard].present? ? @channel.my_permission.can_shared_report_with_dashboard? : @channel.my_permission.can_add_users?
                  end
 
-    render_403 unless (can_access or (@report && @report.channel.is_creator?) or (@report.nil? and  @channel.is_creator?) )
+    render_403 unless (can_access || (@report && @report.channel.is_creator?) || (@report.nil? &&  @channel.is_creator?) )
   end
 end
