@@ -1,13 +1,13 @@
 <div class="row">
   <% if multi_data_set_dashboards.count > 0 %>
     <% multi_data_set_dashboards.each do |dashboard| %>
-      <div class="card border-0 p-0" style="width: 18rem" draggable="<%= is_all == 'yes' ? "false" : "true"  %>"ondragstart="dragevent_dashboard(event,<%= dashboard.id %>)">
+      <div class="card border-0 p-0" style="width: 18rem">
         <div class="border m-2 text-center h-100">
-          <div class="card-header p-0 pr-2 pt-2 border-0" >
+          <div class="card-header p-0 pr-2 pt-2 border-0"  >
             <%= link_to('<i class="fa fa-times float-right"></i>'.html_safe, channel_multi_data_set_dashboard_path(channel, dashboard),
               method: :delete,data: {confirm: "Are you sure to delete Dashboard: #{dashboard.name}?"}) if can_manage_multi_dataset_dashboard?(channel) %>
           </div>
-          <div class="card-body pt-0 pb-2 px-0">
+          <div class="card-body pt-0 pb-2 px-0" draggable="<%= is_all == 'yes' ? "false" : "true"  %>" ondragstart="dragevent_dashboard(event,<%= dashboard.id %>,<%= dashboard.channel_enum_id%>)">
             <%= link_to channel_multi_data_set_dashboard_path(channel,dashboard), {draggable: false,class:'dashboard_check'} do %>
               <%= image_tag "dashboard.png", style: 'width: 13rem; height: 13rem;',draggable: false %>
             <% end %>
@@ -33,8 +33,10 @@
 </div>
 
 <script type="text/javascript">
-  function dragevent_dashboard(ev,id) {
+  function dragevent_dashboard(ev,id,channel_enum) {
     ev.dataTransfer.setData("dashboard",id);
     ev.dataTransfer.setData("status", 'dashboard');
+    type = 'multi_data_set'
+    current_multi_dataset_tab = channel_enum
   }
 </script>

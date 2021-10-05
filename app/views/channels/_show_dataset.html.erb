@@ -2,17 +2,20 @@
   <%= render partial: 'data_set_content', locals: {reports: reports, is_all:'yes'} %>
 </div>
 <% ChannelEnum.all.each do |channelEnum| %>
-  <div class="tab-pane" id="datasets<%= channelEnum.id %>" role="tabpanel" aria-labelledby="pills-<%= channelEnum.id %>-tab" ondrop="drop_report(event,<%= channelEnum.id %>)" ondragover="allowDrop_report(event)" >
+  <div class="tab-pane" id="datasets<%= channelEnum.id %>" role="tabpanel" aria-labelledby="pills-<%= channelEnum.id %>-tab"  >
     <%= render partial: 'data_set_content', locals: { reports: reports.where(channel_enum_id: channelEnum), is_all:'no'} %>
   </div>
 <%end%>
 
 <script type="text/javascript">
-  $('a.my_reports').on('dragenter', function (e) {
-    $('.myTab .nav-item.active').removeClass("active")
-    $('.myTab a.nav-link.active').removeClass("active")
-    $(this).tab('show');
-    $(this).addClass('active');
+  $('a.my_reports:not(#pills-All-tab)').on('dragenter', function (e){
+      if (type == 'dataset' && $(this).attr('id')!='pills-All-tab' )
+      {
+        $('.myTab .nav-item.active').removeClass("active")
+        $('.myTab a.nav-link.active').removeClass("active")
+        $(this).tab('show');
+        $(this).addClass('active');
+      }
   });
 
   $('a.my_reports').on('dragleave',function (e) {
@@ -21,7 +24,8 @@
   });
 
   function allowDrop_report(ev) {
-    ev.preventDefault();
+    if (type=='dataset' && $('a.nav-link.active').get(0).getAttribute('id')!='pills-'+current_dataset_tab+'-tab')
+    {ev.preventDefault();}
   }
 
   function drop_report(ev,newPos) {

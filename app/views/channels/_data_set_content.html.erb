@@ -1,12 +1,12 @@
 <div class="row d-flex">
   <% if reports.present? %>
     <% reports.each do |report| %>
-      <div class="col-3" draggable="<%= is_all == 'yes' ? "false" : "true"  %>" ondragstart="dragevent(event,<%= report.id %>)" >
+      <div class="col-3">
         <a href="<%=  channel_report_path(@channel, report) %>" id="report_check">
         <!--begin::Card-->
         <div class="box-shadow bg-color-lighten card card-custom card-stretch gutter-b">
           <!--begin::Body-->
-          <div class="card-body py-4">
+          <div class="card-body py-4" draggable="<%= is_all == 'yes' ? "false" : "true"  %>" ondragstart="dragevent(event,<%= report.id %>,<%= report.channel_enum_id%>)">
             <!--begin::User-->
             <div class="row">
               <!--begin::Pic-->
@@ -72,8 +72,10 @@
 </div>
 
 <script>
-  function dragevent(ev,id) {
+  function dragevent(ev,id,channel_enum) {
     ev.dataTransfer.setData("text", id);
     ev.dataTransfer.setData("status", 'report');
+    type = 'dataset'
+    current_dataset_tab = channel_enum
   }
 </script>

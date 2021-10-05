@@ -2,17 +2,20 @@
   <%= render partial: 'dashboard_content', locals: { report_dashboard: report_dashboard,is_all:'yes'} %>
 </div>
 <% ChannelEnum.all.each do |channelEnum| %>
-  <div class="tab-pane" id="<%= channelEnum.id %>" role="tabpanel" aria-labelledby="pills-<%= channelEnum.id %>-tab" ondrop = "drop_dashboard(event,<%= channelEnum.id %>)" ondragover="allowDrop_dashboard(event)">
+  <div class="tab-pane" id="<%= channelEnum.id %>" role="tabpanel" aria-labelledby="pills-<%= channelEnum.id %>-tab" >
     <%= render partial: 'dashboard_content', locals: {report_dashboard: report_dashboard.where(channel_enum_id:channelEnum.id),is_all:'no'} %>
   </div>
 <% end %>
 
 <script type="text/javascript">
   $('a.my_dashboards').on('dragenter', function (e) {
-    $('.dashboard_tab .nav-item.active').removeClass("active");
-    $('.dashboard_tab a.nav-link.active').removeClass("active");
-    $(this).tab('show');
-    $(this).addClass('active');
+    if (type == 'dashboard' && $(this).attr('id')!='pills-All-tab')
+    {
+      $('.dashboard_tab .nav-item.active').removeClass("active");
+      $('.dashboard_tab a.nav-link.active').removeClass("active");
+      $(this).tab('show');
+      $(this).addClass('active');
+    }
   });
 
   $('a.my_dashboards').on('dragleave', function (e) {
@@ -21,7 +24,8 @@
   });
 
   function allowDrop_dashboard(ev) {
-    ev.preventDefault();
+    if (type == 'dashboard' && $('a.nav-link.active').get(1).getAttribute('id') != 'pills-'+current_dashboard_tab+'-tab')
+    {ev.preventDefault();}
   }
 
  function drop_dashboard(ev,newPos) {

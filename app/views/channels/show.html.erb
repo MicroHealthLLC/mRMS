@@ -51,5 +51,9 @@
     </article>
   </div>
 </section>
-
+<script type="text/javascript">
+  var type = ''
+  var current_dataset_tab = 'All_Reports'
+  var current_multi_dataset_tab = 'All_Dashboards'
+</script>
 <%= will_paginate @reports, renderer: BootstrapPagination::Rails, class: 'pull-right'%>
