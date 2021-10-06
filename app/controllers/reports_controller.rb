@@ -223,7 +223,9 @@ class ReportsController < ApplicationController
                    when 'show'
                     @channel.is_public? || (@channel.is_group? && @channel.my_permission.can_view_report? && @channel.my_permission.can_view?) || (@channel.is_personal? && @channel.is_creator?)
                    when 'destroy'
-                    @report.channel.my_permission.can_delete_report? || @report.channel.is_public?
+                    @channel.my_permission.can_delete_report? || @channel.is_public?
+                   when 'refresh_onedrive_file'
+                    @channel.is_public? || (@channel.is_group? && @channel.my_permission.can_add_report?) || (@channel.is_personal? && @channel.is_creator?)
                    else
                     @channel.is_public? || params[:shared_report_with_dashboard].present? ? @channel.my_permission.can_shared_report_with_dashboard? : @channel.my_permission.can_add_users?
                  end
