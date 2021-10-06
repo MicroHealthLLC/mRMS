@@ -24,7 +24,7 @@
   });
 
   function allowDrop_report(ev) {
-    if (type=='dataset' && $('a.nav-link.active').get(0).getAttribute('id')!='pills-'+current_dataset_tab+'-tab')
+    if (type=='dataset' && $('a.nav-link.my_reports.active').attr('id')!='pills-'+current_dataset_tab+'-tab')
     {ev.preventDefault();}
   }
 

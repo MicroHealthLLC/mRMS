@@ -24,7 +24,7 @@
   });
 
   function allowDrop_dashboard(ev) {
-    if (type == 'dashboard' && $('a.nav-link.active').get(1).getAttribute('id') != 'pills-'+current_dashboard_tab+'-tab')
+    if (type == 'dashboard' && $('a.nav-link.my_dashboards.active').attr('id') != 'pills-'+current_dashboard_tab+'-tab')
     {ev.preventDefault();}
   }
 

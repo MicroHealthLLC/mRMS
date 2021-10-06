@@ -6,7 +6,7 @@
         <!--begin::Card-->
         <div class="box-shadow bg-color-lighten card card-custom card-stretch gutter-b">
           <!--begin::Body-->
-          <div class="card-body py-4" draggable="<%= is_all == 'yes' ? "false" : "true"  %>" ondragstart="dragevent(event,<%= report.id %>,<%= report.channel_enum_id%>)">
+          <div class="card-body py-4" draggable="<%= is_all == 'yes' || !(@channel.is_group? && @channel.my_permission.can_add_report?)  ? "false" : "true"  %>" ondragstart="dragevent(event,<%= report.id %>,<%= report.channel_enum_id%>)">
             <!--begin::User-->
             <div class="row">
               <!--begin::Pic-->

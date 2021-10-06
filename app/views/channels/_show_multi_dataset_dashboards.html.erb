@@ -24,7 +24,7 @@
   });
 
   function allowDrop_dashboard(ev) {
-    if (type == 'multi_data_set' && $('a.nav-link.active').get(1).getAttribute('id') != 'pills-'+current_multi_dataset_tab+'-tab')
+    if (type == 'multi_data_set' && $('a.nav-link.my_dashboards.active').attr('id') != 'pills-'+current_multi_dataset_tab+'-tab')
     {
       ev.preventDefault();
     }

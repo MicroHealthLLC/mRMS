@@ -23,7 +23,7 @@
   });
 
   function allowDrop_report(ev) {
-    if (type=='report' && $('a.nav-link.active').get(0).getAttribute('id')!='pills-'+current_report_tab+'-tab')
+    if (type=='report' && $('a.nav-link.my_reports.active').attr('id')!='pills-'+current_report_tab+'-tab')
     {
       ev.preventDefault();
     }
