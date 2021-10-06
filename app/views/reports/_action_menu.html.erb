@@ -30,7 +30,7 @@
       <% else %>
         <% if is_onedrive_dataset?(@report) %>
           <span>
-            <%= show_button(refresh_onedrive_file_channel_report_path(@report.channel, @report), 'Refresh Data Set', 'fas fa-refresh', 'linkedin') %>
+            <%= show_button(refresh_onedrive_file_channel_report_path(@channel, @report), 'Refresh Data Set', 'fas fa-refresh', 'linkedin') if @channel.is_group? ? @channel.my_permission.can_add_report? : true %>
           </span>
         <% end %>
           <% if @report.channel.is_public? or @report.channel.is_creator? or @report.channel.my_permission.can_add_report? %>
