@@ -7,7 +7,7 @@
             <%= link_to('<i class="fa fa-times float-right"></i>'.html_safe, channel_report_dashboard_path(dashboard.report.channel, dashboard.report, dashboard),
               method: :delete, data: {confirm: "Are you sure to delete Dashboard: #{dashboard.name}?"}) if can_manage_dashboard?(dashboard.report.channel) %>
           </div>
-          <div class="card-body pt-0 pb-2 px-0" draggable="<%= is_all == 'no' && (@channel.is_group? ? @channel.my_permission.can_add_report? : true) %>" ondragstart="dragevent(event,<%=dashboard.id%>,<%=dashboard.channel_enum_id%>)">
+          <div class="card-body pt-0 pb-2 px-0" draggable="<%= is_all == 'no' && (@channel.is_group? ? @channel.my_permission.can_manage_dashboard? : true) %>" ondragstart="dragevent(event,<%=dashboard.id%>,<%=dashboard.channel_enum_id%>)">
             <%= link_to [dashboard.report.channel, dashboard.report, dashboard], draggable: false, class: 'dashboard_check' do %>
               <%= image_tag "dashboard.png", style: 'width: 13rem; height: 13rem;', draggable: false %>
             <% end %>
