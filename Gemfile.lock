@@ -114,7 +114,6 @@ GEM
       execjs
     coffee-script-source (1.12.2)
     concurrent-ruby (1.1.8)
-    connection_pool (2.2.3)
     crass (1.0.6)
     database_cleaner (2.0.1)
       database_cleaner-active_record (~> 2.0.0)
@@ -186,6 +185,7 @@ GEM
     letter_opener (1.7.0)
       launchy (~> 2.2)
     libv8 (3.16.14.19)
+    libv8 (3.16.14.19-x86_64-darwin-18)
     libv8 (3.16.14.19-x86_64-linux)
     listen (3.1.5)
       rb-fsevent (~> 0.9, >= 0.9.4)
@@ -211,6 +211,7 @@ GEM
     multi_json (1.15.0)
     multi_xml (0.6.0)
     multipart-post (2.1.1)
+    mysql2 (0.5.3)
     net-ldap (0.17.0)
     nio4r (2.5.7)
     nokogiri (1.12.5-x86_64-darwin)
@@ -336,10 +337,6 @@ GEM
     selenium-webdriver (3.142.7)
       childprocess (>= 0.5, < 4.0)
       rubyzip (>= 1.2.2)
-    sidekiq (6.2.0)
-      connection_pool (>= 2.2.2)
-      rack (~> 2.0)
-      redis (>= 4.2.0)
     simple_form (5.1.0)
       actionpack (>= 5.2)
       activemodel (>= 5.2)
@@ -391,10 +388,12 @@ GEM
       nokogiri (~> 1.8)
 
 PLATFORMS
+  x86_64-darwin-18
   x86_64-darwin-19
   x86_64-linux
 
 DEPENDENCIES
+  activerecord-jdbcmysql-adapter
   ajax-datatables-rails (~> 0.3.1)
   audited (~> 4.7)
   awesome_print
@@ -429,6 +428,7 @@ DEPENDENCIES
   mini_magick
   minitest-retry
   momentjs-rails (>= 2.9.0)
+  mysql2
   omniauth-facebook
   omniauth-github
   omniauth-google-oauth2
@@ -450,7 +450,6 @@ DEPENDENCIES
   roo-xls
   sass-rails
   selenium-webdriver
-  sidekiq
   simple_form
   spring
   spring-watcher-listen (~> 2.0.0)
