@@ -105,7 +105,7 @@ gem 'prawn'
 gem 'rails-pry'
 gem 'jSignature'
 gem 'simple_form'
-gem 'sidekiq'
+# gem 'sidekiq'
 gem 'cocoon'
 # gem 'elastic-apm'
 gem "audited", "~> 4.7"
