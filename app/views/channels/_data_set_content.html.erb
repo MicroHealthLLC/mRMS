@@ -6,7 +6,7 @@
         <!--begin::Card-->
         <div class="box-shadow bg-color-lighten card card-custom card-stretch gutter-b">
           <!--begin::Body-->
-          <div class="card-body py-4" draggable="<%= is_all == 'yes' || !(@channel.is_group? && @channel.my_permission.can_add_report?)  ? "false" : "true"  %>" ondragstart="dragevent(event,<%= report.id %>,<%= report.channel_enum_id%>)">
+          <div class="card-body py-4" draggable="<%= is_all == 'no' && (@channel.is_group? ? @channel.my_permission.can_add_report? : true) %>" ondragstart="dragevent(event,<%= report.id %>,<%= report.channel_enum_id%>)">
             <!--begin::User-->
             <div class="row">
               <!--begin::Pic-->
@@ -14,13 +14,13 @@
                 <div class="symbol symbol-lg-75">
                   <% name = JSON.parse(report&.save_pivot_tables&.first&.content)["rendererName"].downcase rescue nil %>
                   <% if (name && name.include?('table')) %>
-                      <%= image_tag "pivot/table.png", size: '220x220', draggable:false %>
+                      <%= image_tag "pivot/table.png", size: '220x220', draggable: false %>
                   <% elsif (name && name.include?('heatmap')) %>
-                      <%= image_tag "pivot/heatmap.png", size: '220x220', draggable:false %>
+                      <%= image_tag "pivot/heatmap.png", size: '220x220', draggable: false %>
                   <% elsif name %>
-                      <%= image_tag "pivot/#{name.gsub(' ', '-')}.png" , size: '220x220' %>
+                      <%= image_tag "pivot/#{name.gsub(' ', '-')}.png" , size: '220x220', draggable: false %>
                   <% else %>
-                    <%= image_tag "dashboard.png", size: '220x220', draggable:false %>
+                    <%= image_tag "dashboard.png", size: '220x220', draggable: false %>
                   <% end %>
                 </div>
               </div>
