@@ -47,7 +47,7 @@
     }, 1000);
   });
 
-  $(document).on('turbolinks:load', () => {
+  $( window ).on( "load", function() {
     $(".jarviswidget-ctrls > .jarviswidget-fullscreen-btn").click(function() {
       var element = document.getElementById("addOverFlow");
       element.classList.toggle("overflow-pivot");
