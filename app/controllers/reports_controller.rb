@@ -185,8 +185,8 @@ class ReportsController < ApplicationController
   rescue ActiveRecord::RecordNotFound
     render_404
   end
-  def change_positions
 
+  def change_positions
     if params[:filter_report]
       pivot_table = @report.save_pivot_tables.find(params[:previous_report_position])
       pivot_table.channel_enum_id = params[:new_report_position]
@@ -197,6 +197,7 @@ class ReportsController < ApplicationController
       dashboard.save!
     end
   end
+
   # Never trust parameters from the scary internet, only allow the white list through.
   def report_params
     params.require(:report).permit(Report.safe_attributes)

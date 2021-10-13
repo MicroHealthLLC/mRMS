@@ -2,6 +2,7 @@ class ReportDocument < ApplicationRecord
   include ReportsHelper
   belongs_to :user, optional: true
   belongs_to :report, optional: true
+  before_create :scan_for_viruses
 
   before_create do
     self.user_id = User.current.id
@@ -52,4 +53,16 @@ class ReportDocument < ApplicationRecord
     end
   end
 
+  def scan_for_viruses
+    return true if EnabledModule.where(name: "scan_virus", status: false).present?
+    path = self.file.path
+    scan_result = Clamby.virus?(path)
+    if scan_result
+      return true
+    else
+      File.delete(path)
+      self.destroy
+      return false
+    end
+  end
 end
