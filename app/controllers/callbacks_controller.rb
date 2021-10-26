@@ -29,7 +29,6 @@ class CallbacksController < Devise::OmniauthCallbacksController
       flash[:error] = 'Social Sign up is not enabled'
       redirect_to root_path
     else
-      flash[:notice] = 'Signed in successfully.'
       @user = User.from_omniauth(request.env["omniauth.auth"])
       sign_in_and_redirect @user
     end
