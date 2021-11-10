@@ -181,7 +181,7 @@ class ReportsController < ApplicationController
   def set_report
     @report = Report.find(params[:id])
     @report.frequently_count += 1
-    @report.save!
+    @report.save(touch: false)
   rescue ActiveRecord::RecordNotFound
     render_404
   end
