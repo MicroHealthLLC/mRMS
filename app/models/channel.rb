@@ -92,6 +92,7 @@ class Channel < ApplicationRecord
       permission.can_view = true
       permission.can_edit = true
       permission.can_add_report = true
+      permission.can_delete_pivot_table = true
       permission.can_delete_report = true
       permission.can_add_users = true
       permission.can_download = true

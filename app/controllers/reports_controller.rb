@@ -217,9 +217,10 @@ class ReportsController < ApplicationController
     can_access = case params[:action]
                    when 'edit', 'update',
                        'new', 'upload_document',
-                       'create', 'save_pivottable',
-                       'delete_pivottable'
+                       'create', 'save_pivottable'
                     @channel.is_public? || (@channel.is_group? && @channel.my_permission.can_add_report? && @channel.my_permission.can_view?) || (@channel.is_personal? && @channel.is_creator?)
+                   when 'delete_pivottable'
+                    @channel.is_public? || (@channel.is_group? && @channel.my_permission.can_delete_pivot_table?) || (@channel.is_personal? && @channel.is_creator?)
                    when 'show'
                     @channel.is_public? || (@channel.is_group? && @channel.my_permission.can_view_report? && @channel.my_permission.can_view?) || (@channel.is_personal? && @channel.is_creator?)
                    when 'destroy'

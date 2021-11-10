@@ -3,7 +3,7 @@
     <div class="card-header p-0 pr-2 pt-2 border-0">
       <%= link_to( '<i class="fa fa-times float-right"></i>'.html_safe, delete_pivottable_channel_report_path(@channel, @report, query_id: pivot_table.id),
                  :method => :delete,
-                 :data => {:confirm => "Are you sure to delete Report: #{pivot_table.name}?"}) if @channel.is_public? or (@channel.is_group? and @channel.my_permission.can_add_report? and @channel.my_permission.can_view?) or (@channel.is_personal? and @channel.is_creator?)   %>
+                 :data => {:confirm => "Are you sure to delete Report: #{pivot_table.name}?"}) if @channel.is_public? or (@channel.is_group? and @channel.my_permission.can_delete_pivot_table? and @channel.my_permission.can_view?) or (@channel.is_personal? and @channel.is_creator?)   %>
     </div>
     <div class="card-body pt-0 pb-2 px-3" draggable="<%= is_all == 'no' && (@channel.is_group? ? @channel.my_permission.can_add_report? : true) %>" ondragstart="dragevent_report(event,<%= pivot_table.id %>,<%=pivot_table.channel_enum_id%>)">
       <div class="py-2">
