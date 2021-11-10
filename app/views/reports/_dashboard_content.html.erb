@@ -4,11 +4,11 @@
       <div class="card border-0 p-0" style="width: 18rem">
         <div class="border m-2 text-center h-100">
           <div class="card-header p-0 pr-2 pt-2 border-0">
-            <%= link_to('<i class="fa fa-times float-right"></i>'.html_safe, channel_report_dashboard_path(dashboard.report.channel, dashboard.report, dashboard),
-              method: :delete, data: {confirm: "Are you sure to delete Dashboard: #{dashboard.name}?"}) if can_manage_dashboard?(dashboard.report.channel) %>
+            <%= link_to('<i class="fa fa-times float-right"></i>'.html_safe, channel_report_dashboard_path(@channel, dashboard.report, dashboard),
+              method: :delete, data: {confirm: "Are you sure to delete Dashboard: #{dashboard.name}?"}) if can_manage_dashboard?(@channel) %>
           </div>
-          <div class="card-body pt-0 pb-2 px-0" draggable="<%= is_all == 'no' && (@channel.is_group? ? @channel.my_permission.can_manage_dashboard? : true) %>" ondragstart="dragevent(event,<%=dashboard.id%>,<%=dashboard.channel_enum_id%>)">
-            <%= link_to [dashboard.report.channel, dashboard.report, dashboard], draggable: false, class: 'dashboard_check' do %>
+          <div class="card-body pt-0 pb-2 px-0" draggable="<%= is_all == 'no' && (@channel.is_group? ? @channel.my_permission.can_manage_dashboard? : true) %>" ondragstart="dragevent(event,<%= dashboard.id%>,<%= @channel %>)">
+            <%= link_to [@channel, dashboard.report, dashboard], draggable: false, class: 'dashboard_check' do %>
               <%= image_tag "dashboard.png", style: 'width: 13rem; height: 13rem;', draggable: false %>
             <% end %>
             <div class="cursor-pointer text-center">
