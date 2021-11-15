@@ -5,6 +5,8 @@ class MultiDataSetDashboardsController < ApplicationController
   before_action :authorize, except: :index
   def new
     @multi_dashboard = MultiDataSetDashboard.new(channel_id: @channel.id)
+    @reports_shared_user = @channel.shared_report? ? User.current.reports.current_user_shared_reports : @channel.reports
+    @save_pivot_tables =  SavePivotTable.where(report_id: @reports_shared_user.pluck(:id))
   end
 
   def show
@@ -32,10 +34,10 @@ class MultiDataSetDashboardsController < ApplicationController
   end
 
   def edit
-    report_ids = @channel.reports.pluck(:id)
-    @save_pivot_tables = nil
-    if report_ids.present?
-      @save_pivot_tables = @multi_dashboard.save_pivot_tables
+    @reports_shared_user = @channel.shared_report? ? User.current.reports.current_user_shared_reports : @channel.reports
+    @save_pivot_tables =  SavePivotTable.where(report_id: @reports_shared_user.pluck(:id))
+    if (@reports_shared_user)
+      @save_pivot_tables = @save_pivot_tables
     end
   end
 
@@ -96,9 +98,9 @@ class MultiDataSetDashboardsController < ApplicationController
   def authorize
     can_access =  case params[:action]
                     when 'new', 'create', 'edit', 'update', 'destroy'
-                      (@channel.is_group? && @channel.my_permission.can_manage_multi_dataset_dashboard?) || @channel.is_public? || (@channel.is_personal? && @channel.is_creator?)
+                      (@channel.is_group? && @channel.my_permission.can_manage_multi_dataset_dashboard?) || @channel.shared_report?  || @channel.is_public? || (@channel.is_personal? && @channel.is_creator?)
                     when 'show'
-                      (@channel.is_group? && @channel.my_permission.can_view?) || @channel.is_public? || (@channel.is_personal? && @channel.is_creator?)
+                      (@channel.is_group? && @channel.my_permission.can_view?) || @channel.shared_report? || @channel.is_public? || (@channel.is_personal? && @channel.is_creator?)
                   end
 
     render_403 unless (can_access || (@report && @report.channel.is_creator?) || (@report.nil? &&  @channel.is_creator?) )
