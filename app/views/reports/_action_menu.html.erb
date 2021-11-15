@@ -45,7 +45,7 @@
               </span>
           <% end %>
 
-          <% if ((@report.channel.is_public? and @report.created_by_id == User.current.id) or (!@report.channel.is_public? and @report.channel.is_creator?) or @report.channel.my_permission.can_add_report?) %>
+          <% if ((@report.channel.is_public? and @report.created_by_id == User.current.id) or (!@report.channel.is_public? and @report.channel.is_creator?) or (@channel.is_group? && @report.channel.my_permission.can_add_edit_data_set?)) %>
                   <span>
                     <%= edit_button edit_channel_report_path(@report.channel, @report) %>
                   </span>

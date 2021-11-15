@@ -218,7 +218,7 @@ class ReportsController < ApplicationController
                    when 'edit', 'update',
                        'new', 'upload_document',
                        'create', 'save_pivottable'
-                    @channel.is_public? || (@channel.is_group? && @channel.my_permission.can_add_report? && @channel.my_permission.can_view?) || (@channel.is_personal? && @channel.is_creator?)
+                    @channel.is_public? || (@channel.is_group? && @channel.my_permission.can_add_edit_data_set?) || (@channel.is_personal? && @channel.is_creator?)
                    when 'delete_pivottable'
                     @channel.is_public? || (@channel.is_group? && @channel.my_permission.can_delete_pivot_table?) || (@channel.is_personal? && @channel.is_creator?)
                    when 'show'

@@ -7,6 +7,7 @@
     <th> Can Add/Edit Report </th>
     <th> Can View Report </th>
     <th> Can Delete Report </th>
+    <th> Can Add/Edit Data Set </th>
     <th> Can Delete Data Set </th>
     <th> Can Add/Change Permission </th>
     <th> Can Download File </th>
@@ -27,6 +28,7 @@
         <td><i class="fa fa-<%=  permission.can_add_report? ? 'check' : 'times' %>"></i></td>
         <td><i class="fa fa-<%=  permission.can_view_report ? 'check' : 'times' %>"></i></td>
         <td><i class="fa fa-<%=  permission.can_delete_pivot_table? ? 'check' : 'times' %>"></i></td>
+        <td><i class="fa fa-<%=  permission.can_add_edit_data_set? ? 'check' : 'times' %>"></i></td>
         <td><i class="fa fa-<%=  permission.can_delete_report? ? 'check' : 'times' %>"></i></td>
         <td><i class="fa fa-<%=  permission.can_add_users? ? 'check' : 'times' %>"></i></td>
         <td><i class="fa fa-<%=  permission.can_download? ? 'check' : 'times' %>"></i></td>
