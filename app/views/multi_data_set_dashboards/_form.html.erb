@@ -41,8 +41,6 @@
     <div class="row">
       <label class="col-md-2 pt-5 text-align-right">Draggable Items:</label>
       <div class="rounded p-3 row col-md-10 my-2 pl-1" id="form_report">
-        <% report_ids = @channel.reports.pluck(:id) %>
-        <% save_pivot_tables = SavePivotTable.where(report_id: report_ids) %>
         <% if save_pivot_tables %>
           <% save_pivot_tables.each do |r| %>
             <div id="report_<%=r.id%>" class="drop-none card p-2 col-md-5 m-2" draggable="true" ondragstart="dragStart(event)">

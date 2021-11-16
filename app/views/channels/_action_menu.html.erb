@@ -78,7 +78,9 @@
               <%= delete_button channel_path(@channel), 'Channel', @channel.name %>
           <% end %>
       <% end %>
-
+      <% if @channel.shared_report? %>
+          <%= show_button(new_channel_multi_data_set_dashboard_url(@channel), 'Add multi Data Set Dashboard', 'fa fa-plus', 'success', '', pivot_table_reports?(@channel)) if display_multi_data_set_dashboard? %>
+      <% end %>
       <%= cancel_button root_path %>
     </div>
   </div>
