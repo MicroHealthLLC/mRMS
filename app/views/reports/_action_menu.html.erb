@@ -39,7 +39,7 @@
           <% if @report.channel.is_public? or @report.channel.is_creator? or @report.channel.my_permission.can_manage_dashboard? %>
             <%= show_button(new_channel_report_dashboard_path(@channel, @report), 'New Dashboard', 'arrow-down', 'primary', {}, @pivot_tables.count == 0 ) if  display_dashboard? %>
           <% end %>
-          <% if ((@report.channel.is_public? and (@report.created_by_id == User.current.id or @report.channel.is_creator?)) or (!@report.channel.is_public? and @report.channel.is_creator?) or @report.channel.my_permission.can_add_report?) %>
+          <% if ((@report.channel.is_public? and (@report.created_by_id == User.current.id or @report.channel.is_creator?)) or (!@report.channel.is_public? and @report.channel.is_creator?) or (@channel.is_group? && @report.channel.my_permission.can_add_edit_data_set?)) %>
               <span>
                 <%= show_button('#', ' Upload Data', 'upload', 'info', {toggle:"modal", target:"#uploadFileModal" }) %>
               </span>
