@@ -36,7 +36,7 @@
 
     <div class="col-6 mb-3">
       <strong>Updated by:</strong>
-      <%= @report.updated_by %> at <%= format_date_time @report.updated_at %>
+      <%= @report.updated_by %> at <%= format_date_time (params[:query_id] ? load_pivot_report(params[:query_id]).updated_at : @report.updated_at) %>
     </div>
   </div>
 </div>
