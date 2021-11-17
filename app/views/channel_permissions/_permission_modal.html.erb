@@ -68,7 +68,8 @@
                 </label>
 
                 <label class="toggle">
-                  <%= f.check_box :can_shared_report_with_dashboard, id:"can_shared_report_with_dashboard" %>
+                  <%= f.check_box :can_shared_report_with_dashboard, id:"can_shared_report_with_dashboard",
+                    :onchange=>"check_validate_can_manage_dashboard()" %>
                   <i data-swchon-text="ON" data-swchoff-text="OFF"></i> Can Share Report with Dashboard
                 </label>
               </div>
@@ -95,6 +96,10 @@
     if(can_manage_dashboard || can_manage_multi) {
       $('#can_shared_report_with_dashboard').prop('checked',true)
     }
+  }
+  function check_validate_can_manage_dashboard(){
+    var can_manage_dashboard = $("#can_manage_dashboard").is(":checked")
+    if(can_manage_dashboard) $('#can_shared_report_with_dashboard').prop('checked',true)
   }
   function validateNewForm() {
     var can_view = $("#can_view_permission").is(":checked");
