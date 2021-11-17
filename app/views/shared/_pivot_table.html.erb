@@ -1,7 +1,7 @@
 <div class="responsivePlotly" style="padding-inline:20px;">
   <% unless params[:controller] == 'reports' %>
     <div style="margin-top: 10px; font-size: 18px">
-      <%= link_to pivot_table.name, channel_report_path(report.channel, report, query_id: pivot_table.id) %>
+      <%= link_to pivot_table.name, channel_report_path(@channel, report, query_id: pivot_table.id) %>
     </div>
   <% end %>
   <% time = params[:number] %>
