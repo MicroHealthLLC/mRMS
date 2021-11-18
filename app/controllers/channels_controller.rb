@@ -113,7 +113,7 @@ class ChannelsController < ApplicationController
     access =  if @channel && ["update", "edit", "destroy"].exclude?(params[:action])
                @channel.is_public? || (@channel.is_creator? && @channel.is_personal?) || (@channel.is_group? && @channel.my_permission.can_view?)
               elsif params[:action] == "update" || params[:action] == "edit" && @channel
-                User.current.admin? || @channel.is_public? || (@channel.is_creator? && @channel.is_personal?) || (@channel.is_group? && @channel.my_permission.can_view? && @channel.my_permission.can_edit?)
+                User.current.admin? || @channel.is_creator? || (@channel.is_group? && @channel.my_permission.can_edit?)
               elsif params[:action] == "destroy" && @channel
                 @channel.is_creator?
               else

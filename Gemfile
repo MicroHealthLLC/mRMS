@@ -114,7 +114,7 @@ gem "breadcrumbs_on_rails"
 
 gem "jquery-fileupload-rails"
 
-gem 'ckeditor_rails'
+gem 'ckeditor_rails', '~> 4.10.0'
 gem 'momentjs-rails', '>= 2.9.0'
 gem 'bootstrap3-datetimepicker-rails', '~> 4.17.43'
 
