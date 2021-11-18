@@ -95,7 +95,8 @@ class ChannelsController < ApplicationController
 
   def change_positions
     if params[:filter_report]
-      report = @channel.reports.find(params[:previous_report_position])
+      reports = User.current.reports.current_user_shared_reports
+      report = @channel.shared_report? ? reports.find(params[:previous_report_position]) : @channel.reports.find(params[:previous_report_position])
       report.channel_enum_id = params[:new_report_position]
       report.save!
     elsif  params[:filter_dashboard]
