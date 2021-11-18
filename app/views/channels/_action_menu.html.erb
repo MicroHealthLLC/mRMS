@@ -70,7 +70,7 @@
               <%= show_theme_button(new_channel_report_url(@channel), ' Add Data set', 'fas fa-clipboard-check', 'info')  %>
           <% end %>
 
-          <% if @channel.is_creator? or @channel.my_permission.can_edit? %>
+          <% if @channel.is_creator? or (@channel.is_group? && @channel.my_permission.can_edit?)%>
               <%= edit_button edit_channel_path(@channel) %>
           <% end %>
 
