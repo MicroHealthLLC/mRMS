@@ -60,7 +60,7 @@ module ReportsHelper
   def update_pivot_table(id)
     pivot_table = SavePivotTable.find_by_id(id)
     pivot_table.frequently_count += 1
-    pivot_table.save
+    pivot_table.save(touch: false)
     return pivot_table
   end
 
