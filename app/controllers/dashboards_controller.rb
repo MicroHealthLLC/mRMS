@@ -137,6 +137,8 @@ class DashboardsController < ApplicationController
                       (@channel.is_group? && @channel.my_permission.can_manage_dashboard?) || @channel.is_public? || (@channel.is_personal? && @channel.is_creator?)
                     when 'show'
                       (@channel.is_group? && @channel.my_permission.can_view?) or @channel.is_public? or (@channel.is_personal? && @channel.is_creator?)
+                    when 'shared_report'
+                      @channel.is_public? || @channel.is_personal? || (@channel.is_group? && @channel.my_permission.can_shared_report_with_dashboard?)
                   end
 
     render_403 unless (can_access || (@report && @report.channel.is_creator?) || (@report.nil? &&  @channel.is_creator?) )

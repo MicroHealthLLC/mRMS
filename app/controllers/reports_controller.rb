@@ -228,7 +228,7 @@ class ReportsController < ApplicationController
                    when 'refresh_onedrive_file'
                     @channel.is_public? || (@channel.is_group? && @channel.my_permission.can_add_report?) || (@channel.is_personal? && @channel.is_creator?)
                    else
-                    @channel.is_public? || params[:shared_report_with_dashboard].present? ? @channel.my_permission.can_shared_report_with_dashboard? : @channel.my_permission.can_add_users?
+                    @channel.is_public? || (params[:shared_report_with_dashboard].present? ? @channel.my_permission.can_shared_report_with_dashboard? : @channel.my_permission.can_add_users?)
                  end
 
     render_403 unless (can_access || (@report && @report.channel.is_creator?) || (@report.nil? &&  @channel.is_creator?) )
