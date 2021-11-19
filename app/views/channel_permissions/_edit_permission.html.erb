@@ -11,7 +11,7 @@
           <div data-toggle="modal" class="modal-body">
             <fieldset>
               <div class="form-group">
-                <%= f.label 'Permission', class: 'col-md-2 control-label' %>
+                <%= f.label 'Permission', class: 'col-md-2 control-label px-0' %>
                 <div class="col-md-9">
                   <label class="toggle">
                     <%= f.check_box :can_view, id:"can_view_permission_edit_#{permission.id}"%>
@@ -29,7 +29,7 @@
                   </label>
 
                   <label class="toggle">
-                    <%= f.check_box :can_view_report %>
+                    <%= f.check_box :can_view_report, :disabled => true %>
                     <i data-swchon-text="ON" data-swchoff-text="OFF"></i> Can View Report
                   </label>
 
