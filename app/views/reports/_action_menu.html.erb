@@ -19,10 +19,10 @@
           <% end %>
           <%= cancel_button channel_report_path(@channel, @report) %>
       <% elsif params[:query_id] && @report.document_url %>
-          <% if ((@report.channel.is_public? and @report.created_by_id == User.current.id) or (!@report.channel.is_public? and @report.channel.is_creator?) or @report.channel.my_permission.can_add_report?) %>
+          <% if (@report.channel.is_public? or (!@report.channel.is_public? and @report.channel.is_creator?) or @report.channel.my_permission.can_add_report?) %>
               <%= show_button('#', ' Update Report', 'arrow-down', 'info', {toggle:"modal", target:"#myRenameModal" }) if  @report.document_url %>
           <% end %>
-          <% if @channel.is_creator? || @channel.is_public? || @channel.is_group? && @channel.my_permission.can_download   %>
+          <% if @channel.is_creator? || @channel.is_public? || (@channel.is_group? && @channel.my_permission.can_download) %>
               <%= link_to "Export to Excel", "/uploads/#{@report.id}/#{File.basename(@report.document.file_url)}",  class: 'btn btn-primary', target: '_blank' %>
           <% end %>
             <!-- <input type="button" onclick="$('#output').find('.pvtRendererArea').attr('id', 'testTable'); tableToExcel('testTable', 'Pivot table export')" value="Export to Excel" class="btn btn-primary"> -->
@@ -39,22 +39,22 @@
           <% if @report.channel.is_public? or @report.channel.is_creator? or @report.channel.my_permission.can_manage_dashboard? %>
             <%= show_button(new_channel_report_dashboard_path(@channel, @report), 'New Dashboard', 'arrow-down', 'primary', {}, @pivot_tables.count == 0 ) if  display_dashboard? %>
           <% end %>
-          <% if ((@report.channel.is_public? and (@report.created_by_id == User.current.id or @report.channel.is_creator?)) or (!@report.channel.is_public? and @report.channel.is_creator?) or (@channel.is_group? && @report.channel.my_permission.can_add_edit_data_set?)) %>
+          <% if (@report.channel.is_public? or (!@report.channel.is_public? and @report.channel.is_creator?) or (@channel.is_group? && @report.channel.my_permission.can_add_edit_data_set?)) %>
               <span>
                 <%= show_button('#', ' Upload Data', 'upload', 'info', {toggle:"modal", target:"#uploadFileModal" }) %>
               </span>
           <% end %>
 
-          <% if ((@report.channel.is_public? and @report.created_by_id == User.current.id) or (!@report.channel.is_public? and @report.channel.is_creator?) or (@channel.is_group? && @report.channel.my_permission.can_add_edit_data_set?)) %>
-                  <span>
-                    <%= edit_button edit_channel_report_path(@report.channel, @report) %>
-                  </span>
+          <% if (@report.channel.is_public? or (!@report.channel.is_public? and @report.channel.is_creator?) or (@channel.is_group? && @report.channel.my_permission.can_add_edit_data_set?)) %>
+              <span>
+                <%= edit_button edit_channel_report_path(@report.channel, @report) %>
+              </span>
           <% end %>
 
-          <% if ((@report.channel.is_public? and @report.created_by_id == User.current.id) or (!@report.channel.is_public? and @report.channel.is_creator?) or @report.channel.my_permission.can_delete_report?) %>
-                  <span>
-                    <%= delete_button channel_report_path(@report.channel, @report), 'Data set', @report.name%>
-                  </span>
+          <% if(@report.channel.is_public? or (!@report.channel.is_public? and @report.channel.is_creator?) or @report.channel.my_permission.can_delete_report?) %>
+              <span>
+                <%= delete_button channel_report_path(@report.channel, @report), 'Data set', @report.name%>
+              </span>
           <% end %>
           <%= cancel_button channel_path(@channel) %>
       <% end %>
