@@ -18,7 +18,7 @@
               <%= f.label 'Permission', class: 'col-md-2 control-label px-0' %>
               <div class="col-md-9">
                 <label class="toggle">
-                  <%= f.check_box :can_view, id: 'can_view_permission' %>
+                  <%= f.check_box :can_view, id: 'can_view_permission', onchange: "canViewReportPermission()" %>
                   <i data-swchon-text="ON" data-swchoff-text="OFF"></i> Can View Channel
                 </label>
 
@@ -33,7 +33,7 @@
                 </label>
 
                 <label class="toggle">
-                  <%= f.check_box :can_view_report, :disabled => true %>
+                  <%= f.check_box :can_view_report, id:"canViewReport", onchange: "canViewReportPermission()" %>
                   <i data-swchon-text="ON" data-swchoff-text="OFF"></i> Can View Report
                 </label>
 
@@ -89,6 +89,10 @@
   </div>
 </div>
 <script>
+  function canViewReportPermission(){
+    $('#canViewReport').prop('checked',true)
+    $('#can_view_permission').prop('checked',true)
+  }
   $(document).on('turbolinks:load', () => {
     $('#userSelect2').select2({
       dropdownParent: $('#userPermissionModal')

@@ -14,7 +14,7 @@
                 <%= f.label 'Permission', class: 'col-md-2 control-label px-0' %>
                 <div class="col-md-9">
                   <label class="toggle">
-                    <%= f.check_box :can_view, id:"can_view_permission_edit_#{permission.id}"%>
+                    <%= f.check_box :can_view, id:"can_view_permission_edit_#{permission.id}", onchange: "canViewReportEditModel(#{permission.id})" %>
                     <i data-swchon-text="ON" data-swchoff-text="OFF"></i> Can View Channel
                   </label>
 
@@ -29,7 +29,7 @@
                   </label>
 
                   <label class="toggle">
-                    <%= f.check_box :can_view_report, :disabled => true %>
+                    <%= f.check_box :can_view_report, id: "canViewReport_#{permission.id}", onchange: "canViewReportEditModel(#{permission.id})" %>
                     <i data-swchon-text="ON" data-swchoff-text="OFF"></i> Can View Report
                   </label>
 
@@ -87,6 +87,10 @@
       </div>
 </div>
 <script type="text/javascript">
+  function canViewReportEditModel(id){
+    $(`#can_view_permission_edit_${id}`).prop('checked',true)
+    $(`#canViewReport_${id}`).prop('checked',true)
+  }
   function change_edit_shared_report(value){
     var can_manage_dashboard = $("#can_manage_dashboard_" + value).is(":checked")
     var can_manage_multi = $("#can_manage_multi_dataset_dashboard_" + value).is(":checked")
