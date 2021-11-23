@@ -34,12 +34,12 @@
                   </label>
 
                   <label class="toggle">
-                    <%= f.check_box :can_delete_pivot_table %>
+                    <%= f.check_box :can_delete_pivot_table, id: "canDeleteReport_#{permission.id}", onchange: "canDeleteDataSet(#{permission.id})" %>
                     <i data-swchon-text="ON" data-swchoff-text="OFF"></i> Can Delete Report
                   </label>
 
                   <label class="toggle">
-                    <%= f.check_box :can_delete_report %>
+                    <%= f.check_box :can_delete_report, id:"can_delete_data_Set_#{permission.id}", onchange: "canDeleteDataSet(#{permission.id})" %>
                     <i data-swchon-text="ON" data-swchoff-text="OFF"></i> Can Delete Data Set
                   </label>
 
@@ -94,6 +94,10 @@
   function canEditAddDataSetModel(id){
     var canEditAddDataSet = $(`#canEditAddDataSet_${id}`).is(":checked")
     if (canEditAddDataSet) $(`#canEditAddReport_${id}`).prop('checked', true)
+  }
+  function canDeleteDataSet(id) {
+    var can_delete_data_Set = $(`#can_delete_data_Set_${id}`).is(":checked")
+    if(can_delete_data_Set) $(`#canDeleteReport_${id}`).prop('checked', true)
   }
   function change_edit_shared_report(value){
     var can_manage_dashboard = $("#can_manage_dashboard_" + value).is(":checked")
