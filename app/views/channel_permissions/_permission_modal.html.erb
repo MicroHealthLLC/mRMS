@@ -28,7 +28,7 @@
                 </label>
 
                 <label class="toggle">
-                  <%= f.check_box :can_add_report %>
+                  <%= f.check_box :can_add_report, id:"canEditAddReport", onchange: "canEditAddDataSetPermission()" %>
                   <i data-swchon-text="ON" data-swchoff-text="OFF"></i> Can Add/Edit Report
                 </label>
 
@@ -48,7 +48,7 @@
                 </label>
 
                 <label class="toggle">
-                  <%= f.check_box :can_add_edit_data_set %>
+                  <%= f.check_box :can_add_edit_data_set, id:"canEditAddDataSet", onchange: "canEditAddDataSetPermission()" %>
                   <i data-swchon-text="ON" data-swchoff-text="OFF"></i> Can Add/Edit Data Set
                 </label>
 
@@ -90,8 +90,12 @@
 </div>
 <script>
   function canViewReportPermission(){
-    $('#canViewReport').prop('checked',true)
-    $('#can_view_permission').prop('checked',true)
+    $('#canViewReport').prop('checked', true)
+    $('#can_view_permission').prop('checked', true)
+  }
+  function canEditAddDataSetPermission(){
+    var canEditAddDataSet = $("#canEditAddDataSet").is(":checked")
+    if (canEditAddDataSet) $('#canEditAddReport').prop('checked', true)
   }
   $(document).on('turbolinks:load', () => {
     $('#userSelect2').select2({

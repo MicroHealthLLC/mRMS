@@ -24,7 +24,7 @@
                   </label>
 
                   <label class="toggle">
-                    <%= f.check_box :can_add_report %>
+                    <%= f.check_box :can_add_report, id:"canEditAddReport_#{permission.id}", onchange: "canEditAddDataSetModel(#{permission.id})" %>
                     <i data-swchon-text="ON" data-swchoff-text="OFF"></i> Can Add/Edit Report
                   </label>
 
@@ -44,7 +44,7 @@
                   </label>
 
                   <label class="toggle">
-                    <%= f.check_box :can_add_edit_data_set %>
+                    <%= f.check_box :can_add_edit_data_set, id:"canEditAddDataSet_#{permission.id}", onchange: "canEditAddDataSetModel(#{permission.id})" %>
                     <i data-swchon-text="ON" data-swchoff-text="OFF"></i> Can Add/Edit Data Set
                   </label>
 
@@ -88,8 +88,12 @@
 </div>
 <script type="text/javascript">
   function canViewReportEditModel(id){
-    $(`#can_view_permission_edit_${id}`).prop('checked',true)
-    $(`#canViewReport_${id}`).prop('checked',true)
+    $(`#can_view_permission_edit_${id}`).prop('checked', true)
+    $(`#canViewReport_${id}`).prop('checked', true)
+  }
+  function canEditAddDataSetModel(id){
+    var canEditAddDataSet = $(`#canEditAddDataSet_${id}`).is(":checked")
+    if (canEditAddDataSet) $(`#canEditAddReport_${id}`).prop('checked', true)
   }
   function change_edit_shared_report(value){
     var can_manage_dashboard = $("#can_manage_dashboard_" + value).is(":checked")
