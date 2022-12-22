@@ -40,6 +40,7 @@ group :development, :test do
   # Adds support for Capybara system testing and selenium driver
   gem 'letter_opener'
   # gem 'dotenv-rails'
+  gem 'rails-erd'
 end
 
 group :test do
