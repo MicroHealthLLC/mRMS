@@ -76,7 +76,7 @@ gem "omniauth-google-oauth2"
 # OAuth
 gem 'omniauth-oauth2', '~> 1.3.1'
 # REST calls to Microsoft Graph
-gem 'httparty', '~> 0.17.1'
+gem 'httparty', '~> 0.21.0'
 gem 'one_drive'
 # ..
 gem 'therubyracer', platforms: :ruby
